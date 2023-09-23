@@ -1,0 +1,45 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "GSB 544: Data Science and Machine Learning with Python"
+  author: "Kelly Bodwin and Hunter Glanz"
+  date: "Sept 1, 2023"
+  chapters:
+    - index.qmd
+    - 00-setup.qmd
+    - 01-objects.qmd
+    - 02-plotnine.qmd
+  site-url: https://earobinson95.github.io/stat331-calpoly-text/
+  repo-url: https://github.com/earobinson95/stat331-calpoly-text
+  repo-branch: main
+  repo-actions: [edit]
+  sharing: [twitter, facebook, linkedin]
+  # toc:
+    # collapse: section
+
+bibliography: references.bib
+
+engine: knitr
+
+#pdf-engine: context
+
+from: markdown+emoji
+
+format:
+  html:
+    css: style.css
+    # theme: cosmo
+    code-link: true
+    theme:
+      light: flatly
+      dark: darkly
+
+  # pdf:
+  #   documentclass: scrreport
+  #epub:
+  #  cover-image: cover.png
+
+editor: source
+
