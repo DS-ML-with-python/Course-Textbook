@@ -11,8 +11,8 @@ book:
     - 00-setup.qmd
     - 01-objects.qmd
     - 02-plotnine.qmd
-  site-url: https://earobinson95.github.io/stat331-calpoly-text/
-  repo-url: https://github.com/earobinson95/stat331-calpoly-text
+  site-url: https://DS-ML-with-python.github.io/Course-Textbook/
+  repo-url: https://github.com/DS-ML-with-python/Course-Textbook/
   repo-branch: main
   repo-actions: [edit]
   sharing: [twitter, facebook, linkedin]
