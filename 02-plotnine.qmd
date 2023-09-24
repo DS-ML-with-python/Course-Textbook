@@ -1,4 +1,395 @@
 ---
-title: "Setup: Jupyter, Quarto, libraries"
+title: "Data Visualization in Python"
+format:
+  html:
+    self-contained: true
+    code-fold: true
+    code-copy: true
+    code-annotations: below
+execute: 
+  echo: fenced
+reference-location: margin
+citation-location: margin
 ---
 
+# Introduction
+
+This document demonstrates the use of the `plotnine` library in Python to visualize data via the *grammar of graphics* framework.
+
+The functions in `plotnine` originate from the `ggplot2` R package, which is the R implementation of the grammar of graphics.
+
+# Grammar of Graphics
+
+The *grammar of graphics* is a framework for creating data visualizations.
+
+A visualization consists of:
+
+-   The **aesthetic**: Which *variables* are dictating which *plot elements*.
+
+-   The **geometry**: What *shape* of plot your are making.
+
+For example, the plot below displays some of the data from the [Palmer Penguins data set](https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data).
+
+```{python}
+#| echo: false
+
+import pandas as pd
+from palmerpenguins import load_penguins
+from plotnine import ggplot, geom_point, aes, geom_boxplot
+```
+
+```{python}
+#| echo: false
+
+penguins = load_penguins()
+
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot()
+)
+```
+
+The *aesthetic* is *species* on the x-axis, *bill_length_mm* on the y-axis, colored by *species*.
+
+The *geometry* is a *boxplot*.
+
+# plotnine (i.e. ggplot)
+
+The library `plotnine` implements the *grammar of graphics* in Python.
+
+Code for the previous example:
+
+```{python}
+#| eval: false
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot()
+)
+```
+
+## The aesthetic:
+
+```{python}
+(ggplot(penguins, 
+aes( # <1>
+  x = "species", # <2>
+  y = "bill_length_mm", # <2>
+  fill = "species")) # <2>
++ geom_boxplot()
+)
+```
+
+1.  The `aes()` function is the place to specify aesthetics.
+2.  `x`, `y`, and `fill` are three possible aesthetics that can be specified, that map variables in our data set to plot elements.
+
+## The geometry
+
+```{python}
+(ggplot(penguins, 
+aes(
+  x = "species",
+  y = "bill_length_mm",
+  fill = "species"))
++ geom_boxplot() # <1>
+)
+```
+
+1.  A variety of `geom_*` functions allow for different plotting shapes (e.g. boxplot, histogram, etc.)
+
+## Other optional elements:
+
+-   The *scales* of the x- and y-axes.
+
+-   The *color* of elements that are not mapped to aesthetics.
+
+-   The *theme* of the plot
+
+...and many more!
+
+## Scales
+
+```{python}
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot()
+)
+```
+
+versus
+
+```{python}
+from plotnine import scale_y_reverse
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot()
++ scale_y_reverse()
+)
+```
+
+## Non-aesthetic colors
+
+```{python}
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot()
+)
+```
+
+versus
+
+```{python}
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot(fill = "cornflowerblue")
+)
+```
+
+## Quick quiz
+
+What will this show?
+
+```{python}
+#| eval: false
+
+(ggplot(penguins, 
+aes(
+  x = "species",
+  y = "bill_length_mm",
+  fill = "cornflowerblue"))
++ geom_boxplot()
+)
+```
+
+## Themes
+
+```{python}
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot()
+)
+```
+
+versus
+
+```{python}
+from plotnine import theme_classic
+(ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
++ geom_boxplot()
++ theme_classic()
+)
+```
+
+## Quick quiz
+
+What are the *aesthetics*, *geometry*, *scales*, and other options?
+
+<!-- xkcd image -->
+
+## Resources
+
+-   Scales: <https://ggplot2-book.org/scale-position.html>
+
+-   Themes: <https://ggplot2-book.org/polishing.html>
+
+# Geometries: The "Big Five"
+
+## 1. Bar Plots
+
+Most often used for showing **counts** of a **categorical variable**:
+
+```{python}
+from plotnine import geom_bar
+(ggplot(penguins,
+aes(
+  x = "species"
+))
++ geom_bar()
+)
+```
+
+... or **relationships** between **two categorical variables**:
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "species",
+  fill = "sex"
+))
++ geom_bar()
+)
+```
+
+Would we rather see percents?
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "species",
+  fill = "island"
+))
++ geom_bar(position = "fill")
+)
+```
+
+Or side-by-side?
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "species",
+  fill = "island"
+))
++ geom_bar(position = "dodge")
+)
+```
+
+## 2. Boxplots
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "species",
+  y = "bill_length_mm"
+))
++ geom_boxplot()
+)
+```
+
+Side-by-side using a categorical variable:
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "species",
+  y = "bill_length_mm",
+  fill = "sex"
+))
++ geom_boxplot()
+)
+```
+
+## 3. Histograms
+
+```{python}
+from plotnine import geom_histogram
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm"
+))
++ geom_histogram()
+)
+```
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm"
+))
++ geom_histogram(bins = 100)
+)
+```
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm"
+))
++ geom_histogram(bins = 10)
+)
+```
+
+## 3.5 Densities
+
+Suppose you want to compare histograms by **category**:
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm",
+  fill = "species"
+))
++ geom_histogram()
+)
+```
+
+Cleaner: smoothed histogram, or density:
+
+```{python}
+from plotnine import geom_density
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm",
+  fill = "species"
+))
++ geom_density()
+)
+```
+
+Even cleaner: The **alpha** option:
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm",
+  fill = "species"
+))
++ geom_density(alpha = 0.5)
+)
+```
+
+## 4. Scatterplots
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm",
+  y = "bill_depth_mm"
+))
++ geom_point()
+)
+```
+
+Colors for extra information:
+
+```{python}
+(ggplot(penguins,
+aes(
+  x = "bill_length_mm",
+  y = "bill_depth_mm",
+  color = "species"
+))
++ geom_point()
+)
+```
+
+## 5. Line Plots
+
+```{python}
+from plotnine import geom_line
+penguins2 = penguins.groupby(by = ["species", "sex"]).mean()
+
+(ggplot(penguins2,
+aes(
+  x = "species",
+  y = "bill_length_mm",
+  color = "sex"
+))
++ geom_point()
++ geom_line()
+)
+```
+
+## Resources
+
+* `ggplot2` cheatsheet: [https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+
+* `plotnine`: [https://plotnine.readthedocs.io/en/stable/](https://plotnine.readthedocs.io/en/stable/)
+
+# Multiple Plots
+
+## Facet Wrapping
+
+```{python}
+from plotnine import facet_wrap
+(ggplot(penguins,
+aes(
+  x = "species",
+  y = "bill_length_mm"
+))
++ geom_boxplot()
++ facet_wrap("sex")
+)
+```
