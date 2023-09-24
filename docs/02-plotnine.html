@@ -4672,14 +4672,14 @@ vertical-align: -.125em;
 <section id="the-aesthetic" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="the-aesthetic"><span class="header-section-number">3.3.1</span> The aesthetic:</h3>
 <div class="cell" data-execution_count="4">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>aes( <span class="co"># &lt;1&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>, <span class="co"># &lt;2&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, <span class="co"># &lt;2&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span>)) <span class="co"># &lt;2&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>aes(                           <span class="co"># &lt;1&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,               <span class="co"># &lt;2&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,        <span class="co"># &lt;2&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span>))           <span class="co"># &lt;2&gt;</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4702,7 +4702,7 @@ vertical-align: -.125em;
 <section id="the-geometry" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="the-geometry"><span class="header-section-number">3.3.2</span> The geometry</h3>
 <div class="cell" data-execution_count="5">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, </span>
@@ -4740,7 +4740,7 @@ vertical-align: -.125em;
 <section id="scales" class="level3" data-number="3.3.4">
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="scales"><span class="header-section-number">3.3.4</span> Scales</h3>
 <div class="cell" data-execution_count="6">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
@@ -4760,7 +4760,7 @@ vertical-align: -.125em;
 </div>
 <p>versus</p>
 <div class="cell" data-execution_count="7">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> scale_y_reverse</span>
@@ -4784,7 +4784,7 @@ vertical-align: -.125em;
 <section id="non-aesthetic-colors" class="level3" data-number="3.3.5">
 <h3 data-number="3.3.5" class="anchored" data-anchor-id="non-aesthetic-colors"><span class="header-section-number">3.3.5</span> Non-aesthetic colors</h3>
 <div class="cell" data-execution_count="8">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
@@ -4804,7 +4804,7 @@ vertical-align: -.125em;
 </div>
 <p>versus</p>
 <div class="cell" data-execution_count="9">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
@@ -4827,7 +4827,7 @@ vertical-align: -.125em;
 <h3 data-number="3.3.6" class="anchored" data-anchor-id="quick-quiz"><span class="header-section-number">3.3.6</span> Quick quiz</h3>
 <p>What will this show?</p>
 <div class="cell" data-execution_count="10">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
@@ -4846,7 +4846,7 @@ vertical-align: -.125em;
 <section id="themes" class="level3" data-number="3.3.7">
 <h3 data-number="3.3.7" class="anchored" data-anchor-id="themes"><span class="header-section-number">3.3.7</span> Themes</h3>
 <div class="cell" data-execution_count="11">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
@@ -4866,7 +4866,7 @@ vertical-align: -.125em;
 </div>
 <p>versus</p>
 <div class="cell" data-execution_count="12">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> theme_classic</span>
@@ -4906,7 +4906,7 @@ vertical-align: -.125em;
 <h3 data-number="4.0.1" class="anchored" data-anchor-id="bar-plots"><span class="header-section-number">4.0.1</span> 1. Bar Plots</h3>
 <p>Most often used for showing <strong>counts</strong> of a <strong>categorical variable</strong>:</p>
 <div class="cell" data-execution_count="13">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_bar</span>
@@ -4927,7 +4927,7 @@ vertical-align: -.125em;
 </div>
 <p>… or <strong>relationships</strong> between <strong>two categorical variables</strong>:</p>
 <div class="cell" data-execution_count="14">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -4948,7 +4948,7 @@ vertical-align: -.125em;
 </div>
 <p>Would we rather see percents?</p>
 <div class="cell" data-execution_count="15">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -4969,7 +4969,7 @@ vertical-align: -.125em;
 </div>
 <p>Or side-by-side?</p>
 <div class="cell" data-execution_count="16">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -4992,7 +4992,7 @@ vertical-align: -.125em;
 <section id="boxplots" class="level3" data-number="4.0.2">
 <h3 data-number="4.0.2" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">4.0.2</span> 2. Boxplots</h3>
 <div class="cell" data-execution_count="17">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5016,7 +5016,7 @@ vertical-align: -.125em;
 </div>
 <p>Side-by-side using a categorical variable:</p>
 <div class="cell" data-execution_count="18">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5043,7 +5043,7 @@ vertical-align: -.125em;
 <section id="histograms" class="level3" data-number="4.0.3">
 <h3 data-number="4.0.3" class="anchored" data-anchor-id="histograms"><span class="header-section-number">4.0.3</span> 3. Histograms</h3>
 <div class="cell" data-execution_count="19">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_histogram</span>
@@ -5067,7 +5067,7 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="cell" data-execution_count="20">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5089,7 +5089,7 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="cell" data-execution_count="21">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5115,7 +5115,7 @@ vertical-align: -.125em;
 <h3 data-number="4.0.4" class="anchored" data-anchor-id="densities"><span class="header-section-number">4.0.4</span> 3.5 Densities</h3>
 <p>Suppose you want to compare histograms by <strong>category</strong>:</p>
 <div class="cell" data-execution_count="22">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5140,7 +5140,7 @@ vertical-align: -.125em;
 </div>
 <p>Cleaner: smoothed histogram, or density:</p>
 <div class="cell" data-execution_count="23">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_density</span>
@@ -5165,7 +5165,7 @@ vertical-align: -.125em;
 </div>
 <p>Even cleaner: The <strong>alpha</strong> option:</p>
 <div class="cell" data-execution_count="24">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5191,7 +5191,7 @@ vertical-align: -.125em;
 <section id="scatterplots" class="level3" data-number="4.0.5">
 <h3 data-number="4.0.5" class="anchored" data-anchor-id="scatterplots"><span class="header-section-number">4.0.5</span> 4. Scatterplots</h3>
 <div class="cell" data-execution_count="25">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5215,7 +5215,7 @@ vertical-align: -.125em;
 </div>
 <p>Colors for extra information:</p>
 <div class="cell" data-execution_count="26">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
@@ -5242,7 +5242,7 @@ vertical-align: -.125em;
 <section id="line-plots" class="level3" data-number="4.0.6">
 <h3 data-number="4.0.6" class="anchored" data-anchor-id="line-plots"><span class="header-section-number">4.0.6</span> 5. Line Plots</h3>
 <div class="cell" data-execution_count="27">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_line</span>
@@ -5260,7 +5260,7 @@ vertical-align: -.125em;
 <span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/nd/tdy2bm8n6ml82rfv_qh7546c0000gn/T/ipykernel_96578/972974361.py:2: FutureWarning: The default value of numeric_only in DataFrameGroupBy.mean is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.</code></pre>
+<pre><code>/var/folders/nd/tdy2bm8n6ml82rfv_qh7546c0000gn/T/ipykernel_96927/972974361.py:2: FutureWarning: The default value of numeric_only in DataFrameGroupBy.mean is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.</code></pre>
 </div>
 <div class="cell-output cell-output-error">
 <pre><code>PlotnineError: "Could not evaluate the 'x' mapping: 'species' (original error: name 'species' is not defined)"</code></pre>
@@ -5279,7 +5279,7 @@ vertical-align: -.125em;
 <section id="facet-wrapping" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="facet-wrapping"><span class="header-section-number">4.1.1</span> Facet Wrapping</h3>
 <div class="cell" data-execution_count="28">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> facet_wrap</span>
