@@ -3,7 +3,7 @@ title: "Data Visualization in Python"
 format:
   html:
     self-contained: true
-    code-fold: true
+    code-fold: show
     code-copy: true
     code-annotations: below
 execute: 
@@ -12,13 +12,13 @@ reference-location: margin
 citation-location: margin
 ---
 
-# Introduction
+## Introduction
 
 This document demonstrates the use of the `plotnine` library in Python to visualize data via the *grammar of graphics* framework.
 
 The functions in `plotnine` originate from the `ggplot2` R package, which is the R implementation of the grammar of graphics.
 
-# Grammar of Graphics
+## Grammar of Graphics
 
 The *grammar of graphics* is a framework for creating data visualizations.
 
@@ -48,11 +48,11 @@ penguins = load_penguins()
 )
 ```
 
-The *aesthetic* is *species* on the x-axis, *bill_length_mm* on the y-axis, colored by *species*.
+The **aesthetic** is **species** on the x-axis, **bill_length_mm** on the y-axis, colored by **species**.
 
-The *geometry* is a *boxplot*.
+The **geometry** is a **boxplot**.
 
-# plotnine (i.e. ggplot)
+## plotnine (i.e. ggplot)
 
 The library `plotnine` implements the *grammar of graphics* in Python.
 
@@ -60,27 +60,27 @@ Code for the previous example:
 
 ```{python}
 #| eval: false
+#| code-fold: show
 (ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
 + geom_boxplot()
 )
 ```
 
-## The aesthetic:
+### The aesthetic:
 
 ```{python}
 (ggplot(penguins, 
-aes( # <1>
-  x = "species", # <2>
-  y = "bill_length_mm", # <2>
-  fill = "species")) # <2>
+aes(                           # <1>
+  x = "species",               # <2>
+  y = "bill_length_mm",        # <2>
+  fill = "species"))           # <2>
 + geom_boxplot()
 )
 ```
-
 1.  The `aes()` function is the place to specify aesthetics.
 2.  `x`, `y`, and `fill` are three possible aesthetics that can be specified, that map variables in our data set to plot elements.
 
-## The geometry
+### The geometry
 
 ```{python}
 (ggplot(penguins, 
@@ -94,7 +94,7 @@ aes(
 
 1.  A variety of `geom_*` functions allow for different plotting shapes (e.g. boxplot, histogram, etc.)
 
-## Other optional elements:
+### Other optional elements:
 
 -   The *scales* of the x- and y-axes.
 
@@ -104,7 +104,7 @@ aes(
 
 ...and many more!
 
-## Scales
+### Scales
 
 ```{python}
 (ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
@@ -122,7 +122,7 @@ from plotnine import scale_y_reverse
 )
 ```
 
-## Non-aesthetic colors
+### Non-aesthetic colors
 
 ```{python}
 (ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
@@ -138,7 +138,7 @@ versus
 )
 ```
 
-## Quick quiz
+### Quick quiz
 
 What will this show?
 
@@ -154,7 +154,7 @@ aes(
 )
 ```
 
-## Themes
+### Themes
 
 ```{python}
 (ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
@@ -172,13 +172,13 @@ from plotnine import theme_classic
 )
 ```
 
-## Quick quiz
+### Quick quiz
 
 What are the *aesthetics*, *geometry*, *scales*, and other options?
 
 <!-- xkcd image -->
 
-## Resources
+### Resources
 
 -   Scales: <https://ggplot2-book.org/scale-position.html>
 
@@ -186,7 +186,7 @@ What are the *aesthetics*, *geometry*, *scales*, and other options?
 
 # Geometries: The "Big Five"
 
-## 1. Bar Plots
+### 1. Bar Plots
 
 Most often used for showing **counts** of a **categorical variable**:
 
@@ -236,7 +236,7 @@ aes(
 )
 ```
 
-## 2. Boxplots
+### 2. Boxplots
 
 ```{python}
 (ggplot(penguins,
@@ -261,7 +261,7 @@ aes(
 )
 ```
 
-## 3. Histograms
+### 3. Histograms
 
 ```{python}
 from plotnine import geom_histogram
@@ -291,7 +291,7 @@ aes(
 )
 ```
 
-## 3.5 Densities
+### 3.5 Densities
 
 Suppose you want to compare histograms by **category**:
 
@@ -330,7 +330,7 @@ aes(
 )
 ```
 
-## 4. Scatterplots
+### 4. Scatterplots
 
 ```{python}
 (ggplot(penguins,
@@ -355,7 +355,7 @@ aes(
 )
 ```
 
-## 5. Line Plots
+### 5. Line Plots
 
 ```{python}
 from plotnine import geom_line
@@ -372,15 +372,15 @@ aes(
 )
 ```
 
-## Resources
+### Resources
 
 * `ggplot2` cheatsheet: [https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 
 * `plotnine`: [https://plotnine.readthedocs.io/en/stable/](https://plotnine.readthedocs.io/en/stable/)
 
-# Multiple Plots
+## Multiple Plots
 
-## Facet Wrapping
+### Facet Wrapping
 
 ```{python}
 from plotnine import facet_wrap
