@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/index.html</loc>
-    <lastmod>2023-09-23T17:26:37.902Z</lastmod>
+    <lastmod>2023-09-25T04:50:45.293Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/00-setup.html</loc>
-    <lastmod>2023-09-23T17:26:37.902Z</lastmod>
+    <lastmod>2023-09-25T04:50:45.295Z</lastmod>
   </url>
   <url>
-    <loc>https://DS-ML-with-python.github.io/Course-Textbook/01-objects.html</loc>
-    <lastmod>2023-09-23T17:26:37.903Z</lastmod>
+    <loc>https://DS-ML-with-python.github.io/Course-Textbook/01-basics.html</loc>
+    <lastmod>2023-09-25T04:50:45.302Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/02-plotnine.html</loc>
-    <lastmod>2023-09-23T17:26:37.903Z</lastmod>
+    <lastmod>2023-09-25T04:50:45.303Z</lastmod>
   </url>
 </urlset>
