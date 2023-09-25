@@ -129,7 +129,7 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup: Jupyter, Quarto, libraries</span></a>
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -191,13 +191,13 @@ ul.task-list{list-style: none;}
 <p>This text is not meant to be a complete course or textbook by itself; rather, think of it as “long-form” class slides. We will summarize the main concepts in each chapter, show you examples, point you to more in-depth readings from outside sources, and ask you to try out short tasks in python as you go.</p>
 <section id="how-to-use-this-text" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-use-this-text">How to Use This Text</h2>
-<div class="callout-tweet icon callout callout-style-default no-icon callout-captioned">
+<div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Tweet
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -217,6 +217,19 @@ Example
 <p>Example sections contain code and other information. Don’t skip them!</p>
 </div>
 </div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note sections contain clarification points (anywhere I would normally say “note that ….). Make sure to read them to avoid any common pitfalls or misconceptions.</p>
+</div>
+</div>
 <div class="callout-required-reading icon callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -227,7 +240,7 @@ Required-reading
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Consider these sections to be required readings/viewings. This is where we will direct you to existing materials to explain or indroduce a concept.</p>
+<p>Consider these sections to be required readings. This is where we will direct you to existing materials to explain or indroduce a concept.</p>
 </div>
 </div>
 <div class="callout-required-video icon callout callout-style-default no-icon callout-captioned">
@@ -240,7 +253,7 @@ Required-video
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Consider these sections to be required readings/viewings. This is where we will direct you to existing materials to explain or indroduce a concept.</p>
+<p>Similarly, consider these sections to be required viewing for the course material.</p>
 </div>
 </div>
 <div class="callout-check-in icon callout callout-style-default no-icon callout-captioned">
@@ -253,7 +266,7 @@ Check-in
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Check-in sections contain quizzes or preview activities to help you process the material. Although they are not graded, please treat them as required!</p>
+<p>Check-in sections contain small tasks that you need to do throughout the reading, to practice or prepare. Although they are not graded, please treat them as required!</p>
 </div>
 </div>
 <div class="callout-practice-exercise icon callout callout-style-default no-icon callout-captioned">
@@ -266,7 +279,7 @@ Practice-exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Activities</p>
+<p>Each chapter will have a longer practice exercise to complete and turn in. These are intended to be done with help from instructors and peers.</p>
 </div>
 </div>
 <div class="callout-learn-more icon callout callout-style-default no-icon callout-captioned">
@@ -280,32 +293,24 @@ Learn-more
 </div>
 <div class="callout-body-container callout-body">
 <p>Consider these to be optional readings/viewings. The world of python programming has so many interesting tidbits, we can’t possibly teach them all - but we want to share them with you nonetheless!</p>
+<p>We will usually make these “click to expand” so that they don’t distract from your reading.</p>
 </div>
 </div>
 <div class="callout-opinion icon callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
 Opinion
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>These are personal opinion comments from the authors. Take them with a grain of salt; we aren’t the only python programmers worth listening to, we are just sharing what has worked for us.</p>
+<p>We will usually make these “click to expand” so that they don’t distract from your reading.</p>
 </div>
-</div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note sections contain clarification points (anywhere I would normally say “note that ….). Make sure to read them to avoid any common pitfalls or misconceptions.</p>
 </div>
 </div>
 </section>
