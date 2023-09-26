@@ -3,14 +3,11 @@ title: "Data Visualization in Python"
 format:
   html:
     self-contained: true
-    code-fold: show
     code-copy: true
     code-annotations: below
 execute: 
   echo: true
   warning: false
-reference-location: margin
-citation-location: margin
 ---
 
 ## Introduction
@@ -126,7 +123,7 @@ aes(
 )
 ```
 
-versus
+**versus**
 
 ```{python}
 from plotnine import scale_y_reverse
@@ -156,6 +153,8 @@ from plotnine import scale_y_reverse
 
 What will this show?
 
+:::
+
 ```{python}
 #| eval: false
 
@@ -168,7 +167,6 @@ aes(
 )
 ```
 
-:::
 
 ### Themes
 
@@ -196,7 +194,7 @@ What are the differences between the two plots above? What did the theme change?
 
 :::{.callout-check-in .icon}
 
-What are the *aesthetics*, *geometry*, *scales*, and other options?
+What are the *aesthetics*, *geometry*, *scales*, and other options in the cartoon plot below?
 
 ![An xkcd comic of time spent going up the down escalator](images/xkcd.png)
 
