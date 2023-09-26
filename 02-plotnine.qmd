@@ -7,6 +7,7 @@ format:
 execute: 
   echo: true
   warning: false
+  error: true
 ---
 
 ## Introduction
@@ -29,14 +30,12 @@ For example, the plot below displays some of the data from the [Palmer Penguins 
 
 First, though, we need to load the Palmer Penguins dataset.
 
-:::{.callout-note}
-
+::: callout-note
 If you do not have the `pandas` library installed then you will need to run
 
 `pip install pandas`
 
 in the Jupyter terminal to install. Same for any other libraries you haven't installed.
-
 :::
 
 ```{python}
@@ -57,10 +56,8 @@ The **aesthetic** is **species** on the x-axis, **bill_length_mm** on the y-axis
 
 The **geometry** is a **boxplot**.
 
-:::{.callout-check-in .icon}
-
+::: {.callout-check-in .icon}
 Take a look at the first page of the optional reading for `plotnine`. In groups of 3-4, discuss the differences between how they use `plotnine` and the way we used it in the code chunk above.
-
 :::
 
 ## plotnine (i.e. ggplot)
@@ -87,6 +84,7 @@ aes(                           # <1>
 + geom_boxplot()
 )
 ```
+
 1.  The `aes()` function is the place to specify aesthetics.
 2.  `x`, `y`, and `fill` are three possible aesthetics that can be specified, that map variables in our data set to plot elements.
 
@@ -149,9 +147,7 @@ from plotnine import scale_y_reverse
 ```
 
 :::{.callout-check-in .icon}
-
 What will this show?
-
 :::
 
 ```{python}
@@ -165,7 +161,6 @@ aes(
 + geom_boxplot()
 )
 ```
-
 
 ### Themes
 
@@ -185,26 +180,20 @@ from plotnine import theme_classic
 )
 ```
 
-:::{.callout-example .icon}
-
+::: {.callout-example .icon}
 What are the differences between the two plots above? What did the theme change?
-
 :::
 
-:::{.callout-check-in .icon}
-
+::: {.callout-check-in .icon}
 What are the *aesthetics*, *geometry*, *scales*, and other options in the cartoon plot below?
 
 ![An xkcd comic of time spent going up the down escalator](images/xkcd.png)
-
 :::
 
-:::{.callout-learn-more .icon}
-
+::: {.callout-learn-more .icon}
 -   Scales: <https://ggplot2-book.org/scale-position.html>
 
 -   Themes: <https://ggplot2-book.org/polishing.html>
-
 :::
 
 ## Geometries: The "Big Five"
@@ -259,10 +248,8 @@ aes(
 )
 ```
 
-:::{.callout-example .icon}
-
+::: {.callout-example .icon}
 Compare and contrast the plots above? What information is lost or gained between each of them?
-
 :::
 
 ### 2. Boxplots
@@ -401,12 +388,10 @@ aes(
 )
 ```
 
-:::{.callout-learn-more .icon}
+::: {.callout-learn-more .icon}
+-   `ggplot2` cheatsheet: <https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf>
 
-* `ggplot2` cheatsheet: [https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
-
-* `plotnine`: [https://plotnine.readthedocs.io/en/stable/](https://plotnine.readthedocs.io/en/stable/)
-
+-   `plotnine`: <https://plotnine.readthedocs.io/en/stable/>
 :::
 
 ## Multiple Plots
@@ -425,10 +410,8 @@ aes(
 )
 ```
 
-:::{.callout-practice-exercise .icon}
-
+::: {.callout-practice-exercise .icon}
 Open up [this colab notebook](https://colab.research.google.com/drive/1LDt_ALySdbxGZbWEQe8dTx_L9QTC5jcU?usp=sharing) and make a copy.
 
 Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.
-
 :::
