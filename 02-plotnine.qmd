@@ -427,3 +427,11 @@ aes(
 + facet_wrap("sex")
 )
 ```
+
+:::{.callout-practice-exercise .icon}
+
+Open up [this colab notebook](https://colab.research.google.com/drive/1LDt_ALySdbxGZbWEQe8dTx_L9QTC5jcU?usp=sharing) and make a copy.
+
+Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.
+
+:::
