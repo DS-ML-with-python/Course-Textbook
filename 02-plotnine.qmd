@@ -2,7 +2,6 @@
 title: "Data Visualization in Python"
 format:
   html:
-    self-contained: true
     code-copy: true
     code-annotations: below
 execute: 
