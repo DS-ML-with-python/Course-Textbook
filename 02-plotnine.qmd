@@ -7,7 +7,8 @@ format:
     code-copy: true
     code-annotations: below
 execute: 
-  echo: fenced
+  echo: true
+  warning: false
 reference-location: margin
 citation-location: margin
 ---
@@ -30,17 +31,25 @@ A visualization consists of:
 
 For example, the plot below displays some of the data from the [Palmer Penguins data set](https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data).
 
-```{python}
-#| echo: false
+First, though, we need to load the Palmer Penguins dataset.
 
+:::{.callout-note}
+
+If you do not have the `pandas` library installed then you will need to run
+
+`pip install pandas`
+
+in the Jupyter terminal to install. Same for any other libraries you haven't installed.
+
+:::
+
+```{python}
 import pandas as pd
 from palmerpenguins import load_penguins
 from plotnine import ggplot, geom_point, aes, geom_boxplot
 ```
 
 ```{python}
-#| echo: false
-
 penguins = load_penguins()
 
 (ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
@@ -52,21 +61,26 @@ The **aesthetic** is **species** on the x-axis, **bill_length_mm** on the y-axis
 
 The **geometry** is a **boxplot**.
 
+:::{.callout-check-in .icon}
+
+Take a look at the first page of the optional reading for `plotnine`. In groups of 3-4, discuss the differences between how they use `plotnine` and the way we used it in the code chunk above.
+
+:::
+
 ## plotnine (i.e. ggplot)
 
-The library `plotnine` implements the *grammar of graphics* in Python.
+The `plotnine` library implements the *grammar of graphics* in Python.
 
 Code for the previous example:
 
 ```{python}
 #| eval: false
-#| code-fold: show
 (ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
 + geom_boxplot()
 )
 ```
 
-### The aesthetic:
+### The aesthetic
 
 ```{python}
 (ggplot(penguins, 
@@ -130,7 +144,7 @@ from plotnine import scale_y_reverse
 )
 ```
 
-versus
+**versus**
 
 ```{python}
 (ggplot(penguins, aes(x = "species", y = "bill_length_mm", fill = "species"))
@@ -138,7 +152,7 @@ versus
 )
 ```
 
-### Quick quiz
+:::{.callout-check-in .icon}
 
 What will this show?
 
@@ -154,6 +168,8 @@ aes(
 )
 ```
 
+:::
+
 ### Themes
 
 ```{python}
@@ -162,7 +178,7 @@ aes(
 )
 ```
 
-versus
+**versus**
 
 ```{python}
 from plotnine import theme_classic
@@ -172,19 +188,29 @@ from plotnine import theme_classic
 )
 ```
 
-### Quick quiz
+:::{.callout-example .icon}
+
+What are the differences between the two plots above? What did the theme change?
+
+:::
+
+:::{.callout-check-in .icon}
 
 What are the *aesthetics*, *geometry*, *scales*, and other options?
 
-<!-- xkcd image -->
+![An xkcd comic of time spent going up the down escalator](images/xkcd.png)
 
-### Resources
+:::
+
+:::{.callout-learn-more .icon}
 
 -   Scales: <https://ggplot2-book.org/scale-position.html>
 
 -   Themes: <https://ggplot2-book.org/polishing.html>
 
-# Geometries: The "Big Five"
+:::
+
+## Geometries: The "Big Five"
 
 ### 1. Bar Plots
 
@@ -235,6 +261,12 @@ aes(
 + geom_bar(position = "dodge")
 )
 ```
+
+:::{.callout-example .icon}
+
+Compare and contrast the plots above? What information is lost or gained between each of them?
+
+:::
 
 ### 2. Boxplots
 
@@ -372,11 +404,13 @@ aes(
 )
 ```
 
-### Resources
+:::{.callout-learn-more .icon}
 
 * `ggplot2` cheatsheet: [https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 
 * `plotnine`: [https://plotnine.readthedocs.io/en/stable/](https://plotnine.readthedocs.io/en/stable/)
+
+:::
 
 ## Multiple Plots
 

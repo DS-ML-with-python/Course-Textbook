@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -94,7 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -114,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -128,7 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">GSB 544: Data Science and Machine Learning with Python</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -172,13 +139,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup: Jupyter, Quarto, libraries</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-objects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup: Jupyter, Quarto, libraries</span></span></a>
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -197,7 +164,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <ul class="collapse">
+  <li><a href="#how-to-use-this-text" id="toc-how-to-use-this-text" class="nav-link" data-scroll-target="#how-to-use-this-text">How to Use This Text</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/index.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -235,16 +206,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1>
-<p>This is a Quarto book.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<p>This text was created for the Cal Poly course “GSB 544: Data Science and Machine Learning with Python” by <a href="https://github.com/kbodwin">Dr.&nbsp;Kelly Bodwin</a> and <a href="https://github.com/hglanz">Dr.&nbsp;Hunter Glanz</a>. Some parts of the material and text are borrowed from <a href="https://earobinson95.github.io/stat331-calpoly-text/">Dr.&nbsp;Emily Robinson’s R course</a> and <a href="https://github.com/dlsun/pods">Dr.&nbsp;Dennis Sun’s python course</a></p>
+<p>This text is not meant to be a complete course or textbook by itself; rather, think of it as “long-form” class slides. We will summarize the main concepts in each chapter, show you examples, point you to more in-depth readings from outside sources, and ask you to try out short tasks in python as you go.</p>
+<section id="how-to-use-this-text" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-text">How to Use This Text</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Watch out sections contain things you may want to look out for - common errors, etc.</p>
+</div>
+</div>
+<div class="callout-example icon">
+<p>Example sections contain code and other information. Don’t skip them!</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note sections contain clarification points (anywhere I would normally say “note that ….). Make sure to read them to avoid any common pitfalls or misconceptions.</p>
+</div>
+</div>
+<div class="callout-required-reading icon">
+<p>Consider these sections to be required readings. This is where we will direct you to existing materials to explain or indroduce a concept.</p>
+</div>
+<div class="callout-required-video icon">
+<p>Similarly, consider these sections to be required viewing for the course material.</p>
+</div>
+<div class="callout-check-in icon">
+<p>Check-in sections contain small tasks that you need to do throughout the reading, to practice or prepare. Although they are not graded, please treat them as required!</p>
+</div>
+<div class="callout-practice-exercise icon">
+<p>Each chapter will have a longer practice exercise to complete and turn in. These are intended to be done with help from instructors and peers.</p>
+</div>
+<div class="callout-learn-more icon">
+<p>Consider these to be optional readings/viewings. The world of python programming has so many interesting tidbits, we can’t possibly teach them all - but we want to share them with you nonetheless!</p>
+<p>We will usually make these “click to expand” so that they don’t distract from your reading.</p>
+</div>
+<div class="callout-opinion icon" data-collapse="true">
+<p>These are personal opinion comments from the authors. Take them with a grain of salt; we aren’t the only python programmers worth listening to, we are just sharing what has worked for us.</p>
+<p>We will usually make these “click to expand” so that they don’t distract from your reading.</p>
+</div>
+</section>
+<section id="additional-resources" class="level2">
+<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
+<p>References or additional readings may come from the following texts:</p>
+<ul>
+<li><a href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> by Jake VanderPlas</li>
+<li><a href="https://wesmckinney.com/book/">Python for Data Analysis</a> by Wes McKinney</li>
+<li><a href="https://github.com/dlsun/pods">Principles of Data Science</a> by Dennis Sun</li>
+</ul>
+<p>For extra practice with python programming, we recommend the <a href="https://www.dataquest.io/course/introduction-to-python/">DataQuest interactive tutorials</a> or working through some lessons on <a href="https://www.py4e.com/">Python for Everybody</a>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -601,7 +628,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./00-setup.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Setup: Jupyter, Quarto, libraries</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
