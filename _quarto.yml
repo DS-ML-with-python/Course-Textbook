@@ -35,6 +35,15 @@ format:
     theme:
       light: [flatly, custom-callouts.scss]
       dark: [darkly, custom-callouts.scss]
+    code-copy: true
+    code-annotations: below
+    
+execute: 
+  echo: true
+  warning: false
+  error: true
+  
+self-contained: true
 
   # pdf:
   #   documentclass: scrreport

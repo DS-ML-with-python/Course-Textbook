@@ -1,13 +1,5 @@
 ---
 title: "Data Visualization in Python"
-format:
-  html:
-    code-copy: true
-    code-annotations: below
-execute: 
-  echo: true
-  warning: false
-  error: true
 ---
 
 ## Introduction

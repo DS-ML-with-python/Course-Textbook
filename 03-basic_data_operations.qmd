@@ -1,0 +1,390 @@
+---
+title: "Tabular Data and Basic Data Operations"
+---
+
+## Introduction
+
+This document demonstrates the use of the `pandas` library in Python to do basic data wrangling and summarization.
+
+::: callout-note
+If you do not have the `pandas` library installed then you will need to run
+
+`pip install pandas`
+
+in the Jupyter terminal to install. **Remember:** you only need to install once per machine (or Colab session).
+:::
+
+## Reading Tabular Data into Python
+
+We're going to be exploring `pandas` in the context of the famous Titanic dataset. We'll work with a subset of this dataset, but more information about it all can be found [here](https://www.kaggle.com/competitions/titanic/data).
+
+We start by loading the `numpy` and `pandas` libraries. Most of our data wrangling work will happen with functions from the `pandas` library, but the `numpy` library will be useful for performing certain mathematical operations should we choose to transform any of our data.
+
+```{python}
+import numpy as np
+import pandas as pd
+```
+
+```{python}
+data_dir = "https://dlsun.github.io/pods/data/"
+df_titanic = pd.read_csv(data_dir + "titanic.csv")
+```
+
+:::{.callout-example .icon}
+
+We've already seen `read_csv()` used many times for importing CSV files into Python, but it bears repeating. 
+
+:::
+
+Data files of many different types and shapes can be read into Python with similar functions, but we will focus on tabular data.
+
+### Tidy Data is Special Tabular Data
+
+For most people, the image that comes to mind when thinking about data is indeed something tabular or spreadsheet-like in nature. **Which is great!**
+
+Tabular data is a form preferred by MANY different data operations and work. However, we will want to take this one step further. In almost all data science work we want our data to be **tidy**
+
+:::{.callout-note}
+
+A dataset is **tidy** if it adheres to following three characteristics:
+
+* Every column is a variable
+
+* Every row is an observation
+
+* Every cell is a single value
+
+:::
+
+:::{.callout-check-in .icon}
+
+With 2-3 people around you, navigate to the [GapMinder Data](https://www.gapminder.org/data/) site and download a single CSV file of your choice. Open it up in Excel or your application of choice. Is this dataset *tidy*? If not, then what would have to change to make it *tidy*?
+
+:::
+
+You may have noticed that `plotnine` (`ggplot`) is basically built to take *tidy* data. Variables are specified in the aesthetics function to map them (i.e. columns) in our dataset to plot elements. This type of behavior is **EXTREMELY** common among functions that work with data in all languages, and so the importance of getting our data into a *tidy* format cannot be overstated.
+
+In Python, there are at least two quick ways to view a dataset we've read in:
+
+```{python}
+df_titanic
+```
+
+```{python}
+df_titanic.head()
+```
+
+The latter (`.head()`) is usually preferred in case the dataset is large.c
+
+:::{.callout-check-in .icon}
+
+Does the titanic dataset appear to be in *tidy* format?
+
+:::
+
+
+## The "Big Five" Verbs of Data Wrangling
+
+Data wrangling can involve a lot of different steps and operations to get data into a *tidy* format and ready for analysis and visualization. The vast majority of these fall under the umbrella one the following five operations:
+
+1. **Select** columns/variables of interest
+
+2. **Filter** rows/observations of interest
+
+3. **Arrange** the rows of a dataset by column(s) of interest (i.e. order or sort)
+
+4. **Mutate** the columns of a dataset (i.e. create or transform variables)
+
+5. **Summarize** the rows of a dataset for column(s) of interest
+
+
+### **Select** Columns/Variables
+
+Suppose we want to select the `age` varible from the titanic `DataFrame`. There are three ways to do this.
+
+1. Use `.loc`, specifying both the rows and columns. (The colon `:` is Python shorthand for "all".)
+
+```{python}
+#|eval: false
+
+df_titanic[:, "age"]
+```
+
+2. Access the column as you would a key in a `dict`.
+
+```{python}
+#|eval: false
+
+df_titanic["age"]
+```
+
+3. Access the column as an attribute of the `DataFrame`.
+
+```{python}
+#|eval: false
+
+df_titanic.age
+```
+
+Method 3 (attribute access) is the most concise. However, it does not work if the variable name contains spaces or special characters, begins with a number, or matches an existing attribute of the `DataFrame`. So, methods 1 and 2 are usually safer and preferred.
+
+To select multiple columns, you would pass in a *list* of variable names, instead of a single variable name. For example, to select both `age` and `fare`, either of the two methods below would work (and produce the same result):
+
+```{python}
+#|eval: false
+
+# Method 1
+df_titanic[:, ["age", "fare"]].head()
+
+# Method 2
+df_titanic[["age", "fare"]].head()
+```
+
+### **Filter** Rows/Observations
+
+#### Selecting Rows/Observations by Location
+
+Before we see how to **filter** (i.e. **subset**) the rows of dataset based on some condition, let's see how to select rows by explicitly identifying them.
+
+We can select a row by its position using the `.iloc` attribute. Keeping in mind that the first row is actually row 0, the fourth row could be extracted as:
+
+```{python}
+df_titanic.iloc[3]
+```
+
+Notice that a single row from a `DataFrame` is no longer a `DataFrame` but a different data structure, called a `Series`.
+
+We can also select multiple rows by passing a *list* of positions to `.iloc`.
+
+```{python}
+df_titanic.iloc[[1, 3]]
+```
+
+Notice that when we select multiple rows, we get a `DataFrame` back.
+
+So a `Series` is used to store a single observation (across multiple variables), while a `DataFrame` is used to store multiple observations (across multiple variables).
+
+If selecting consecutive rows, we can use Python's `slice` notation. For example, the code below selects all rows from the fourth row, up to (but not including) the tenth row.
+
+```{python}
+df_titanic.iloc[3:9]
+```
+
+#### Selecting Rows/Observations by Condition
+
+We'll often want to **filter** or **subset** the rows of a dataset based on some condition. To do this we'll take advantage of **vectorization** and **boolean masking**.
+
+Recall that we can compare the values of a variable/column to a particular value in the following way, and observe the result.
+
+```{python}
+df_titanic["age"] > 30
+```
+
+We can use these `True` and `False` values to filter/subset the dataset! The following subsets the titanic dataset down to only those individuals (rows) with ages over 30.
+
+```{python}
+df_titanic[df_titanic["age"] > 30]
+```
+
+We can combine multiple conditions using `&` (and) and `|` (or). The following subsets the titanic dataset down to females over 30 years of age.
+
+```{python}
+df_titanic[(df_titanic["age"] > 30) & (df_titanic["gender"] == "female")]
+```
+
+:::{.callout-check-in .icon}
+
+With the 2-3 people around you, how would you find the just the names of the males under 20 years of age who survived (in the titanic dataset) with a single line of code?
+
+:::
+
+### **Arrange** Rows
+
+As part of exploratory data analysis and some reporting efforts, we will want to sort a dataset or set of results by one or more variables of interest.
+
+We can do this with `.sort_values` in either *ascending* or *descending* order. We'll also make use of the `inplace` option so that we're changing the dataset itself, instead of having to create a new variable or reassign the sorted result to our existing `DataFrame` object.
+
+The following sorts the titanic dataset by `age` in decreasing order.
+
+```{python}
+df_titanic.sort_values(by = ["age"], ascending=False, inplace=True)
+```
+
+
+### **Mutate** Column(s)
+
+The variables available to us in our original dataset contain all of the information we have access to, but the best insights may instead come from transformations of those variables. 
+
+#### Transforming Quantitative Variables
+
+One of the simplest reasons to want to transform a quantitative variable is to change the measurement units. 
+
+Here we change the `age` of passengers from a value in years to a value in decades.
+
+```{python}
+df_titanic["age"] = df_titanic["age] / 10
+```
+
+If we have a quantitative variable that is particularly skewed, then it might be a good idea to transform the values of that variable...like taking the `log` of the values.
+
+:::{.callout-note}
+
+This was a strategy you saw employed with the GapMinder data!
+
+:::
+
+Below is an example of taking the `log` of the `fare` variable. Notice that we're making use of the `numpy` here to take the `log`.
+
+```{python}
+df_titanic["fare"] = np.log(df_titanic["fare"])
+```
+
+Remember that we can take advantage of **vectorization** here too. The following operation wouldn't really make physical sense, but it's an example of **creating a new variable** out of existing variables.
+
+```{python}
+df_titanic["nonsense"] = df_titanic["fare"] / df_titanic["age"]
+```
+
+Note that we created the new variable, `nonsense`, by specifying on the left side of the `=` here and populating that column/variable via the expression on the right side of the `=`.
+
+We could want to create a new variable by categorizing (or discretizing) the values of a quantitative variable (i.e. convert a quantitative variable to a categorical variable). We can do so with `cut`.
+
+In the following, we create a new `age_cat` variable which represents whether a person is a child or an adult.
+
+```{python}
+df_titanic["age_cat"] = pd.cut(df_titanic["age"],
+                              bins = [0, 18, 100],
+                              labels = ["child", "adult"])
+```
+
+
+#### Transforming Categorical Variables
+
+In some situations, especially later with modeling, we'll need to convert categorical variables (stored as text) into quantitative (often coded) variables. Binary categorical variables can be converted into quantitative variables by coding one category as 1 and the other category as 0. (In fact, the **survived** column in the titanic dataset has already been coded this way.) The easiest way to do this is to create a boolean mask. For example, to convert `gender` to a quantitative variable `female`, which is 1 if the passenger was female and 0 otherwise, we can do the following:
+
+```{python}
+df_titanic["female"] = 1 * (df_titanic["gender"] == "female")
+```
+
+What do we do about a categorical variable with more than twwo categories, like `embarked`, which has four categories? In general, a categorical variable with **K** categories can be converted into **K** separate 0/1 variables, or **dummy variables**. Each of the **K** dummy variables is an indicator for one of the **K** categories. That is, a dummy variable is 1 if the observation fell into its particular category and 0 otherwise.
+
+Although it is not difficult to create dummy variables manually, the easiest way to create them is the `get_dummies()` function in `pandas`.
+
+```{python}
+pd.get_dummies(df_titanic["embarked"])
+```
+
+We may also want to change the levels of a categorical variable. A categorical variable can be transformed by mapping its levels to new levels. For example, we may only be interested in whether a person on the titanic was a passenger or a crew member. The variable `class` is too detailed. We can create a new variable, `type`, that is derived from the existing variable `class`. Observations with a `class` of "1st", "2nd", or "3rd" get a value of "passenger", while observations with a `class` of "deck crew", "engineering crew", or "deck crew" get a value of "crew".
+
+```{python}
+df_titanic["type"] = df_titanic["class"].map({
+    "1st": "passenger",
+    "2nd": "passenger",
+    "3rd": "passenger",
+    "victualling crew": "crew",
+    "engineering crew": "crew",
+    "deck crew": "crew"
+})
+
+df_titanic
+```
+
+### **Summarizing** Rows
+
+Summarization of the rows of a dataset for column(s) of interest can take many different forms. This introduction will not be exhaustive, but certainly cover the basics.
+
+#### Summarizing a Quantitative Variable
+
+There are a few descriptive statistics that can be computed directly including, but not limited to, the mean and median.
+
+```{python}
+df_titanic["age"].mean()
+
+df_titanic["age"].median()
+
+df_titanic[["age", "fare"]].mean()
+```
+
+We can ask for a slightly more comprehensive description using `.describe()`
+
+```{python}
+df_titanic["age"].describe()
+
+df_titanic.describe()
+```
+
+Note that, by default, `.describe()` provides descriptive statistics for only the quantitative variables in the dataset.
+
+We can enhance numerical summaries with `.groupby()`, which allows us to specify one or more variables that we'd like to **group** our work by.
+
+```{python}
+df_titanic[["age", "survived"]].groupby("survived").mean()
+```
+
+:::{.callout-check-in .icon}
+
+With 2-3 people around you, look up how you would compute the correlation between two quantitative variables in Python. Compute the correlation between the `age` and `fare` variables in the titanic dataset.
+
+:::
+
+#### Summarizing a Categorical Variable
+
+When it comes to categorical variables we're most often interested in **frequency distributions** (counts), **relative frequency distributions**, and **cross-tabulations**.
+
+```{python}
+df_titanic["class"].unique()
+
+df_titanic["class"].describe()
+```
+
+The `.unique()` here allows us to see the unique values of the `class` variable. Notice that the results of `.describe()` on a categorical variable are much different.
+
+To completely summarize a single categorical variable, we report the number of times each level appeared, or its **frequency**.
+
+```{python}
+df_titanic["class"].value_counts()
+```
+
+Instead of reporting counts, we can also report proportions or probabilities, or the **relative frequencies**. We can calculate the relative frequencies by specifying `normalize=True` in `.value_counts()`.
+
+```{python}
+df_titanic["class"].value_counts(normalize=True)
+```
+
+Cross-tabulations are one way we can investigate possible relationships between categorical variables. For example, what can we say about the relationship between `gender` and `survival` on the Titanic?
+
+:::{.callout-check-in .icon}
+
+Summarize `gender` and `survival` individually by computing the frequency distributions of each.
+
+:::
+
+This does not tell us how `gender` interacts with `survival`. To do that, we need to produce a *cross-tabulation*, or a "cross-tab" for short. (Statisticians tend to call this a *contingency table* or a *two-way table*.)
+
+```{python}
+pd.crosstab(df_titanic["survived"], df_titanic["gender"])
+```
+
+A cross-tabulation of two categorical variables is a two-dimensional array, with the levels of one variable along the rows and the levels of the other variable along the columns. Each cell in this array contains the number of observations that had a particular combination of levels. So in the Titanic data set, there were 359 females who survived and 1366 males who died. From the cross-tabulation, we can see that there were more females who survived than not, while there were more males who died than not. Clearly, gender had a strong influence on survival because of the Titanic's policy of "women and children first".
+
+To get probabilities instead of counts, we specify `normalize=True`.
+
+```{python}
+pd.crosstab(df_titanic["survived"], df_titanic["gender"], normalize=True)
+```
+
+:::{.callout-check-in .icon}
+
+What about conditional proportions? With 2-3 people around you, discuss how you would compute *the proportion of females that survived* and *the proportion of males that survived* and then do it. 
+
+Note, there are multiple ways to do this.
+
+:::
+
+
+::: {.callout-practice-exercise .icon}
+Open up [this colab notebook](https://colab.research.google.com/drive/1JnbwwQG7GW6cu_kGNggo0U8SLFTvTLfR?usp=sharing) and make a copy.
+
+Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.
+:::
+

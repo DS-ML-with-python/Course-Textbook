@@ -25,7 +25,7 @@ Note sections contain clarification points (anywhere I would normally say "note 
 
 :::{.callout-required-reading .icon}
 
-Consider these sections to be required readings.  This is where we will direct you to existing materials to explain or indroduce a concept. 
+Consider these sections to be required readings.  This is where we will direct you to existing materials to explain or introduce a concept. 
 
 :::
 
