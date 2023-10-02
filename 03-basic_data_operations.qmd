@@ -11,7 +11,7 @@ If you do not have the `pandas` library installed then you will need to run
 
 `pip install pandas`
 
-in the Jupyter terminal to install. **Remember:** you only need to install once per machine (or Colab session).
+in the Jupyter terminal to install. **Remember:** you only need to install once per machine (or Colab session, for packages that don't come pre-installed).
 :::
 
 ## Reading Tabular Data into Python
@@ -56,10 +56,16 @@ A dataset is **tidy** if it adheres to following three characteristics:
 
 :::
 
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
 :::{.callout-check-in .icon}
 
 With 2-3 people around you, navigate to the [GapMinder Data](https://www.gapminder.org/data/) site and download a single CSV file of your choice. Open it up in Excel or your application of choice. Is this dataset *tidy*? If not, then what would have to change to make it *tidy*?
 
+:::
+
+:::{.callout-learn-more .icon}
+The term "tidy data" was first popularized in [this paper](https://vita.had.co.nz/papers/tidy-data.pdf) by R developer Hadley Wickham.
 :::
 
 You may have noticed that `plotnine` (`ggplot`) is basically built to take *tidy* data. Variables are specified in the aesthetics function to map them (i.e. columns) in our dataset to plot elements. This type of behavior is **EXTREMELY** common among functions that work with data in all languages, and so the importance of getting our data into a *tidy* format cannot be overstated.
@@ -74,7 +80,7 @@ df_titanic
 df_titanic.head()
 ```
 
-The latter (`.head()`) is usually preferred in case the dataset is large.c
+The latter (`.head()`) is usually preferred in case the dataset is large.
 
 :::{.callout-check-in .icon}
 
@@ -107,7 +113,7 @@ Suppose we want to select the `age` varible from the titanic `DataFrame`. There 
 ```{python}
 #|eval: false
 
-df_titanic[:, "age"]
+df_titanic.loc[:, "age"]
 ```
 
 2. Access the column as you would a key in a `dict`.
@@ -134,7 +140,7 @@ To select multiple columns, you would pass in a *list* of variable names, instea
 #|eval: false
 
 # Method 1
-df_titanic[:, ["age", "fare"]].head()
+df_titanic.loc[:, ["age", "fare"]].head()
 
 # Method 2
 df_titanic[["age", "fare"]].head()
@@ -202,14 +208,38 @@ With the 2-3 people around you, how would you find the just the names of the mal
 
 As part of exploratory data analysis and some reporting efforts, we will want to sort a dataset or set of results by one or more variables of interest.
 
-We can do this with `.sort_values` in either *ascending* or *descending* order. We'll also make use of the `inplace` option so that we're changing the dataset itself, instead of having to create a new variable or reassign the sorted result to our existing `DataFrame` object.
+We can do this with `.sort_values` in either *ascending* or *descending* order. 
 
 The following sorts the titanic dataset by `age` in decreasing order.
 
 ```{python}
+df_titanic.sort_values(by = ["age"], ascending=False)
+```
+
+:::{.callout-note}
+Notice that in these last few sections, we have not made any *permanent* changes to the `df_titanic` object.  We have only asked python do some selecting/filtering/sorting and then to print out the results, not save them.
+
+If we wanted `df_titanic` to become permanently sorted by age, we would **re-assign** the object:
+
+```{python}
+df_titanic = df_titanic.sort_values(by = ["age"], ascending=False)
+```
+
+:::
+
+:::{.callout-warning}
+
+You will sometimes see object reassignment happen in a different way, using an `inplace = True` argument, like this:
+```{python}
 df_titanic.sort_values(by = ["age"], ascending=False, inplace=True)
 ```
 
+We strongly recommend **against** this approach, for two reason:
+
+1. When an object is "overwritten" via reassignment, that's a major decision; you lose the old version of the object.  It should be made deliberately and obviously.  The `inplace` argument is easy to miss when copying/editing code, so it can lead to accidental overwriting that is hard to keep track of.
+
+2. Not all functions of DataFrames have an `inplace` option.  It can be frustrating to get into the habit of using it, only to find out the hard way that it's not available half the time!
+:::
 
 ### **Mutate** Column(s)
 
@@ -222,7 +252,7 @@ One of the simplest reasons to want to transform a quantitative variable is to c
 Here we change the `age` of passengers from a value in years to a value in decades.
 
 ```{python}
-df_titanic["age"] = df_titanic["age] / 10
+df_titanic["age"] = df_titanic["age"] / 10
 ```
 
 If we have a quantitative variable that is particularly skewed, then it might be a good idea to transform the values of that variable...like taking the `log` of the values.
@@ -257,6 +287,10 @@ df_titanic["age_cat"] = pd.cut(df_titanic["age"],
                               labels = ["child", "adult"])
 ```
 
+
+:::{.callout-check-in .icon}
+Consider the four mutations we just performed.  In which ones did we **reassign** a column of the dataset, thus *replacing* the old values with new ones?  In which ones did we **create** a brand-new column, thus retaining the old column(s) that were involved in the calculation?
+:::
 
 #### Transforming Categorical Variables
 

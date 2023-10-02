@@ -2,26 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/index.html</loc>
-    <lastmod>2023-10-02T01:49:27.573Z</lastmod>
+    <lastmod>2023-10-02T02:18:56.790Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/00-setup.html</loc>
-    <lastmod>2023-10-02T01:49:27.597Z</lastmod>
+    <lastmod>2023-10-02T02:18:56.803Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/01-basics.html</loc>
-    <lastmod>2023-10-02T01:49:27.684Z</lastmod>
+    <lastmod>2023-10-02T02:18:56.851Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/02-plotnine.html</loc>
-    <lastmod>2023-10-02T01:49:27.767Z</lastmod>
+    <lastmod>2023-10-02T02:18:56.903Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/03-basic_data_operations.html</loc>
-    <lastmod>2023-10-02T01:49:27.836Z</lastmod>
-  </url>
-  <url>
-    <loc>https://DS-ML-with-python.github.io/Course-Textbook/04-pivoting_joining.html</loc>
-    <lastmod>2023-10-02T01:49:27.927Z</lastmod>
+    <lastmod>2023-10-02T02:18:56.968Z</lastmod>
   </url>
 </urlset>
