@@ -11,8 +11,7 @@ book:
     - 00-setup.qmd
     - 01-basics.qmd
     - 02-plotnine.qmd
-    #- 03-basic_data_operations.qmd
-    #- 04-pivoting_joining.qmd
+    - 03-basic_data_operations.qmd
   site-url: https://DS-ML-with-python.github.io/Course-Textbook/
   repo-url: https://github.com/DS-ML-with-python/Course-Textbook/
   repo-branch: main
