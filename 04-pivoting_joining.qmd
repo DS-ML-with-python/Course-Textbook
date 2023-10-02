@@ -1,0 +1,26 @@
+---
+title: "Pivoting and Joining"
+---
+
+## Introduction
+
+This document demonstrates the use of the `pandas` library in Python to do basic data wrangling and summarization.
+
+::: callout-note
+If you do not have the `pandas` library installed then you will need to run
+
+`pip install pandas`
+
+in the Jupyter terminal to install. **Remember:** you only need to install once per machine (or Colab session).
+:::
+
+## Reading Tabular Data into Python
+
+
+
+::: {.callout-practice-exercise .icon}
+Open up [this colab notebook](https://colab.research.google.com/drive/1JnbwwQG7GW6cu_kGNggo0U8SLFTvTLfR?usp=sharing) and make a copy.
+
+Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.
+:::
+
