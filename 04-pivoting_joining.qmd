@@ -15,10 +15,11 @@ in the Jupyter terminal to install. **Remember:** you only need to install once 
 :::
 
 ```{python}
-#|eval: false
-
-
 import pandas as pd
+```
+
+```{python}
+#|eval: false
 
 # Population data from GapMinder
 population = pd.read_csv("/content/pop.csv")
