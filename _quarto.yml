@@ -44,6 +44,7 @@ execute:
   echo: true
   warning: false
   error: true
+  freeze: auto
   
 self-contained: true
 
