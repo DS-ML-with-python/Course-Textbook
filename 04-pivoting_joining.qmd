@@ -341,7 +341,7 @@ Download a second GapMinder dataset and merge it with the population dataset fro
 
 ::: {.callout-practice-exercise .icon}
 
-College Puzzle PA here...
+[Click here](https://colab.research.google.com/drive/12zB93Tb-f1lln5AtX8q1iHv6thlDb4aO?usp=sharing) to solve a riddle using data manipulation. 
 
 :::
 
