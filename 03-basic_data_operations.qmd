@@ -106,7 +106,7 @@ Data wrangling can involve a lot of different steps and operations to get data i
 
 ### **Select** Columns/Variables
 
-Suppose we want to select the `age` varible from the titanic `DataFrame`. There are three ways to do this.
+Suppose we want to select the `age` variable from the titanic `DataFrame`. There are three ways to do this.
 
 1. Use `.loc`, specifying both the rows and columns. (The colon `:` is Python shorthand for "all".)
 
@@ -308,7 +308,7 @@ Although it is not difficult to create dummy variables manually, the easiest way
 pd.get_dummies(df_titanic["embarked"])
 ```
 
-We may also want to change the levels of a categorical variable. A categorical variable can be transformed by mapping its levels to new levels. For example, we may only be interested in whether a person on the titanic was a passenger or a crew member. The variable `class` is too detailed. We can create a new variable, `type`, that is derived from the existing variable `class`. Observations with a `class` of "1st", "2nd", or "3rd" get a value of "passenger", while observations with a `class` of "deck crew", "engineering crew", or "deck crew" get a value of "crew".
+We may also want to change the levels of a categorical variable. A categorical variable can be transformed by mapping its levels to new levels. For example, we may only be interested in whether a person on the titanic was a passenger or a crew member. The variable `class` is too detailed. We can create a new variable, `type`, that is derived from the existing variable `class`. Observations with a `class` of "1st", "2nd", or "3rd" get a value of "passenger", while observations with a `class` of "victualling crew", "engineering crew", or "deck crew" get a value of "crew".
 
 ```{python}
 df_titanic["type"] = df_titanic["class"].map({

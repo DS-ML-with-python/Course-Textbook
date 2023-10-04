@@ -4,7 +4,7 @@ title: "Pivoting and Joining"
 
 ## Introduction
 
-This document demonstrates the use of the `pandas` library in Python to do basic data wrangling and summarization.
+This document demonstrates the use of the `pandas` library in Python to do pivoting and joining of datasets.
 
 ::: callout-note
 If you do not have the `pandas` library installed then you will need to run
@@ -14,13 +14,334 @@ If you do not have the `pandas` library installed then you will need to run
 in the Jupyter terminal to install. **Remember:** you only need to install once per machine (or Colab session).
 :::
 
-## Reading Tabular Data into Python
+```{python}
+import pandas as pd
+```
 
+```{python}
+#|eval: false
+
+# Population data from GapMinder
+population = pd.read_csv("/content/pop.csv")
+```
+
+## Pivoting Data in Python
+
+Data come in all shapes and forms! Rare is the day when we can open a dataset for the first time and it's ready for every type of visualization or analysis that we could want to do with it.
+
+In addition to the wrangling we discussed in the previous chapter, there may be a need to reshape the dataset entirely. For example, the column names might be values themselves that we want to make use of.
+
+Recall our introduction of *tidy* data in the previous chapter...
+
+### Tidy Data is Special Tabular Data
+
+For most people, the image that comes to mind when thinking about data is indeed something tabular or spreadsheet-like in nature. **Which is great!**
+
+Tabular data is a form preferred by MANY different data operations and work. However, we will want to take this one step further. In almost all data science work we want our data to be **tidy**
+
+:::{.callout-note}
+
+A dataset is **tidy** if it adheres to following three characteristics:
+
+* Every column is a variable
+
+* Every row is an observation
+
+* Every cell is a single value
+
+:::
+
+![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
+
+In the previous chapter you were asked to open up a GapMinder dataset [here](https://www.gapminder.org/data/) and to comment on whether this dataset was *tidy* or not. 
+The answer was **no**, this dataset is not *tidy*. These datasets come with a row representing a country, each column representing a year, and each cell representing the value of the global indicator selected. To be *tidy* these three variables (`country`, `year`, `global indicator`) should each have their own column, instead of the `year` variable taking values as the column headers.
+
+### Wide to Long Format
+
+The GapMinder dataset is an example of what's commonly referred to as data in a *wide format*. To make this dataset *tidy* we aim for a dataset with columns for `country`, `year`, and `global indicator` (e.g. population). Three columns is many fewer than the current number of columns, and so we will convert this dataset from *wide to long format*.
+
+:::{.callout-warning}
+
+It often helps to physically draw/map out what our current dataset looks like and what the look of our target dataset is, before actually trying to write any code to do this. Writing the code can be **extremely** easier after this exercise, and only makes future pivot operations easier.
+
+:::
+
+In order to convert our dataset from *wide to long format* we will use `.melt()` (or `.wide_to_long()`) in `pandas`. 
+
+```{python}
+#|eval: false
+long_population = population.melt(id_vars=["country"], var_name="year", value_name="population")
+```
+
+:::{.callout-check-in .icon}
+
+With 2-3 people around you navigate to GapMinder, download the population dataset, and convert it from wide to long format. Does the result look how you expect? Is any other wrangling necessary?
+
+:::
+
+### Long to Wide Format
+
+Even though certain data shapes are not considered *tidy*, they may be more conducive to performing certain operations than other shapes. For example, what if we were interested in the change in country population between 1950 and 2010? In the original *wide* shape of the GapMinder data this operation would have been a simple difference of columns like below.
+
+```{python}
+#|eval: false
+
+population["pop_diff"] = population["2010"] - population["1950"]
+```
+
+
+:::{.callout-check-in .icon}
+
+Why doesn't the above code work without further wrangling? What in the dataset needs to change for this operation to work?
+
+:::
+
+In the *long* format of our Gapminder dataset (`long_population`), this operation is less straightforward. Sometimes datasets come to us in *long* format and to do things like the operation above we need to convert that dataset from *long to wide format*. We can go the reverse direction (i.e. *long to wide format*) with `.pivot()` in `pandas`.
+
+```{python}
+#|eval: false
+
+
+wide_population = long_population.pivot(index = "country", columns = "year", values = "population")
+wide_population = wide_population.reset_index()
+```
+
+:::{.callout-learn-more .icon collapse="true"}
+
+We haven't spent much time discussing the `index` of a `pandas` DataFrame, but you can think of it like an address for data, or slices of data in a DataFrame. You can also think of an `index` (or `indices`) as row names, or axis labels, for your dataset. This can be useful for a number of functions in Python, and can enhance the look of results or visualizations.
+
+However, understanding them is not critical for what we will do in Python. Furthermore, variables that are `indices` for a DataFrame cannot be accessed or referenced in the same way as other variables in the DataFrame. So, we will avoid their use if possible.
+
+:::
+
+## Joining Datasets in Python
+
+The information you need is often spread across multiple data sets, so you will need to combine multiple data sets into one. In this chapter, we discuss strategies for combining information from multiple (tabular) data sets.
+
+As a working example, we will use a data set of baby names collected by the Social Security Administration. Each data set in this collection contains the names of all babies born in the United States in a particular year. This data is publicly available, and a copy has been made available at [https://dlsun.github.io/pods/data/names/](https://dlsun.github.io/pods/data/names/).
+
+### Concatenating and Merging Data
+
+#### Concatenation
+
+Sometimes, the *rows* of data are spread across multiple files, and we want to combine the rows into a single data set. The process of combining rows from different data sets is known as concatenation.
+
+Visually, to concatenate two `DataFrames`, we simply stack them on top of one another.
+
+For example, suppose we want to understand how the popularity of different names evolved between 1995 and 2015. The 1995 names and the 2015 names are stored in two different files: `yob1995.txt` and `yob2015.txt`, respectively. To carry out this analysis, we will need to combine these two data sets into one.
+
+```{python}
+data_dir = "http://dlsun.github.io/pods/data/names/"
+names1995 = pd.read_csv(data_dir + "yob1995.txt",
+                        header=None,
+                        names=["Name", "Sex", "Count"])
+names1995
+```
+
+```{python}
+names2015 = pd.read_csv(data_dir + "yob2015.txt",
+                        header=None,
+                        names=["Name", "Sex", "Count"])
+names2015
+```
+
+To concatenate the two, we use the `pd.concat()` function, which accepts a *list* of `pandas` objects (`DataFrames` or `Series`) and concatenates them.
+
+```{python}
+pd.concat([names1995, names2015])
+```
+
+1. There is no longer any way to distinguish the 1995 data from the 2015 data. To fix this, we can add a **Year** column to each `DataFrame` before we concatenate.
+
+2. The indexes from the original `DataFrames` are preserved in the concatenated `DataFrame`. (To see this, observe that the last index in the `DataFrame` is about 33000, which corresponds to the number of rows in `names2015`, even though there are 59000 rows in the `DataFrame`.) That means that there are two rows with an index of 0, two rows with an index of 1, and so on. To force `pandas` to generate a completely new index for this `DataFrame`, ignoring the indices from the original `DataFrames`, we specify `ignore_index=True`.
+
+```{python}
+names1995["Year"] = 1995
+names2015["Year"] = 2015
+names = pd.concat([names1995, names2015], ignore_index=True)
+names
+```
+
+Now this is a `DataFrame` we can use!
+
+#### Merging (a.k.a Joining)
+
+More commonly, the data sets that we want to combine actually contain different information about the same observations. In other words, instead of stacking the `DataFrames` on top of each other, as in concatenation, we want to stack them next to each other. The process of combining columns or variables from different data sets is known as *merging* or *joining*.
+
+The observations may be in a different order in the two data sets, so merging is not as simple as placing the two `DataFrames` side-by-side.
+
+*Merging* is an operation on two `DataFrames` that returns a third `DataFrame`. By convention, the first `DataFrame` is referred to as the one on the "left", while the second `DataFrame` is the one on the "right".
+
+This naming convention is reflected in the syntax of the `.merge()` function in `pandas`. In the code below, the "left" `DataFrame`, `names1995`, is quite literally on the left in the code, while the "right" `DataFrame`, `names2015`, is to the right. We also specify the variables to match across the two `DataFrames`.
+
+```{python}
+names1995.merge(names2015, on=["Name", "Sex"])
+```
+
+The **most important component** of *merging* two datasets is the presence of at least one *key* variable that both datasets share. This variable is sometimes referred to as an *ID variable*. It's this variable that we will want to *merge on*, i.e. use to combine the two datasets intelligently.
+
+The variables that we joined on (`Name` and `Sex`) appear once in the final `DataFrame`. The variable `Count`, which we did not join on, appears twice---since there was a column called `Count` in both of the original `DataFrames`. Notice that `pandas` automatically appended the suffix `_x` to the name of the variable from the left `DataFrame` and `_y` to the one from the right `DataFrame`. We can customize the suffixes by specifying the `suffixes=` parameter.
+
+```{python}
+names1995.merge(names2015, on=["Name", "Sex"], suffixes=("1995", "2015"))
+```
+
+In the code above, we assumed that the columns that we joined on had the same names in the two data sets. What if they had different names? For example, suppose the variable had been called `Sex` in one data set and `Gender` in the other. We can specify which variables to use from the left and right data sets using the `left_on=` and `right_on=` parameters.
+
+```{python}
+# Create new DataFrames where the column names are different
+names2015_ = names2015.rename({"Sex": "Gender"}, axis=1)
+
+# This is how you merge them.
+names1995.merge(
+    names2015_,
+    left_on=("Name", "Sex"),
+    right_on=("Name", "Gender")
+)
+```
+
+#### One-to-One and Many-to-One Relationships
+
+In the example above, there was at most one combination of `Name` and `Sex` in the 2015 data set for each combination of `Name` and `Sex` in the 1995 data set. These two data sets are thus said to have a one-to-one relationship. The same would be true of combining two GapMinder datasets.
+
+However, two data sets need not have a one-to-one relationship! Two datasets could have a *many-to-one relationship*. In general, it's **extremely important** to think carefully about what variables each of your two datasets have to begin with, and what variables you want your merged dataset to have...and what that merged dataset will represent with respect to your data.
+
+#### Many-to-Many Relationships: A Cautionary Tale
+
+It is also possible for multiple rows in the left `DataFrame` to match multiple rows in the right `DataFrame`. In this case, the two data sets are said to have a *many-to-many relationship*. Many-to-many joins can lead to misleading analyses, so it is important to exercise caution when working with many-to-many relationships.
+
+For example, in the baby names data set, the `Name` variable is not uniquely identifying. For example, there are both males and females with the name "Jessie".
+
+```{python}
+jessie1995 = names1995[names1995["Name"] == "Jessie"]
+jessie1995
+```
+
+```{python}
+jessie2015 = names2015[names2015["Name"] == "Jessie"]
+jessie2015
+```
+
+If we join these two `DataFrames` on `Name`, then we will end up with a many-to-many join, since each "Jessie" row in the 1995 data will be paired with each "Jessie" row in the 2015 data.
+
+```{python}
+jessie1995.merge(jessie2015, on=["Name"])
+```
+
+Notice that Jessie ends up appearing four times:
+
+* Female Jessies from 1995 are matched with female Jessies from 2015. (Good!)
+* Male Jessies from 1995 are matched with male Jessies from 2015. (Good!)
+* Female Jessies from 1995 are matched with male Jessies from 2015. (This is perhaps undesirable.)
+* Male Jessies from 1995 are matched with female Jessies from 2015. (Also unexpected and undesirable.)
+
+If we had used a data set like this to determine the number of Jessies in 1995, then we would end up with the wrong answer, since we would have double-counted both female and male Jessies as a result of the many-to-many join. This is why it is important to exercise caution when working with (potential) many-to-many relationships.
+
+### Types of Joins
+
+Above, we saw how to merge (or join) two data sets by matching on certain variables. But what happens when a row in one `DataFrame` has no match in the other?
+
+First, let's investigate how `pandas` handles this situation by default. The name "Nevaeh", which is "heaven" spelled backwards, took after Sonny Sandoval of the band P.O.D. gave his daughter the name in 2000. Let's look at how common this name was five years earlier and five years after.
+
+```{python}
+data_dir = "http://dlsun.github.io/pods/data/names/"
+
+names1995 = pd.read_csv(data_dir + "yob1995.txt",
+                        header=None, names=["Name", "Sex", "Count"])
+names2005 = pd.read_csv(data_dir + "yob2005.txt",
+                        header=None, names=["Name", "Sex", "Count"])
+```
+
+```{python}
+names1995[names1995.Name == "Nevaeh"]
+```
+
+```{python}
+names2005[names2005.Name == "Nevaeh"]
+```
+
+In 1995, there were no girls (at least fewer than 5) named Nevaeh; just eight years later, there were over 4500 girls (and even 56 boys) with the name. It seems like Sonny Sandoval had a huge effect.
+
+What happens to the name "Nevaeh" when we merge the two data sets?
+
+```{python}
+names = names1995.merge(names2005, on=["Name", "Sex"])
+names[names.Name == "Nevaeh"]
+```
+
+By default, `pandas` only includes combinations that are present in both `DataFrames`. If it cannot find a match for a row in one `DataFrame`, then the combination is simply dropped.
+
+But in this context, the fact that a name does not appear in one data set is informative. It means that no babies were born in that year with that name. We might want to include names that appeared in only one of the two `DataFrames`, rather than just the names that appeared in both.
+
+There are four types of joins, distinguished by whether they include the rows from the left `DataFrame`, the right `DataFrame`, both, or neither:
+
+1. *inner join* (default): only values that are present in both `DataFrames` are included in the result
+2. *outer join*: any value that appears in either `DataFrame` is included in the result
+3. *left join*: any value that appears in the left `DataFrame` is included in the result, whether or not it appears in the right `DataFrame`
+4. *right join*: any value that appears in the right `DataFrame` is included in the result, whether or not it appears in the left `DataFrame`.
+
+One way to visualize the different types of joins is using Venn diagrams. The shaded region indicates which rows that are included in the output. For example, only rows that appear in both the left and right `DataFrames` are included in the output of an inner join.
+
+![](https://github.com/dlsun/pods/blob/master/09-Joining-Tabular-Data/joins.png?raw=1)
+
+In `pandas`, the join type is specified using the `how=` argument.
+
+Now let's look at the examples of each of these types of joins.
+
+```{python}
+# inner join
+names_inner = names1995.merge(names2005, on=["Name", "Sex"], how="inner")
+names_inner
+```
+
+```{python}
+# outer join
+names_outer = names1995.merge(names2005, on=["Name", "Sex"], how="outer")
+names_outer
+```
+
+Names like "Zyrell" and "Zyron" appeared in the 2005 data but not the 1995 data. For this reason, their count in 1995 is `NaN`. In general, there will be missing values in `DataFrames` that result from an outer join. Any time a value appears in one `DataFrame` but not the other, there will be `NaN`s in the columns from the `DataFrame` missing that value.
+
+```{python}
+names_inner.isnull().sum()
+```
+
+Left and right joins preserve data from one `DataFrame` but not the other. For example, if we were trying to calculate the percentage change for each name from 1995 to 2005, we would want to include all of the names that appeared in the 1995 data. If the name did not appear in the 2005 data, then that is informative.
+
+```{python}
+# left join
+names_left = names1995.merge(names2005, on=["Name", "Sex"], how="left")
+names_left
+```
+
+The result of the left join has `NaN`s in the columns from the right `DataFrame`.
+
+```{python}
+names_left.isnull().sum()
+```
+
+The result of the right join, on the other hand, has `NaN`s in the column from the left `DataFrame`.
+
+```{python}
+# right join
+names_right = names1995.merge(names2005, on=["Name", "Sex"], how="right")
+names_right
+```
+
+```{python}
+names_right.isnull().sum()
+```
+
+:::{.callout-check-in .icon}
+
+Download a second GapMinder dataset and merge it with the population dataset from above. Did you have to pivot first? Which order of operations makes the most sense? Is your resulting dataset *tidy*?
+
+:::
 
 
 ::: {.callout-practice-exercise .icon}
-Open up [this colab notebook](https://colab.research.google.com/drive/1JnbwwQG7GW6cu_kGNggo0U8SLFTvTLfR?usp=sharing) and make a copy.
 
-Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.
+[Click here](https://colab.research.google.com/drive/12zB93Tb-f1lln5AtX8q1iHv6thlDb4aO?usp=sharing) to solve a riddle using data manipulation. 
+
 :::
 
