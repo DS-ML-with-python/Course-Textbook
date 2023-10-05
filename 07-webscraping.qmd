@@ -1,0 +1,28 @@
+---
+title: "Webscraping"
+---
+
+## Introduction
+
+This document demonstrates the use of the `beautifulsoup` library in Python to do webscraping.
+
+::: callout-note
+If you do not have the `pandas` library installed then you will need to run
+
+`pip install pandas`
+
+in the Jupyter terminal to install. **Remember:** you only need to install once per machine (or Colab session).
+:::
+
+```{python}
+import pandas as pd
+```
+
+```{python}
+#|eval: false
+
+# Population data from GapMinder
+population = pd.read_csv("/content/pop.csv")
+```
+
+## Pivoting Data in Python
