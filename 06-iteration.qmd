@@ -1,0 +1,43 @@
+---
+title: "Iteration"
+---
+
+## Introduction
+
+In this chapter, we will learn strategies for **iteration**, or performing a repeated task over many values.
+
+Consider the following task:  Suppose I want to get a computer to print out the lyrics to the song [99 Bottles of Beer on the Wall](https://www.youtube.com/watch?v=FITjBet3dio).
+
+Now, we could certainly simply type up all the lyrics ourselves:
+
+```{python}
+print(
+  "99 Bottles of beer on the wall, 99 Bottles of beer. Take one down, pass it around, 98 Bottles of beer on the wall. 98 Bottles of beer on the wall, 98 Bottles of beer. Take one down, pass it around, 97 Bottles of beer on the wall." #... etc etc etc
+)
+```
+
+That sounds like... not much fun to do.  
+
+But we notice that in the song, there is a ton of repetition!  Every verse is almost identical, except for the number of bottles of beer.
+
+This is a great time for some *iteration*.
+
+:::{.callout-opinion .icon .collapse}
+Fortunately, we aren't going to try to sing this version: https://www.youtube.com/watch?v=R30DnFfVtUw
+:::
+
+
+## For loops
+
+
+
+
+### Vectorized functions
+
+
+## Using `.map()`
+
+## Using `.reduce()`
+
+
+## Lambda functions
