@@ -1,5 +1,6 @@
 ---
 title: "Writing Custom Functions"
+self-contained: true
 ---
 
 ```{python}
@@ -237,7 +238,7 @@ Just as someone sitting next to you on a different computer can't access an obje
 
 Anything that is created or altered in the function environment does not impact the global environment - locally, you only "see" what the function *returns*.
 
-:::{.callout-opinion .icon .collapse}
+:::{.callout-opinion .icon}
 
 ![Like Las Vegas, what happens in a function stays in that function](https://images.squarespace-cdn.com/content/v1/617299f9fe173949bdf3774a/438f57b3-3c15-4c6f-a423-f433c8a7aa06/DA3B97EC-DFC1-48A1-B7D5-6EC83D784CB4.jpeg)
 :::
@@ -655,7 +656,6 @@ Try the above debugging approach.
 :::
 
 
-
 ## General Debugging Strategies
 
 > Debugging: Being the detective in a crime movie where you are also the murderer.
@@ -679,8 +679,10 @@ Have you ever called a friend or teacher over for help with an issue, only to fi
 
 Talking through your code out loud is an extremely effective way to spot problems. In programming, we call this **Rubber Duck Debugging**, because coders will sometimes keep a small toy like a rubber duck by their computer, and talk to it while they are alone.
 
-![This is the original RickRoll.  Yes, really.](https://i.kym-cdn.com/entries/icons/original/000/000/305/duckroll169.jpg)
 
+:::{.callout-opinion .icon}
+![This is the original RickRoll.  Yes, really.](https://i.kym-cdn.com/entries/icons/original/000/000/305/duckroll169.jpg)
+:::
 
 :::{.callout-learn-more .icon}
 [A more thorough explanation of rubber duck debugging can be found at gitduck.com](https://gitduck.com/blog/improve-how-to-code-with-rubber-duck-debugging/). 
