@@ -76,7 +76,7 @@ This code has only one input: `df['a']`.
 What is the **object structure** of this input?
 :::
 
-Now we chose an **argument name** for our new input.  It's nice if the argument name reminds the user of what type or structure of object is expected.
+Now we choose an **argument name** for our new input.  It's nice if the argument name reminds the user of what type or structure of object is expected.
 
 In this case, it might help to replace `df$a` with `vec`.
 
@@ -153,7 +153,7 @@ df['d'] = rescale_vector(df['d'])
 
 
 
-You probably notice there is still a little bit of repetition here, with `df['a']` appearing on both the left and right side of the `=`.  But this is good repetition!  When we **assign** or **reassign** and object or column, we want that to be an obvious and deliberate choice.
+You probably notice there is still a little bit of repetition here, with `df['a']` appearing on both the left and right side of the `=`.  But this is good repetition!  When we **assign** or **reassign** an object or column, we want that to be an obvious and deliberate choice.
 
 It's also possible that you might have preferred to keep your original column untouched, and to make new columns for the rescaled data:
 
@@ -341,7 +341,7 @@ What if you accidentally change or delete that global object?  Suddenly the *exa
 
 :::
 
-Alas, although this is bad practice, we quite often "cheat" in Data Science and use global references our dataset in function shortcuts, e.g.
+Alas, although this is bad practice, we quite often "cheat" in Data Science and use global references to our dataset in function shortcuts, e.g.
 
 ```{python}
 #| warning: false
@@ -359,7 +359,6 @@ plot_my_data('species')
   
 ```
 
-:::
 
 
 This "trick" is sometimes called **Dynamic Lookup**.  You should mostly avoid it; but when you use it carefully and deliberately in the context of a specific data analysis, it can be a convenient approach.
