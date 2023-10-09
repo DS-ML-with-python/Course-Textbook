@@ -53,7 +53,7 @@ What does this code do?
 
 :::
 
-:::{.callout-example .icon .collapse}
+:::{.callout-example .icon collapse="true"}
 
 In theory, the code rescales a set of variables to have a range from 0 to 1. But, because of the copy-pasting, the code's author made a mistake and forgot to change an `a` to `b`!
 
@@ -275,7 +275,7 @@ a + 5
 
 :::
 
-:::{.callout-check-in .icon .collapse}
+:::{.callout-check-in .icon collapse="true"}
 
 The object named `a` within the *function environment*, i.e. the **parameter** of the function, was altered to be equal to `20`.
 
