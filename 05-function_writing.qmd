@@ -165,6 +165,58 @@ df['c_scaled'] = rescale_vector(df['c'])
 df['d_scaled'] = rescale_vector(df['d'])
 ```
 
+### Documenting your function
+
+When you want to use a function in `python`, but you can't quite remember exactly how it works, you might be in the habit of typing `?fun_name` or `help(fun_name)` to be able to see the **documentation** for that function.
+
+When you write your own function - whether for yourself or for others - it's important to provide reminders of what the function is for and how it works.
+
+We do this by adding text in a very specific structure into the *body* of our function:
+
+
+```{python}
+
+def rescale_vector(vec):
+  
+  """
+  Rescales a numeric vector to have a max of 1 and min of 0
+  
+  Parameter
+  ---------
+  vec : num
+    A list, numpy array, or pandas Series of numeric data.
+
+  Returns
+  -------
+  array 
+    A numpy array containing the rescaled values.
+  """
+  
+  min_vec = min(vec)
+  max_vec = max(vec)
+  
+  rescaled_vec = (vec - min_vec)/(max_vec - min_vec)
+  
+  return rescaled_vec
+
+```
+
+A few important aspects of the above to note:
+
+* The use of three quotation marks, `"""` is necessary for this text to be recognized as official documentation.
+
+* The exact structure of the *Parameters* and *Returns* sections, with underlines, is important for consistency with other documentation.  There are a few other formatting styles that are generally accepted; we'll stick with the one in this example in this course.
+
+* When listing the *arguments*, a.k.a. *parameters* of our function, we specify the name of the argument, the data type that is expected, and a brief description.
+
+* When listing the *returns* of our function, we specify what object structure is being returned, and a brief description.
+
+* The blank line after the final `"""` is important!
+
+:::{.callout-check-in .icon}
+Define the function using the code above, then run `help(rescale_vector)`. Pretty satisfying, right?
+:::
+
 
 ## Scope
 
@@ -175,7 +227,7 @@ In the previous example, you might have expected
 rescale_vector(df['a'])
 ```
 
-to change the column automatically - but it does not!  This is because everything that happens "inside" the function cannot change the status of objects *outside* the function.
+to change the column of the `df` object automatically - but it does not, unless you explicitly reassign the results!  This is because everything that happens "inside" the function cannot change the status of objects *outside* the function.
 
 This critical programming concept - determining when objects are changed and when they can be accessed - is called **scope**.
 
