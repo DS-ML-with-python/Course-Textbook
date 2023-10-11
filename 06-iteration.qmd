@@ -31,7 +31,7 @@ But we notice that in the song, there is a ton of repetition!  Every verse is al
 
 This is a great time for some *iteration*.
 
-:::{.callout-opinion .icon .collapse}
+:::{.callout-opinion .icon collapse="true"}
 Fortunately, we aren't going to try to sing this version: https://www.youtube.com/watch?v=R30DnFfVtUw
 :::
 
@@ -124,7 +124,7 @@ Here is an approach that *does not* work:
 
 ```{python}
 #| error: true
-a_vec = [-2, 1, -3, -9, 7]
+a_vec = np.array([-2, 1, -3, -9, 7])
 
 if a_vec > 0:
   a_vec = np.sqrt(a_vec)
@@ -136,7 +136,7 @@ The statement `if a_vec > 0` makes no sense for a vector!  The `if` statement ne
 Instead, we would need to iterate over the values:
 
 ```{python}
-a_vec = [-2, 1, -3, -9, 7]
+a_vec = np.array([-2, 1, -3, -9, 7])
 
 for val in a_vec:
   if val > 0:
@@ -146,7 +146,7 @@ for val in a_vec:
 However, there is a nicer approach to this variety of problem, which is to use **boolean masking**:
 
 ```{python}
-is_pos = a_vec < 0
+is_pos = a_vec > 0
 
 a_vec[is_pos] = np.sqrt(a_vec[is_pos])
 
