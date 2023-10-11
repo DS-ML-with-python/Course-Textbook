@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/index.html</loc>
-    <lastmod>2023-10-09T05:10:54.423Z</lastmod>
+    <lastmod>2023-10-11T07:44:26.968Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/00-setup.html</loc>
-    <lastmod>2023-10-09T05:10:54.435Z</lastmod>
+    <lastmod>2023-10-11T07:44:26.982Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/01-basics.html</loc>
-    <lastmod>2023-10-09T05:10:54.479Z</lastmod>
+    <lastmod>2023-10-11T07:44:27.025Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/02-plotnine.html</loc>
-    <lastmod>2023-10-09T05:10:54.529Z</lastmod>
+    <lastmod>2023-10-11T07:44:27.086Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/03-basic_data_operations.html</loc>
-    <lastmod>2023-10-09T05:10:54.589Z</lastmod>
+    <lastmod>2023-10-11T07:44:27.159Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/04-pivoting_joining.html</loc>
-    <lastmod>2023-10-09T05:10:54.659Z</lastmod>
+    <lastmod>2023-10-11T07:44:27.285Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/05-function_writing.html</loc>
-    <lastmod>2023-10-09T05:10:54.752Z</lastmod>
+    <lastmod>2023-10-11T07:44:27.390Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DS-ML-with-python.github.io/Course-Textbook/06-iteration.html</loc>
+    <lastmod>2023-10-11T07:44:27.518Z</lastmod>
   </url>
 </urlset>
