@@ -15,6 +15,7 @@ book:
     - 04-pivoting_joining.qmd
     - 05-function_writing.qmd
     - 06-iteration.qmd
+    - 07-webscraping.qmd
   site-url: https://DS-ML-with-python.github.io/Course-Textbook/
   repo-url: https://github.com/DS-ML-with-python/Course-Textbook/
   repo-branch: main
