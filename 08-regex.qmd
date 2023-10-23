@@ -107,11 +107,6 @@ If the pattern is not found, we get back a value of `-1`.
 string_4.find("007")
 ```
 
-
-:::{.callout-check-in .icon}
-What happens if you replace `.find` with `.findall`?  When might it be better to use one, and when might it be better to use the other?
-:::
-
 Next, we can replace the word with a different string:
 
 ```{python}
@@ -228,6 +223,11 @@ Regular expressions can be both very powerful and very frustrating.  With the ri
 
 ![](https://imgs.xkcd.com/comics/regular_expressions.png)
 
+:::{.callout-check-in .icon}
+Apart from using regular expressions instead of exact strings, do you notice another major difference between the `.find` method versus the `re.findall()` function?  When might it be better to use one, and when might it be better to use the other?
+:::
+
+
 ### Shortcuts
 
 In our Moses example, we wanted to match all rhyming words.  Rather than go through the whole string to figure out possible letters that come before "-oses", we can instead use the `\w` regular expression shortcut to say "match any character that might be found in a word" - i.e., not punctuation or whitespace.
@@ -260,7 +260,7 @@ nursery_rhyme = "Peter Piper picked a peck of pickled peppers, A peck of pickled
 
 1. Use `re.split()` and a regular expression to turn this into a list where each element is one word.
 
-2. Find all the words that start with the letter p.
+2. How many words start with the letter p?
 
 :::
 
@@ -295,10 +295,14 @@ re.findall(r"Kel{2}y", names)
 re.findall(r"Kel{2,3}y", names)
 ```
 
-:::{.callout-check-in}
+:::{.callout-check-in .icon}
+Return to the Peter Piper example in the previous check-in.  Instead of finding *how many* words start with a p, can you extract the words themselves?
+:::
+
+:::{.callout-check-in .icon}
 Use repetition to find **all** the rhyming words in the Moses rhyme.  
 
-*Hint: Don't forget "toeses"!  How can you make the "e" optional, to match either "-oses" or "-oeses"?*
+*Hint: Don't forget "toeses"!  How can you make the "e" optional, to match "-oses" or "-oeses" or "-owses"?*
 :::
 
 ### Escaping special characters
