@@ -96,7 +96,7 @@ One of the most important parts of a data scientist's workflow is **version trac
 **Git** is a computer program that lives on your local 
 computer. Once you designate a folder as a **Git Repository**, the program will automatically tracks changes to the files in side that folder.  
 
-:::{.callout-check-in .icon}
+:::{.callout-check-in}
 [Click here to install Git on your computer.](https://git-scm.com/downloads)
 :::
 
