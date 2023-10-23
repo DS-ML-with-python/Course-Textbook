@@ -1,0 +1,494 @@
+---
+title: "Introduction to Predictive Modeling"
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Introduction
+
+In this chapter, you will be introduced to the basic structure and
+philosophy of the world of **predictive modeling**, or as it is often
+known, **machine learning.**
+
+Machine learning in `python` is usually performed using the
+`SciKit-Learn` package. This library not only provides convenient
+functions for fitting predictive learning models, it also enforces a
+strict structure of workflow that will help you make responsible choices
+in your machine learning decisions.
+
+To help introduce the mindset and procedure of predictive modeling, we
+begin with a metaphor:
+
+> You are the wealthy Baroness Von Machlearn, and you have decided to
+> commission a painting of yourself to hang in your mansion for
+> posterity. Of course, to fully capture your beauty, this portrait
+> needs to be 100 feet tall at least - so you'll only be able to
+> commission one final painting. But who shall have the honor of
+> immortalizing you?
+
+![The Baroness herself.](images/baroness.jpeg){width="50%"}
+
+> You being sneakily exploring your friends' houses every week at
+> Baroness Card Club to see the portraits they have commissioned for
+> themselves. You write down the names of these painters, who you now
+> know are capable of decent quality portrature. (After all, the painter
+> cannot be blamed for the hideous dress that Baroness Artificia was
+> wearing!)
+
+![They didn't even notice you were gone!](images/cats_cards.jpeg){width="50%"}
+
+> Then, you send each of these portrait painters a photograph of
+> yourself and pay them to recreate it as a *miniature* portrait. You
+> bring these portraits to your weekly Card Game, and see which one most
+> impresses your Baroness friends.\
+> Surely, whichever painter's minature interpretation impresses them the
+> most, that is the painter you should hire!
+
+::: {layout-ncol="3"}
+
+![Painter 1's submission](images/cat_portrait_2.jpeg){width="30%"}
+![Painter 2's submission](images/cat_portrait_5.jpeg){width="30%"}
+![Painter 3's submission](images/cat_portrait_6.jpeg){width="30%"}
+
+Three portrait submissions. Which will be your legacy?
+
+:::
+
+> At Baroness Card Club, your friends are blown away by Painter 1's
+> majestic portrait. You hire them at once to paint you in your full
+> glory and secure your regal legacy.
+
+![The Baroness in her full glory.](images/cat_portrait_1.jpeg)
+
+How does this story relate at all to Machine Learning? Read on to find
+out...
+
+## Elements of a machine learning process
+
+### Predictors and Targets
+
+In a predictive modeling setting, there is one **target variable** that
+we are hoping to be able to predict in the future.
+
+This target variable could take many forms; for example it could be:
+
+-   The price that a particular house will sell for.
+
+-   The profits of a company next year.
+
+-   Whether or not a person will click a targeted ad on a website.
+
+The goal is to come up with a *strategy* for how we will use the data we
+*can* observe to make a good guess about the unknown value of the
+*target* variable.
+
+The next question, then, is: what data *can* we observe? The information
+we choose to use in our prediction strategy is called the *predictors*.
+For the above three target variables, some predictors might be:
+
+-   The size of the house in square feet, the neighborhood it is located
+    in, and the number of bedrooms it has.
+
+-   The company's profits last year.
+
+-   The person's age, the person's previous search terms, the image used
+    for the ad, and the website it is hosted on.
+
+Ultimately, every machine learning model - even very complex ones - are
+simply procedures that take *in* some predictors and *give back* a
+predicted value for the target.
+
+:::{.callout-example .icon} 
+
+For Baroness Von Machlearn, the desired
+target was a beautiful portrait. Her "predictors" were the elements of a
+portrait: what dress was she wearing, what background was shown, how she
+styled her hair, etc.
+
+:::
+
+::: callout-caution
+
+In machine learning, it is common to refer to **predictors** or
+**features** for the input and **target** or **target variable** for the
+output.
+
+In computer science, you will sometimes hear these simply called
+**input** and **output**.
+
+In statistics, we sometimes say **covariates** or **independent
+variables** for the input, and **response variable** or **dependent
+variable** for the output.
+
+This book will use all the terms interchangeably, but we will mostly
+stick to "predictors" and "target".
+
+:::
+
+### Model Specifications
+
+Now, once we have identified our target variable, and decided on some
+predictors we will use, we need to come up with a process for making
+predictions.
+
+For example, consider the problem of predicting the price a newly listed
+house will sell for, based on its size, neighborhood, and number of
+bedrooms. Here are a few different prediction strategies:
+
+-   We will find ten houses in the same neighborhood with approximately
+    the same size and number of bedrooms. We will look at the most
+    recent prices these ten houses sold for, and take the average of
+    those. This is our predicted price for the new house.
+
+-   We will make an equation
+
+$$a * \text{size} + b * \text{neighborhood 1}  + c* \text{neighborhood 2} + d*\text{num bedrooms} = \text{price}$$
+We will find out what choices of $a,b,c,d$ lead to the best estimates
+for recently sold houses. Then, we will use those to predict the new
+house's price.
+
+-   We will define a few categories of houses, such as "large, many
+    bedrooms, neighborhood 1" or "medium, few bedrooms, neighborhood 2".
+    Then, we will see which category the new house fits into best. We
+    will predict the price of the new house to be the average price of
+    the ones in its category.
+
+Each of these strategies is what we call a **model specification**. We
+are *specifying* the procedure we intend to use to *model* the way house
+prices are determined.
+
+::: callout-note
+
+For the curious, the examples above roughly correspond to the model
+specifications:
+
+-   K-Nearest-Neighbors
+
+-   Linear Regression
+
+-   Decision Trees
+
+In this class, you will learn a few of the many different model
+specifications that exist.
+
+:::
+
+:::{.callout-example .icon} 
+
+In our Baroness's journey to a portrait, she
+considered many portrait painters. These represent her model
+specifications: the procedures that will turn her image into a portrait.
+
+:::
+
+## Choosing a final model
+
+### Training data
+
+Notice something very important about all of the examples of model
+specifications: They required us to know something about the prices and
+qualities of *other* houses, not just the one we wanted to predict. That
+is, to help us develop our strategy for *future prediction*, we had to
+rely on *past* or *known* information.
+
+This process, by which we use known data to nail down the details of our
+prediction strategy, is called **fitting the models**.
+
+For the three specifications above, the model fitting step is:
+
+-   Simply collecting information about house sizes and prices in the
+    same neighborhood.
+
+-   Determining which exact values of $a,b,c,d$ do a good job predicting
+    for known house prices.
+
+-   Deciding on categories of houses that seem to be priced similarly.
+
+:::{.callout-example .icon} 
+
+To help figure out which painters were
+capable of portraits, the Baroness observed portraits in her friend's
+homes. The painters had been *trained* on portraits of other fancy
+ladies. 
+
+:::
+
+### Test Data and Metrics
+
+Ultimately, we need to settle on **only one** procedure to use to come
+up with our prediction(s) of unknown target values.
+
+Since our goal is to choose a good strategy for *future data*, we'd like
+to see how our fitted models perform on *new* data. This brand-new
+data - which was **not** involved in the model fitting process, but for
+which we **do** know the true target values - is called the **test
+data**.
+
+:::{.callout-check-in .icon} 
+
+Why might we not want to measure prediction
+success on the *training data*?
+
+*Hint:* Consider the model specification "Find the most similar house in
+the training data, and predict that price?" If we use this approach to
+make predictions about the houses *in the training data*, what will
+happen? 
+
+:::
+
+:::{.callout-check-in .icon collapse='true'} 
+
+If we want to predict the
+price of a house in the training data, we look for the most similar
+house, which is... itself! So we predict the price perfectly!
+
+This doesn't necessarily mean our *modeling approach* is good: remember,
+our goal here is to come up with a strategy that will work well for
+*future data*. 
+
+:::
+
+:::{.callout-example .icon} 
+
+To help figure out which painter to
+ultimately hire, the Baroness sent each painter a photograph of herself.
+This allowed the painter to create a sample portrait, i.e., "test data",
+before they ever saw her in person.
+
+:::
+
+Once we make predictions on the test data, we need to decide on a
+**metrics**: a measurement of prediction success of our different models
+on the **test data** that will help us choose the "best" one.
+
+A *metric* is typically an equation that can be calculated using the
+test data and the predictions from a fitted model.
+
+For example, some good metrics for choosing a model to predict house
+prices might be **Mean Squared Error:** We gather houses whose recent
+sales prices are known, use our fitted model to predict prices, and find
+the average squared distance between the predicted price and the actual
+price.
+
+In math notation, this looks like:
+
+$$ (y_1, ..., y_{100}) = \text{actual sales prices of 100 houses}$$
+$$ (\hat{y}_1, ..., \hat{y}_{100}) = \text{predicted sales prices of those 100 houses}$$
+
+$$ \text{MSE} = \frac{1}{100} \sum_{i = 1}^{100} (y_i - \hat{y}_i)^2$$
+
+Of our three (or however many) model specifications, which have been
+fitted with training data, one will have the "best metrics" - the lowest
+MSE on the test data.\
+This "winner" is our **final model**: the modeling approach we will use
+to make predictions on the new house.
+
+:::{.callout-example .icon} 
+
+At Baroness Card Club, the other ladies gave
+their opinions on the candidate painters' mini portraits. Baroness Von
+Machlearn's *metric* was her friends' opinions, which is how she chose
+the painter to make the final portrait. 
+
+:::
+
+Our last - and very important! - step is to **fit the final model**:
+That is, to use *all* the data we have, test and training, to re-train
+the winning model specification. This is the fitted model we will use on
+our actual future unknown data.
+
+:::{.callout-example .icon} 
+
+After all this effort choosing a painter,
+the Baroness still needed to sit for her massive portrait! 
+
+:::
+
+## Modeling with Scikit-learn
+
+Now, let's walk through a simple example of this predictive model
+workflow in python with the `scikit-learn` library.
+
+First, install and import `sklearn`, as well as our usual suspects:
+
+```{r}
+#| include: false
+reticulate::use_python("/usr/local/bin/python3")
+```
+
+```{python}
+import sklearn
+import pandas as pd
+import numpy as np
+```
+
+Next, load the example dataset we will use: the "Ames Housing" dataset,
+which contains information about house sizes and prices in Ames, Iowa.
+
+```{python}
+#| include: false
+dat = pd.read_csv("data/AmesHousing.csv")
+#dat['Neighborhood'].value_counts()
+keep = (dat['Neighborhood'] == 'NAmes') | (dat['Neighborhood'] == 'NWAmes')
+dat = dat[keep]
+dat = dat[['SalePrice', 'Gr Liv Area', 'Bedroom AbvGr', 'Neighborhood']]
+dat = dat.iloc[1:100, :]
+dat = pd.get_dummies(dat)
+dat.to_csv("data/housing_small.csv")
+```
+
+```{python}
+dat = read_csv("")
+```
+
+### Target and Predictors
+
+First, we will establish which variable is our **response** and which
+are our **predictors**. We'll call these `y` and `X`.
+
+```{python}
+y = dat['SalePrice']
+X = dat[['Gr Liv Area', 'Bedroom AbvGr', 'Neighborhood_NAmes', 'Neighborhood_NWAmes']]
+```
+
+:::{.callout-caution}
+
+**Important!** Notice that the object `y` is a **Series**, containing
+all the values of the target variable, while `X` is a **Data Frame**
+with three columns.
+
+We often name `y` in lowercase and `X` in uppercase, to remind ourselves
+that `y` is one-dimensional and `X` is two-dimensional.
+
+In general, `sklearn` functions will expect a one-dimensional target and
+two-dimensional object for predictors.
+
+:::
+
+### Model specifications
+
+Our next step is to establish which model specifications in `sklearn` we
+are going to consider as possible prediction procedures:
+
+```{python}
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.linear_model import LinearRegression
+
+knn = KNeighborsRegressor()
+lr = LinearRegression()
+dt = DecisionTreeRegressor()
+
+```
+
+::: callout-caution
+
+**IMPORTANT:** Nothing in the above code chunk mentioned the *data* at
+all!
+
+We are simply preparing three objects, named `knn` and `lr` and `dt`,
+which we will use with the data to obtain fitted models.
+
+:::
+
+### Test/training split
+
+To choose between our model specifications, we will need some *training
+data* for fitting the models, and some *test data* for computing the
+metrics. How will we get two separate datasets? Easy, we'll just split
+up the one dataset we already have!
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
+```
+
+:::{.callout-check-in .icon}
+
+Try running the above code, and looking at the objects it produces.
+Answer the following questions:
+
+-   How many rows are in the datasets `X_train` and `X_test`?
+
+-   How many elements are in the series `y_train` and `y_test`?
+
+-   What would you change to increase the number of rows in `X_train`?
+
+-   Run the code again, and re-examine the objects. Do they contain the
+    exact same data as before? Why or why not?
+    
+:::
+
+### Model fitting and Metrics
+
+Now, we are ready to put our specifications to the test.
+
+First we fit our models on the training data:
+
+```{python}
+lr_fit = lr.fit(X_train, y_train)
+dt_fit = dt.fit(X_train, y_train)
+knn_fit = knn.fit(X_train, y_train)
+```
+
+::: callout-caution
+
+This is one of the few times you will modify an object *in place*; the
+`.fit()` method called on a model specification object, like `lr` or
+`knn`, will permanently modify that object to be the fitted version.
+However, for clarity, we recommend storing the fitted model under a new
+name, in case we re-fit the model objects later.
+
+:::
+
+There isn't much worth examining in the "model fit" details for `knn`
+and `dt`, but for `lr` we might want to see what *coefficients* were
+chosen - i.e., what were the values of $a,b,c,d$ in our equation.
+
+```{python}
+lr_fit.coef_
+```
+
+Next, we use the fitted models to get predicted values for the *test*
+data.
+
+```{python}
+y_pred_knn = knn_fit.predict(X_test)
+y_pred_lr = lr_fit.predict(X_test)
+y_pred_dt = dt_fit.predict(X_test)
+```
+
+:::{.callout-check-in .icon}
+
+Make a plot of the predicted values versus the true values, `y_test`,
+for each of the three models. Which of the three models seems best to
+you?
+
+:::
+
+Finally, we choose a metric and compute it for the test data
+predictions. In this example, we'll use the MSE:
+
+```{python}
+from sklearn.metrics import mean_squared_error
+
+mean_squared_error(y_test, y_pred_knn)
+mean_squared_error(y_test, y_pred_lr)
+mean_squared_error(y_test, y_pred_dt)
+```
+
+The smallest squared error was achieved by the linear regression!
+
+Thus, our final model will be the linear regression model spec, fit on
+*all* our data:
+
+```{python}
+final_model = lr.fit(X, y)
+final_model.coef_
+```
+
+## Conclusion
+
+No practice exercise this week!

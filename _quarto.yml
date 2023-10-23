@@ -20,6 +20,7 @@ book:
     - 07-webscraping.qmd
     - 08-regex.qmd
   - part: "Machine Learning with Python"
+    chapters:
     - 09-modeling_intro.qmd
   site-url: https://DS-ML-with-python.github.io/Course-Textbook/
   repo-url: https://github.com/DS-ML-with-python/Course-Textbook/
