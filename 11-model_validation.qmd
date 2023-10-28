@@ -1,0 +1,34 @@
+---
+title: "Model Validation"
+---
+
+## Introduction
+
+This document demonstrates the use of the `sklearn` library in Python to do modeling via *multiple linear regression*.
+
+::: callout-note
+If you do not have the `sklearn` library installed then you will need to run
+
+`pip install sklearn`
+
+in the Jupyter/Colab terminal to install. **Remember:** you only need to install once per machine (or Colab session).
+:::
+
+```{python}
+#| label: libraries-py
+#| include: false
+import pandas as pd
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+```
+
+## Machine Learning Mission
+
+Recall that in machine learning our goal is to **predict** the value of some *target* variable using one or more *predictor* variables. Mathematically, we we're in the following setup
+
+\[
+y = f(X) + \epsilon
+\]
+
+where $y$ is our target variable and $X$ represents the collection of our predictor variables.
