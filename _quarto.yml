@@ -22,6 +22,8 @@ book:
   - part: "Machine Learning with Python"
     chapters:
     - 09-modeling_intro.qmd
+    - 10-multiple_linear_regression.qmd
+    - 11-model_validation.qmd
   site-url: https://DS-ML-with-python.github.io/Course-Textbook/
   repo-url: https://github.com/DS-ML-with-python/Course-Textbook/
   repo-branch: main
@@ -57,7 +59,7 @@ execute:
   error: true
   freeze: auto
   
-self-contained: true
+#self-contained: true
 
   # pdf:
   #   documentclass: scrreport
