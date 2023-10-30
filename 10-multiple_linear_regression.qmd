@@ -27,9 +27,7 @@ from sklearn.metrics import r2_score
 
 Recall that in machine learning our goal is to **predict** the value of some *target* variable using one or more *predictor* variables. Mathematically, we we're in the following setup
 
-\[
-y = f(X) + \epsilon
-\]
+$$y = f(X) + \epsilon $$
 
 where $y$ is our target variable and $X$ represents the collection (data frame) of our predictor variables. To **predict** $y$ well we need to estimate $f$ well. We will see many different ways to estimate $f$ including those methods mentioned in our previous modeling introduction:
 
@@ -45,9 +43,7 @@ For the sake of completeness, the $\epsilon$ in the equation above represents ra
 
 Our estimate of $f$ will eventually take on very complicated forms, but one of the simplest estimates is a straight line using a single predictor:
 
-\[
-y = \beta_0 + \beta_1 X_1 + \epsilon
-\]
+$$y = \beta_0 + \beta_1 X_1 + \epsilon$$
 
 This is called **simple linear regression** and is an especially good place to start in our predictive modeling journey for many reasons, but in particular because our data and model are visualizable!
 
@@ -71,9 +67,7 @@ Recall that the vertical distance between a point and our simple linear regressi
 
 There are actually multiple ways to arrive at the estimates for $\beta_0$ and $\beta_1$, but in our machine learning context it's most useful to think of using calculus (you don't need to know this calculus) to find the values of $\hat{\beta}_0$ and $\hat{\beta}_1$ that minimize the **sum of squared residuals**:
 
-\[
-\sum_{i=1}^n (y_i - \hat{y}_i)^2
-\]
+$$\sum_{i=1}^n (y_i - \hat{y}_i)^2$$
 
 where $\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i$.
 
@@ -105,15 +99,11 @@ Our course, and treatment of machine learning, will make use of other model eval
 
 One of the simplest ways to extend simple linear regression is to replace our straight-line model
 
-\[
-y = \beta_0 + \beta_1 X_1 + \epsilon
-\]
+$$y = \beta_0 + \beta_1 X_1 + \epsilon$$
 
 with a polynomial function
 
-\[
-y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \cdots + \beta_d X_1^d + \epsilon
-\]
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \cdots + \beta_d X_1^d + \epsilon$$
 
 We can still estimate the coefficients with the **least squares** method described above for simple linear regression. **Note** that we're still only using a single predictor variable here; we've added polynomial terms of that predictor variable. This can be useful if the relationship between `y` and `x` is not linear.
 
@@ -197,21 +187,17 @@ X["X_cube"] = X["x"]**3
 
 It's almost always the case that we have more than one predictor variable in our dataset. To estimate $f$ in the best possible way we usually want to take advantage of everything we have access to. Extending our simple linear and polynomial regression models to this **multiple linear regression** model is straightforward!
 
-\[
-y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon
-\]
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon$$
 
 where $X_1$ represents the first predictor variable and so on. Coefficients are estimated in the same exact way! Minimize the sum of squared residuals:
 
-\[
-\sum_{i=1}^n (y_i - \hat{y}_i)^2
-\]
+$$\sum_{i=1}^n (y_i - \hat{y}_i)^2$$
 
 but now $\hat{y}_i$ is based on the multiple linear regression model above.
 
 We just blew this regression modeling wide open! We should now consider the inclusion of variables of any type within our model. If we think it can help in the prediction effort, then we should consider including it in our model.
 
-![](https://media.giphy.com/media/4cUCFvwICarHq/giphy.gif)
+<!-- ![](https://media.giphy.com/media/4cUCFvwICarHq/giphy.gif) -->
 
 ### Dummifying Categorical Variables
 

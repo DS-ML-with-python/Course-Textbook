@@ -27,9 +27,7 @@ from sklearn.metrics import r2_score
 
 Recall that in machine learning our goal is to **predict** the value of some *target* variable using one or more *predictor* variables. Mathematically, we we're in the following setup
 
-\[
-y = f(X) + \epsilon
-\]
+$$y = f(X) + \epsilon $$
 
 where $y$ is our target variable and $X$ represents the collection (data frame) of our predictor variables. So far we've discussed tackling this via **multiple linear regression**.
 
@@ -37,9 +35,7 @@ where $y$ is our target variable and $X$ represents the collection (data frame) 
 
 Recall that we've discussed the following model specification:
 
-\[
-y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon
-\]
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon$$
 
 where $X_j$ ($j = 1,...,p$) can represent any type of predictor (or transformed predictor) variable in our dataset.
 
