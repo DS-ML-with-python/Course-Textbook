@@ -10,7 +10,7 @@ title: "Pipelines, Cross-Validation, and Tuning"
 
 import pandas as pd
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
@@ -284,20 +284,63 @@ Notice also the structure of the names of the dummified variables:
 :::
 
 
-#### Interactions
+#### Interactions and Dummies
 
-???
+Sometimes, we want to include an **interaction term** in our model; for example,
 
+$$ \text{House Price} = \text{House Size} + \text{Num Rooms} + \text{Size}*\text{Rooms}$$
+
+Adding interactions between numeric variables is simple, we simply add a "polynomial" step to our preprocessing, except we leave off the squares and cubes, and keep only the interactions:
+
+```{python}
+ct_inter = ColumnTransformer(
+  [
+    ("interaction", PolynomialFeatures(interaction_only = True), ["Gr Liv Area", "TotRms AbvGrd"])
+  ],
+  remainder = "drop"
+).set_output(transform = "pandas")
+
+ct_inter.fit_transform(X_train)
+
+```
+
+However, to add an interaction with a dummified variable, we first need to know what the *new* column names are after the dummification step.
+
+For example, suppose we wanted to add an interaction term for the number of rooms in the house and whether the house is a single family home.
+
+We'll need to run the data through one preprocessing step, to get the dummy variables, then a *second* preprocessing that uses those variables.
+
+```{python}
+ct_dummies = ColumnTransformer(
+  [("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"])],
+  remainder = "passthrough"
+).set_output(transform = "pandas")
+
+ct_inter = ColumnTransformer(
+  [
+    ("interaction", PolynomialFeatures(interaction_only = True), ["remainder__TotRms AbvGrd", "dummify__Bldg Type_1Fam"]),
+  ],
+  remainder = "drop"
+).set_output(transform = "pandas")
+
+X_train_dummified = ct_dummies.fit_transform(X_train)
+X_train_dummified
+
+ct_inter.fit_transform(X_train_dummified)
+```
+
+Ooof!  This is not very elegant, we admit.  But it is still worth the effort to set up a full pipeline, instead of transforming things by hand, as we will see in the next section.
 
 ### Your turn
 
 :::{.callout-practice-exercise .icon}
 
-Consider three possible models for predicting house prices:
+Consider four possible models for predicting house prices:
 
 1. Using only the size and number of rooms.
 2. Using size, number of rooms, and building type.
-3. Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.
+3. Using size and building type, and their interaction.
+4. Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.
 
 Set up a pipeline for each of these three models.
 
