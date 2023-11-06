@@ -1,0 +1,596 @@
+---
+title: "Pipelines, Cross-Validation, and Tuning"
+---
+
+```{r}
+#| include: false
+reticulate::use_python("/usr/local/bin/python3")
+```
+
+```{python}
+#| include: false
+import random
+
+random.seed(1010220)
+```
+
+
+
+## Introduction
+
+
+```{python}
+import pandas as pd
+import numpy as np
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+```
+
+
+In the last two chapters, we learned to use `sklearn` and `python` to perform the main steps of the modeling procedure:
+
+1. **Preprocessing:** Choosing which predictors to include, and how we will transform them to prepare them for the model, e.g. `pd.get_dummies()` or `StandardScaler()`
+
+2. **Model Specification:**  Choosing the *procedure* we will use to make sure predictions; e.g. `LinearRegression()` or `NearestNeighborsRegressor()`
+
+3. **Fitting on training data:** Using `train_test_split()` to establish a randomly chosen training set, then using `.fit()` to fit the model on that set.
+
+4. **Validating on test data:** Using `.predict` to make predictions on the test set, and then computing desired metrics to compare models, like `rmse()` or `r2()`.
+
+In this chapter, we will combine all these steps into one **pipeline**, sometimes called a **workflow**, to streamline our modeling process. 
+
+Then, we will use our pipeline objects to quickly and easily perform more complex model fitting and validation tasks.
+
+## Pipelines
+
+If we already know how to perform each modeling step, why would we need pipelines?  Consider the following cautionary tale...
+
+### Cautionary Tale:
+
+#### Chapter One
+
+Suppose you want to predict (of course) house prices from house characteristics. 
+
+[Click here to download the full AMES housing dataset](https://www.dropbox.com/scl/fi/g0n5le5p6fr136ggetfsf/AmesHousing.csv?rlkey=jlr9xtz1o6u5rghfo29a5c02f&dl=1)
+
+[Click here for data documentation](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+
+You might take an approach like this:
+
+```{python}
+lr = LinearRegression()
+
+
+ames = pd.read_csv("data/AmesHousing.csv")
+X = ames[["Gr Liv Area", "TotRms AbvGrd"]]
+y = ames["SalePrice"]
+
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+X_train_s = (X_train - X_train.mean())/X_train.std()
+
+lr_fitted = lr.fit(X_train_s, y_train)
+lr_fitted.coef_
+```
+
+Then, you decide to apply your fitted model to the test data:
+
+```{python}
+y_preds = lr_fitted.predict(X_test)
+
+r2_score(y_test, y_preds)
+```
+
+Oh no!  An $R^2$ score of *negative 2 million*???  How could this have happened?
+
+Let's look at the predictions:
+
+```{python}
+y_preds[1:5]
+```
+
+Wow.  We predicted that the first five test houses would all be worth over $50 million dollars.  That doesn't seem quite right.
+
+:::{.callout-check-in .icon}
+What went wrong here?
+:::
+
+#### Chapter Two
+
+Now a new house has come along, and you need to predict it.  That house has a
+living area of 889 square feet, and 6 rooms.
+
+```{python}
+new_house = pd.DataFrame(data = {"Gr Liv Area": [889], "TotRms AbvGrd": [6]})
+new_house
+```
+
+We won't make the same mistake again!  Time to standardize our new data:
+
+```{python}
+new_house_s = (new_house - new_house.mean())/new_house.std()
+new_house_s
+```
+
+Oh no!  Our data is now all `NaN`!!!
+
+:::{.callout-check-in .icon}
+What happened this time, and how can we fix it?
+:::
+
+#### The Moral of the Story
+
+A massively important principle of the modeling process is:  **New data that we want to predict on must go through the exact same pre-processing as the training data.**
+
+By *"exact same"*, we don't mean *"same idea"*, we mean *the same calculations*.
+
+To standardize our training data, we subtracted from each column its mean *in the training data*, and then divided each column by the standard deviation *in the training data*.  Thus, for any new data that comes along - whether it is a larger test dataset, or a single new house to predict on - we need to use the **same numbers** to standardize:
+
+```{python}
+X_test_s = (X_test - X_train.mean())/X_train.std()
+y_preds = lr_fitted.predict(X_test_s)
+
+r2_score(y_test, y_preds)
+```
+
+```{python}
+new_house_s = (new_house - X_train.mean())/X_train.std()
+lr_fitted.predict(new_house_s)
+```
+
+Notice that we used `X_train.mean()` and `X_train.std()` in each case: we "learned" our estimates for the mean and sd of the columns when we **fit** the model, and we use those for all future predictions!
+
+### Pipeline Objects
+
+Now, for an easier way to make sure preprocessing happens correctly.  Instead of making a **model** object, like `LinearRegression()`, that we use for fitting and predicting, we will make a **pipeline** object that contains *all* our steps:
+
+```{python}
+lr_pipeline = Pipeline(
+  [StandardScaler(),
+  LinearRegression()]
+)
+
+lr_pipeline
+```
+
+We can even name the steps in our pipeline, in order to help us keep track of them:
+
+```{python}
+lr_pipeline = Pipeline(
+  [("standardize", StandardScaler()),
+  ("linear_regression", LinearRegression())]
+)
+
+lr_pipeline
+```
+
+:::{.callout-caution}
+Pay careful attention to the use of `[` and `(` inside the `Pipeline` function.  The function takes a **list** (`[]`) of steps; each step may be put into a **tuple** `()` with a name of your choice.
+:::
+
+Now, we can use this pipeline for all our modeling tasks, without having to worry about doing the standardizing ourselves ahead of time:
+
+```{python}
+lr_pipeline_fitted = lr_pipeline.fit(X_train, y_train)
+
+y_preds = lr_pipeline_fitted.predict(X_test)
+r2_score(y_test, y_preds)
+```
+
+```{python}
+lr_pipeline_fitted.predict(new_house)
+```
+
+### Column Transformers
+
+Because there may be many different steps to the data preprocessing, it can sometimes be convenient to separate these steps into individual *column transformers*.
+
+For example, suppose you wanted to include a third predictor in your house price prediction: The type of building it is (`Bldg Type`); e.g., a Townhouse, a single-family home, etc.
+
+Since this is a categorical variable, we need to turn it into dummy variables first, using `OneHotEncoder()`.  But we don't want to put `OneHotEncoder()` directly into our pipeline, because we don't want to dummify *every* variable!
+
+So, we'll make column transformers to handle our variables separately:
+
+```{python}
+from sklearn.compose import ColumnTransformer
+
+ct = ColumnTransformer(
+  [
+    ("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"]),
+    ("standardize", StandardScaler(), ["Gr Liv Area", "TotRms AbvGrd"])
+  ],
+  remainder = "drop"
+)
+
+
+lr_pipeline = Pipeline(
+  [("preprocessing", ct),
+  ("linear_regression", LinearRegression())]
+)
+
+lr_pipeline
+```
+:::{.callout-check-in}
+What does the `remainder = "drop"` part of the `ColumnTransformer()` function do?
+Why might that be useful?
+
+Hint: What happens when you try to fit this pipeline on `X_train`?
+:::
+
+```{python}
+X = ames.drop("SalePrice", axis = 1)
+y = ames["SalePrice"]
+
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+lr_fitted = lr_pipeline.fit(X_train, y_train)
+```
+
+
+
+#### Checking preprocessing
+
+We've seen the value of including preprocessing steps in a pipeline instead of doing them "by hand".  However, you might sometimes want to see what that processed data
+looks like.  This is one advantage of a column transformer - it can be separately used to `fit` and `transform` datasets:
+
+```{python}
+ct_fitted = ct.fit(X_train)
+
+ct.transform(X_train)
+ct.transform(X_test)
+```
+
+
+### Challenges of pipelines
+
+Although `Pipeline` objects are incredible tools for making sure your model process is reproducible and correct, they come with some frustrations.  Here are a few you might encounter, and our advice for dealing with them:
+
+#### Extracting information
+
+When we wanted to find the fitted coefficients of a model object, we could simply use `.coef_`.  However, since a `Pipeline` is not a model object, this no longer works:
+
+```{python}
+#| error: true
+lr_pipeline_fitted.coef_
+```
+
+What we need to do instead is find the *step* of the pipeline where the model fitting happened, and get those coefficients:
+
+```{python}
+lr_pipeline_fitted.named_steps['linear_regression'].coef_
+```
+
+
+
+#### Pandas input, numpy output
+
+You may have noticed that `sklearn` functions are designed to handle `pandas` objects nicely - which is a good thing, since we like to do our data cleaning and manipulation in `pandas`!  However, the outputs of these model functions are typically `numpy` arrays:
+
+```{python}
+type(y_preds)
+```
+
+Occasionally, this can cause trouble; especially when you want to continue data manipulation after making predictions.
+
+Fortunately, it is possible to set up your pipeline to output `pandas` objects instead, using the `set_output()` method:
+
+```{python}
+lr_pipeline = Pipeline(
+  [("preprocessing", ct),
+  ("linear_regression", LinearRegression())]
+).set_output(transform="pandas")
+
+
+ct.fit_transform(X_train)
+```
+
+:::{.callout-warning}
+
+Notice that in this transformed dataset, the column names now have prefixes for the named steps in the column transformer.
+
+Notice also the structure of the names of the dummified variables:
+
+`[step name]__[variable name]_[category]`
+
+:::
+
+
+#### Interactions and Dummies
+
+Sometimes, we want to include an **interaction term** in our model; for example,
+
+$$ \text{House Price} = \text{House Size} + \text{Num Rooms} + \text{Size}*\text{Rooms}$$
+
+Adding interactions between numeric variables is simple, we simply add a "polynomial" step to our preprocessing, except we leave off the squares and cubes, and keep only the interactions:
+
+```{python}
+ct_inter = ColumnTransformer(
+  [
+    ("interaction", PolynomialFeatures(interaction_only = True), ["Gr Liv Area", "TotRms AbvGrd"])
+  ],
+  remainder = "drop"
+).set_output(transform = "pandas")
+
+ct_inter.fit_transform(X_train)
+
+```
+
+However, to add an interaction with a dummified variable, we first need to know what the *new* column names are after the dummification step.
+
+For example, suppose we wanted to add an interaction term for the number of rooms in the house and whether the house is a single family home.
+
+We'll need to run the data through one preprocessing step, to get the dummy variables, then a *second* preprocessing that uses those variables.
+
+```{python}
+ct_dummies = ColumnTransformer(
+  [("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"])],
+  remainder = "passthrough"
+).set_output(transform = "pandas")
+
+ct_inter = ColumnTransformer(
+  [
+    ("interaction", PolynomialFeatures(interaction_only = True), ["remainder__TotRms AbvGrd", "dummify__Bldg Type_1Fam"]),
+  ],
+  remainder = "drop"
+).set_output(transform = "pandas")
+
+X_train_dummified = ct_dummies.fit_transform(X_train)
+X_train_dummified
+
+ct_inter.fit_transform(X_train_dummified)
+```
+
+Ooof!  This is not very elegant, we admit.  But it is still worth the effort to set up a full pipeline, instead of transforming things by hand, as we will see in the next section.
+
+### Your turn
+
+:::{.callout-practice-exercise .icon}
+
+Consider four possible models for predicting house prices:
+
+1. Using only the size and number of rooms.
+2. Using size, number of rooms, and building type.
+3. Using size and building type, and their interaction.
+4. Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.
+
+Set up a pipeline for each of these four models.
+
+Then, get predictions on the test set for each of your pipelines, and compute the root mean squared error.  Which model performed best?
+
+Note: You should only use the function `train_test_split()` **one** time in your code; that is, we should be predicting on the **same** test set for all three models.
+
+:::
+
+
+## Cross-Validation
+
+Now that we have all our modeling process wrapped up in one tidy pipeline bundle, we can upgrade another piece of the puzzle: the test/training split.
+
+In the previous exercise, we used our **test metrics** to compare pipelines, with the idea that a pipeline which performs well on test data is likely to perform well on future data.  This is a bit of a big assumption though.  What if we *just so happened* to get an "unlucky" test/training split, where the test set *just so happened* to contain houses that don't follow the usual price patterns?
+
+To try to avoid unlucky splits, an easy solution is to simply do many different test/training splits and see what happens.  But we have to be careful - if we end up doing many random splits, we still might end up getting similar "unlucky" test sets every time.
+
+Our solution to this challenge is **k-fold cross-validation** (sometimes called *v-fold*, since the letter *k* is used for so many other things in statistics).  In cross-validation, we perform multiple test/training splits, but we make sure each observation only gets one "turn" in the test set.
+
+A procedure for **5-fold cross-validation** on the housing data might look like this:
+
+1.  Randomly divide the houses into 5 sets.  Call these "Fold 1", "Fold 2", ... "Fold 5".
+
+2.  Make Fold 1 the test sets, and Folds 2-5 together the training set.
+
+3.  Fit the data on the houses in the training set, predict the prices of the houses test set, and record the resulting R-squared value. 
+
+4.  Repeat (2) and (3) four more times, letting each fold have a turn as the test set.
+
+5.  Take the average of the 5 different R-squared values.
+
+Here is a picture that helps illustrate the procedure:
+
+![](https://user-images.githubusercontent.com/26833433/258589390-8d815058-ece8-48b9-a94e-0e1ab53ea0f6.png)
+
+The advantage of this process is that our final **cross-validated metric** for our proposed pipeline is in fact the *average* of five different values - so even if one of the test sets is "unlucky", the others will average it out.
+
+
+:::{.callout-note}
+Remember that ultimately, all of this effort has only one goal: to get a "fair" measurement of how good a particular pipeline is at predicting, so that we can choose our best final pipeline from among the many options.
+:::
+
+### `cross_val_score`
+
+Even if you are convinced that cross-validation could be useful, it might seem daunting.  Imagine needing to create five different test/training sets, and go through the process of fitting, predicting, and computing metrics for every single one.
+
+Fortunately, now that we have `Pipeline` objects, `sklearn` has shortcuts.
+
+```{python}
+from sklearn.model_selection import cross_val_score
+
+X = ames.drop("SalePrice", axis = 1)
+y = ames["SalePrice"]
+
+
+ct = ColumnTransformer(
+  [
+    ("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"]),
+    ("standardize", StandardScaler(), ["Gr Liv Area", "TotRms AbvGrd"])
+  ],
+  remainder = "drop"
+)
+
+lr_pipeline_1 = Pipeline(
+  [("preprocessing", ct),
+  ("linear_regression", LinearRegression())]
+).set_output(transform="pandas")
+
+
+scores = cross_val_score(lr_pipeline_1, X, y, cv=5, scoring='r2')
+scores
+
+```
+
+Wow!  Once the pipeline is set up, only one small line of code performs the entire cross-validation procedure!
+
+Notice that here, we never used `train_test_split()`.  We simply passed our entire `X` and `y` objects to the `cross_val_score` function, and it took care of making the `5` cross validation folds; as well as all of the fitting, predicting, and computing of metrics.
+
+We now can simply report our final **cross-validated R-squared value**:
+
+```{python}
+scores.mean()
+```
+
+
+
+:::{.callout-practice-exercise}
+Once again consider four modeling options for house price:
+
+1. Using only the size and number of rooms.
+2. Using size, number of rooms, and building type.
+3. Using size and building type, and their interaction.
+4. Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.
+
+Use `cross_val_score` with the pipelines you made earlier to find the cross-validated root mean squared error for each model.
+
+Which do you prefer?  Does this agree with your conclusion from earlier?
+:::
+
+### Tuning
+
+In our previous exercise, we considered one-degree polynomials as well as 5-degree polynomials.  But what if we wanted to try everything from 1-degree to 10-degree, without needing to manually create 10 different pipelines?
+
+This process - where we want to try a range of different values in our *model specification* and see which has the best cross-validation metrics - is called **tuning**.
+
+Since tuning is a common need in modeling, `sklearn` has another shortcut for us, `grid_search_cv`.  But in order to capture the process, this function needs to know:
+
+1. What pipeline structure you want to try.
+
+2. Which piece of the pipeline you are plugging in a range of different values for.
+
+3. Which values to plug in.
+
+We'll start by writing ourselves a function that makes the pipeline we need for a particular degree number.
+
+```{python}
+from sklearn.model_selection import GridSearchCV
+
+ct_poly = ColumnTransformer(
+  [
+    ("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"]),
+    ("polynomial", PolynomialFeatures(), ["Gr Liv Area"])
+  ],
+  remainder = "drop"
+)
+
+lr_pipeline_poly = Pipeline(
+  [("preprocessing", ct_poly),
+  ("linear_regression", LinearRegression())]
+).set_output(transform="pandas")
+
+degrees = {'preprocessing__polynomial__degree': np.arange(1, 10)}
+
+gscv = GridSearchCV(lr_pipeline_poly, degrees, cv = 5, scoring='r2')
+```
+
+A few important things to notice in this code:
+
+* In the `polynomial` step of our `ColumnTransformer`, we did **not** specify 
+the number of features in the `PolynomialFeatures()` function.
+
+* We created a *dictionary* object named `degrees`, which was simply a list of the numbers we wanted to try inserting into the `PolynomialFeatures()` function.
+
+* The name of the list of numbers in our dictionary object was `preprocessing__polynomial__degree`.  This follows the pattern
+
+`[name of step in pipeline]__[name of step in column transformer]__[name of argument to function]`
+
+* The code above did **not** result in cross-validated metrics for the 9 model options (degrees 1 to 9). Like a `Pipeline` object, a `GridSearchCV` object "sets up" a process - we haven't actually given it data yet.
+
+:::{.callout-note}
+You might be noticing a pattern in `sklearn` here: in general (although not always), a capitalized function is a "set up" step, like `LinearRegression()` or `OneHotEncoder` or `Pipeline()`.  A lowercase function is often a calculation on data, like `.fit()` or `.predict()` or `cross_val_score()`.
+:::
+
+Now, we will fit our "grid search" tuning procedure to the data:
+
+```{python}
+
+gscv_fitted = gscv.fit(X, y)
+
+gscv_fitted.cv_results_
+
+```
+
+Oof, this is a lot of information!
+
+Ultimately, what we care about is the **cross-validated metric** (i.e. average over the 5 folds) for each of the 9 proposed models.
+
+```{python}
+gscv_fitted.cv_results_['mean_test_score']
+```
+
+It can sometimes be handy to convert these results to a `pandas` data frame for easy viewing:
+
+```{python}
+pd.DataFrame(data = {"degrees": np.arange(1, 10), "scores": gscv_fitted.cv_results_['mean_test_score']})
+```
+
+
+It appears that the third model - degree 3 - had the best cross-validated metrics, with an R-squared value of about 0.55.
+
+:::{.callout-check-in}
+Recall that the **model fitting** step is when coefficients are computed for the linear regression.
+
+How many different model fitting steps occurred when `gscv.fit(X, y)` was run?
+:::
+
+### Your Turn
+
+:::{.callout-practice-exercise .icon}
+Consider *one hundred* modeling options for house price:
+
+* House size, trying degrees 1 through 10
+* Number of rooms, trying degrees 1 through 10
+* Building Type
+
+*Hint: The dictionary of possible values that you make to give to `GridSearchCV` will have two elements instead of one.*
+
+Q1: Which model performed the best?
+
+Q2: What downsides do you see of trying *all possible* model options?  How might you go about choosing a smaller number of tuning values to try?
+:::
+
+
+
+<!-- ### Model Comparison: K-Nearest-Neighbors -->
+
+<!-- In our previous exercise, we only used cross-validation to compare different *predictor choices* and different *preprocessing options*.  All of our models were of the type `LinearRegression()` -->
+
+<!-- The real beauty and flexibility of cross-validation, though, is in comparing different **model specifications**. -->
+
+<!-- Thus, let's add another option to our list of pipelines we are considering for predicting house prices: **K-Nearest-Neighbors (KNN)**. -->
+
+<!-- KNN is a *very* different modeling approach than Linear Regression.  Rather than using our training data to come up with a mathematical formula for future predictions, we simply reference the data itself every time we want to make future predictions. -->
+
+<!-- For example, a 10-nearest-neighbors prediction process for the price of new house would be: -->
+
+<!-- 1. Find the 10 houses in the training set that are most similar to the new house. -->
+
+<!-- 2. Take their average price. -->
+
+<!-- ... and that's it! -->
+
+<!-- Of course, there is some flexibility in what we mean by "most similar" - but typically, we  -->
+
+
+
+
+
+
+
+
+
+
+

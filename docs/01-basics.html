@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.439">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -83,13 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -104,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -119,9 +113,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./01-basics.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./01-basics.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -136,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">GSB 544: Data Science and Machine Learning with Python</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -269,6 +263,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -312,12 +312,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#practice-exercise" id="toc-practice-exercise" class="nav-link" data-scroll-target="#practice-exercise"><span class="header-section-number">2.6.1</span> Practice Exercise</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/01-basics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/01-basics.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./01-basics.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></h1>
 </div>
@@ -332,9 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-
 </header>
-
 
 <section id="ch0-objectives" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="ch0-objectives">Objectives</h2>
@@ -377,7 +375,7 @@ Learn More
 <li><p><strong>character</strong> or <strong>string</strong> or <strong>object</strong> - holds text, usually enclosed in quotes.</p></li>
 </ul>
 <p>If you don’t know what type a value is, <code>python</code> has a function to help you with that.</p>
-<div id="f8c393c9" class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="va">False</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">2</span>) <span class="co"># by default, python treats whole numbers as integers</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="fl">2.0</span>)  <span class="co"># to force it not to be an integer, add a .0</span></span>
@@ -405,14 +403,14 @@ Warning
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="variables"><span class="header-section-number">2.1.2</span> Variables</h3>
 <p>Programming languages use <strong>variables</strong> - names that refer to values. Think of a variable as a container that holds something - instead of referring to the value, you can refer to the container and you will get whatever is stored inside.</p>
 <p>In <code>python</code>, we <strong>assign</strong> variables values using the syntax <code>object_name = value</code> You can read this as “object name gets value” in your head.</p>
-<div id="24ba0beb" class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> <span class="st">"So long and thanks for all the fish"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>year <span class="op">=</span> <span class="dv">2025</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>the_answer <span class="op">=</span> <span class="dv">42</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>earth_demolished <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can then use the variables - do numerical computations, evaluate whether a proposition is true or false, and even manipulate the content of strings, all by referencing the variable by name.</p>
-<div id="ef920f46" class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>message <span class="op">+</span> <span class="st">", sang the dolphins."</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>year <span class="op">+</span> the_answer</span>
@@ -431,7 +429,7 @@ Warning
 <p>Object names must start with a letter and can only contain letters, numbers, and <code>_</code>.</p>
 <p>What happens if we try to create a variable name that isn’t valid?</p>
 <p>Starting a variable name with a number will get you an error message that lets you know that something isn’t right.</p>
-<div id="dcc544e8" class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="er">st_thing</span> <span class="op">=</span> <span class="st">"No starting with numbers"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>first<span class="op">~</span>thing <span class="op">=</span> <span class="st">"No other symbols"</span></span>
@@ -474,7 +472,7 @@ double b = 3.14159</code></pre>
 <p>Typically, an integer would take up 32 bits of memory, and a double would take up 64 bits, so doubles used 2x the memory that integers did. R is <strong>dynamically typed</strong>, which means you don’t have to deal with any of the trouble of declaring what your variables will hold - the computer automatically figures out how much memory to use when you run the code. So we can avoid the discussion of memory allocation and types because we’re using higher-level languages that handle that stuff for us<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>But the discussion of types isn’t something we can completely avoid, because we still have to figure out what to do when we do operations on things of two different types - even if memory isn’t a concern, we still have to figure out the arithmetic question.</p>
 <p>So let’s see what happens with a couple of examples, just to get a feel for <strong>type conversion</strong> (aka <strong>type casting</strong> or <strong>type coercion</strong>), which is the process of changing an expression from one data type to another.</p>
-<div id="f8da41cb" class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">2</span> <span class="op">+</span> <span class="fl">3.14159</span>) <span class="co"># add integer 2 and pi</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">2</span> <span class="op">+</span> <span class="va">True</span>) <span class="co"># add integer 2 and TRUE</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="va">True</span> <span class="op">+</span> <span class="va">False</span>) <span class="co"># add TRUE and FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -541,7 +539,7 @@ Check In
 </div>
 <p>Above, we looked at automatic type conversions, but in many cases, we also may want to convert variables manually, specifying exactly what type we’d like them to be. A common application for this in data analysis is when there are “NA” or ” ” or other indicators in an otherwise numeric column of a spreadsheet that indicate missing data: when this data is read in, the whole column is usually read in as character data. So we need to know how to tell <code>python</code> that we want our string to be treated as a number, or vice-versa.</p>
 <p>In python, we can explicitly convert a variable’s type using functions (<code>int</code>, <code>float</code>, <code>str</code>, etc.).</p>
-<div id="39670fdd" class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="st">"3.14159"</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -599,7 +597,7 @@ Check In
 </table>
 <p>Note that integer division is the whole number answer to A/B, and modular division is the fractional remainder when A/B.</p>
 <p>So <code>14 // 3</code> would be 4, and <code>14 % 3</code> would be 2.</p>
-<div id="3631f7dc" class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="op">//</span> <span class="dv">3</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span> <span class="op">%</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -610,7 +608,7 @@ Check In
 <section id="order-of-operations" class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="order-of-operations"><span class="header-section-number">2.2.1</span> Order of Operations</h3>
 <p><code>python</code> operates under the same mathematical rules of precedence that you learned in school. You may have learned the acronym PEMDAS, which stands for Parentheses, Exponents, Multiplication/Division, and Addition/Subtraction. That is, when examining a set of mathematical operations, we evaluate parentheses first, then exponents, and then we do multiplication/division, and finally, we add and subtract.</p>
-<div id="ac15ee11" class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="op">+</span><span class="dv">1</span>)<span class="op">**</span>(<span class="dv">5</span><span class="op">-</span><span class="dv">2</span>) <span class="co"># 2 ^ 3 = 8</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">3</span> <span class="op">*</span> <span class="dv">4</span> <span class="co"># 1 + (8 * 4)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="op">*</span><span class="dv">1</span><span class="op">**</span><span class="dv">3</span> <span class="co"># 3 * 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -622,7 +620,7 @@ Check In
 <section id="string-operations" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="string-operations"><span class="header-section-number">2.2.2</span> String Operations</h3>
 <p>The <code>+</code> operator also works on strings. Just remember that <code>python</code> doesn’t speak English - it neither knows nor cares if your strings are words, sentences, etc. So if you want to create good punctuation or spacing, that needs to be done in the code.</p>
-<div id="f367e2db" class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>greeting <span class="op">=</span> <span class="st">"howdy"</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>person <span class="op">=</span> <span class="st">"pardner"</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -643,7 +641,7 @@ Return number rounded to ndigits precision after the decimal point. If ndigits i
 <p>This tells us that the function requires one argument, <code>number</code>, a number to round. You also have the <em>option</em> to include a second argument, <code>ndigits</code>, if you want to round to something other than a whole number.</p>
 <p>When you call a function, you can either use the names of the arguments, or simply provide the information in the expected order.</p>
 <p>By convention, we usually use names for optional arguments but not required ones.</p>
-<div id="45055232" class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>(number <span class="op">=</span> <span class="fl">2.718</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">round</span>(<span class="fl">2.718</span>, <span class="dv">2</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -700,12 +698,12 @@ Warning
 </tbody>
 </table>
 <p><strong>Methods</strong> or <strong>attributes</strong> are a special type of function that operate only on a specific data structure When using a method in <code>python</code>, you can use a period <code>.</code> to apply the function to an object.</p>
-<div id="2a96feaf" class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>my_nums <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>my_nums.sort()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Careful, though! If a function is not specifically designed to be an attribute of the structure, this <code>.</code> trick won’t work.</p>
-<div id="0e2f4646" class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>my_nums.<span class="bu">round</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>AttributeError: 'list' object has no attribute 'round'</code></pre>
@@ -717,10 +715,10 @@ Warning
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lego-list.png" class="img-fluid figure-img"></p>
-<figcaption>A lego list: the bricks are all different types and colors, but they are still part of the same data structure.</figcaption>
+<figcaption class="figure-caption">A lego list: the bricks are all different types and colors, but they are still part of the same data structure.</figcaption>
 </figure>
 </div>
-<div id="301c5700" class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="st">"a"</span>, <span class="dv">3</span>, <span class="va">True</span>]</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -732,7 +730,7 @@ Warning
 <h4 data-number="2.3.1.1" class="anchored" data-anchor-id="indexing"><span class="header-section-number">2.3.1.1</span> Indexing</h4>
 <p>Every element in a list has an <strong>index</strong> (a location, indicated by an integer position)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <p>In <code>python</code>, we count from 0.</p>
-<div id="ca14d480" class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="st">"a"</span>, <span class="dv">3</span>, <span class="va">True</span>]</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>] <span class="co"># This returns a list</span></span>
@@ -753,7 +751,7 @@ Warning
 <p>A <strong>vector</strong> is a one-dimensional column of homogeneous data. Homogeneous means that every element in a vector has the same data type.</p>
 <p>We can have vectors of any data type and length we want: <img src="images/lego-set-of-vectors.png" class="img-fluid" alt="vectors of different data types"></p>
 <p>Base <code>python</code> does not actually have a vector-type object! However, in data analysis we often have reasons to want a single-type data structure, so we will load an extra function called <code>array</code> from the <code>numpy</code> <strong>library</strong> to help us out. (More on libraries later!)</p>
-<div id="b5a2b720" class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> array</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>digits_pi <span class="op">=</span> array([<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">5</span>])</span>
@@ -768,7 +766,7 @@ Warning
 </div>
 </div>
 <p>We can pull out items in a vector by indexing, but we can also replace specific elements as well:</p>
-<div id="e532ae2a" class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>favorite_cats <span class="op">=</span> array([<span class="st">"Grumpy"</span>, <span class="st">"Garfield"</span>, <span class="st">"Jorts"</span>, <span class="st">"Jean"</span>])</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>favorite_cats</span>
@@ -787,7 +785,7 @@ Warning
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lego-logical-full.png" class="img-fluid figure-img"></p>
-<figcaption>lego vectors - a pink/purple hued set of 1x3 bricks representing the data and a corresponding set of 1x1 grey and black bricks representing the logical index vector of the same length</figcaption>
+<figcaption class="figure-caption">lego vectors - a pink/purple hued set of 1x3 bricks representing the data and a corresponding set of 1x1 grey and black bricks representing the logical index vector of the same length</figcaption>
 </figure>
 </div>
 <p>If we let the black lego represent “True” and the grey lego represent “False”, we can use the logical vector to pull out all values in the main vector.</p>
@@ -820,7 +818,7 @@ Example
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="cf770209" class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a character vector</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>weekdays <span class="op">=</span> array([<span class="st">"Sunday"</span>, <span class="st">"Monday"</span>, <span class="st">"Tuesday"</span>, <span class="st">"Wednesday"</span>, <span class="st">"Thursday"</span>, <span class="st">"Friday"</span>, <span class="st">"Saturday"</span>])</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>weekend <span class="op">=</span> array([<span class="st">"Sunday"</span>, <span class="st">"Saturday"</span>])</span>
@@ -860,7 +858,7 @@ Example
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="e9ce715c" class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>array([<span class="dv">2</span>, <span class="va">False</span>, <span class="fl">3.1415</span>, <span class="st">"animal"</span>]) <span class="co"># all converted to strings</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>array([<span class="dv">2</span>, <span class="va">False</span>, <span class="fl">3.1415</span>]) <span class="co"># converted to numerics</span></span>
@@ -894,11 +892,11 @@ Warning
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/lego-2x2-matrix.png" class="img-fluid figure-img"></p>
-<figcaption>lego depiction of a 3-row, 4-column matrix of 2x2 red-colored blocks</figcaption>
+<figcaption class="figure-caption">lego depiction of a 3-row, 4-column matrix of 2x2 red-colored blocks</figcaption>
 </figure>
 </div>
 <p>Once again, we need to use the <code>numpy</code> package to allow the <em>matrix</em> type to exist in <code>python</code>.</p>
-<div id="25e6336a" class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> matrix</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>matrix([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -935,7 +933,7 @@ Example
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div id="c79d4d67" class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>my_mat <span class="op">=</span> matrix([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>], [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>]])</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>my_mat</span>
@@ -991,7 +989,11 @@ Just our opinion...
 <div class="callout-body-container callout-body">
 <p>We believe very strongly in the philosophy of open-source. However, it does have its downsides: mainly, that nearly all progress in the language is on a volunteer, community basis.</p>
 <p>As a user of open source tools, we hope you will give back in whatever ways you can - sharing your work publicly, helping others learn, and encouraging private companies to fund open-source work.</p>
-<p><img src="https://mc-cdn.com/8779571f940f2dc2f7ae06312a086e69.jpg" class="img-fluid quarto-figure-center" style="width:50.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://mc-cdn.com/8779571f940f2dc2f7ae06312a086e69.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-learn-more no-icon callout-titled">
@@ -1039,7 +1041,11 @@ Just our opinion...
 </div>
 <div class="callout-body-container callout-body">
 <p>Python is notoriously frustrating for managine package installs. We will keep things simple in this class, but if you reach a point where you are struggling with libraries, know that you are not alone.</p>
-<p><img src="https://i.redd.it/imbmky0k2zh21.jpg" class="img-fluid quarto-figure-center" style="width:50.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.redd.it/imbmky0k2zh21.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1050,7 +1056,7 @@ Just our opinion...
 <h4 data-number="2.4.3.1" class="anchored" data-anchor-id="import-the-whole-library"><span class="header-section-number">2.4.3.1</span> 1. Import the whole library</h4>
 <p>It is possible to load the full functionality of a library into your notebook project by adding an <code>import</code> statement in your very first code chunk.</p>
 <p>The downside of this is that you then need to reference all those functions using the package name:</p>
-<div id="7d0ed18a" class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>my_nums <span class="op">=</span> numpy.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>])</span>
@@ -1060,7 +1066,7 @@ Just our opinion...
 </div>
 </div>
 <p>Because this can get tedious, it’s common practice to give the package a “nickname” that is shorter:</p>
-<div id="55ae5e2f" class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>my_nums <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>])</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(my_nums)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1085,7 +1091,7 @@ Learn More
 <section id="import-only-the-functions-you-need." class="level4" data-number="2.4.3.2">
 <h4 data-number="2.4.3.2" class="anchored" data-anchor-id="import-only-the-functions-you-need."><span class="header-section-number">2.4.3.2</span> 2. Import only the functions you need.</h4>
 <p>If you only need a handful of functions from the library, and you want to avoid the extra typing of including the package name/nickname, you can pull those functions in directly:</p>
-<div id="a6472952" class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> array, <span class="bu">sum</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>my_nums <span class="op">=</span> array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>])</span>
@@ -1106,7 +1112,7 @@ Learn More
 <h4 data-number="2.5.0.1" class="anchored" data-anchor-id="pandas"><span class="header-section-number">2.5.0.1</span> Pandas</h4>
 <p>As with vectors and matrices, we need help from an external package to construct and work efficiently with data frames. This library is called <code>pandas</code>, and you will learn many of its functions next week.</p>
 <p>For now, let’s just look at a pandas data frame:</p>
-<div id="7458edcf" class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> pd.read_csv(<span class="st">"https://gist.githubusercontent.com/slopp/ce3b90b9168f2f921784de84fa445651/raw/4ecf3041f0ed4913e7c230758733948bc561f434/penguins.csv"</span>)</span>
@@ -1134,7 +1140,7 @@ memory usage: 24.3+ KB</code></pre>
 </div>
 </div>
 <p>Notice how the columns all have specific types: integers, floats, or strings (“object”). They also each have names. We can access the vector of information in one column like so…</p>
-<div id="8185af77" class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>dat.body_mass_g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>0      3750.0
@@ -1152,7 +1158,7 @@ Name: body_mass_g, Length: 344, dtype: float64</code></pre>
 </div>
 </div>
 <p>… which then lets us do things to that column vector just as we might for standalone vectors:</p>
-<div id="878fb884" class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">## using methods</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>dat.body_mass_g.mean()</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1230,7 +1236,11 @@ Name: body_mass_g, Length: 344, dtype: float64</code></pre>
 <section id="summary" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.6</span> Summary</h2>
 <p>Whew! How’s that for an overview?</p>
-<p><img src="https://media.tenor.com/88DfzQS5tlQAAAAC/adventure-time-demon-cat.gif" class="img-fluid quarto-figure-center" style="width:60.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://media.tenor.com/88DfzQS5tlQAAAAC/adventure-time-demon-cat.gif" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
 <p>The most important takeaways from this chapter are:</p>
 <ul>
 <li><p>Objects in python have <strong>types</strong>, and sometimes functions and operators behave differently based on the type.</p></li>
@@ -1259,7 +1269,7 @@ Practice Activity
 
 </section>
 </section>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>This means that doubles take up more memory but can store more decimal places. You don’t need to worry about this in anything we will do.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1267,7 +1277,7 @@ Practice Activity
 <li id="fn3"><p>Throughout this section (and other sections), lego pictures are rendered using https://www.mecabricks.com/en/workshop. It’s a pretty nice tool for building stuff online!<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p><a href="https://www.grumpycats.com/">Grumpy cat</a>, <a href="https://www.garfield.com/">Garfield</a>, <a href="https://en.wikipedia.org/wiki/Nyan_Cat">Nyan cat</a>. Jorts and Jean: <a href="https://www.reddit.com/r/AmItheAsshole/comments/rfwgmc/aita_for_perpetuating_ethnic_stereotypes_about/">The initial post</a> and the <a href="https://www.reddit.com/user/throwawayorangecat/comments/rgi000/update_aita_for_perpetuating_stereotypes_about/">update</a> (both are worth a read because the story is hilarious). The cats also have a <a href="https://twitter.com/JortsTheCat">Twitter account</a> where they promote workers rights.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</aside>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1311,33 +1321,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1406,15 +1389,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  let localAlternateSentinel = 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1493,9 +1474,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1505,17 +1487,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1528,128 +1501,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
-        }
-        typesetMath(container);
-        return container.innerHTML
-      } else {
-        typesetMath(note);
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      typesetMath(note);
-      return note.innerHTML;
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1693,7 +1544,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1719,32 +1569,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1806,18 +1630,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./00-setup.html" class="pagination-link  aria-label=" <span="">1&nbsp; <span class="chapter-title">Intro and Workflow Setup</span>"&gt;
+      <a href="./00-setup.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-plotnine.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>Data Visualization in Python</span>">
+      <a href="./02-plotnine.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
