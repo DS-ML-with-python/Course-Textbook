@@ -7,12 +7,21 @@ title: "Pipelines, Cross-Validation, and Tuning"
 reticulate::use_python("/usr/local/bin/python3")
 ```
 
+```{python}
+#| include: false
+import random
+
+random.seed(1010220)
+```
+
+
 
 ## Introduction
 
 
 ```{python}
 import pandas as pd
+import numpy as np
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, PolynomialFeatures
 from sklearn.linear_model import LinearRegression
@@ -346,7 +355,7 @@ Consider four possible models for predicting house prices:
 3. Using size and building type, and their interaction.
 4. Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.
 
-Set up a pipeline for each of these three models.
+Set up a pipeline for each of these four models.
 
 Then, get predictions on the test set for each of your pipelines, and compute the root mean squared error.  Which model performed best?
 
@@ -356,5 +365,227 @@ Note: You should only use the function `train_test_split()` **one** time in your
 
 
 ## Cross-Validation
+
+Now that we have all our modeling process wrapped up in one tidy pipeline bundle, we can upgrade another piece of the puzzle: the test/training split.
+
+In the previous exercise, we used our **test metrics** to compare pipelines, with the idea that a pipeline which performs well on test data is likely to perform well on future data.  This is a bit of a big assumption though.  What if we *just so happened* to get an "unlucky" test/training split, where the test set *just so happened* to contain houses that don't follow the usual price patterns?
+
+To try to avoid unlucky splits, an easy solution is to simply do many different test/training splits and see what happens.  But we have to be careful - if we end up doing many random splits, we still might end up getting similar "unlucky" test sets every time.
+
+Our solution to this challenge is **k-fold cross-validation** (sometimes called *v-fold*, since the letter *k* is used for so many other things in statistics).  In cross-validation, we perform multiple test/training splits, but we make sure each observation only gets one "turn" in the test set.
+
+A procedure for **5-fold cross-validation** on the housing data might look like this:
+
+1.  Randomly divide the houses into 5 sets.  Call these "Fold 1", "Fold 2", ... "Fold 5".
+
+2.  Make Fold 1 the test sets, and Folds 2-5 together the training set.
+
+3.  Fit the data on the houses in the training set, predict the prices of the houses test set, and record the resulting R-squared value. 
+
+4.  Repeat (2) and (3) four more times, letting each fold have a turn as the test set.
+
+5.  Take the average of the 5 different R-squared values.
+
+Here is a picture that helps illustrate the procedure:
+
+![](https://user-images.githubusercontent.com/26833433/258589390-8d815058-ece8-48b9-a94e-0e1ab53ea0f6.png)
+
+The advantage of this process is that our final **cross-validated metric** for our proposed pipeline is in fact the *average* of five different values - so even if one of the test sets is "unlucky", the others will average it out.
+
+
+:::{.callout-note}
+Remember that ultimately, all of this effort has only one goal: to get a "fair" measurement of how good a particular pipeline is at predicting, so that we can choose our best final pipeline from among the many options.
+:::
+
+### `cross_val_score`
+
+Even if you are convinced that cross-validation could be useful, it might seem daunting.  Imagine needing to create five different test/training sets, and go through the process of fitting, predicting, and computing metrics for every single one.
+
+Fortunately, now that we have `Pipeline` objects, `sklearn` has shortcuts.
+
+```{python}
+from sklearn.model_selection import cross_val_score
+
+X = ames.drop("SalePrice", axis = 1)
+y = ames["SalePrice"]
+
+
+ct = ColumnTransformer(
+  [
+    ("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"]),
+    ("standardize", StandardScaler(), ["Gr Liv Area", "TotRms AbvGrd"])
+  ],
+  remainder = "drop"
+)
+
+lr_pipeline_1 = Pipeline(
+  [("preprocessing", ct),
+  ("linear_regression", LinearRegression())]
+).set_output(transform="pandas")
+
+
+scores = cross_val_score(lr_pipeline_1, X, y, cv=5, scoring='r2')
+scores
+
+```
+
+Wow!  Once the pipeline is set up, only one small line of code performs the entire cross-validation procedure!
+
+Notice that here, we never used `train_test_split()`.  We simply passed our entire `X` and `y` objects to the `cross_val_score` function, and it took care of making the `5` cross validation folds; as well as all of the fitting, predicting, and computing of metrics.
+
+We now can simply report our final **cross-validated R-squared value**:
+
+```{python}
+scores.mean()
+```
+
+
+
+:::{.callout-practice-exercise}
+Once again consider four modeling options for house price:
+
+1. Using only the size and number of rooms.
+2. Using size, number of rooms, and building type.
+3. Using size and building type, and their interaction.
+4. Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.
+
+Use `cross_val_score` with the pipelines you made earlier to find the cross-validated root mean squared error for each model.
+
+Which do you prefer?  Does this agree with your conclusion from earlier?
+:::
+
+### Tuning
+
+In our previous exercise, we considered one-degree polynomials as well as 5-degree polynomials.  But what if we wanted to try everything from 1-degree to 10-degree, without needing to manually create 10 different pipelines?
+
+This process - where we want to try a range of different values in our *model specification* and see which has the best cross-validation metrics - is called **tuning**.
+
+Since tuning is a common need in modeling, `sklearn` has another shortcut for us, `grid_search_cv`.  But in order to capture the process, this function needs to know:
+
+1. What pipeline structure you want to try.
+
+2. Which piece of the pipeline you are plugging in a range of different values for.
+
+3. Which values to plug in.
+
+We'll start by writing ourselves a function that makes the pipeline we need for a particular degree number.
+
+```{python}
+from sklearn.model_selection import GridSearchCV
+
+ct_poly = ColumnTransformer(
+  [
+    ("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"]),
+    ("polynomial", PolynomialFeatures(), ["Gr Liv Area"])
+  ],
+  remainder = "drop"
+)
+
+lr_pipeline_poly = Pipeline(
+  [("preprocessing", ct_poly),
+  ("linear_regression", LinearRegression())]
+).set_output(transform="pandas")
+
+degrees = {'preprocessing__polynomial__degree': np.arange(1, 10)}
+
+gscv = GridSearchCV(lr_pipeline_poly, degrees, cv = 5, scoring='r2')
+```
+
+A few important things to notice in this code:
+
+* In the `polynomial` step of our `ColumnTransformer`, we did **not** specify 
+the number of features in the `PolynomialFeatures()` function.
+
+* We created a *dictionary* object named `degrees`, which was simply a list of the numbers we wanted to try inserting into the `PolynomialFeatures()` function.
+
+* The name of the list of numbers in our dictionary object was `preprocessing__polynomial__degree`.  This follows the pattern
+
+`[name of step in pipeline]__[name of step in column transformer]__[name of argument to function]`
+
+* The code above did **not** result in cross-validated metrics for the 9 model options (degrees 1 to 9). Like a `Pipeline` object, a `GridSearchCV` object "sets up" a process - we haven't actually given it data yet.
+
+:::{.callout-note}
+You might be noticing a pattern in `sklearn` here: in general (although not always), a capitalized function is a "set up" step, like `LinearRegression()` or `OneHotEncoder` or `Pipeline()`.  A lowercase function is often a calculation on data, like `.fit()` or `.predict()` or `cross_val_score()`.
+:::
+
+Now, we will fit our "grid search" tuning procedure to the data:
+
+```{python}
+
+gscv_fitted = gscv.fit(X, y)
+
+gscv_fitted.cv_results_
+
+```
+
+Oof, this is a lot of information!
+
+Ultimately, what we care about is the **cross-validated metric** (i.e. average over the 5 folds) for each of the 9 proposed models.
+
+```{python}
+gscv_fitted.cv_results_['mean_test_score']
+```
+
+It can sometimes be handy to convert these results to a `pandas` data frame for easy viewing:
+
+```{python}
+pd.DataFrame(data = {"degrees": np.arange(1, 10), "scores": gscv_fitted.cv_results_['mean_test_score']})
+```
+
+
+It appears that the third model - degree 3 - had the best cross-validated metrics, with an R-squared value of about 0.55.
+
+:::{.callout-check-in}
+Recall that the **model fitting** step is when coefficients are computed for the linear regression.
+
+How many different model fitting steps occurred when `gscv.fit(X, y)` was run?
+:::
+
+### Your Turn
+
+:::{.callout-practice-exercise .icon}
+Consider *one hundred* modeling options for house price:
+
+* House size, trying degrees 1 through 10
+* Number of rooms, trying degrees 1 through 10
+* Building Type
+
+*Hint: The dictionary of possible values that you make to give to `GridSearchCV` will have two elements instead of one.*
+
+Q1: Which model performed the best?
+
+Q2: What downsides do you see of trying *all possible* model options?  How might you go about choosing a smaller number of tuning values to try?
+:::
+
+
+
+<!-- ### Model Comparison: K-Nearest-Neighbors -->
+
+<!-- In our previous exercise, we only used cross-validation to compare different *predictor choices* and different *preprocessing options*.  All of our models were of the type `LinearRegression()` -->
+
+<!-- The real beauty and flexibility of cross-validation, though, is in comparing different **model specifications**. -->
+
+<!-- Thus, let's add another option to our list of pipelines we are considering for predicting house prices: **K-Nearest-Neighbors (KNN)**. -->
+
+<!-- KNN is a *very* different modeling approach than Linear Regression.  Rather than using our training data to come up with a mathematical formula for future predictions, we simply reference the data itself every time we want to make future predictions. -->
+
+<!-- For example, a 10-nearest-neighbors prediction process for the price of new house would be: -->
+
+<!-- 1. Find the 10 houses in the training set that are most similar to the new house. -->
+
+<!-- 2. Take their average price. -->
+
+<!-- ... and that's it! -->
+
+<!-- Of course, there is some flexibility in what we mean by "most similar" - but typically, we  -->
+
+
+
+
+
+
+
+
+
 
 
