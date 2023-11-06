@@ -1,0 +1,320 @@
+---
+title: "Pipelines, Cross-Validation, and Tuning"
+---
+
+## Introduction
+
+
+```{python}
+#| eval: false
+
+import pandas as pd
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+```
+
+## Pipelines
+
+In the last two chapters, we learned to use `sklearn` and `python` to perform the main steps of the modeling procedure:
+
+1. **Preprocessing:** Choosing which predictors to include, and how we will transform them to prepare them for the model, e.g. `pd.get_dummies()` or `StandardScaler()`
+
+2. **Model Specification:**  Choosing the *procedure* we will use to make sure predictions; e.g. `LinearRegression()` or `NearestNeighborsRegressor()`
+
+3. **Fitting on training data:** Using `train_test_split()` to establish a randomly chosen training set, then using `.fit()` to fit the model on that set.
+
+4. **Validating on test data:** Using `.predict` to make predictions on the test set, and then computing desired metrics to compare models, like `rmse()` or `r2()`.
+
+In this chapter, we will combine all these steps into one **pipeline**, sometimes called a **workflow**, to streamline our modeling process. 
+
+Then, we will use our pipeline objects to quickly and easily perform more complex model fitting and validation tasks.
+
+## Pipelines
+
+If we already know how to perform each modeling step, why would we need pipelines?  Consider the following cautionary tale...
+
+### Cautionary Tale:
+
+#### Chapter One
+
+Suppose you want to predict (of course) house prices from house characteristics.  You might take an approach like this:
+
+```{python}
+lr = LinearRegression()
+
+
+ames = pd.read_csv("data/AmesHousing.csv")
+X = ames[["Gr Liv Area", "TotRms AbvGrd"]]
+y = ames["SalePrice"]
+
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+X_train_s = (X_train - X_train.mean())/X_train.std()
+
+lr_fitted = lr.fit(X_train_s, y_train)
+lr_fitted.coef_
+```
+
+Then, you decide to apply your fitted model to the test data:
+
+```{python}
+y_preds = lr_fitted.predict(X_test)
+
+r2_score(y_test, y_preds)
+```
+
+Oh no!  An $R^2$ score of *negative 2 million*???  How could this have happened?
+
+Let's look at the predictions:
+
+```{python}
+y_preds[1:5]
+```
+
+Wow.  We predicted that the first five test houses would all be worth over $50 million dollars.  That doesn't seem quite right.
+
+:::{.callout-check-in .icon}
+What went wrong here?
+:::
+
+#### Chapter Two
+
+Now a new house has come along, and you need to predict it.  That house has a
+living area of 889 square feet, and 6 rooms.
+
+```{python}
+new_house = pd.DataFrame(data = {"Gr Liv Area": [889], "TotRms AbvGrd": [6]})
+new_house
+```
+
+We won't make the same mistake again!  Time to standardize our new data:
+
+```{python}
+new_house_s = (new_house - new_house.mean())/new_house.std()
+new_house_s
+```
+
+Oh no!  Our data is now all `NaN`!!!
+
+:::{.callout-check-in .icon}
+What happened this time, and how can we fix it?
+:::
+
+#### The Moral of the Story
+
+A massively important principle of the modeling process is:  **New data that we want to predict on must go through the exact same pre-processing as the training data.**
+
+By *"exact same"*, we don't mean *"same idea"*, we mean *the same calculations*.
+
+To standardize our training data, we subtracted from each column its mean *in the training data*, and then divided each column by the standard deviation *in the training data*.  Thus, for any new data that comes along - whether it is a larger test dataset, or a single new house to predict on - we need to use the **same numbers** to standardize:
+
+```{python}
+X_test_s = (X_test - X_train.mean())/X_train.std()
+y_preds = lr_fitted.predict(X_test_s)
+
+r2_score(y_test, y_preds)
+```
+
+```{python}
+new_house_s = (new_house - X_train.mean())/X_train.std()
+lr_fitted.predict(new_house_s)
+```
+
+Notice that we used `X_train.mean()` and `X_train.std()` in each case: we "learned" our estimates for the mean and sd of the columns when we **fit** the model, and we use those for all future predictions!
+
+### Pipeline Objects
+
+Now, for an easier way to make sure preprocessing happens correctly.  Instead of making a **model** object, like `LinearRegression()`, that we use for fitting and predicting, we will make a **pipeline** object that contains *all* our steps:
+
+```{python}
+lr_pipeline = Pipeline(
+  [StandardScaler(),
+  LinearRegression()]
+)
+
+lr_pipeline
+```
+
+We can even name the steps in our pipeline, in order to help us keep track of them:
+
+```{python}
+lr_pipeline = Pipeline(
+  [("standardize", StandardScaler()),
+  ("linear_regression", LinearRegression())]
+)
+
+lr_pipeline
+```
+
+:::{.callout-caution}
+Pay careful attention to the use of `[` and `(` inside the `Pipeline` function.  The function takes a **list** (`[]`) of steps; each step may be put into a **tuple** `()` with a name of your choice.
+:::
+
+Now, we can use this pipeline for all our modeling tasks, without having to worry about doing the standardizing ourselves ahead of time:
+
+```{python}
+lr_pipeline_fitted = lr_pipeline.fit(X_train, y_train)
+
+y_preds = lr_pipeline_fitted.predict(X_test)
+r2_score(y_test, y_preds)
+```
+
+```{python}
+lr_pipeline_fitted.predict(new_house)
+```
+
+### Column Transformers
+
+Because there may be many different steps to the data preprocessing, it can sometimes be convenient to separate these steps into individual *column transformers*.
+
+For example, suppose you wanted to include a third predictor in your house price prediction: The type of building it is (`Bldg Type`); e.g., a Townhouse, a single-family home, etc.
+
+Since this is a categorical variable, we need to turn it into dummy variables first, using `OneHotEncoder()`.  But we don't want to put `OneHotEncoder()` directly into our pipeline, because we don't want to dummify *every* variable!
+
+So, we'll make column transformers to handle our variables separately:
+
+```{python}
+from sklearn.compose import ColumnTransformer
+
+ct = ColumnTransformer(
+  [
+    ("dummify", OneHotEncoder(sparse_output = False), ["Bldg Type"]),
+    ("standardize", StandardScaler(), ["Gr Liv Area", "TotRms AbvGrd"])
+  ],
+  remainder = "drop"
+)
+
+
+lr_pipeline = Pipeline(
+  [("preprocessing", ct),
+  ("linear_regression", LinearRegression())]
+)
+
+lr_pipeline
+```
+:::{.callout-check-in}
+What does the `remainder = "drop"` part of the `ColumnTransformer()` function do?
+Why might that be useful?
+
+Hint: What happens when you try to fit this pipeline on `X_train`?
+:::
+
+```{python}
+X = ames.drop("SalePrice", axis = 1)
+y = ames["SalePrice"]
+
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+lr_fitted = lr_pipeline.fit(X_train, y_train)
+```
+
+
+
+#### Checking preprocessing
+
+We've seen the value of including preprocessing steps in a pipeline instead of doing them "by hand".  However, you might sometimes want to see what that processed data
+looks like.  This is one advantage of a column transformer - it can be separately used to `fit` and `transform` datasets:
+
+```{python}
+ct_fitted = ct.fit(X_train)
+
+ct.transform(X_train)
+ct.transform(X_test)
+```
+
+
+### Challenges of pipelines
+
+Although `Pipeline` objects are incredible tools for making sure your model process is reproducible and correct, they come with some frustrations.  Here are a few you might encounter, and our advice for dealing with them:
+
+#### Extracting information
+
+When we wanted to find the fitted coefficients of a model object, we could simply use `.coef_`.  However, since a `Pipeline` is not a model object, this no longer works:
+
+```{python}
+#| error: true
+lr_pipeline_fitted.coef_
+```
+
+What we need to do instead is find the *step* of the pipeline where the model fitting happened, and get those coefficients:
+
+```{python}
+lr_pipeline_fitted.named_steps['linear_regression'].coef_
+```
+
+
+
+#### Pandas input, numpy output
+
+You may have noticed that `sklearn` functions are designed to handle `pandas` objects nicely - which is a good thing, since we like to do our data cleaning and manipulation in `pandas`!  However, the outputs of these model functions are typically `numpy` arrays:
+
+```{python}
+type(y_preds)
+```
+
+Occasionally, this can cause trouble; especially when you want to continue data manipulation after making predictions.
+
+Fortunately, it is possible to set up your pipeline to output `pandas` objects instead, using the `set_output()` method:
+
+```{python}
+lr_pipeline = Pipeline(
+  [("preprocessing", ct),
+  ("linear_regression", LinearRegression())]
+).set_output(transform="pandas")
+
+
+ct.fit_transform(X_train)
+```
+
+:::{.callout-warning}
+
+Notice that in this transformed dataset, the column names now have prefixes for the named steps in the column transformer.
+
+Notice also the structure of the names of the dummified variables:
+
+`[step name]__[variable name]_[category]`
+
+:::
+
+
+#### Interactions
+
+???
+
+
+### Your turn
+
+:::{.callout-practice-exercise .icon}
+
+Consider three possible models for predicting house prices:
+
+1. Using only the size and number of rooms.
+2. Using size, number of rooms, and building type.
+3. Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.
+
+Set up a pipeline for each of these three models.
+
+Then, get predictions on the test set for each of your pipelines, and compute the root mean squared error.  Which model performed best?
+
+Note: You should only use the function `train_test_split()` **one** time in your code; that is, we should be predicting on the **same** test set for all three models.
+
+:::
+
+
+## Cross-Validation
+
+
+
+
+Recall that we've discussed the following model specification:
+
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon$$
+
+where $X_j$ ($j = 1,...,p$) can represent any type of predictor (or transformed predictor) variable in our dataset.
