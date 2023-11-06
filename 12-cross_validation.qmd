@@ -52,7 +52,13 @@ If we already know how to perform each modeling step, why would we need pipeline
 
 #### Chapter One
 
-Suppose you want to predict (of course) house prices from house characteristics.  You might take an approach like this:
+Suppose you want to predict (of course) house prices from house characteristics. 
+
+[Click here to download the full AMES housing dataset](https://www.dropbox.com/scl/fi/g0n5le5p6fr136ggetfsf/AmesHousing.csv?rlkey=jlr9xtz1o6u5rghfo29a5c02f&dl=1)
+
+[Click here for data documentation](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+
+You might take an approach like this:
 
 ```{python}
 lr = LinearRegression()
