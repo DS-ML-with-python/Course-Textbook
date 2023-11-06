@@ -29,7 +29,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 ```
 
-## Pipelines
 
 In the last two chapters, we learned to use `sklearn` and `python` to perform the main steps of the modeling procedure:
 

@@ -262,23 +262,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
-  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">13.2</span> Pipelines</a></li>
   <li>
-<a href="#pipelines-1" id="toc-pipelines-1" class="nav-link" data-scroll-target="#pipelines-1"><span class="header-section-number">13.3</span> Pipelines</a>
+<a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">13.2</span> Pipelines</a>
   <ul class="collapse">
-<li><a href="#cautionary-tale" id="toc-cautionary-tale" class="nav-link" data-scroll-target="#cautionary-tale"><span class="header-section-number">13.3.1</span> Cautionary Tale:</a></li>
-  <li><a href="#pipeline-objects" id="toc-pipeline-objects" class="nav-link" data-scroll-target="#pipeline-objects"><span class="header-section-number">13.3.2</span> Pipeline Objects</a></li>
-  <li><a href="#column-transformers" id="toc-column-transformers" class="nav-link" data-scroll-target="#column-transformers"><span class="header-section-number">13.3.3</span> Column Transformers</a></li>
-  <li><a href="#challenges-of-pipelines" id="toc-challenges-of-pipelines" class="nav-link" data-scroll-target="#challenges-of-pipelines"><span class="header-section-number">13.3.4</span> Challenges of pipelines</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">13.3.5</span> Your turn</a></li>
+<li><a href="#cautionary-tale" id="toc-cautionary-tale" class="nav-link" data-scroll-target="#cautionary-tale"><span class="header-section-number">13.2.1</span> Cautionary Tale:</a></li>
+  <li><a href="#pipeline-objects" id="toc-pipeline-objects" class="nav-link" data-scroll-target="#pipeline-objects"><span class="header-section-number">13.2.2</span> Pipeline Objects</a></li>
+  <li><a href="#column-transformers" id="toc-column-transformers" class="nav-link" data-scroll-target="#column-transformers"><span class="header-section-number">13.2.3</span> Column Transformers</a></li>
+  <li><a href="#challenges-of-pipelines" id="toc-challenges-of-pipelines" class="nav-link" data-scroll-target="#challenges-of-pipelines"><span class="header-section-number">13.2.4</span> Challenges of pipelines</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">13.2.5</span> Your turn</a></li>
   </ul>
 </li>
   <li>
-<a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">13.4</span> Cross-Validation</a>
+<a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">13.3</span> Cross-Validation</a>
   <ul class="collapse">
-<li><a href="#cross_val_score" id="toc-cross_val_score" class="nav-link" data-scroll-target="#cross_val_score"><span class="header-section-number">13.4.1</span> <code>cross_val_score</code></a></li>
-  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">13.4.2</span> Tuning</a></li>
-  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">13.4.3</span> Your Turn</a></li>
+<li><a href="#cross_val_score" id="toc-cross_val_score" class="nav-link" data-scroll-target="#cross_val_score"><span class="header-section-number">13.3.1</span> <code>cross_val_score</code></a></li>
+  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">13.3.2</span> Tuning</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">13.3.3</span> Your Turn</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/12-cross_validation.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -311,8 +310,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="pipelines" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="pipelines">
-<span class="header-section-number">13.2</span> Pipelines</h2>
 <p>In the last two chapters, we learned to use <code>sklearn</code> and <code>python</code> to perform the main steps of the modeling procedure:</p>
 <ol type="1">
 <li><p><strong>Preprocessing:</strong> Choosing which predictors to include, and how we will transform them to prepare them for the model, e.g.&nbsp;<code>pd.get_dummies()</code> or <code>StandardScaler()</code></p></li>
@@ -322,13 +319,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>In this chapter, we will combine all these steps into one <strong>pipeline</strong>, sometimes called a <strong>workflow</strong>, to streamline our modeling process.</p>
 <p>Then, we will use our pipeline objects to quickly and easily perform more complex model fitting and validation tasks.</p>
-</section><section id="pipelines-1" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="pipelines-1">
-<span class="header-section-number">13.3</span> Pipelines</h2>
+</section><section id="pipelines" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="pipelines">
+<span class="header-section-number">13.2</span> Pipelines</h2>
 <p>If we already know how to perform each modeling step, why would we need pipelines? Consider the following cautionary tale…</p>
-<section id="cautionary-tale" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="cautionary-tale">
-<span class="header-section-number">13.3.1</span> Cautionary Tale:</h3>
-<section id="chapter-one" class="level4" data-number="13.3.1.1"><h4 data-number="13.3.1.1" class="anchored" data-anchor-id="chapter-one">
-<span class="header-section-number">13.3.1.1</span> Chapter One</h4>
+<section id="cautionary-tale" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="cautionary-tale">
+<span class="header-section-number">13.2.1</span> Cautionary Tale:</h3>
+<section id="chapter-one" class="level4" data-number="13.2.1.1"><h4 data-number="13.2.1.1" class="anchored" data-anchor-id="chapter-one">
+<span class="header-section-number">13.2.1.1</span> Chapter One</h4>
 <p>Suppose you want to predict (of course) house prices from house characteristics. You might take an approach like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> LinearRegression()</span>
@@ -347,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>lr_fitted <span class="op">=</span> lr.fit(X_train_s, y_train)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>lr_fitted.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([ 71583.82146991, -17246.02936406])</code></pre>
+<pre><code>array([ 71902.76569175, -18169.87987431])</code></pre>
 </div>
 </div>
 <p>Then, you decide to apply your fitted model to the test data:</p>
@@ -356,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-2080235.365252091</code></pre>
+<pre><code>-2125153.4612452607</code></pre>
 </div>
 </div>
 <p>Oh no! An <span class="math inline">\(R^2\)</span> score of <em>negative 2 million</em>??? How could this have happened?</p>
@@ -364,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y_preds[<span class="dv">1</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([1.03518093e+08, 1.41548947e+08, 1.89438524e+08, 1.22453313e+08])</code></pre>
+<pre><code>array([6.14954941e+07, 1.06272747e+08, 1.24751758e+08, 6.73733511e+07])</code></pre>
 </div>
 </div>
 <p>Wow. We predicted that the first five test houses would all be worth over $50 million dollars. That doesn’t seem quite right.</p>
@@ -381,8 +378,8 @@ Check In
 <p>What went wrong here?</p>
 </div>
 </div>
-</section><section id="chapter-two" class="level4" data-number="13.3.1.2"><h4 data-number="13.3.1.2" class="anchored" data-anchor-id="chapter-two">
-<span class="header-section-number">13.3.1.2</span> Chapter Two</h4>
+</section><section id="chapter-two" class="level4" data-number="13.2.1.2"><h4 data-number="13.2.1.2" class="anchored" data-anchor-id="chapter-two">
+<span class="header-section-number">13.2.1.2</span> Chapter Two</h4>
 <p>Now a new house has come along, and you need to predict it. That house has a living area of 889 square feet, and 6 rooms.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>new_house <span class="op">=</span> pd.DataFrame(data <span class="op">=</span> {<span class="st">"Gr Liv Area"</span>: [<span class="dv">889</span>], <span class="st">"TotRms AbvGrd"</span>: [<span class="dv">6</span>]})</span>
@@ -415,8 +412,8 @@ Check In
 <p>What happened this time, and how can we fix it?</p>
 </div>
 </div>
-</section><section id="the-moral-of-the-story" class="level4" data-number="13.3.1.3"><h4 data-number="13.3.1.3" class="anchored" data-anchor-id="the-moral-of-the-story">
-<span class="header-section-number">13.3.1.3</span> The Moral of the Story</h4>
+</section><section id="the-moral-of-the-story" class="level4" data-number="13.2.1.3"><h4 data-number="13.2.1.3" class="anchored" data-anchor-id="the-moral-of-the-story">
+<span class="header-section-number">13.2.1.3</span> The Moral of the Story</h4>
 <p>A massively important principle of the modeling process is: <strong>New data that we want to predict on must go through the exact same pre-processing as the training data.</strong></p>
 <p>By <em>“exact same”</em>, we don’t mean <em>“same idea”</em>, we mean <em>the same calculations</em>.</p>
 <p>To standardize our training data, we subtracted from each column its mean <em>in the training data</em>, and then divided each column by the standard deviation <em>in the training data</em>. Thus, for any new data that comes along - whether it is a larger test dataset, or a single new house to predict on - we need to use the <strong>same numbers</strong> to standardize:</p>
@@ -426,19 +423,19 @@ Check In
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.48441967465945013</code></pre>
+<pre><code>0.48986494038520745</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>new_house_s <span class="op">=</span> (new_house <span class="op">-</span> X_train.mean())<span class="op">/</span>X_train.std()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>lr_fitted.predict(new_house_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([101515.12366609])</code></pre>
+<pre><code>array([98867.8879354])</code></pre>
 </div>
 </div>
 <p>Notice that we used <code>X_train.mean()</code> and <code>X_train.std()</code> in each case: we “learned” our estimates for the mean and sd of the columns when we <strong>fit</strong> the model, and we use those for all future predictions!</p>
-</section></section><section id="pipeline-objects" class="level3" data-number="13.3.2"><h3 data-number="13.3.2" class="anchored" data-anchor-id="pipeline-objects">
-<span class="header-section-number">13.3.2</span> Pipeline Objects</h3>
+</section></section><section id="pipeline-objects" class="level3" data-number="13.2.2"><h3 data-number="13.2.2" class="anchored" data-anchor-id="pipeline-objects">
+<span class="header-section-number">13.2.2</span> Pipeline Objects</h3>
 <p>Now, for an easier way to make sure preprocessing happens correctly. Instead of making a <strong>model</strong> object, like <code>LinearRegression()</code>, that we use for fitting and predicting, we will make a <strong>pipeline</strong> object that contains <em>all</em> our steps:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline <span class="op">=</span> Pipeline(</span>
@@ -513,17 +510,17 @@ Caution
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>y_preds <span class="op">=</span> lr_pipeline_fitted.predict(X_test)</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.48441967465945013</code></pre>
+<pre><code>0.48986494038520734</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.predict(new_house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([101515.12366609])</code></pre>
+<pre><code>array([98867.8879354])</code></pre>
 </div>
 </div>
-</section><section id="column-transformers" class="level3" data-number="13.3.3"><h3 data-number="13.3.3" class="anchored" data-anchor-id="column-transformers">
-<span class="header-section-number">13.3.3</span> Column Transformers</h3>
+</section><section id="column-transformers" class="level3" data-number="13.2.3"><h3 data-number="13.2.3" class="anchored" data-anchor-id="column-transformers">
+<span class="header-section-number">13.2.3</span> Column Transformers</h3>
 <p>Because there may be many different steps to the data preprocessing, it can sometimes be convenient to separate these steps into individual <em>column transformers</em>.</p>
 <p>For example, suppose you wanted to include a third predictor in your house price prediction: The type of building it is (<code>Bldg Type</code>); e.g., a Townhouse, a single-family home, etc.</p>
 <p>Since this is a categorical variable, we need to turn it into dummy variables first, using <code>OneHotEncoder()</code>. But we don’t want to put <code>OneHotEncoder()</code> directly into our pipeline, because we don’t want to dummify <em>every</em> variable!</p>
@@ -632,8 +629,8 @@ Check In
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>lr_fitted <span class="op">=</span> lr_pipeline.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="checking-preprocessing" class="level4" data-number="13.3.3.1"><h4 data-number="13.3.3.1" class="anchored" data-anchor-id="checking-preprocessing">
-<span class="header-section-number">13.3.3.1</span> Checking preprocessing</h4>
+<section id="checking-preprocessing" class="level4" data-number="13.2.3.1"><h4 data-number="13.2.3.1" class="anchored" data-anchor-id="checking-preprocessing">
+<span class="header-section-number">13.2.3.1</span> Checking preprocessing</h4>
 <p>We’ve seen the value of including preprocessing steps in a pipeline instead of doing them “by hand”. However, you might sometimes want to see what that processed data looks like. This is one advantage of a column transformer - it can be separately used to <code>fit</code> and <code>transform</code> datasets:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ct_fitted <span class="op">=</span> ct.fit(X_train)</span>
@@ -641,41 +638,41 @@ Check In
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ct.transform(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>array([[ 1.        ,  0.        ,  0.        , ...,  0.        ,
-        -0.50446066,  0.34991054],
-       [ 0.        ,  0.        ,  1.        , ...,  0.        ,
-         0.29275851,  0.98210911],
+        -0.63755092, -1.54127131],
        [ 1.        ,  0.        ,  0.        , ...,  0.        ,
-        -1.20601352, -0.9144866 ],
+        -0.41018648, -0.28597082],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+         0.07419862,  0.34167942],
        ...,
-       [ 0.        ,  0.        ,  0.        , ...,  1.        ,
-         0.75514562, -0.28228803],
-       [ 0.        ,  0.        ,  1.        , ...,  0.        ,
-         0.57178522,  0.98210911],
        [ 1.        ,  0.        ,  0.        , ...,  0.        ,
-        -0.16165642,  0.34991054]])</code></pre>
+        -1.11600478, -1.54127131],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+         0.02872573, -0.91362106],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+        -1.34930046, -0.91362106]])</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ct.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>array([[ 1.        ,  0.        ,  0.        , ...,  0.        ,
-        -0.14571203,  0.34991054],
+        -0.29749281, -0.91362106],
        [ 1.        ,  0.        ,  0.        , ...,  0.        ,
-        -0.7515986 , -0.9144866 ],
+        -1.38093377, -1.54127131],
        [ 1.        ,  0.        ,  0.        , ...,  0.        ,
-         1.3989001 ,  0.34991054],
+        -1.34930046, -0.91362106],
        ...,
        [ 1.        ,  0.        ,  0.        , ...,  0.        ,
-         0.08348848,  0.34991054],
+         0.4399588 ,  0.34167942],
        [ 1.        ,  0.        ,  0.        , ...,  0.        ,
-         2.14629307,  1.61430768],
+        -1.1911339 , -1.54127131],
        [ 1.        ,  0.        ,  0.        , ...,  0.        ,
-         0.66346542,  1.61430768]])</code></pre>
+        -0.15909706, -0.91362106]])</code></pre>
 </div>
 </div>
-</section></section><section id="challenges-of-pipelines" class="level3" data-number="13.3.4"><h3 data-number="13.3.4" class="anchored" data-anchor-id="challenges-of-pipelines">
-<span class="header-section-number">13.3.4</span> Challenges of pipelines</h3>
+</section></section><section id="challenges-of-pipelines" class="level3" data-number="13.2.4"><h3 data-number="13.2.4" class="anchored" data-anchor-id="challenges-of-pipelines">
+<span class="header-section-number">13.2.4</span> Challenges of pipelines</h3>
 <p>Although <code>Pipeline</code> objects are incredible tools for making sure your model process is reproducible and correct, they come with some frustrations. Here are a few you might encounter, and our advice for dealing with them:</p>
-<section id="extracting-information" class="level4" data-number="13.3.4.1"><h4 data-number="13.3.4.1" class="anchored" data-anchor-id="extracting-information">
-<span class="header-section-number">13.3.4.1</span> Extracting information</h4>
+<section id="extracting-information" class="level4" data-number="13.2.4.1"><h4 data-number="13.2.4.1" class="anchored" data-anchor-id="extracting-information">
+<span class="header-section-number">13.2.4.1</span> Extracting information</h4>
 <p>When we wanted to find the fitted coefficients of a model object, we could simply use <code>.coef_</code>. However, since a <code>Pipeline</code> is not a model object, this no longer works:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -687,11 +684,11 @@ Check In
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.named_steps[<span class="st">'linear_regression'</span>].coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([ 71567.52834999, -17242.10401307])</code></pre>
+<pre><code>array([ 71886.39997726, -18165.74424665])</code></pre>
 </div>
 </div>
-</section><section id="pandas-input-numpy-output" class="level4" data-number="13.3.4.2"><h4 data-number="13.3.4.2" class="anchored" data-anchor-id="pandas-input-numpy-output">
-<span class="header-section-number">13.3.4.2</span> Pandas input, numpy output</h4>
+</section><section id="pandas-input-numpy-output" class="level4" data-number="13.2.4.2"><h4 data-number="13.2.4.2" class="anchored" data-anchor-id="pandas-input-numpy-output">
+<span class="header-section-number">13.2.4.2</span> Pandas input, numpy output</h4>
 <p>You may have noticed that <code>sklearn</code> functions are designed to handle <code>pandas</code> objects nicely - which is a good thing, since we like to do our data cleaning and manipulation in <code>pandas</code>! However, the outputs of these model functions are typically <code>numpy</code> arrays:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -711,17 +708,17 @@ Check In
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>ct.fit_transform(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      dummify__Bldg Type_1Fam  ...  standardize__TotRms AbvGrd
-1216                      1.0  ...                    0.349911
-2912                      0.0  ...                    0.982109
-86                        1.0  ...                   -0.914487
-2820                      0.0  ...                   -1.546685
-1267                      1.0  ...                   -0.914487
+734                       1.0  ...                   -1.541271
+1398                      1.0  ...                   -0.285971
+1472                      1.0  ...                    0.341679
+977                       0.0  ...                   -2.168922
+1781                      1.0  ...                    0.969330
 ...                       ...  ...                         ...
-1817                      0.0  ...                    2.246506
-992                       1.0  ...                    0.349911
-458                       0.0  ...                   -0.282288
-392                       0.0  ...                    0.982109
-1519                      1.0  ...                    0.349911
+2175                      1.0  ...                   -0.285971
+2706                      0.0  ...                   -0.285971
+2710                      1.0  ...                   -1.541271
+869                       1.0  ...                   -0.913621
+1547                      1.0  ...                   -0.913621
 
 [2197 rows x 7 columns]</code></pre>
 </div>
@@ -741,8 +738,8 @@ Warning
 <p><code>[step name]__[variable name]_[category]</code></p>
 </div>
 </div>
-</section><section id="interactions-and-dummies" class="level4" data-number="13.3.4.3"><h4 data-number="13.3.4.3" class="anchored" data-anchor-id="interactions-and-dummies">
-<span class="header-section-number">13.3.4.3</span> Interactions and Dummies</h4>
+</section><section id="interactions-and-dummies" class="level4" data-number="13.2.4.3"><h4 data-number="13.2.4.3" class="anchored" data-anchor-id="interactions-and-dummies">
+<span class="header-section-number">13.2.4.3</span> Interactions and Dummies</h4>
 <p>Sometimes, we want to include an <strong>interaction term</strong> in our model; for example,</p>
 <p><span class="math display">\[ \text{House Price} = \text{House Size} + \text{Num Rooms} + \text{Size}*\text{Rooms}\]</span></p>
 <p>Adding interactions between numeric variables is simple, we simply add a “polynomial” step to our preprocessing, except we leave off the squares and cubes, and keep only the interactions:</p>
@@ -757,17 +754,17 @@ Warning
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>ct_inter.fit_transform(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      interaction__1  ...  interaction__Gr Liv Area TotRms AbvGrd
-1216             1.0  ...                                  8764.0
-2912             1.0  ...                                 13216.0
-86               1.0  ...                                  4500.0
-2820             1.0  ...                                  3920.0
-1267             1.0  ...                                  4380.0
+734              1.0  ...                                  4704.0
+1398             1.0  ...                                  7746.0
+1472             1.0  ...                                 10752.0
+977              1.0  ...                                  1890.0
+1781             1.0  ...                                 13088.0
 ...              ...  ...                                     ...
-1817             1.0  ...                                 20200.0
-992              1.0  ...                                 11228.0
-458              1.0  ...                                 11304.0
-392              1.0  ...                                 14336.0
-1519             1.0  ...                                  9968.0
+2175             1.0  ...                                  6678.0
+2706             1.0  ...                                  7776.0
+2710             1.0  ...                                  3736.0
+869              1.0  ...                                  7565.0
+1547             1.0  ...                                  4080.0
 
 [2197 rows x 4 columns]</code></pre>
 </div>
@@ -792,41 +789,41 @@ Warning
 <span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>X_train_dummified</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      dummify__Bldg Type_1Fam  ...  remainder__Sale Condition
-1216                      1.0  ...                     Normal
-2912                      0.0  ...                     Normal
-86                        1.0  ...                     Normal
-2820                      0.0  ...                    AdjLand
-1267                      1.0  ...                    Abnorml
+734                       1.0  ...                     Normal
+1398                      1.0  ...                     Normal
+1472                      1.0  ...                     Normal
+977                       0.0  ...                     Normal
+1781                      1.0  ...                     Normal
 ...                       ...  ...                        ...
-1817                      0.0  ...                     Normal
-992                       1.0  ...                     Normal
-458                       0.0  ...                    Partial
-392                       0.0  ...                     Normal
-1519                      1.0  ...                     Normal
+2175                      1.0  ...                     Normal
+2706                      0.0  ...                     Normal
+2710                      1.0  ...                     Normal
+869                       1.0  ...                     Normal
+1547                      1.0  ...                     Normal
 
 [2197 rows x 85 columns]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ct_inter.fit_transform(X_train_dummified)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      interaction__1  ...  interaction__remainder__TotRms AbvGrd dummify__Bldg Type_1Fam
-1216             1.0  ...                                                7.0            
-2912             1.0  ...                                                0.0            
-86               1.0  ...                                                5.0            
-2820             1.0  ...                                                0.0            
-1267             1.0  ...                                                5.0            
+734              1.0  ...                                                4.0            
+1398             1.0  ...                                                6.0            
+1472             1.0  ...                                                7.0            
+977              1.0  ...                                                0.0            
+1781             1.0  ...                                                8.0            
 ...              ...  ...                                                ...            
-1817             1.0  ...                                                0.0            
-992              1.0  ...                                                7.0            
-458              1.0  ...                                                0.0            
-392              1.0  ...                                                0.0            
-1519             1.0  ...                                                7.0            
+2175             1.0  ...                                                6.0            
+2706             1.0  ...                                                0.0            
+2710             1.0  ...                                                4.0            
+869              1.0  ...                                                5.0            
+1547             1.0  ...                                                5.0            
 
 [2197 rows x 4 columns]</code></pre>
 </div>
 </div>
 <p>Ooof! This is not very elegant, we admit. But it is still worth the effort to set up a full pipeline, instead of transforming things by hand, as we will see in the next section.</p>
-</section></section><section id="your-turn" class="level3" data-number="13.3.5"><h3 data-number="13.3.5" class="anchored" data-anchor-id="your-turn">
-<span class="header-section-number">13.3.5</span> Your turn</h3>
+</section></section><section id="your-turn" class="level3" data-number="13.2.5"><h3 data-number="13.2.5" class="anchored" data-anchor-id="your-turn">
+<span class="header-section-number">13.2.5</span> Your turn</h3>
 <div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -849,8 +846,8 @@ Practice Activity
 <p>Note: You should only use the function <code>train_test_split()</code> <strong>one</strong> time in your code; that is, we should be predicting on the <strong>same</strong> test set for all three models.</p>
 </div>
 </div>
-</section></section><section id="cross-validation" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="cross-validation">
-<span class="header-section-number">13.4</span> Cross-Validation</h2>
+</section></section><section id="cross-validation" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="cross-validation">
+<span class="header-section-number">13.3</span> Cross-Validation</h2>
 <p>Now that we have all our modeling process wrapped up in one tidy pipeline bundle, we can upgrade another piece of the puzzle: the test/training split.</p>
 <p>In the previous exercise, we used our <strong>test metrics</strong> to compare pipelines, with the idea that a pipeline which performs well on test data is likely to perform well on future data. This is a bit of a big assumption though. What if we <em>just so happened</em> to get an “unlucky” test/training split, where the test set <em>just so happened</em> to contain houses that don’t follow the usual price patterns?</p>
 <p>To try to avoid unlucky splits, an easy solution is to simply do many different test/training splits and see what happens. But we have to be careful - if we end up doing many random splits, we still might end up getting similar “unlucky” test sets every time.</p>
@@ -879,8 +876,8 @@ Note
 <p>Remember that ultimately, all of this effort has only one goal: to get a “fair” measurement of how good a particular pipeline is at predicting, so that we can choose our best final pipeline from among the many options.</p>
 </div>
 </div>
-<section id="cross_val_score" class="level3" data-number="13.4.1"><h3 data-number="13.4.1" class="anchored" data-anchor-id="cross_val_score">
-<span class="header-section-number">13.4.1</span> <code>cross_val_score</code>
+<section id="cross_val_score" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="cross_val_score">
+<span class="header-section-number">13.3.1</span> <code>cross_val_score</code>
 </h3>
 <p>Even if you are convinced that cross-validation could be useful, it might seem daunting. Imagine needing to create five different test/training sets, and go through the process of fitting, predicting, and computing metrics for every single one.</p>
 <p>Fortunately, now that we have <code>Pipeline</code> objects, <code>sklearn</code> has shortcuts.</p>
@@ -941,8 +938,8 @@ Practice Activity
 <p>Which do you prefer? Does this agree with your conclusion from earlier?</p>
 </div>
 </div>
-</section><section id="tuning" class="level3" data-number="13.4.2"><h3 data-number="13.4.2" class="anchored" data-anchor-id="tuning">
-<span class="header-section-number">13.4.2</span> Tuning</h3>
+</section><section id="tuning" class="level3" data-number="13.3.2"><h3 data-number="13.3.2" class="anchored" data-anchor-id="tuning">
+<span class="header-section-number">13.3.2</span> Tuning</h3>
 <p>In our previous exercise, we considered one-degree polynomials as well as 5-degree polynomials. But what if we wanted to try everything from 1-degree to 10-degree, without needing to manually create 10 different pipelines?</p>
 <p>This process - where we want to try a range of different values in our <em>model specification</em> and see which has the best cross-validation metrics - is called <strong>tuning</strong>.</p>
 <p>Since tuning is a common need in modeling, <code>sklearn</code> has another shortcut for us, <code>grid_search_cv</code>. But in order to capture the process, this function needs to know:</p>
@@ -1001,13 +998,12 @@ Note
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>gscv_fitted.cv_results_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'mean_fit_time': array([0.0034564 , 0.00361719, 0.00346055, 0.00353241, 0.00340223,
-       0.0036005 , 0.00673418, 0.00368299, 0.00385098]), 'std_fit_time': array([3.16236822e-04, 1.73483595e-04, 1.19083109e-04, 2.27879924e-04,
-       1.18356516e-04, 2.34200821e-04, 6.25023599e-03, 1.15125773e-04,
-       9.06970598e-05]), 'mean_score_time': array([0.00151558, 0.00149808, 0.00153756, 0.00148807, 0.00146079,
-       0.00150905, 0.001477  , 0.00150661, 0.00154681]), 'std_score_time': array([1.36544666e-04, 8.16768744e-05, 1.34140064e-04, 5.10791650e-05,
-       1.30761234e-05, 6.50980701e-05, 4.27462638e-05, 2.29196531e-05,
-       5.03349900e-05]), 'param_preprocessing__polynomial__degree': masked_array(data=[1, 2, 3, 4, 5, 6, 7, 8, 9],
+<pre><code>{'mean_fit_time': array([0.00393295, 0.00428023, 0.00414538, 0.00354476, 0.00375199,
+       0.00380545, 0.00711932, 0.00419898, 0.00435543]), 'std_fit_time': array([0.00042948, 0.00016659, 0.00050928, 0.00014504, 0.00011514,
+       0.00022525, 0.00674173, 0.00014447, 0.0007336 ]), 'mean_score_time': array([0.00168114, 0.00188975, 0.00167375, 0.00155163, 0.0016367 ,
+       0.00156574, 0.00167532, 0.00183978, 0.00166903]), 'std_score_time': array([1.77825254e-04, 1.67246743e-04, 7.41326754e-05, 5.35137923e-05,
+       1.64945093e-04, 4.61129885e-05, 2.52718449e-04, 1.12400502e-04,
+       9.82648588e-05]), 'param_preprocessing__polynomial__degree': masked_array(data=[1, 2, 3, 4, 5, 6, 7, 8, 9],
              mask=[False, False, False, False, False, False, False, False,
                    False],
        fill_value='?',
@@ -1063,8 +1059,8 @@ Check In
 <p>How many different model fitting steps occurred when <code>gscv.fit(X, y)</code> was run?</p>
 </div>
 </div>
-</section><section id="your-turn-1" class="level3" data-number="13.4.3"><h3 data-number="13.4.3" class="anchored" data-anchor-id="your-turn-1">
-<span class="header-section-number">13.4.3</span> Your Turn</h3>
+</section><section id="your-turn-1" class="level3" data-number="13.3.3"><h3 data-number="13.3.3" class="anchored" data-anchor-id="your-turn-1">
+<span class="header-section-number">13.3.3</span> Your Turn</h3>
 <div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
