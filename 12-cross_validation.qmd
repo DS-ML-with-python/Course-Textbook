@@ -2,12 +2,16 @@
 title: "Pipelines, Cross-Validation, and Tuning"
 ---
 
+```{r}
+#| include: false
+reticulate::use_python("/usr/local/bin/python3")
+```
+
+
 ## Introduction
 
 
 ```{python}
-#| eval: false
-
 import pandas as pd
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, PolynomialFeatures
@@ -354,10 +358,3 @@ Note: You should only use the function `train_test_split()` **one** time in your
 ## Cross-Validation
 
 
-
-
-Recall that we've discussed the following model specification:
-
-$$y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon$$
-
-where $X_j$ ($j = 1,...,p$) can represent any type of predictor (or transformed predictor) variable in our dataset.
