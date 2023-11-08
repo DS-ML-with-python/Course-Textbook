@@ -1,0 +1,250 @@
+---
+title: "Penalized Regression"
+---
+
+
+```{python}
+#| include: false
+import random
+
+random.seed(1010220)
+```
+
+
+
+## Introduction
+
+
+```{python}
+import pandas as pd
+import numpy as np
+from sklearn.pipeline import Pipeline
+from sklearn.compose import make_column_selector, ColumnTransformer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, PolynomialFeatures
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet 
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import r2_score
+```
+
+Now that we know how to create and use pipelines, it's finally time to start adding more **model specifications** to our repertoire.
+
+To motivate today's new models, consider the house price prediction problem.  This time, we are going to use ALL of our predictors!
+
+
+[Click here to download the full AMES housing dataset](https://www.dropbox.com/scl/fi/g0n5le5p6fr136ggetfsf/AmesHousing.csv?rlkey=jlr9xtz1o6u5rghfo29a5c02f&dl=1)
+
+[Click here for data documentation](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+
+First, we'll read and clean our data..
+
+```{python}
+# Read the data
+ames = pd.read_csv("data/AmesHousing.csv")
+
+# Get rid of columns with mostly NaN values
+good_cols = ames.isna().sum() < 100
+ames = ames.loc[:,good_cols]
+
+# Drop other NAs
+ames = ames.dropna()
+
+```
+
+Then, we'll set up our pipeline...
+
+```{python}
+
+X = ames.drop(["SalePrice", "Order", "PID"], axis = 1)
+y = ames["SalePrice"]
+
+
+ct = ColumnTransformer(
+  [
+    ("dummify", 
+    OneHotEncoder(sparse_output = False, handle_unknown='ignore'),
+    make_column_selector(dtype_include=object)),
+    ("standardize", 
+    StandardScaler(), 
+    make_column_selector(dtype_include=np.number))
+  ],
+  remainder = "passthrough"
+)
+
+lr_pipeline_1 = Pipeline(
+  [("preprocessing", ct),
+  ("linear_regression", LinearRegression())]
+)
+
+```
+
+:::{.callout-check-in .icon}
+Notice in the Column Transformer, we added the argument `handle_unknown='ignore'`What did this accomplish?
+
+:::
+
+:::{.callout-check-in .icon}
+Notice in the OneHotEncoder, we used `make_column_selector(dtype_include=object)` instead of supplying column names.  What did this accomplish?
+
+:::
+
+
+:::{.callout-check-in .icon}
+
+Why did we drop the `Order` and `PID` columns?
+
+:::
+
+
+Then, we cross-validate:
+
+```{python}
+cross_val_score(lr_pipeline_1, X, y, cv = 5, scoring = 'r2')
+```
+
+Oof.  This is terrible!  We used so many features in our model, we **overfit** to the training data, and ended up with terrible predictions.
+
+## Ridge Regression
+
+In the previous analysis, we **fit** our model according to *Least Squares Regression*.  That is, we fit a model that predicts the $i$-th house price with the equation
+
+$$\hat{y}_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots +  \beta_p x_{ip}$$
+When we chose the best numbers to plug in for $\beta_1$ ... $\beta_p$, we did so by choosing the numbers that would minimize the **squared error** in the training data:
+
+$$\sum_{i = 1}^n (y_i - \hat{y}_i)^2$$
+
+
+But this equation is not our only way to define the "best" $\beta$'s - and in this case, fitting as closely as possible to the training data did not result in good future predictions.  
+
+Recall that modeling is a kind of "teeter totter" between models that are **too inflexible** (underfit) and those that are **too flexible** (overfit).  In this instance, we are overfitting, so we need our model to be *less* flexible; i.e., *less* able to get too close to the training data.
+
+How will we do this? **Regularization** - a fancy word that says we will add a new piece to our loss function that restricts the flexibility of the $\beta$'s.  We call these new pieces **penalties**.
+
+For example, what if our definition of "best beta" was the ones that minimize:
+
+$$ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \sum_{j = 1}^p \beta_j^2 $$
+Here, the $\sum \beta_j^2$ is a **Ridge penalty**, another name for the sum of squared coefficients.
+
+Now our loss function - which defines the best betas - has two concerns:
+
+1. To make the Sum of Squared Error (SSE) small
+
+2. To make the betas themselves small
+
+These two concerns are acting in opposition to each other: We can make the SSE small by choosing $\beta$'s that overfit; or we can make the Ridge penalty small by choosing $\beta$'s near 0, but we can't do both at the same time.
+
+To decide how much we want to prioritize each concern, we'll throw a number in called $\lambda$:
+
+$$ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \lambda \sum_{j = 1}^p \beta_j^2 $$
+
+Now, we have a "knob" we can use to balance the pieces of the loss function.  If $\lambda$ is very large, then we care much more about restricting our coefficients to small values than about getting small SSE.  If $\lambda$ is close to 0, then we care much more about SSE.
+
+When $\beta$'s are chosen according to the above loss function, instead of just considering SSE, we call this **Ridge Regression**.
+
+
+:::{.callout-practice-exercise}
+
+Make a pipeline that uses all the variables in the Ames dataset, and then fits Ridge Regression with $\lambda = 1$.
+
+Cross-validate this pipeline and compare the results to the ordinary linear regression.
+
+Then fit the model on the whole dataset and get the coefficients. Make a plot of these coefficients compared to the ones from ordinary linear regression.
+
+:::
+
+:::{.callout-warning}
+The `sklearn` function `Ridge()` uses the argument name `alpha` for $\lambda$.  
+:::
+
+### Tuning
+
+Now, you might be wondering, how do we know what value to use for $\lambda$?  That is, how *should* we prioritize between the two concerns?
+
+Well, we don't really know!  But what we can do is try *many* different values of $\lambda$ and see which one results in the best metrics.
+
+That is, we can **tune** the **hyperparameter** $\lambda$ to pick a final value - not because we are interested in the value itself, but because it will tell us the best **model specification** (i.e., the best loss function) to use.
+
+
+:::{.callout-practice-exercise}
+
+Using the same pipeline as previously, perform tuning on $\lambda$.
+
+You should always try $\lambda$ values on a log scale; that is, don't use `[1,2,3,4]`; instead use something like `[0.001, 0.01, 0.1, 1, 10]`
+
+:::
+
+
+
+
+## LASSO
+
+This idea of adding a penalty to the loss function is very powerful - and the Ridge penalty is not the only one we could have used.
+
+Another common choice is the **LASSO** (least absolute shrinkage and selection operator) penalty, which *regularizes* the $\beta$'s according to their *absolute value* instead of the square.
+
+$$ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \lambda \sum_{j = 1}^p |\beta| $$
+
+This difference should feel fairly trivial, but it has some surprisingly different effects on the resulting coefficients!  While Ridge Regression will result in coefficients that are generally *smaller* than OLS, LASSO Regression will cause some coefficients to be *equal to 0*.
+
+:::{.callout-opinion}
+The mathematical reasons for this difference are very deep.  We wish we had time to derive them in this class!  But for the time being, you'll just have to trust us that the small change from square to absolute value is all it takes to produce the different results you are about to see...
+:::
+
+This outcome, where some of the $\beta$'s are fully eliminated from the model, is very powerful. It essentially performs **automatic feature selection**; the predictors whose coefficients became zero are the ones that were not needed to get better predictive power. 
+
+### Your Turn
+
+:::{.callout-practice-exercise}
+
+Create a LASSO pipeline, and tune $\lambda$.
+
+Fit your best model on the full Ames data, and compare the coefficients to Ridge and OLS
+
+:::
+
+:::{.callout-warning}
+The `sklearn` function `Lasso()` uses the argument name `alpha` for $\lambda$.  
+:::
+
+### Elastic Net
+
+If Ridge regression is one way to improve OLS in overfit cases, and LASSO regression is another, why not have the best of both worlds?
+
+There is no reason not to add *both* penalties to our loss function:
+
+$$ \ell(\beta) = SSE + \lambda \left(\sum_{j = 1}^p \beta^2 + \sum_{j = 1}^p |\beta| \right)$$
+
+Of course, we now have **three** concerns to balance:  The SSE, the Ridge penalty, *and* the LASSO penalty.  So in addition to $\lambda$, which balances SSE and penalties, we need to add in a number $\alpha$ for how much we care (relatively) about Ridge vs LASSO:
+
+$$ \ell(\beta) = SSE + \lambda \left(\alpha \sum_{j = 1}^p \beta^2 + (1-\alpha) \sum_{j = 1}^p |\beta| \right)$$
+
+But what is the best choice of $\alpha$?  I think you can see where this is headed...
+
+
+### Your Turn
+
+:::{.callout-practice-exercise}
+
+Create an Elastic Net pipeline, and tune $\lambda$ and $\alpha$.
+
+Fit your best model on the full Ames data, and compare the coefficients to Ridge and OLS.
+
+:::
+
+:::{.callout-warning}
+The `sklearn` function `Ridge()` uses the argument name `alpha` for $\lambda$, and the argument name `l1_ratio` for $\alpha$.
+
+Yes, this is confusing and annoying!  But since essentially **all** of the literature uses $\lambda$ and $\alpha$ the way we have used them in this chapter, we are choosing to be consistent with that notation instead of `sklearn`'s argument names.
+:::
+
+
+## Wrap-Up
+
+In this chapter, you may feel a bit tricked!  We promised you new model specifications, but actually, we *still* haven't changed our prediction approach from a simple linear model:
+
+$$\hat{y}_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots +  \beta_p x_{ip}$$
+
+It's important to remember, though, that how you **fit** the model to data is every bit as important a piece of the **model specification** decision as the equation itself.  
+
+By changing our definition of "best" coefficients - that is, changing the *loss function* that our ideal $\beta$'s would minimize - we were able to massively impact the resulting prediction procedure.
+
+
