@@ -493,7 +493,7 @@ Practice Activity
 <h2 data-number="14.3" class="anchored" data-anchor-id="lasso"><span class="header-section-number">14.3</span> LASSO</h2>
 <p>This idea of adding a penalty to the loss function is very powerful - and the Ridge penalty is not the only one we could have used.</p>
 <p>Another common choice is the <strong>LASSO</strong> (least absolute shrinkage and selection operator) penalty, which <em>regularizes</em> the <span class="math inline">\(\beta\)</span>’s according to their <em>absolute value</em> instead of the square.</p>
-<p><span class="math display">\[ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \lambda \sum_{j = 1}^p |\beta| \]</span></p>
+<p><span class="math display">\[ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \lambda \sum_{j = 1}^p |\beta_j| \]</span></p>
 <p>This difference should feel fairly trivial, but it has some surprisingly different effects on the resulting coefficients! While Ridge Regression will result in coefficients that are generally <em>smaller</em> than OLS, LASSO Regression will cause some coefficients to be <em>equal to 0</em>.</p>
 <div class="callout callout-style-default callout-opinion no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -543,9 +543,9 @@ Warning
 <h3 data-number="14.3.2" class="anchored" data-anchor-id="elastic-net"><span class="header-section-number">14.3.2</span> Elastic Net</h3>
 <p>If Ridge regression is one way to improve OLS in overfit cases, and LASSO regression is another, why not have the best of both worlds?</p>
 <p>There is no reason not to add <em>both</em> penalties to our loss function:</p>
-<p><span class="math display">\[ \ell(\beta) = SSE + \lambda \left(\sum_{j = 1}^p \beta^2 + \sum_{j = 1}^p |\beta| \right)\]</span></p>
+<p><span class="math display">\[ \ell(\beta) = SSE + \lambda \left(\sum_{j = 1}^p \beta^2 + \sum_{j = 1}^p |\beta_j| \right)\]</span></p>
 <p>Of course, we now have <strong>three</strong> concerns to balance: The SSE, the Ridge penalty, <em>and</em> the LASSO penalty. So in addition to <span class="math inline">\(\lambda\)</span>, which balances SSE and penalties, we need to add in a number <span class="math inline">\(\alpha\)</span> for how much we care (relatively) about Ridge vs LASSO:</p>
-<p><span class="math display">\[ \ell(\beta) = SSE + \lambda \left(\alpha \sum_{j = 1}^p \beta^2 + (1-\alpha) \sum_{j = 1}^p |\beta| \right)\]</span></p>
+<p><span class="math display">\[ \ell(\beta) = SSE + \lambda \left(\alpha \sum_{j = 1}^p \beta^2 + (1-\alpha) \sum_{j = 1}^p |\beta_j| \right)\]</span></p>
 <p>But what is the best choice of <span class="math inline">\(\alpha\)</span>? I think you can see where this is headed…</p>
 </section>
 <section id="your-turn-1" class="level3" data-number="14.3.3">
@@ -574,7 +574,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <code>sklearn</code> function <code>Ridge()</code> uses the argument name <code>alpha</code> for <span class="math inline">\(\lambda\)</span>, and the argument name <code>l1_ratio</code> for <span class="math inline">\(\alpha\)</span>.</p>
+<p>The <code>sklearn</code> function <code>ElasticNet()</code> uses the argument name <code>alpha</code> for <span class="math inline">\(\lambda\)</span>, and the argument name <code>l1_ratio</code> for <span class="math inline">\(\alpha\)</span>.</p>
 <p>Yes, this is confusing and annoying! But since essentially <strong>all</strong> of the literature uses <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\alpha\)</span> the way we have used them in this chapter, we are choosing to be consistent with that notation instead of <code>sklearn</code>’s argument names.</p>
 </div>
 </div>

@@ -181,7 +181,7 @@ This idea of adding a penalty to the loss function is very powerful - and the Ri
 
 Another common choice is the **LASSO** (least absolute shrinkage and selection operator) penalty, which *regularizes* the $\beta$'s according to their *absolute value* instead of the square.
 
-$$ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \lambda \sum_{j = 1}^p |\beta| $$
+$$ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \lambda \sum_{j = 1}^p |\beta_j| $$
 
 This difference should feel fairly trivial, but it has some surprisingly different effects on the resulting coefficients!  While Ridge Regression will result in coefficients that are generally *smaller* than OLS, LASSO Regression will cause some coefficients to be *equal to 0*.
 
@@ -211,11 +211,11 @@ If Ridge regression is one way to improve OLS in overfit cases, and LASSO regres
 
 There is no reason not to add *both* penalties to our loss function:
 
-$$ \ell(\beta) = SSE + \lambda \left(\sum_{j = 1}^p \beta^2 + \sum_{j = 1}^p |\beta| \right)$$
+$$ \ell(\beta) = SSE + \lambda \left(\sum_{j = 1}^p \beta^2 + \sum_{j = 1}^p |\beta_j| \right)$$
 
 Of course, we now have **three** concerns to balance:  The SSE, the Ridge penalty, *and* the LASSO penalty.  So in addition to $\lambda$, which balances SSE and penalties, we need to add in a number $\alpha$ for how much we care (relatively) about Ridge vs LASSO:
 
-$$ \ell(\beta) = SSE + \lambda \left(\alpha \sum_{j = 1}^p \beta^2 + (1-\alpha) \sum_{j = 1}^p |\beta| \right)$$
+$$ \ell(\beta) = SSE + \lambda \left(\alpha \sum_{j = 1}^p \beta^2 + (1-\alpha) \sum_{j = 1}^p |\beta_j| \right)$$
 
 But what is the best choice of $\alpha$?  I think you can see where this is headed...
 
@@ -231,7 +231,7 @@ Fit your best model on the full Ames data, and compare the coefficients to Ridge
 :::
 
 :::{.callout-warning}
-The `sklearn` function `Ridge()` uses the argument name `alpha` for $\lambda$, and the argument name `l1_ratio` for $\alpha$.
+The `sklearn` function `ElasticNet()` uses the argument name `alpha` for $\lambda$, and the argument name `l1_ratio` for $\alpha$.
 
 Yes, this is confusing and annoying!  But since essentially **all** of the literature uses $\lambda$ and $\alpha$ the way we have used them in this chapter, we are choosing to be consistent with that notation instead of `sklearn`'s argument names.
 :::
