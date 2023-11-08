@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GSB 544: Data Science and Machine Learning with Python - 13&nbsp; Pipelines, Cross-Validation, and Tuning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./13-penalized_regression.html" rel="next">
+<link href="./11-model_validation.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./12-cross_validation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">GSB 544: Data Science and Machine Learning with Python</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Data Science with Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Machine Learning with Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
+  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">13.2</span> Pipelines</a>
+  <ul class="collapse">
+  <li><a href="#cautionary-tale" id="toc-cautionary-tale" class="nav-link" data-scroll-target="#cautionary-tale"><span class="header-section-number">13.2.1</span> Cautionary Tale:</a></li>
+  <li><a href="#pipeline-objects" id="toc-pipeline-objects" class="nav-link" data-scroll-target="#pipeline-objects"><span class="header-section-number">13.2.2</span> Pipeline Objects</a></li>
+  <li><a href="#column-transformers" id="toc-column-transformers" class="nav-link" data-scroll-target="#column-transformers"><span class="header-section-number">13.2.3</span> Column Transformers</a></li>
+  <li><a href="#challenges-of-pipelines" id="toc-challenges-of-pipelines" class="nav-link" data-scroll-target="#challenges-of-pipelines"><span class="header-section-number">13.2.4</span> Challenges of pipelines</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">13.2.5</span> Your turn</a></li>
+  </ul></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">13.3</span> Cross-Validation</a>
+  <ul class="collapse">
+  <li><a href="#cross_val_score" id="toc-cross_val_score" class="nav-link" data-scroll-target="#cross_val_score"><span class="header-section-number">13.3.1</span> <code>cross_val_score</code></a></li>
+  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">13.3.2</span> Tuning</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">13.3.3</span> Your Turn</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/12-cross_validation.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">13.1</span> Introduction</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler, OneHotEncoder, PolynomialFeatures</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the last two chapters, we learned to use <code>sklearn</code> and <code>python</code> to perform the main steps of the modeling procedure:</p>
+<ol type="1">
+<li><p><strong>Preprocessing:</strong> Choosing which predictors to include, and how we will transform them to prepare them for the model, e.g.&nbsp;<code>pd.get_dummies()</code> or <code>StandardScaler()</code></p></li>
+<li><p><strong>Model Specification:</strong> Choosing the <em>procedure</em> we will use to make sure predictions; e.g.&nbsp;<code>LinearRegression()</code> or <code>NearestNeighborsRegressor()</code></p></li>
+<li><p><strong>Fitting on training data:</strong> Using <code>train_test_split()</code> to establish a randomly chosen training set, then using <code>.fit()</code> to fit the model on that set.</p></li>
+<li><p><strong>Validating on test data:</strong> Using <code>.predict</code> to make predictions on the test set, and then computing desired metrics to compare models, like <code>rmse()</code> or <code>r2()</code>.</p></li>
+</ol>
+<p>In this chapter, we will combine all these steps into one <strong>pipeline</strong>, sometimes called a <strong>workflow</strong>, to streamline our modeling process.</p>
+<p>Then, we will use our pipeline objects to quickly and easily perform more complex model fitting and validation tasks.</p>
+</section>
+<section id="pipelines" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="pipelines"><span class="header-section-number">13.2</span> Pipelines</h2>
+<p>If we already know how to perform each modeling step, why would we need pipelines? Consider the following cautionary tale…</p>
+<section id="cautionary-tale" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="cautionary-tale"><span class="header-section-number">13.2.1</span> Cautionary Tale:</h3>
+<section id="chapter-one" class="level4" data-number="13.2.1.1">
+<h4 data-number="13.2.1.1" class="anchored" data-anchor-id="chapter-one"><span class="header-section-number">13.2.1.1</span> Chapter One</h4>
+<p>Suppose you want to predict (of course) house prices from house characteristics.</p>
+<p><a href="https://www.dropbox.com/scl/fi/g0n5le5p6fr136ggetfsf/AmesHousing.csv?rlkey=jlr9xtz1o6u5rghfo29a5c02f&amp;dl=1">Click here to download the full AMES housing dataset</a></p>
+<p><a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques">Click here for data documentation</a></p>
+<p>You might take an approach like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ames <span class="op">=</span> pd.read_csv(<span class="st">"data/AmesHousing.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> ames[[<span class="st">"Gr Liv Area"</span>, <span class="st">"TotRms AbvGrd"</span>]]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> ames[<span class="st">"SalePrice"</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>X_train_s <span class="op">=</span> (X_train <span class="op">-</span> X_train.mean())<span class="op">/</span>X_train.std()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>lr_fitted <span class="op">=</span> lr.fit(X_train_s, y_train)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>lr_fitted.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([ 74207.85836241, -19901.17744922])</code></pre>
+</div>
+</div>
+<p>Then, you decide to apply your fitted model to the test data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>y_preds <span class="op">=</span> lr_fitted.predict(X_test)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-2507767.075238028</code></pre>
+</div>
+</div>
+<p>Oh no! An <span class="math inline">\(R^2\)</span> score of <em>negative 2 million</em>??? How could this have happened?</p>
+<p>Let’s look at the predictions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y_preds[<span class="dv">1</span>:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([7.69806469e+07, 1.06138938e+08, 8.83688547e+07, 8.39905911e+07])</code></pre>
+</div>
+</div>
+<p>Wow. We predicted that the first five test houses would all be worth over $50 million dollars. That doesn’t seem quite right.</p>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What went wrong here?</p>
+</div>
+</div>
+</section>
+<section id="chapter-two" class="level4" data-number="13.2.1.2">
+<h4 data-number="13.2.1.2" class="anchored" data-anchor-id="chapter-two"><span class="header-section-number">13.2.1.2</span> Chapter Two</h4>
+<p>Now a new house has come along, and you need to predict it. That house has a living area of 889 square feet, and 6 rooms.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>new_house <span class="op">=</span> pd.DataFrame(data <span class="op">=</span> {<span class="st">"Gr Liv Area"</span>: [<span class="dv">889</span>], <span class="st">"TotRms AbvGrd"</span>: [<span class="dv">6</span>]})</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>new_house</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Gr Liv Area  TotRms AbvGrd
+0          889              6</code></pre>
+</div>
+</div>
+<p>We won’t make the same mistake again! Time to standardize our new data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>new_house_s <span class="op">=</span> (new_house <span class="op">-</span> new_house.mean())<span class="op">/</span>new_house.std()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>new_house_s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Gr Liv Area  TotRms AbvGrd
+0          NaN            NaN</code></pre>
+</div>
+</div>
+<p>Oh no! Our data is now all <code>NaN</code>!!!</p>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What happened this time, and how can we fix it?</p>
+</div>
+</div>
+</section>
+<section id="the-moral-of-the-story" class="level4" data-number="13.2.1.3">
+<h4 data-number="13.2.1.3" class="anchored" data-anchor-id="the-moral-of-the-story"><span class="header-section-number">13.2.1.3</span> The Moral of the Story</h4>
+<p>A massively important principle of the modeling process is: <strong>New data that we want to predict on must go through the exact same pre-processing as the training data.</strong></p>
+<p>By <em>“exact same”</em>, we don’t mean <em>“same idea”</em>, we mean <em>the same calculations</em>.</p>
+<p>To standardize our training data, we subtracted from each column its mean <em>in the training data</em>, and then divided each column by the standard deviation <em>in the training data</em>. Thus, for any new data that comes along - whether it is a larger test dataset, or a single new house to predict on - we need to use the <strong>same numbers</strong> to standardize:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X_test_s <span class="op">=</span> (X_test <span class="op">-</span> X_train.mean())<span class="op">/</span>X_train.std()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y_preds <span class="op">=</span> lr_fitted.predict(X_test_s)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.4949343935252205</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>new_house_s <span class="op">=</span> (new_house <span class="op">-</span> X_train.mean())<span class="op">/</span>X_train.std()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>lr_fitted.predict(new_house_s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([97709.94301488])</code></pre>
+</div>
+</div>
+<p>Notice that we used <code>X_train.mean()</code> and <code>X_train.std()</code> in each case: we “learned” our estimates for the mean and sd of the columns when we <strong>fit</strong> the model, and we use those for all future predictions!</p>
+</section>
+</section>
+<section id="pipeline-objects" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="pipeline-objects"><span class="header-section-number">13.2.2</span> Pipeline Objects</h3>
+<p>Now, for an easier way to make sure preprocessing happens correctly. Instead of making a <strong>model</strong> object, like <code>LinearRegression()</code>, that we use for fitting and predicting, we will make a <strong>pipeline</strong> object that contains <em>all</em> our steps:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  [StandardScaler(),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  LinearRegression()]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>lr_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[StandardScaler(), LinearRegression()])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[StandardScaler(), LinearRegression()])</pre></div></div></div></div></div>
+</div>
+</div>
+<p>We can even name the steps in our pipeline, in order to help us keep track of them:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">"standardize"</span>, StandardScaler()),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"linear_regression"</span>, LinearRegression())]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>lr_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[('standardize', StandardScaler()),
+                ('linear_regression', LinearRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('standardize', StandardScaler()),
+                ('linear_regression', LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pay careful attention to the use of <code>[</code> and <code>(</code> inside the <code>Pipeline</code> function. The function takes a <strong>list</strong> (<code>[]</code>) of steps; each step may be put into a <strong>tuple</strong> <code>()</code> with a name of your choice.</p>
+</div>
+</div>
+<p>Now, we can use this pipeline for all our modeling tasks, without having to worry about doing the standardizing ourselves ahead of time:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted <span class="op">=</span> lr_pipeline.fit(X_train, y_train)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>y_preds <span class="op">=</span> lr_pipeline_fitted.predict(X_test)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>r2_score(y_test, y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.4949343935252205</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.predict(new_house)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([97709.94301488])</code></pre>
+</div>
+</div>
+</section>
+<section id="column-transformers" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="column-transformers"><span class="header-section-number">13.2.3</span> Column Transformers</h3>
+<p>Because there may be many different steps to the data preprocessing, it can sometimes be convenient to separate these steps into individual <em>column transformers</em>.</p>
+<p>For example, suppose you wanted to include a third predictor in your house price prediction: The type of building it is (<code>Bldg Type</code>); e.g., a Townhouse, a single-family home, etc.</p>
+<p>Since this is a categorical variable, we need to turn it into dummy variables first, using <code>OneHotEncoder()</code>. But we don’t want to put <code>OneHotEncoder()</code> directly into our pipeline, because we don’t want to dummify <em>every</em> variable!</p>
+<p>So, we’ll make column transformers to handle our variables separately:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ct <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"dummify"</span>, OneHotEncoder(sparse_output <span class="op">=</span> <span class="va">False</span>), [<span class="st">"Bldg Type"</span>]),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"standardize"</span>, StandardScaler(), [<span class="st">"Gr Liv Area"</span>, <span class="st">"TotRms AbvGrd"</span>])</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">"drop"</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>lr_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">"preprocessing"</span>, ct),</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"linear_regression"</span>, LinearRegression())]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>lr_pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<style>#sk-container-id-3 {color: black;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[('preprocessing',
+                 ColumnTransformer(transformers=[('dummify',
+                                                  OneHotEncoder(sparse_output=False),
+                                                  ['Bldg Type']),
+                                                 ('standardize',
+                                                  StandardScaler(),
+                                                  ['Gr Liv Area',
+                                                   'TotRms AbvGrd'])])),
+                ('linear_regression', LinearRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessing',
+                 ColumnTransformer(transformers=[('dummify',
+                                                  OneHotEncoder(sparse_output=False),
+                                                  ['Bldg Type']),
+                                                 ('standardize',
+                                                  StandardScaler(),
+                                                  ['Gr Liv Area',
+                                                   'TotRms AbvGrd'])])),
+                ('linear_regression', LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">preprocessing: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('dummify', OneHotEncoder(sparse_output=False),
+                                 ['Bldg Type']),
+                                ('standardize', StandardScaler(),
+                                 ['Gr Liv Area', 'TotRms AbvGrd'])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox"><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">dummify</label><div class="sk-toggleable__content"><pre>['Bldg Type']</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox"><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(sparse_output=False)</pre></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox"><label for="sk-estimator-id-9" class="sk-toggleable__label sk-toggleable__label-arrow">standardize</label><div class="sk-toggleable__content"><pre>['Gr Liv Area', 'TotRms AbvGrd']</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox"><label for="sk-estimator-id-10" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox"><label for="sk-estimator-id-11" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div>
+</div>
+</div>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What does the <code>remainder = "drop"</code> part of the <code>ColumnTransformer()</code> function do? Why might that be useful?</p>
+<p>Hint: What happens when you try to fit this pipeline on <code>X_train</code>?</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> ames.drop(<span class="st">"SalePrice"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> ames[<span class="st">"SalePrice"</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>lr_fitted <span class="op">=</span> lr_pipeline.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="checking-preprocessing" class="level4" data-number="13.2.3.1">
+<h4 data-number="13.2.3.1" class="anchored" data-anchor-id="checking-preprocessing"><span class="header-section-number">13.2.3.1</span> Checking preprocessing</h4>
+<p>We’ve seen the value of including preprocessing steps in a pipeline instead of doing them “by hand”. However, you might sometimes want to see what that processed data looks like. This is one advantage of a column transformer - it can be separately used to <code>fit</code> and <code>transform</code> datasets:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ct_fitted <span class="op">=</span> ct.fit(X_train)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ct.transform(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[ 0.        ,  0.        ,  1.        , ...,  0.        ,
+         2.53707757,  0.96562117],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+         0.17823224, -0.29154606],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+         0.72242894, -0.29154606],
+       ...,
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+        -0.61728438, -0.92012968],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+        -0.70633475, -0.29154606],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+        -0.73403931, -0.29154606]])</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ct.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([[ 0.        ,  0.        ,  0.        , ...,  0.        ,
+         0.10105526, -0.29154606],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+         0.45132004,  0.33703755],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+        -0.76174387, -0.92012968],
+       ...,
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+        -0.72810262, -0.92012968],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+         0.96979108,  0.96562117],
+       [ 1.        ,  0.        ,  0.        , ...,  0.        ,
+        -0.18588482, -0.29154606]])</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="challenges-of-pipelines" class="level3" data-number="13.2.4">
+<h3 data-number="13.2.4" class="anchored" data-anchor-id="challenges-of-pipelines"><span class="header-section-number">13.2.4</span> Challenges of pipelines</h3>
+<p>Although <code>Pipeline</code> objects are incredible tools for making sure your model process is reproducible and correct, they come with some frustrations. Here are a few you might encounter, and our advice for dealing with them:</p>
+<section id="extracting-information" class="level4" data-number="13.2.4.1">
+<h4 data-number="13.2.4.1" class="anchored" data-anchor-id="extracting-information"><span class="header-section-number">13.2.4.1</span> Extracting information</h4>
+<p>When we wanted to find the fitted coefficients of a model object, we could simply use <code>.coef_</code>. However, since a <code>Pipeline</code> is not a model object, this no longer works:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>'Pipeline' object has no attribute 'coef_'</code></pre>
+</div>
+</div>
+<p>What we need to do instead is find the <em>step</em> of the pipeline where the model fitting happened, and get those coefficients:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.named_steps[<span class="st">'linear_regression'</span>].coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([ 74190.96798814, -19896.6477627 ])</code></pre>
+</div>
+</div>
+</section>
+<section id="pandas-input-numpy-output" class="level4" data-number="13.2.4.2">
+<h4 data-number="13.2.4.2" class="anchored" data-anchor-id="pandas-input-numpy-output"><span class="header-section-number">13.2.4.2</span> Pandas input, numpy output</h4>
+<p>You may have noticed that <code>sklearn</code> functions are designed to handle <code>pandas</code> objects nicely - which is a good thing, since we like to do our data cleaning and manipulation in <code>pandas</code>! However, the outputs of these model functions are typically <code>numpy</code> arrays:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'numpy.ndarray'&gt;</code></pre>
+</div>
+</div>
+<p>Occasionally, this can cause trouble; especially when you want to continue data manipulation after making predictions.</p>
+<p>Fortunately, it is possible to set up your pipeline to output <code>pandas</code> objects instead, using the <code>set_output()</code> method:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline <span class="op">=</span> Pipeline(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">"preprocessing"</span>, ct),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"linear_regression"</span>, LinearRegression())]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>).set_output(transform<span class="op">=</span><span class="st">"pandas"</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>ct.fit_transform(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      dummify__Bldg Type_1Fam  ...  standardize__TotRms AbvGrd
+815                       0.0  ...                    0.965621
+2846                      1.0  ...                   -0.291546
+868                       1.0  ...                   -0.291546
+1250                      1.0  ...                   -1.548713
+175                       1.0  ...                   -1.548713
+...                       ...  ...                         ...
+2568                      1.0  ...                    0.965621
+2684                      1.0  ...                   -0.920130
+389                       1.0  ...                   -0.920130
+2743                      1.0  ...                   -0.291546
+1962                      1.0  ...                   -0.291546
+
+[2197 rows x 7 columns]</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that in this transformed dataset, the column names now have prefixes for the named steps in the column transformer.</p>
+<p>Notice also the structure of the names of the dummified variables:</p>
+<p><code>[step name]__[variable name]_[category]</code></p>
+</div>
+</div>
+</section>
+<section id="interactions-and-dummies" class="level4" data-number="13.2.4.3">
+<h4 data-number="13.2.4.3" class="anchored" data-anchor-id="interactions-and-dummies"><span class="header-section-number">13.2.4.3</span> Interactions and Dummies</h4>
+<p>Sometimes, we want to include an <strong>interaction term</strong> in our model; for example,</p>
+<p><span class="math display">\[ \text{House Price} = \text{House Size} + \text{Num Rooms} + \text{Size}*\text{Rooms}\]</span></p>
+<p>Adding interactions between numeric variables is simple, we simply add a “polynomial” step to our preprocessing, except we leave off the squares and cubes, and keep only the interactions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ct_inter <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"interaction"</span>, PolynomialFeatures(interaction_only <span class="op">=</span> <span class="va">True</span>), [<span class="st">"Gr Liv Area"</span>, <span class="st">"TotRms AbvGrd"</span>])</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">"drop"</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>).set_output(transform <span class="op">=</span> <span class="st">"pandas"</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>ct_inter.fit_transform(X_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      interaction__1  ...  interaction__Gr Liv Area TotRms AbvGrd
+815              1.0  ...                                 22296.0
+2846             1.0  ...                                  9570.0
+868              1.0  ...                                 11220.0
+1250             1.0  ...                                  3092.0
+175              1.0  ...                                  2988.0
+...              ...  ...                                     ...
+2568             1.0  ...                                 17256.0
+2684             1.0  ...                                  5240.0
+389              1.0  ...                                  5965.0
+2743             1.0  ...                                  6888.0
+1962             1.0  ...                                  6804.0
+
+[2197 rows x 4 columns]</code></pre>
+</div>
+</div>
+<p>However, to add an interaction with a dummified variable, we first need to know what the <em>new</em> column names are after the dummification step.</p>
+<p>For example, suppose we wanted to add an interaction term for the number of rooms in the house and whether the house is a single family home.</p>
+<p>We’ll need to run the data through one preprocessing step, to get the dummy variables, then a <em>second</em> preprocessing that uses those variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ct_dummies <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">"dummify"</span>, OneHotEncoder(sparse_output <span class="op">=</span> <span class="va">False</span>), [<span class="st">"Bldg Type"</span>])],</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">"passthrough"</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>).set_output(transform <span class="op">=</span> <span class="st">"pandas"</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>ct_inter <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"interaction"</span>, PolynomialFeatures(interaction_only <span class="op">=</span> <span class="va">True</span>), [<span class="st">"remainder__TotRms AbvGrd"</span>, <span class="st">"dummify__Bldg Type_1Fam"</span>]),</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">"drop"</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>).set_output(transform <span class="op">=</span> <span class="st">"pandas"</span>)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>X_train_dummified <span class="op">=</span> ct_dummies.fit_transform(X_train)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>X_train_dummified</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      dummify__Bldg Type_1Fam  ...  remainder__Sale Condition
+815                       0.0  ...                     Normal
+2846                      1.0  ...                     Normal
+868                       1.0  ...                     Normal
+1250                      1.0  ...                    Abnorml
+175                       1.0  ...                     Normal
+...                       ...  ...                        ...
+2568                      1.0  ...                     Normal
+2684                      1.0  ...                     Normal
+389                       1.0  ...                     Normal
+2743                      1.0  ...                     Normal
+1962                      1.0  ...                     Family
+
+[2197 rows x 85 columns]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ct_inter.fit_transform(X_train_dummified)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      interaction__1  ...  interaction__remainder__TotRms AbvGrd dummify__Bldg Type_1Fam
+815              1.0  ...                                                0.0            
+2846             1.0  ...                                                6.0            
+868              1.0  ...                                                6.0            
+1250             1.0  ...                                                4.0            
+175              1.0  ...                                                4.0            
+...              ...  ...                                                ...            
+2568             1.0  ...                                                8.0            
+2684             1.0  ...                                                5.0            
+389              1.0  ...                                                5.0            
+2743             1.0  ...                                                6.0            
+1962             1.0  ...                                                6.0            
+
+[2197 rows x 4 columns]</code></pre>
+</div>
+</div>
+<p>Ooof! This is not very elegant, we admit. But it is still worth the effort to set up a full pipeline, instead of transforming things by hand, as we will see in the next section.</p>
+</section>
+</section>
+<section id="your-turn" class="level3" data-number="13.2.5">
+<h3 data-number="13.2.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">13.2.5</span> Your turn</h3>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider four possible models for predicting house prices:</p>
+<ol type="1">
+<li>Using only the size and number of rooms.</li>
+<li>Using size, number of rooms, and building type.</li>
+<li>Using size and building type, and their interaction.</li>
+<li>Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.</li>
+</ol>
+<p>Set up a pipeline for each of these four models.</p>
+<p>Then, get predictions on the test set for each of your pipelines, and compute the root mean squared error. Which model performed best?</p>
+<p>Note: You should only use the function <code>train_test_split()</code> <strong>one</strong> time in your code; that is, we should be predicting on the <strong>same</strong> test set for all three models.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="cross-validation" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">13.3</span> Cross-Validation</h2>
+<p>Now that we have all our modeling process wrapped up in one tidy pipeline bundle, we can upgrade another piece of the puzzle: the test/training split.</p>
+<p>In the previous exercise, we used our <strong>test metrics</strong> to compare pipelines, with the idea that a pipeline which performs well on test data is likely to perform well on future data. This is a bit of a big assumption though. What if we <em>just so happened</em> to get an “unlucky” test/training split, where the test set <em>just so happened</em> to contain houses that don’t follow the usual price patterns?</p>
+<p>To try to avoid unlucky splits, an easy solution is to simply do many different test/training splits and see what happens. But we have to be careful - if we end up doing many random splits, we still might end up getting similar “unlucky” test sets every time.</p>
+<p>Our solution to this challenge is <strong>k-fold cross-validation</strong> (sometimes called <em>v-fold</em>, since the letter <em>k</em> is used for so many other things in statistics). In cross-validation, we perform multiple test/training splits, but we make sure each observation only gets one “turn” in the test set.</p>
+<p>A procedure for <strong>5-fold cross-validation</strong> on the housing data might look like this:</p>
+<ol type="1">
+<li><p>Randomly divide the houses into 5 sets. Call these “Fold 1”, “Fold 2”, … “Fold 5”.</p></li>
+<li><p>Make Fold 1 the test sets, and Folds 2-5 together the training set.</p></li>
+<li><p>Fit the data on the houses in the training set, predict the prices of the houses test set, and record the resulting R-squared value.</p></li>
+<li><p>Repeat (2) and (3) four more times, letting each fold have a turn as the test set.</p></li>
+<li><p>Take the average of the 5 different R-squared values.</p></li>
+</ol>
+<p>Here is a picture that helps illustrate the procedure:</p>
+<p><img src="https://user-images.githubusercontent.com/26833433/258589390-8d815058-ece8-48b9-a94e-0e1ab53ea0f6.png" class="img-fluid"></p>
+<p>The advantage of this process is that our final <strong>cross-validated metric</strong> for our proposed pipeline is in fact the <em>average</em> of five different values - so even if one of the test sets is “unlucky”, the others will average it out.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that ultimately, all of this effort has only one goal: to get a “fair” measurement of how good a particular pipeline is at predicting, so that we can choose our best final pipeline from among the many options.</p>
+</div>
+</div>
+<section id="cross_val_score" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="cross_val_score"><span class="header-section-number">13.3.1</span> <code>cross_val_score</code></h3>
+<p>Even if you are convinced that cross-validation could be useful, it might seem daunting. Imagine needing to create five different test/training sets, and go through the process of fitting, predicting, and computing metrics for every single one.</p>
+<p>Fortunately, now that we have <code>Pipeline</code> objects, <code>sklearn</code> has shortcuts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> ames.drop(<span class="st">"SalePrice"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> ames[<span class="st">"SalePrice"</span>]</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>ct <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"dummify"</span>, OneHotEncoder(sparse_output <span class="op">=</span> <span class="va">False</span>), [<span class="st">"Bldg Type"</span>]),</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"standardize"</span>, StandardScaler(), [<span class="st">"Gr Liv Area"</span>, <span class="st">"TotRms AbvGrd"</span>])</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">"drop"</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>lr_pipeline_1 <span class="op">=</span> Pipeline(</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">"preprocessing"</span>, ct),</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"linear_regression"</span>, LinearRegression())]</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>).set_output(transform<span class="op">=</span><span class="st">"pandas"</span>)</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_val_score(lr_pipeline_1, X, y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'r2'</span>)</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([0.53184383, 0.53247653, 0.42905573, 0.56571819, 0.60646427])</code></pre>
+</div>
+</div>
+<p>Wow! Once the pipeline is set up, only one small line of code performs the entire cross-validation procedure!</p>
+<p>Notice that here, we never used <code>train_test_split()</code>. We simply passed our entire <code>X</code> and <code>y</code> objects to the <code>cross_val_score</code> function, and it took care of making the <code>5</code> cross validation folds; as well as all of the fitting, predicting, and computing of metrics.</p>
+<p>We now can simply report our final <strong>cross-validated R-squared value</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>scores.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5331117091273414</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Once again consider four modeling options for house price:</p>
+<ol type="1">
+<li>Using only the size and number of rooms.</li>
+<li>Using size, number of rooms, and building type.</li>
+<li>Using size and building type, and their interaction.</li>
+<li>Using a 5-degree polynomial on size, a 5-degree polynomial on number of rooms, and also building type.</li>
+</ol>
+<p>Use <code>cross_val_score</code> with the pipelines you made earlier to find the cross-validated root mean squared error for each model.</p>
+<p>Which do you prefer? Does this agree with your conclusion from earlier?</p>
+</div>
+</div>
+</section>
+<section id="tuning" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="tuning"><span class="header-section-number">13.3.2</span> Tuning</h3>
+<p>In our previous exercise, we considered one-degree polynomials as well as 5-degree polynomials. But what if we wanted to try everything from 1-degree to 10-degree, without needing to manually create 10 different pipelines?</p>
+<p>This process - where we want to try a range of different values in our <em>model specification</em> and see which has the best cross-validation metrics - is called <strong>tuning</strong>.</p>
+<p>Since tuning is a common need in modeling, <code>sklearn</code> has another shortcut for us, <code>grid_search_cv</code>. But in order to capture the process, this function needs to know:</p>
+<ol type="1">
+<li><p>What pipeline structure you want to try.</p></li>
+<li><p>Which piece of the pipeline you are plugging in a range of different values for.</p></li>
+<li><p>Which values to plug in.</p></li>
+</ol>
+<p>We’ll start by writing ourselves a function that makes the pipeline we need for a particular degree number.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>ct_poly <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  [</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"dummify"</span>, OneHotEncoder(sparse_output <span class="op">=</span> <span class="va">False</span>), [<span class="st">"Bldg Type"</span>]),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"polynomial"</span>, PolynomialFeatures(), [<span class="st">"Gr Liv Area"</span>])</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  remainder <span class="op">=</span> <span class="st">"drop"</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>lr_pipeline_poly <span class="op">=</span> Pipeline(</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  [(<span class="st">"preprocessing"</span>, ct_poly),</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"linear_regression"</span>, LinearRegression())]</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>).set_output(transform<span class="op">=</span><span class="st">"pandas"</span>)</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> {<span class="st">'preprocessing__polynomial__degree'</span>: np.arange(<span class="dv">1</span>, <span class="dv">10</span>)}</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>gscv <span class="op">=</span> GridSearchCV(lr_pipeline_poly, degrees, cv <span class="op">=</span> <span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'r2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A few important things to notice in this code:</p>
+<ul>
+<li><p>In the <code>polynomial</code> step of our <code>ColumnTransformer</code>, we did <strong>not</strong> specify the number of features in the <code>PolynomialFeatures()</code> function.</p></li>
+<li><p>We created a <em>dictionary</em> object named <code>degrees</code>, which was simply a list of the numbers we wanted to try inserting into the <code>PolynomialFeatures()</code> function.</p></li>
+<li><p>The name of the list of numbers in our dictionary object was <code>preprocessing__polynomial__degree</code>. This follows the pattern</p></li>
+</ul>
+<p><code>[name of step in pipeline]__[name of step in column transformer]__[name of argument to function]</code></p>
+<ul>
+<li>The code above did <strong>not</strong> result in cross-validated metrics for the 9 model options (degrees 1 to 9). Like a <code>Pipeline</code> object, a <code>GridSearchCV</code> object “sets up” a process - we haven’t actually given it data yet.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You might be noticing a pattern in <code>sklearn</code> here: in general (although not always), a capitalized function is a “set up” step, like <code>LinearRegression()</code> or <code>OneHotEncoder</code> or <code>Pipeline()</code>. A lowercase function is often a calculation on data, like <code>.fit()</code> or <code>.predict()</code> or <code>cross_val_score()</code>.</p>
+</div>
+</div>
+<p>Now, we will fit our “grid search” tuning procedure to the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>gscv_fitted <span class="op">=</span> gscv.fit(X, y)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>gscv_fitted.cv_results_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'mean_fit_time': array([0.00373011, 0.0035553 , 0.00363498, 0.00373187, 0.00346799,
+       0.00376768, 0.00669088, 0.00375037, 0.00373635]), 'std_fit_time': array([3.38883354e-04, 9.75645415e-05, 2.30070218e-04, 1.75824584e-04,
+       1.73586763e-04, 3.46568232e-04, 5.88991242e-03, 8.52224735e-05,
+       8.85113811e-05]), 'mean_score_time': array([0.00158796, 0.00151463, 0.00150099, 0.00152459, 0.0014884 ,
+       0.00157409, 0.00168405, 0.00159721, 0.00150619]), 'std_score_time': array([1.71109784e-04, 6.70866670e-05, 1.43201241e-04, 7.17739878e-05,
+       1.24161236e-04, 9.94328850e-05, 2.57057937e-04, 1.00324816e-04,
+       2.26392722e-05]), 'param_preprocessing__polynomial__degree': masked_array(data=[1, 2, 3, 4, 5, 6, 7, 8, 9],
+             mask=[False, False, False, False, False, False, False, False,
+                   False],
+       fill_value='?',
+            dtype=object), 'params': [{'preprocessing__polynomial__degree': 1}, {'preprocessing__polynomial__degree': 2}, {'preprocessing__polynomial__degree': 3}, {'preprocessing__polynomial__degree': 4}, {'preprocessing__polynomial__degree': 5}, {'preprocessing__polynomial__degree': 6}, {'preprocessing__polynomial__degree': 7}, {'preprocessing__polynomial__degree': 8}, {'preprocessing__polynomial__degree': 9}], 'split0_test_score': array([0.53667199, 0.53861812, 0.55155397, 0.55000299, 0.50847886,
+       0.50803388, 0.50404864, 0.48824759, 0.45353318]), 'split1_test_score': array([0.52379929, 0.51739889, 0.52489524, 0.52536327, 0.45451042,
+       0.45231332, 0.44389116, 0.42226201, 0.38464169]), 'split2_test_score': array([  0.43205901,   0.44999102,   0.50538581,   0.45008921,
+         0.1733882 ,  -0.39418512,  -1.67096399,  -4.78706736,
+       -12.6045523 ]), 'split3_test_score': array([  0.56266573,   0.57574172,   0.58653708,   0.59197747,
+         0.54742275,   0.53273129,   0.31370342,  -1.49591606,
+       -11.46561678]), 'split4_test_score': array([0.59424739, 0.57528078, 0.58780969, 0.59316272, 0.57550038,
+       0.5702938 , 0.55592936, 0.53199328, 0.50402512]), 'mean_test_score': array([ 0.52988868,  0.5314061 ,  0.55123636,  0.54211913,  0.45186012,
+        0.33383744,  0.02932172, -0.96809611, -4.54559382]), 'std_test_score': array([0.05453461, 0.04640531, 0.03280237, 0.05273277, 0.14503685,
+       0.36602408, 0.85397816, 2.05754398, 6.12585788]), 'rank_test_score': array([4, 3, 1, 2, 5, 6, 7, 8, 9], dtype=int32)}</code></pre>
+</div>
+</div>
+<p>Oof, this is a lot of information!</p>
+<p>Ultimately, what we care about is the <strong>cross-validated metric</strong> (i.e.&nbsp;average over the 5 folds) for each of the 9 proposed models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>gscv_fitted.cv_results_[<span class="st">'mean_test_score'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([ 0.52988868,  0.5314061 ,  0.55123636,  0.54211913,  0.45186012,
+        0.33383744,  0.02932172, -0.96809611, -4.54559382])</code></pre>
+</div>
+</div>
+<p>It can sometimes be handy to convert these results to a <code>pandas</code> data frame for easy viewing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(data <span class="op">=</span> {<span class="st">"degrees"</span>: np.arange(<span class="dv">1</span>, <span class="dv">10</span>), <span class="st">"scores"</span>: gscv_fitted.cv_results_[<span class="st">'mean_test_score'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   degrees    scores
+0        1  0.529889
+1        2  0.531406
+2        3  0.551236
+3        4  0.542119
+4        5  0.451860
+5        6  0.333837
+6        7  0.029322
+7        8 -0.968096
+8        9 -4.545594</code></pre>
+</div>
+</div>
+<p>It appears that the third model - degree 3 - had the best cross-validated metrics, with an R-squared value of about 0.55.</p>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Recall that the <strong>model fitting</strong> step is when coefficients are computed for the linear regression.</p>
+<p>How many different model fitting steps occurred when <code>gscv.fit(X, y)</code> was run?</p>
+</div>
+</div>
+</section>
+<section id="your-turn-1" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3" class="anchored" data-anchor-id="your-turn-1"><span class="header-section-number">13.3.3</span> Your Turn</h3>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider <em>one hundred</em> modeling options for house price:</p>
+<ul>
+<li>House size, trying degrees 1 through 10</li>
+<li>Number of rooms, trying degrees 1 through 10</li>
+<li>Building Type</li>
+</ul>
+<p><em>Hint: The dictionary of possible values that you make to give to <code>GridSearchCV</code> will have two elements instead of one.</em></p>
+<p>Q1: Which model performed the best?</p>
+<p>Q2: What downsides do you see of trying <em>all possible</em> model options? How might you go about choosing a smaller number of tuning values to try?</p>
+</div>
+</div>
+<!-- ### Model Comparison: K-Nearest-Neighbors -->
+<!-- In our previous exercise, we only used cross-validation to compare different *predictor choices* and different *preprocessing options*.  All of our models were of the type `LinearRegression()` -->
+<!-- The real beauty and flexibility of cross-validation, though, is in comparing different **model specifications**. -->
+<!-- Thus, let's add another option to our list of pipelines we are considering for predicting house prices: **K-Nearest-Neighbors (KNN)**. -->
+<!-- KNN is a *very* different modeling approach than Linear Regression.  Rather than using our training data to come up with a mathematical formula for future predictions, we simply reference the data itself every time we want to make future predictions. -->
+<!-- For example, a 10-nearest-neighbors prediction process for the price of new house would be: -->
+<!-- 1. Find the 10 houses in the training set that are most similar to the new house. -->
+<!-- 2. Take their average price. -->
+<!-- ... and that's it! -->
+<!-- Of course, there is some flexibility in what we mean by "most similar" - but typically, we  -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./11-model_validation.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./13-penalized_regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
