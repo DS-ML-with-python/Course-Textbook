@@ -25,7 +25,7 @@ in the Jupyter/Colab terminal to install. **Remember:** you only need to install
 
 import pandas as pd
 from sklearn.pipeline import Pipeline
-from sklearn.neighbors import NearestNeighborClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 ```
