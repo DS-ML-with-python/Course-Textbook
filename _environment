@@ -1,1 +1,2 @@
 QUARTO_PYTHON=/usr/local/bin/python3
+RETICULATE_PYTHON=/usr/local/bin/python3

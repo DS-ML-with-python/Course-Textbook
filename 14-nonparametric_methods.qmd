@@ -2,6 +2,12 @@
 title: "Nonparametric Methods"
 ---
 
+```{r}
+#| include: false
+reticulate::use_python("/usr/local/bin/python3")
+```
+
+
 ## Introduction
 
 This document discusses modeling via nonparametric methods such as **k-Nearest Neighbors** and **decision trees**, and the tools in `pandas` and `sklearn` that can assist with this. We will expand on our previous content by diving deeper into model evaluation.
@@ -26,9 +32,7 @@ from sklearn.linear_model import NearestNeighborRegressor, DecisionTreeRegressor
 
 Recall that in machine learning our goal is to **predict** the value of some *target* variable using one or more *predictor* variables. Mathematically, we we're in the following setup
 
-\[
-y = f(X) + \epsilon
-\]
+$$y = f(X) + \epsilon$$
 
 where $y$ is our target variable and $X$ represents the collection (data frame) of our predictor variables. So far we've discussed tackling this via **multiple linear regression**. In this chapter we'll introduce two nonparametric methods for estimating $f$: **k-Nearest Neighbors** and **decision trees**.
 
@@ -43,9 +47,7 @@ where $y$ is our target variable and $X$ represents the collection (data frame) 
 
 As we alluded to in our modeling introduction chapter, the **k-Nearest Neighbors** model involves looking at the observations in the training dataset *closest* to our new observation of interest and predicting the target value based on these *closest* training observations. Mathematically,
 
-\[
-\hat{f}(x_0) = \frac{1}{K} \sum_{x_i \in N_0} y_i
-\]
+$$\hat{f}(x_0) = \frac{1}{K} \sum_{x_i \in N_0} y_i$$
 
 where $K$ is the number of neighboring training data points we're interested in using to make our prediction, and $N_0$ is the neighborhood (collection) of those $K$ training data points.
 
@@ -121,9 +123,7 @@ A decision tree grown to the point of having a terminal node for each observatio
 
 Such an overly complex decision tree often overfits our data. Because we hope to avoid overfitting we will often **penalize** our decision tree fitting procedure in a way that's similar to our discussion of penalized regression! We seek to minimize the following quantity on our training data during the fitting procedure:
 
-\[
-\sum_{m=1}^{|T|} \sum_{i: x_i \in R_m} (y_i - \hat{y}_{R_m})^2 + \alpha |T|
-\]
+$$\sum_{m=1}^{|T|} \sum_{i: x_i \in R_m} (y_i - \hat{y}_{R_m})^2 + \alpha |T|$$
 
 As mathematical as this expression is, it boils down to this: we want to minimize the error on the training set while penalizing the fitted tree for being big (i.e. the size of the tree ($|T|$) is large). The larger we make $\alpha$ the more we penalize the tree for being big.
 

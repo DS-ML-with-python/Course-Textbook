@@ -2,6 +2,12 @@
 title: "Introduction to Classification"
 ---
 
+
+```{r}
+#| include: false
+reticulate::use_python("/usr/local/bin/python3")
+```
+
 ## Introduction
 
 This document discusses classification, and the tools in `pandas` and `sklearn` that can assist with this. We will expand on our previous content by diving deeper into model evaluation.
@@ -26,9 +32,9 @@ from sklearn.linear_model import KNeighborsClassifier, DecisionTreeClassifier, L
 
 Recall that in machine learning our goal is to **predict** the value of some *target* variable using one or more *predictor* variables. Mathematically, we we're in the following setup
 
-\[
+$$
 y = f(X) + \epsilon
-\]
+$$
 
 where $y$ is our target variable and $X$ represents the collection (data frame) of our predictor variables. So far our discussion has assumed that $y$ is a quantitative variable, but what if it's a categorical variable?
 
@@ -47,9 +53,9 @@ A straight-line (i.e. traditional regression) model is not appropriate for these
 ### Classification
 Because our target variable is **categorical**, our machine learning task is known as **classification**. It also means that it no longer makes sense for our error metric to involve differences between the actual value and the predicted value. We should, instead, be looking at whether our predicted value **matches** the actual value. In such situations, the error term often used is **mis-classification rate**.
 
-\[
+$$
 \frac{1}{n} \sum_{i = 1}^n I(y_i \neq \hat{y}_i)
-\]
+$$
 
 :::{.callout-note collapse="true"}
 
@@ -61,9 +67,7 @@ It turns out that the classifier that minimizes this mis-classification rate on 
 
 In other words, classify a new observation to class $j$ if
 
-\[
-Pr(Y = j | X = x_0)
-\]
+$$Pr(Y = j | X = x_0)$$
 
 is the largest. As mathematical as this seems, it actually exactly matches how our intuition works!
 
@@ -73,9 +77,7 @@ Because it can be shown that the **Bayes Classifier** is the best, machine learn
 
 When our target variable is categorical and has only two distinct values (i.e. is binary) then **logistic regression** is a method often used. This approach involves modeling the log-odds of the target variable being in one category over the other, given the predictors. Mathematically, it's something like
 
-\[
-log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p + \epsilon
-\]
+$$log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p + \epsilon$$
 
 In our predictive modeling context it will suffice to know that after fitting the logistic regression model, predictions should take the form of probabilities of belonging to each possible category of our target variable.
 
@@ -180,17 +182,17 @@ What kinds of errors are most prevalent?
 
 **Precision** is defined as the proportion of positive identifications that are actually correct. In other words,
 
-\[
+$$
 Precision = \frac{True Positives}{True Positives + False Positives}
-\]
+$$
 
 #### Recall
 
 **Recall** is defined as the proportion of actual positives that are identified correctly. In other words,
 
-\[
+$$
 Recall = \frac{True Positives}{True Positives + False Negatives}
-\]
+$$
 
 :::{.callout-note}
 
@@ -218,7 +220,7 @@ It should also be noted that both **precision** and **recall** were defined in t
 
 So what the heck is a ROC-AUC anyway?!
 
-![](images/roc_auc.png)
+![Artwork by Cal Poly '22 data science students.](images/roc_awk.png){width='40%'}
 
 #### Sensitivity and Specificity
 
@@ -226,9 +228,9 @@ So what the heck is a ROC-AUC anyway?!
 
 **Specificity** is another name for the *true negative rate*:
 
-\[
+$$
 Specificity = \frac{True Negatives}{True Negatives + False Positives}
-\]
+$$
 
 Similar to **precision** and **recall**, higher values of **sensitivity** and **specificity** are always better.
 
@@ -266,9 +268,9 @@ What is the range of values for the AUC of a classifier? What values are more de
 
 Because classification model metrics can be so complicated, researchers have come up with a class of metrics that can summarize quantities like precision and recall into a single number. The **$F_1$** score is the "first" of these metrics:
 
-\[
+$$
 F_1 = 2\frac{precision \cdot recall}{precision + recall}
-\]
+$$
 
 The $F_1$ score is the harmonic mean of the precision and recall. It thus symmetrically represents both precision and recall in one metric. The highest possible value is 1.0, indicating perfect precision and recall, and the lowest possible value is 0, if either precision or recall are zero.
 
