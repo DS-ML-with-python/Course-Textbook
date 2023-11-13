@@ -26,6 +26,8 @@ book:
     - 11-model_validation.qmd
     - 12-cross_validation.qmd
     - 13-penalized_regression.qmd
+    - 14-nonparametric_methods.qmd
+    - 15-classification_intro.qmd
   site-url: https://DS-ML-with-python.github.io/Course-Textbook/
   repo-url: https://github.com/DS-ML-with-python/Course-Textbook/
   repo-branch: main
