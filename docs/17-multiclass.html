@@ -377,9 +377,19 @@ Note
 <span class="header-section-number">18.2.3</span> Multiclass LDA</h3>
 <p>In the binary setting, LDA relies on the assumption that the “scores” (linear combinations of predictors) for observations in the two classes were generated from two Normal distributions with different means. After using the training data to pick a score function and estimate means, we then assign new predictions to the class whose distribution would be <em>most likely</em> to output that data.</p>
 <p>Instead of two Normal distributions, we can easily imagine three or more! We still use the observed data to pick a score function and then approximate the means and standard deviations of the Normal distributions, and we still assign new predictions to the “most likely” group.</p>
-<p>:::{.callout practice-exercise}</p>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><a href="https://colab.research.google.com/drive/1PK1cQML5uzsGDLSgdSGzMDqItFi696ly?usp=sharing">Open this Colab notebook.</a> Fit a multiclass KNN, Decision Tree, and LDA for the heart disease data; this time predicting the type of chest pain (categories 0 - 3) that a patient experiences. For the decision tree, plot the fitted tree, and interpret the first couple splits.</p>
-<p>:::</p>
+</div>
+</div>
 </section></section><section id="multiclass-from-binary-classifiers" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="multiclass-from-binary-classifiers">
 <span class="header-section-number">18.3</span> Multiclass from Binary Classifiers</h2>
 <p>Some models simply cannot be easily “upgraded” to the multiclass setting. Of those we have studied, Logistic Regression and SVC/SVM fall into this category.</p>
@@ -389,31 +399,71 @@ Note
 <section id="one-vs.-rest-ovr" class="level3" data-number="18.3.1"><h3 data-number="18.3.1" class="anchored" data-anchor-id="one-vs.-rest-ovr">
 <span class="header-section-number">18.3.1</span> One vs.&nbsp;Rest (OvR)</h3>
 <p>The first approach is to try to target only one category at a time, and fit a model that can extract those observations from the rest of them. This is called “One vs Rest” or <strong>OvR</strong> modeling.</p>
-<p>:::{.callout practice-exercise}</p>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><a href="https://colab.research.google.com/drive/1PK1cQML5uzsGDLSgdSGzMDqItFi696ly?usp=sharing">Open this Colab notebook.</a> Create a new column in the <code>ha</code> dataset called “cp_is_3”, which is equal to <code>1</code> if the <code>cp</code> variable is equal to <code>3</code> and <code>0</code> otherwise.</p>
 <p>Then, fit a Logistic Regression to predict this new target, and report the <strong>F1 Score</strong>.</p>
 <p>Repeat for the other three <code>cp</code> categories. Which category was the OvR approach best at distinguishing?</p>
-<p>:::</p>
-<p>:::{.callout check-in}</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Your four OvR Logistic Regressions produced four probabilities for each observation: prob of <code>cp_is_0</code>, prob of <code>cp_is_1</code>, etc.</p>
 <p>Is it guaranteed that these four probabilities add up to 1? Why or why not?</p>
-<p>:::</p>
+</div>
+</div>
 </section><section id="one-vs.-one-ovo" class="level3" data-number="18.3.2"><h3 data-number="18.3.2" class="anchored" data-anchor-id="one-vs.-one-ovo">
 <span class="header-section-number">18.3.2</span> One vs.&nbsp;One (OvO)</h3>
 <p>The second approach is to try to fit a model that are able to separate every pair of categories. This is called “One vs One” or <strong>OvO</strong> modeling.</p>
-<p>:::{.callout practice-exercise}</p>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><a href="https://colab.research.google.com/drive/1PK1cQML5uzsGDLSgdSGzMDqItFi696ly?usp=sharing">Open this Colab notebook.</a> Reduce your dataset to only the <code>0</code> and <code>1</code> types of chest pain.</p>
 <p>Then, fit a Logistic Regression to predict between the two grousp, and report the <strong>ROC-AUC</strong>.</p>
 <p>Repeat comparing category <code>0</code> to <code>2</code> and <code>3</code>. Which pair was the OvO approach best at distinguishing?</p>
-<p>:::</p>
-<p>:::{.callout check-in}</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li><p>Why do you think we reported ROC-AUC instead of F1 Score this time?</p></li>
 <li><p>Your three OvO Logistic Regressions produced four probabilities for each observation: prob of <code>0</code> compared to <code>1</code>, prob of <code>0</code> compared to <code>2</code>, and prob of <code>0</code> compared to <code>3</code>. Is it guaranteed that these four probabilities add up to 1? Why or why not?</p></li>
 <li><p>If we had done <em>all</em> the OvO pairs, how many regressions would we have fit?</p></li>
 <li><p>How would you use the results of all the OvO pairs to arrive at one final class prediction?</p></li>
 </ul>
-<p>:::</p>
+</div>
+</div>
 </section><section id="how-to-choose" class="level3" data-number="18.3.3"><h3 data-number="18.3.3" class="anchored" data-anchor-id="how-to-choose">
 <span class="header-section-number">18.3.3</span> How to choose</h3>
 <p>In general, the OvO approach is better because:</p>
@@ -443,11 +493,21 @@ Note
 <p>Now that we are in the multiclass setting, we can think of precision, recall, and F1 Score as “OvR” metrics: They measure the model’s ability to successfully predict one category of interest out of the pack.</p>
 <p>We can think of ROC-AUC as an “OvO” metric: It measures the model’s trade-off between success for two classes.</p>
 <p>Only <em>accuracy</em> is truly a multiclass metric!</p>
-<p>:::{.callout check-in}</p>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>If you randomly guess categories in a two-class setting by flipping a coin, how often do you expect to be right?</p>
 <p>If you randomly guess categories in a six-class setting by rolling a die, how often do you expect to be right?</p>
 <p>What does this tell you about what you should consider a “good” accuracy for a model to achieve in multiclass settings?</p>
-<p>:::</p>
+</div>
+</div>
 <section id="macro-and-micro" class="level3" data-number="18.4.1"><h3 data-number="18.4.1" class="anchored" data-anchor-id="macro-and-micro">
 <span class="header-section-number">18.4.1</span> Macro and micro</h3>
 <p>So, if we want to use a metric besides accuracy to measure our model’s success, what should we do? Three options:</p>
