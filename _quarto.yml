@@ -29,6 +29,7 @@ book:
     - 14-nonparametric_methods.qmd
     - 15-classification_intro.qmd
     - 16-linear_classifiers.qmd
+    - 17-multiclass.qmd
   site-url: https://DS-ML-with-python.github.io/Course-Textbook/
   repo-url: https://github.com/DS-ML-with-python/Course-Textbook/
   repo-branch: main

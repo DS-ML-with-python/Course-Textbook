@@ -2,74 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/index.html</loc>
-    <lastmod>2023-11-27T09:37:41.643Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.052Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/00-setup.html</loc>
-    <lastmod>2023-11-27T09:37:41.649Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.060Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/01-basics.html</loc>
-    <lastmod>2023-11-27T09:37:41.668Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.079Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/02-plotnine.html</loc>
-    <lastmod>2023-11-27T09:37:41.681Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.092Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/03-basic_data_operations.html</loc>
-    <lastmod>2023-11-27T09:37:41.706Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.118Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/04-pivoting_joining.html</loc>
-    <lastmod>2023-11-27T09:37:41.727Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.142Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/05-function_writing.html</loc>
-    <lastmod>2023-11-27T09:37:41.791Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.216Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/06-iteration.html</loc>
-    <lastmod>2023-11-27T09:37:41.804Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.228Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/07-webscraping.html</loc>
-    <lastmod>2023-11-27T09:37:41.812Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.236Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/08-regex.html</loc>
-    <lastmod>2023-11-27T09:37:41.825Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.248Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/09-modeling_intro.html</loc>
-    <lastmod>2023-11-27T09:37:41.833Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.256Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/10-multiple_linear_regression.html</loc>
-    <lastmod>2023-11-27T09:37:41.839Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.265Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/11-model_validation.html</loc>
-    <lastmod>2023-11-27T09:37:41.846Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.269Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/12-cross_validation.html</loc>
-    <lastmod>2023-11-27T09:37:41.861Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.285Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/13-penalized_regression.html</loc>
-    <lastmod>2023-11-27T09:37:41.869Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.292Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/14-nonparametric_methods.html</loc>
-    <lastmod>2023-11-27T09:37:41.874Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.297Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/15-classification_intro.html</loc>
-    <lastmod>2023-11-27T09:37:41.880Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.304Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/16-linear_classifiers.html</loc>
-    <lastmod>2023-11-27T09:37:41.887Z</lastmod>
+    <lastmod>2023-11-29T07:10:42.310Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DS-ML-with-python.github.io/Course-Textbook/17-multiclass.html</loc>
+    <lastmod>2023-11-29T07:10:42.315Z</lastmod>
   </url>
 </urlset>
