@@ -14,8 +14,8 @@ In this chapter you will:
 -   Learn the basics of a computer system.
 -   Create a GitHub account and practice using it for managing code and data artifacts.
 -   Practice using Google Colab notebooks for quick tasks and activities.
--   Install `python` locally on your machine via Anaconda.
--   Practice opening and using `jupyter` notebooks in Anaconda.
+-   Install `python` locally on your machine with Anaconda.
+-   Practice opening and using `jupyter` notebooks in Positron or VSCode or another IDE.
 -   Install the `quarto` document rendering system.
 -   Practice using `quarto` to render nicely formatted html documents from `jupyter` notebooks.
 
@@ -34,9 +34,7 @@ We all use computers daily - we carry them around with us on our wrists, in our 
 Here is a short 3-minute video on the basic hardware that makes up your computer. It is focused on desktops, but the same components (with the exception of the optical drive) are commonly found in cell phones, smart watches, and laptops.
 
 :::{.callout-learn-more .icon}
-
-{{ <video "https://www.youtube.com/embed/Rdm8E59L8Og >}}
-
+{{<video https://www.youtube.com/embed/Rdm8E59L8Og >}}
 :::
 
 When programming, it is usually helpful to understand the distinction between RAM and disk storage (hard drives). We also need to know at least a little bit about processors (so that we know when we've asked our processor to do too much). Most of the other details aren't necessary (for now).
@@ -52,7 +50,7 @@ When programming, it is usually helpful to understand the distinction between RA
 Operating systems, such as Windows, MacOS, or Linux, are a sophisticated program that allows CPUs to keep track of multiple programs and tasks and execute them at the same time.
 
 :::{.callout-learn-more .icon}
-{{ <video https://www.youtube.com/embed/RhHMgkUdhdk" > }}
+{{<video https://www.youtube.com/embed/RhHMgkUdhdk >}}
 :::
 
 ### File Systems {#file-systems}
@@ -65,7 +63,7 @@ Regardless of how you tend to organize your personal files, it is probably helpf
 
 :::{.callout-required-video .icon}
 
-{{ <video https://www.youtube.com/embed/BV0-EPUYuQc >}}
+{{<video https://www.youtube.com/embed/BV0-EPUYuQc >}}
 
 Stop watching at 4:16.
 :::
@@ -73,7 +71,7 @@ Stop watching at 4:16.
 That's not enough, though - we also need to know how computers remember the location of what is stored where. Specifically, we need to understand **file paths**.
 
 :::{.callout-required-video .icon}
-{{ <video https://www.youtube.com/embed/BMT3JUWmqYY >}}
+{{<video https://www.youtube.com/embed/BMT3JUWmqYY >}}
 :::
 
 <br>
@@ -117,13 +115,13 @@ If you are already familiar with how to use Git and GitHub, you can skip the res
 First, watch this 15-minute video, which nicely illustrates the basics of version tracking:
 
 :::{.callout-required-video .icon}
-{{ <video https://www.youtube.com/embed/BCQHnlnPusY?si=L9C5waHxDzib-VwY >}}
+{{<video https://www.youtube.com/embed/BCQHnlnPusY?si=L9C5waHxDzib-VwY >}}
 :::
 
 Then, watch this 10-minute video, which introduces the idea of **branches**, and important habit for collaborating with others (or your future self!)
 
 :::{.callout-required-video .icon}
-{{ <video https://www.youtube.com/embed/oPpnCh7InLY?si=Yzezgt3R4n1OYBdV >}}
+{{<video https://www.youtube.com/embed/oPpnCh7InLY?si=Yzezgt3R4n1OYBdV >}}
 :::
 
 :::{.callout-opinion .icon collapse="true"}
@@ -213,7 +211,7 @@ This is why we need Anaconda or similar local installations.
 
 ## Quarto
 
-Although jupyter and Colab are fantastic tools for data analysis, one major limitation is that the raw notebooks themselves are not the same as a final clear report.
+Although `jupyter` and Colab are fantastic tools for data analysis, one major limitation is that the raw notebooks themselves are not the same as a final clear report.
 
 To convert our interactive notebooks into professionally presented static documents, we will use a program called `Quarto`.
 
@@ -225,15 +223,82 @@ Once quarto is installed, converting a `.ipynb` file
 requires running only a single line in the *Terminal*:
 
 ```
-quarto render my_file.ipynb
+quarto render /path/to/my_file.ipynb
 ```
 
 :::{.callout-check-in .icon}
-Download the .ipynb file from your practice Colab notebook, open it using Anaconda, and render it using Quarto. 
+Download the .ipynb file from your practice Colab notebook and render it using Quarto. 
 :::
 
 However, there are also many, many options to make the final rendered document look even more visually pleasing and professional.  Have a look at the Quarto documentation if you want to play around with themes, fonts, layouts, and so on.
 
 :::{.callout-learn-more .icon collapse="true"}
 https://quarto.org/docs/get-started/hello/jupyter.html
+:::
+
+## IDEs
+
+Have you ever watched an old movie or TV show, and the "hacker" character is typing on a screen that looks like this?
+
+![](https://upload.wikimedia.org/wikipedia/commons/6/6f/Programming123najra.gif){width=50% fig-align="center"}
+
+Nobody in today's programming world interacts with code as plain green text on a black screen.  Instead, we take advantage of the tools available to make coding and data analysis more user-friendly.  This usually means using an **Integrated Developer Environment**, or **IDE**: an application on your computer that provides a nice user interface for writing code.
+
+In this class, you may use any IDE you prefer.  You *might* be able to get by with only using Google Colab - but for many projects and assignments, this approach will be extremely inconvenient and require some frustrating steps in your workflow.
+
+Instead, we would like to encourage you to use one of the following tools:
+
+### VS Code
+
+We mention this first because it is currently the most commonly used IDE for programming.  [VSCode ("Visual Studio Code")](https://code.visualstudio.com/) is released by Microsoft, and provides a clean interface, with multiple panels to help you organize multiple files.
+
+![](https://code.visualstudio.com/assets/docs/getstarted/userinterface/hero.png){width=80% fig-align="center"}
+
+**Pro:**  VSCode is very widely used; if you get comfortable in it now, you may be well prepared to work on teams that use it in the future.
+
+**Con:** VSCode is more targeted at software development than data science.  It lacks several data-specific conveniences that other IDEs implement, such as the ability to explore a loaded dataset in the IDE.
+
+### Positron (our current recommendation)
+
+[Positron](https://github.com/posit-dev/positron) is a data science targeted IDE recently released by Posit, PBC.  It is build on the original open-source structure used by VSCode, so it has many similarities.
+
+![](https://cdn.prod.website-files.com/654fd3ad88635290d9845b9e/6686aaaeaa918f71adb2d060_AD_4nXdsSJi_ZPSBvmJ1FjILP70SS9zrD6UtNtDJnq0FLdNrIRhmXei2l47Ir4QdZdB64dr0fSeIeficuBml5ZSvfLHERHPyaCFhCNhSFhwddMwHXM_Nt2K6fHBDmIk6cKKDD68wM0Qk5bZkGlCMG2cMqCicYdgp.png){width=80% fig-align="center"}
+
+**Pro:** Nearly all the great elements of VSCode, plus some extra conveniences for data analysis and multi-lingual coding.
+
+**Con:** It is currently in Beta stages, so the workflow you get used to now could change in the future.
+
+:::{.callout-opinion .icon collapse="true"}
+
+We are always hesitant to recommend a tool in class that is only in Beta testing phase.  However, we firmly believe that Positron is the future go-to IDE for data science; and even in its current early form, it provides the smoothest workflow from jupyter notebook to Quarto document that we know of.
+
+:::
+
+### RStudio
+
+For R users, there has historically only been one IDE worth using:  [RStudio](https://posit.co/download/rstudio-desktop/).  RStudio *does* support `python` and `jupyter` - so it is certainly a viable option for this class.  However, there can be some frustrations in getting RStudio to recognize the correct installations of `python` and its packages.  If you are already very familiar with RStudio, it might be worth working through the initial install challenges so you can stick with your comfort zone.
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/ed/RStudio_IDE_screenshot.png){width=80% fig-align="center"}
+
+**Pros:** A very optimized data science IDE that is particularly great for `R` and for Quarto.
+
+**Cons:** Can be a bit frustrating to use with `python`; most `python` users prefer VSCode or Positron.
+
+### Jupyter
+
+Technically speaking, `jupyter` does provide its own built-in IDE, which is essentially a plain `jupyter` notebook much like Google Colab.
+
+You can access this through Anaconda.
+
+![](https://miro.medium.com/v2/resize:fit:1200/1*CrzFvh-ha0mkhUrA3q786A.png){width=40% fig-align="left"}
+![](https://plantsandpython.github.io/PlantsAndPython/_images/name_file_2.png){width=40% fig-align="right"}
+
+We do **not** recommend this workflow; as it can get rather tedious to click through your folder structure and open individual documents, and none of the conveniences of an IDE are available.
+
+#### Try it!
+
+:::{.callout-check-in .icon}
+Choose an IDE to install.  Then, download the `.ipynb` file from your practice Colab notebook and open it in that IDE.  Play around with the notebook, and perhaps choose some color schemes that you prefer.
+
+Then, from your IDE, render the `.ipynb` file using Quarto. 
 :::
