@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>GSB 544: Data Science and Machine Learning with Python - 13&nbsp; Pipelines, Cross-Validation, and Tuning</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 14&nbsp; Pipelines, Cross-Validation, and Tuning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -78,7 +78,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -87,33 +93,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./12-cross_validation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./12-cross_validation.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">GSB 544: Data Science and Machine Learning with Python</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -177,44 +209,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,92 +269,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
   <li>
-<a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">13.2</span> Pipelines</a>
+<a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines"><span class="header-section-number">14.2</span> Pipelines</a>
   <ul class="collapse">
-<li><a href="#cautionary-tale" id="toc-cautionary-tale" class="nav-link" data-scroll-target="#cautionary-tale"><span class="header-section-number">13.2.1</span> Cautionary Tale:</a></li>
-  <li><a href="#pipeline-objects" id="toc-pipeline-objects" class="nav-link" data-scroll-target="#pipeline-objects"><span class="header-section-number">13.2.2</span> Pipeline Objects</a></li>
-  <li><a href="#column-transformers" id="toc-column-transformers" class="nav-link" data-scroll-target="#column-transformers"><span class="header-section-number">13.2.3</span> Column Transformers</a></li>
-  <li><a href="#challenges-of-pipelines" id="toc-challenges-of-pipelines" class="nav-link" data-scroll-target="#challenges-of-pipelines"><span class="header-section-number">13.2.4</span> Challenges of pipelines</a></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">13.2.5</span> Your turn</a></li>
+<li><a href="#cautionary-tale" id="toc-cautionary-tale" class="nav-link" data-scroll-target="#cautionary-tale"><span class="header-section-number">14.2.1</span> Cautionary Tale:</a></li>
+  <li><a href="#pipeline-objects" id="toc-pipeline-objects" class="nav-link" data-scroll-target="#pipeline-objects"><span class="header-section-number">14.2.2</span> Pipeline Objects</a></li>
+  <li><a href="#column-transformers" id="toc-column-transformers" class="nav-link" data-scroll-target="#column-transformers"><span class="header-section-number">14.2.3</span> Column Transformers</a></li>
+  <li><a href="#challenges-of-pipelines" id="toc-challenges-of-pipelines" class="nav-link" data-scroll-target="#challenges-of-pipelines"><span class="header-section-number">14.2.4</span> Challenges of pipelines</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">14.2.5</span> Your turn</a></li>
   </ul>
 </li>
   <li>
-<a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">13.3</span> Cross-Validation</a>
+<a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">14.3</span> Cross-Validation</a>
   <ul class="collapse">
-<li><a href="#cross_val_score" id="toc-cross_val_score" class="nav-link" data-scroll-target="#cross_val_score"><span class="header-section-number">13.3.1</span> <code>cross_val_score</code></a></li>
-  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">13.3.2</span> Tuning</a></li>
-  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">13.3.3</span> Your Turn</a></li>
+<li><a href="#cross_val_score" id="toc-cross_val_score" class="nav-link" data-scroll-target="#cross_val_score"><span class="header-section-number">14.3.1</span> <code>cross_val_score</code></a></li>
+  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">14.3.2</span> Tuning</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">14.3.3</span> Your Turn</a></li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/12-cross_validation.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/12-cross_validation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./12-cross_validation.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span>
+<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span>
 </h1>
 </div>
 
@@ -330,8 +368,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><section id="introduction" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">13.1</span> Introduction</h2>
+
+</header><section id="introduction" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">14.1</span> Introduction</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -350,13 +389,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>In this chapter, we will combine all these steps into one <strong>pipeline</strong>, sometimes called a <strong>workflow</strong>, to streamline our modeling process.</p>
 <p>Then, we will use our pipeline objects to quickly and easily perform more complex model fitting and validation tasks.</p>
-</section><section id="pipelines" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="pipelines">
-<span class="header-section-number">13.2</span> Pipelines</h2>
+</section><section id="pipelines" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="pipelines">
+<span class="header-section-number">14.2</span> Pipelines</h2>
 <p>If we already know how to perform each modeling step, why would we need pipelines? Consider the following cautionary tale…</p>
-<section id="cautionary-tale" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="cautionary-tale">
-<span class="header-section-number">13.2.1</span> Cautionary Tale:</h3>
-<section id="chapter-one" class="level4" data-number="13.2.1.1"><h4 data-number="13.2.1.1" class="anchored" data-anchor-id="chapter-one">
-<span class="header-section-number">13.2.1.1</span> Chapter One</h4>
+<section id="cautionary-tale" class="level3" data-number="14.2.1"><h3 data-number="14.2.1" class="anchored" data-anchor-id="cautionary-tale">
+<span class="header-section-number">14.2.1</span> Cautionary Tale:</h3>
+<section id="chapter-one" class="level4" data-number="14.2.1.1"><h4 data-number="14.2.1.1" class="anchored" data-anchor-id="chapter-one">
+<span class="header-section-number">14.2.1.1</span> Chapter One</h4>
 <p>Suppose you want to predict (of course) house prices from house characteristics.</p>
 <p><a href="https://www.dropbox.com/scl/fi/g0n5le5p6fr136ggetfsf/AmesHousing.csv?rlkey=jlr9xtz1o6u5rghfo29a5c02f&amp;dl=1">Click here to download the full AMES housing dataset</a></p>
 <p><a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques">Click here for data documentation</a></p>
@@ -412,8 +451,8 @@ Check In
 <p>What went wrong here?</p>
 </div>
 </div>
-</section><section id="chapter-two" class="level4" data-number="13.2.1.2"><h4 data-number="13.2.1.2" class="anchored" data-anchor-id="chapter-two">
-<span class="header-section-number">13.2.1.2</span> Chapter Two</h4>
+</section><section id="chapter-two" class="level4" data-number="14.2.1.2"><h4 data-number="14.2.1.2" class="anchored" data-anchor-id="chapter-two">
+<span class="header-section-number">14.2.1.2</span> Chapter Two</h4>
 <p>Now a new house has come along, and you need to predict it. That house has a living area of 889 square feet, and 6 rooms.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>new_house <span class="op">=</span> pd.DataFrame(data <span class="op">=</span> {<span class="st">"Gr Liv Area"</span>: [<span class="dv">889</span>], <span class="st">"TotRms AbvGrd"</span>: [<span class="dv">6</span>]})</span>
@@ -446,8 +485,8 @@ Check In
 <p>What happened this time, and how can we fix it?</p>
 </div>
 </div>
-</section><section id="the-moral-of-the-story" class="level4" data-number="13.2.1.3"><h4 data-number="13.2.1.3" class="anchored" data-anchor-id="the-moral-of-the-story">
-<span class="header-section-number">13.2.1.3</span> The Moral of the Story</h4>
+</section><section id="the-moral-of-the-story" class="level4" data-number="14.2.1.3"><h4 data-number="14.2.1.3" class="anchored" data-anchor-id="the-moral-of-the-story">
+<span class="header-section-number">14.2.1.3</span> The Moral of the Story</h4>
 <p>A massively important principle of the modeling process is: <strong>New data that we want to predict on must go through the exact same pre-processing as the training data.</strong></p>
 <p>By <em>“exact same”</em>, we don’t mean <em>“same idea”</em>, we mean <em>the same calculations</em>.</p>
 <p>To standardize our training data, we subtracted from each column its mean <em>in the training data</em>, and then divided each column by the standard deviation <em>in the training data</em>. Thus, for any new data that comes along - whether it is a larger test dataset, or a single new house to predict on - we need to use the <strong>same numbers</strong> to standardize:</p>
@@ -468,8 +507,8 @@ Check In
 </div>
 </div>
 <p>Notice that we used <code>X_train.mean()</code> and <code>X_train.std()</code> in each case: we “learned” our estimates for the mean and sd of the columns when we <strong>fit</strong> the model, and we use those for all future predictions!</p>
-</section></section><section id="pipeline-objects" class="level3" data-number="13.2.2"><h3 data-number="13.2.2" class="anchored" data-anchor-id="pipeline-objects">
-<span class="header-section-number">13.2.2</span> Pipeline Objects</h3>
+</section></section><section id="pipeline-objects" class="level3" data-number="14.2.2"><h3 data-number="14.2.2" class="anchored" data-anchor-id="pipeline-objects">
+<span class="header-section-number">14.2.2</span> Pipeline Objects</h3>
 <p>Now, for an easier way to make sure preprocessing happens correctly. Instead of making a <strong>model</strong> object, like <code>LinearRegression()</code>, that we use for fitting and predicting, we will make a <strong>pipeline</strong> object that contains <em>all</em> our steps:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline <span class="op">=</span> Pipeline(</span>
@@ -553,8 +592,8 @@ Caution
 <pre><code>array([97709.94301488])</code></pre>
 </div>
 </div>
-</section><section id="column-transformers" class="level3" data-number="13.2.3"><h3 data-number="13.2.3" class="anchored" data-anchor-id="column-transformers">
-<span class="header-section-number">13.2.3</span> Column Transformers</h3>
+</section><section id="column-transformers" class="level3" data-number="14.2.3"><h3 data-number="14.2.3" class="anchored" data-anchor-id="column-transformers">
+<span class="header-section-number">14.2.3</span> Column Transformers</h3>
 <p>Because there may be many different steps to the data preprocessing, it can sometimes be convenient to separate these steps into individual <em>column transformers</em>.</p>
 <p>For example, suppose you wanted to include a third predictor in your house price prediction: The type of building it is (<code>Bldg Type</code>); e.g., a Townhouse, a single-family home, etc.</p>
 <p>Since this is a categorical variable, we need to turn it into dummy variables first, using <code>OneHotEncoder()</code>. But we don’t want to put <code>OneHotEncoder()</code> directly into our pipeline, because we don’t want to dummify <em>every</em> variable!</p>
@@ -663,8 +702,8 @@ Check In
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>lr_fitted <span class="op">=</span> lr_pipeline.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="checking-preprocessing" class="level4" data-number="13.2.3.1"><h4 data-number="13.2.3.1" class="anchored" data-anchor-id="checking-preprocessing">
-<span class="header-section-number">13.2.3.1</span> Checking preprocessing</h4>
+<section id="checking-preprocessing" class="level4" data-number="14.2.3.1"><h4 data-number="14.2.3.1" class="anchored" data-anchor-id="checking-preprocessing">
+<span class="header-section-number">14.2.3.1</span> Checking preprocessing</h4>
 <p>We’ve seen the value of including preprocessing steps in a pipeline instead of doing them “by hand”. However, you might sometimes want to see what that processed data looks like. This is one advantage of a column transformer - it can be separately used to <code>fit</code> and <code>transform</code> datasets:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ct_fitted <span class="op">=</span> ct.fit(X_train)</span>
@@ -702,11 +741,11 @@ Check In
         -0.18588482, -0.29154606]])</code></pre>
 </div>
 </div>
-</section></section><section id="challenges-of-pipelines" class="level3" data-number="13.2.4"><h3 data-number="13.2.4" class="anchored" data-anchor-id="challenges-of-pipelines">
-<span class="header-section-number">13.2.4</span> Challenges of pipelines</h3>
+</section></section><section id="challenges-of-pipelines" class="level3" data-number="14.2.4"><h3 data-number="14.2.4" class="anchored" data-anchor-id="challenges-of-pipelines">
+<span class="header-section-number">14.2.4</span> Challenges of pipelines</h3>
 <p>Although <code>Pipeline</code> objects are incredible tools for making sure your model process is reproducible and correct, they come with some frustrations. Here are a few you might encounter, and our advice for dealing with them:</p>
-<section id="extracting-information" class="level4" data-number="13.2.4.1"><h4 data-number="13.2.4.1" class="anchored" data-anchor-id="extracting-information">
-<span class="header-section-number">13.2.4.1</span> Extracting information</h4>
+<section id="extracting-information" class="level4" data-number="14.2.4.1"><h4 data-number="14.2.4.1" class="anchored" data-anchor-id="extracting-information">
+<span class="header-section-number">14.2.4.1</span> Extracting information</h4>
 <p>When we wanted to find the fitted coefficients of a model object, we could simply use <code>.coef_</code>. However, since a <code>Pipeline</code> is not a model object, this no longer works:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lr_pipeline_fitted.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -721,8 +760,8 @@ Check In
 <pre><code>array([ 74190.96798814, -19896.6477627 ])</code></pre>
 </div>
 </div>
-</section><section id="pandas-input-numpy-output" class="level4" data-number="13.2.4.2"><h4 data-number="13.2.4.2" class="anchored" data-anchor-id="pandas-input-numpy-output">
-<span class="header-section-number">13.2.4.2</span> Pandas input, numpy output</h4>
+</section><section id="pandas-input-numpy-output" class="level4" data-number="14.2.4.2"><h4 data-number="14.2.4.2" class="anchored" data-anchor-id="pandas-input-numpy-output">
+<span class="header-section-number">14.2.4.2</span> Pandas input, numpy output</h4>
 <p>You may have noticed that <code>sklearn</code> functions are designed to handle <code>pandas</code> objects nicely - which is a good thing, since we like to do our data cleaning and manipulation in <code>pandas</code>! However, the outputs of these model functions are typically <code>numpy</code> arrays:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(y_preds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -772,8 +811,8 @@ Warning
 <p><code>[step name]__[variable name]_[category]</code></p>
 </div>
 </div>
-</section><section id="interactions-and-dummies" class="level4" data-number="13.2.4.3"><h4 data-number="13.2.4.3" class="anchored" data-anchor-id="interactions-and-dummies">
-<span class="header-section-number">13.2.4.3</span> Interactions and Dummies</h4>
+</section><section id="interactions-and-dummies" class="level4" data-number="14.2.4.3"><h4 data-number="14.2.4.3" class="anchored" data-anchor-id="interactions-and-dummies">
+<span class="header-section-number">14.2.4.3</span> Interactions and Dummies</h4>
 <p>Sometimes, we want to include an <strong>interaction term</strong> in our model; for example,</p>
 <p><span class="math display">\[ \text{House Price} = \text{House Size} + \text{Num Rooms} + \text{Size}*\text{Rooms}\]</span></p>
 <p>Adding interactions between numeric variables is simple, we simply add a “polynomial” step to our preprocessing, except we leave off the squares and cubes, and keep only the interactions:</p>
@@ -856,8 +895,8 @@ Warning
 </div>
 </div>
 <p>Ooof! This is not very elegant, we admit. But it is still worth the effort to set up a full pipeline, instead of transforming things by hand, as we will see in the next section.</p>
-</section></section><section id="your-turn" class="level3" data-number="13.2.5"><h3 data-number="13.2.5" class="anchored" data-anchor-id="your-turn">
-<span class="header-section-number">13.2.5</span> Your turn</h3>
+</section></section><section id="your-turn" class="level3" data-number="14.2.5"><h3 data-number="14.2.5" class="anchored" data-anchor-id="your-turn">
+<span class="header-section-number">14.2.5</span> Your turn</h3>
 <div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -880,8 +919,8 @@ Practice Activity
 <p>Note: You should only use the function <code>train_test_split()</code> <strong>one</strong> time in your code; that is, we should be predicting on the <strong>same</strong> test set for all three models.</p>
 </div>
 </div>
-</section></section><section id="cross-validation" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="cross-validation">
-<span class="header-section-number">13.3</span> Cross-Validation</h2>
+</section></section><section id="cross-validation" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="cross-validation">
+<span class="header-section-number">14.3</span> Cross-Validation</h2>
 <p>Now that we have all our modeling process wrapped up in one tidy pipeline bundle, we can upgrade another piece of the puzzle: the test/training split.</p>
 <p>In the previous exercise, we used our <strong>test metrics</strong> to compare pipelines, with the idea that a pipeline which performs well on test data is likely to perform well on future data. This is a bit of a big assumption though. What if we <em>just so happened</em> to get an “unlucky” test/training split, where the test set <em>just so happened</em> to contain houses that don’t follow the usual price patterns?</p>
 <p>To try to avoid unlucky splits, an easy solution is to simply do many different test/training splits and see what happens. But we have to be careful - if we end up doing many random splits, we still might end up getting similar “unlucky” test sets every time.</p>
@@ -910,8 +949,8 @@ Note
 <p>Remember that ultimately, all of this effort has only one goal: to get a “fair” measurement of how good a particular pipeline is at predicting, so that we can choose our best final pipeline from among the many options.</p>
 </div>
 </div>
-<section id="cross_val_score" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="cross_val_score">
-<span class="header-section-number">13.3.1</span> <code>cross_val_score</code>
+<section id="cross_val_score" class="level3" data-number="14.3.1"><h3 data-number="14.3.1" class="anchored" data-anchor-id="cross_val_score">
+<span class="header-section-number">14.3.1</span> <code>cross_val_score</code>
 </h3>
 <p>Even if you are convinced that cross-validation could be useful, it might seem daunting. Imagine needing to create five different test/training sets, and go through the process of fitting, predicting, and computing metrics for every single one.</p>
 <p>Fortunately, now that we have <code>Pipeline</code> objects, <code>sklearn</code> has shortcuts.</p>
@@ -972,8 +1011,8 @@ Practice Activity
 <p>Which do you prefer? Does this agree with your conclusion from earlier?</p>
 </div>
 </div>
-</section><section id="tuning" class="level3" data-number="13.3.2"><h3 data-number="13.3.2" class="anchored" data-anchor-id="tuning">
-<span class="header-section-number">13.3.2</span> Tuning</h3>
+</section><section id="tuning" class="level3" data-number="14.3.2"><h3 data-number="14.3.2" class="anchored" data-anchor-id="tuning">
+<span class="header-section-number">14.3.2</span> Tuning</h3>
 <p>In our previous exercise, we considered one-degree polynomials as well as 5-degree polynomials. But what if we wanted to try everything from 1-degree to 10-degree, without needing to manually create 10 different pipelines?</p>
 <p>This process - where we want to try a range of different values in our <em>model specification</em> and see which has the best cross-validation metrics - is called <strong>tuning</strong>.</p>
 <p>Since tuning is a common need in modeling, <code>sklearn</code> has another shortcut for us, <code>grid_search_cv</code>. But in order to capture the process, this function needs to know:</p>
@@ -1094,8 +1133,8 @@ Check In
 <p>How many different model fitting steps occurred when <code>gscv.fit(X, y)</code> was run?</p>
 </div>
 </div>
-</section><section id="your-turn-1" class="level3" data-number="13.3.3"><h3 data-number="13.3.3" class="anchored" data-anchor-id="your-turn-1">
-<span class="header-section-number">13.3.3</span> Your Turn</h3>
+</section><section id="your-turn-1" class="level3" data-number="14.3.3"><h3 data-number="14.3.3" class="anchored" data-anchor-id="your-turn-1">
+<span class="header-section-number">14.3.3</span> Your Turn</h3>
 <div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1172,6 +1211,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1238,13 +1304,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1323,10 +1391,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/DS-ML-with-python\.github\.io\/Course-Textbook\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1336,8 +1421,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1349,7 +1443,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1393,6 +1610,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1418,6 +1636,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1477,13 +1721,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./11-model_validation.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span>
+      <a href="./11-model_validation.html" class="pagination-link" aria-label="Model Validation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./13-penalized_regression.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./13-penalized_regression.html" class="pagination-link" aria-label="Penalized Regression">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1491,4 +1735,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/12-cross_validation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
