@@ -7,6 +7,8 @@ title: "Programming Basics"
 In this chapter, we will review some basics of general computer programming, and 
 how they appear in `python`.
 
+We will also introduce the role of GenAI in programming and how it will be covered in this course.
+
 :::{.callout-learn-more .icon collapse="true"}
 Some of you may find this material to be unneeded review - if so, great!
 
@@ -640,5 +642,8 @@ The most important takeaways from this chapter are:
 :::{.callout-practice-exercise .icon}
 Use your new knowledge of objects, types, and common coding errors to [solve this puzzle](https://colab.research.google.com/drive/19q0g8JRwKIRjyLe0HG3Olwnp4VyeyX3P?usp=sharing)
 :::
+
+
+
 
 
