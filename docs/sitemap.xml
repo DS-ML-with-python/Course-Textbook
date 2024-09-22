@@ -2,78 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/index.html</loc>
-    <lastmod>2023-11-29T07:10:42.052Z</lastmod>
+    <lastmod>2023-10-23T10:36:53.576Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/00-setup.html</loc>
-    <lastmod>2023-11-29T07:10:42.060Z</lastmod>
+    <lastmod>2024-09-13T21:38:15.431Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/01-basics.html</loc>
-    <lastmod>2023-11-29T07:10:42.079Z</lastmod>
+    <lastmod>2024-09-13T23:10:14.686Z</lastmod>
+  </url>
+  <url>
+    <loc>https://DS-ML-with-python.github.io/Course-Textbook/01-a-intro_ai.html</loc>
+    <lastmod>2024-09-22T06:50:12.923Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/02-plotnine.html</loc>
-    <lastmod>2023-11-29T07:10:42.092Z</lastmod>
+    <lastmod>2023-09-28T01:45:20.430Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/03-basic_data_operations.html</loc>
-    <lastmod>2023-11-29T07:10:42.118Z</lastmod>
+    <lastmod>2023-10-04T04:03:08.353Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/04-pivoting_joining.html</loc>
-    <lastmod>2023-11-29T07:10:42.142Z</lastmod>
+    <lastmod>2023-10-04T04:13:06.543Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/05-function_writing.html</loc>
-    <lastmod>2023-11-29T07:10:42.216Z</lastmod>
+    <lastmod>2023-10-16T05:32:22.748Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/06-iteration.html</loc>
-    <lastmod>2023-11-29T07:10:42.228Z</lastmod>
+    <lastmod>2023-10-16T05:32:22.749Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/07-webscraping.html</loc>
-    <lastmod>2023-11-29T07:10:42.236Z</lastmod>
+    <lastmod>2023-10-16T05:32:22.749Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/08-regex.html</loc>
-    <lastmod>2023-11-29T07:10:42.248Z</lastmod>
+    <lastmod>2023-10-23T01:12:30.280Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/09-modeling_intro.html</loc>
-    <lastmod>2023-11-29T07:10:42.256Z</lastmod>
+    <lastmod>2023-10-23T11:16:13.821Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/10-multiple_linear_regression.html</loc>
-    <lastmod>2023-11-29T07:10:42.265Z</lastmod>
+    <lastmod>2023-11-13T07:44:41.017Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/11-model_validation.html</loc>
-    <lastmod>2023-11-29T07:10:42.269Z</lastmod>
+    <lastmod>2023-11-13T07:44:41.027Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/12-cross_validation.html</loc>
-    <lastmod>2023-11-29T07:10:42.285Z</lastmod>
+    <lastmod>2023-11-13T07:44:41.028Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/13-penalized_regression.html</loc>
-    <lastmod>2023-11-29T07:10:42.292Z</lastmod>
+    <lastmod>2023-11-13T07:44:41.029Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/14-nonparametric_methods.html</loc>
-    <lastmod>2023-11-29T07:10:42.297Z</lastmod>
+    <lastmod>2023-11-13T18:58:16.800Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/15-classification_intro.html</loc>
-    <lastmod>2023-11-29T07:10:42.304Z</lastmod>
+    <lastmod>2023-11-13T18:58:10.190Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/16-linear_classifiers.html</loc>
-    <lastmod>2023-11-29T07:10:42.310Z</lastmod>
+    <lastmod>2023-11-27T09:37:04.903Z</lastmod>
   </url>
   <url>
     <loc>https://DS-ML-with-python.github.io/Course-Textbook/17-multiclass.html</loc>
-    <lastmod>2023-11-29T07:10:42.315Z</lastmod>
+    <lastmod>2023-11-29T07:10:03.337Z</lastmod>
   </url>
 </urlset>
