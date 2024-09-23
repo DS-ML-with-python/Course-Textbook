@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GSB 544: Data Science and Machine Learning with Python - 5&nbsp; Tabular Data and Basic Data Operations</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 4&nbsp; Tabular Data and Basic Data Operations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./03-basic_data_operations.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./03-basic_data_operations.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -178,6 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -189,62 +195,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,55 +255,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -324,18 +318,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
-  <li><a href="#reading-tabular-data-into-python" id="toc-reading-tabular-data-into-python" class="nav-link" data-scroll-target="#reading-tabular-data-into-python"><span class="header-section-number">5.2</span> Reading Tabular Data into Python</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">4.1</span> Introduction</a></li>
+  <li><a href="#reading-tabular-data-into-python" id="toc-reading-tabular-data-into-python" class="nav-link" data-scroll-target="#reading-tabular-data-into-python"><span class="header-section-number">4.2</span> Reading Tabular Data into Python</a>
   <ul class="collapse">
-  <li><a href="#tidy-data-is-special-tabular-data" id="toc-tidy-data-is-special-tabular-data" class="nav-link" data-scroll-target="#tidy-data-is-special-tabular-data"><span class="header-section-number">5.2.1</span> Tidy Data is Special Tabular Data</a></li>
+  <li><a href="#tidy-data-is-special-tabular-data" id="toc-tidy-data-is-special-tabular-data" class="nav-link" data-scroll-target="#tidy-data-is-special-tabular-data"><span class="header-section-number">4.2.1</span> Tidy Data is Special Tabular Data</a></li>
   </ul></li>
-  <li><a href="#the-big-five-verbs-of-data-wrangling" id="toc-the-big-five-verbs-of-data-wrangling" class="nav-link" data-scroll-target="#the-big-five-verbs-of-data-wrangling"><span class="header-section-number">5.3</span> The “Big Five” Verbs of Data Wrangling</a>
+  <li><a href="#the-big-five-verbs-of-data-wrangling" id="toc-the-big-five-verbs-of-data-wrangling" class="nav-link" data-scroll-target="#the-big-five-verbs-of-data-wrangling"><span class="header-section-number">4.3</span> The “Big Five” Verbs of Data Wrangling</a>
   <ul class="collapse">
-  <li><a href="#select-columnsvariables" id="toc-select-columnsvariables" class="nav-link" data-scroll-target="#select-columnsvariables"><span class="header-section-number">5.3.1</span> <strong>Select</strong> Columns/Variables</a></li>
-  <li><a href="#filter-rowsobservations" id="toc-filter-rowsobservations" class="nav-link" data-scroll-target="#filter-rowsobservations"><span class="header-section-number">5.3.2</span> <strong>Filter</strong> Rows/Observations</a></li>
-  <li><a href="#arrange-rows" id="toc-arrange-rows" class="nav-link" data-scroll-target="#arrange-rows"><span class="header-section-number">5.3.3</span> <strong>Arrange</strong> Rows</a></li>
-  <li><a href="#mutate-columns" id="toc-mutate-columns" class="nav-link" data-scroll-target="#mutate-columns"><span class="header-section-number">5.3.4</span> <strong>Mutate</strong> Column(s)</a></li>
-  <li><a href="#summarizing-rows" id="toc-summarizing-rows" class="nav-link" data-scroll-target="#summarizing-rows"><span class="header-section-number">5.3.5</span> <strong>Summarizing</strong> Rows</a></li>
+  <li><a href="#select-columnsvariables" id="toc-select-columnsvariables" class="nav-link" data-scroll-target="#select-columnsvariables"><span class="header-section-number">4.3.1</span> <strong>Select</strong> Columns/Variables</a></li>
+  <li><a href="#filter-rowsobservations" id="toc-filter-rowsobservations" class="nav-link" data-scroll-target="#filter-rowsobservations"><span class="header-section-number">4.3.2</span> <strong>Filter</strong> Rows/Observations</a></li>
+  <li><a href="#arrange-rows" id="toc-arrange-rows" class="nav-link" data-scroll-target="#arrange-rows"><span class="header-section-number">4.3.3</span> <strong>Arrange</strong> Rows</a></li>
+  <li><a href="#mutate-columns" id="toc-mutate-columns" class="nav-link" data-scroll-target="#mutate-columns"><span class="header-section-number">4.3.4</span> <strong>Mutate</strong> Column(s)</a></li>
+  <li><a href="#summarizing-rows" id="toc-summarizing-rows" class="nav-link" data-scroll-target="#summarizing-rows"><span class="header-section-number">4.3.5</span> <strong>Summarizing</strong> Rows</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/03-basic_data_operations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -343,9 +337,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./03-basic_data_operations.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./03-basic_data_operations.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></h1>
 </div>
 
 
@@ -362,8 +356,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">4.1</span> Introduction</h2>
 <p>This document demonstrates the use of the <code>pandas</code> library in Python to do basic data wrangling and summarization.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -381,8 +375,8 @@ Note
 </div>
 </div>
 </section>
-<section id="reading-tabular-data-into-python" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="reading-tabular-data-into-python"><span class="header-section-number">5.2</span> Reading Tabular Data into Python</h2>
+<section id="reading-tabular-data-into-python" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="reading-tabular-data-into-python"><span class="header-section-number">4.2</span> Reading Tabular Data into Python</h2>
 <p>We’re going to be exploring <code>pandas</code> in the context of the famous Titanic dataset. We’ll work with a subset of this dataset, but more information about it all can be found <a href="https://www.kaggle.com/competitions/titanic/data">here</a>.</p>
 <p>We start by loading the <code>numpy</code> and <code>pandas</code> libraries. Most of our data wrangling work will happen with functions from the <code>pandas</code> library, but the <code>numpy</code> library will be useful for performing certain mathematical operations should we choose to transform any of our data.</p>
 <div id="492d518b" class="cell" data-execution_count="1">
@@ -407,8 +401,8 @@ Example
 </div>
 </div>
 <p>Data files of many different types and shapes can be read into Python with similar functions, but we will focus on tabular data.</p>
-<section id="tidy-data-is-special-tabular-data" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="tidy-data-is-special-tabular-data"><span class="header-section-number">5.2.1</span> Tidy Data is Special Tabular Data</h3>
+<section id="tidy-data-is-special-tabular-data" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="tidy-data-is-special-tabular-data"><span class="header-section-number">4.2.1</span> Tidy Data is Special Tabular Data</h3>
 <p>For most people, the image that comes to mind when thinking about data is indeed something tabular or spreadsheet-like in nature. <strong>Which is great!</strong></p>
 <p>Tabular data is a form preferred by MANY different data operations and work. However, we will want to take this one step further. In almost all data science work we want our data to be <strong>tidy</strong></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -723,8 +717,8 @@ Check In
 </div>
 </section>
 </section>
-<section id="the-big-five-verbs-of-data-wrangling" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="the-big-five-verbs-of-data-wrangling"><span class="header-section-number">5.3</span> The “Big Five” Verbs of Data Wrangling</h2>
+<section id="the-big-five-verbs-of-data-wrangling" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="the-big-five-verbs-of-data-wrangling"><span class="header-section-number">4.3</span> The “Big Five” Verbs of Data Wrangling</h2>
 <p>Data wrangling can involve a lot of different steps and operations to get data into a <em>tidy</em> format and ready for analysis and visualization. The vast majority of these fall under the umbrella one the following five operations:</p>
 <ol type="1">
 <li><p><strong>Select</strong> columns/variables of interest</p></li>
@@ -733,8 +727,8 @@ Check In
 <li><p><strong>Mutate</strong> the columns of a dataset (i.e.&nbsp;create or transform variables)</p></li>
 <li><p><strong>Summarize</strong> the rows of a dataset for column(s) of interest</p></li>
 </ol>
-<section id="select-columnsvariables" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="select-columnsvariables"><span class="header-section-number">5.3.1</span> <strong>Select</strong> Columns/Variables</h3>
+<section id="select-columnsvariables" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="select-columnsvariables"><span class="header-section-number">4.3.1</span> <strong>Select</strong> Columns/Variables</h3>
 <p>Suppose we want to select the <code>age</code> variable from the titanic <code>DataFrame</code>. There are three ways to do this.</p>
 <ol type="1">
 <li>Use <code>.loc</code>, specifying both the rows and columns. (The colon <code>:</code> is Python shorthand for “all”.)</li>
@@ -764,10 +758,10 @@ Check In
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df_titanic[[<span class="st">"age"</span>, <span class="st">"fare"</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="filter-rowsobservations" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="filter-rowsobservations"><span class="header-section-number">5.3.2</span> <strong>Filter</strong> Rows/Observations</h3>
-<section id="selecting-rowsobservations-by-location" class="level4" data-number="5.3.2.1">
-<h4 data-number="5.3.2.1" class="anchored" data-anchor-id="selecting-rowsobservations-by-location"><span class="header-section-number">5.3.2.1</span> Selecting Rows/Observations by Location</h4>
+<section id="filter-rowsobservations" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="filter-rowsobservations"><span class="header-section-number">4.3.2</span> <strong>Filter</strong> Rows/Observations</h3>
+<section id="selecting-rowsobservations-by-location" class="level4" data-number="4.3.2.1">
+<h4 data-number="4.3.2.1" class="anchored" data-anchor-id="selecting-rowsobservations-by-location"><span class="header-section-number">4.3.2.1</span> Selecting Rows/Observations by Location</h4>
 <p>Before we see how to <strong>filter</strong> (i.e.&nbsp;<strong>subset</strong>) the rows of dataset based on some condition, let’s see how to select rows by explicitly identifying them.</p>
 <p>We can select a row by its position using the <code>.iloc</code> attribute. Keeping in mind that the first row is actually row 0, the fourth row could be extracted as:</p>
 <div id="707d50e7" class="cell" data-execution_count="9">
@@ -943,8 +937,8 @@ Name: 3, dtype: object</code></pre>
 </div>
 </div>
 </section>
-<section id="selecting-rowsobservations-by-condition" class="level4" data-number="5.3.2.2">
-<h4 data-number="5.3.2.2" class="anchored" data-anchor-id="selecting-rowsobservations-by-condition"><span class="header-section-number">5.3.2.2</span> Selecting Rows/Observations by Condition</h4>
+<section id="selecting-rowsobservations-by-condition" class="level4" data-number="4.3.2.2">
+<h4 data-number="4.3.2.2" class="anchored" data-anchor-id="selecting-rowsobservations-by-condition"><span class="header-section-number">4.3.2.2</span> Selecting Rows/Observations by Condition</h4>
 <p>We’ll often want to <strong>filter</strong> or <strong>subset</strong> the rows of a dataset based on some condition. To do this we’ll take advantage of <strong>vectorization</strong> and <strong>boolean masking</strong>.</p>
 <p>Recall that we can compare the values of a variable/column to a particular value in the following way, and observe the result.</p>
 <div id="755f55f3" class="cell" data-execution_count="12">
@@ -1303,8 +1297,8 @@ Check In
 </div>
 </section>
 </section>
-<section id="arrange-rows" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="arrange-rows"><span class="header-section-number">5.3.3</span> <strong>Arrange</strong> Rows</h3>
+<section id="arrange-rows" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="arrange-rows"><span class="header-section-number">4.3.3</span> <strong>Arrange</strong> Rows</h3>
 <p>As part of exploratory data analysis and some reporting efforts, we will want to sort a dataset or set of results by one or more variables of interest.</p>
 <p>We can do this with <code>.sort_values</code> in either <em>ascending</em> or <em>descending</em> order.</p>
 <p>The following sorts the titanic dataset by <code>age</code> in decreasing order.</p>
@@ -1508,11 +1502,11 @@ Warning
 </div>
 </div>
 </section>
-<section id="mutate-columns" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="mutate-columns"><span class="header-section-number">5.3.4</span> <strong>Mutate</strong> Column(s)</h3>
+<section id="mutate-columns" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="mutate-columns"><span class="header-section-number">4.3.4</span> <strong>Mutate</strong> Column(s)</h3>
 <p>The variables available to us in our original dataset contain all of the information we have access to, but the best insights may instead come from transformations of those variables.</p>
-<section id="transforming-quantitative-variables" class="level4" data-number="5.3.4.1">
-<h4 data-number="5.3.4.1" class="anchored" data-anchor-id="transforming-quantitative-variables"><span class="header-section-number">5.3.4.1</span> Transforming Quantitative Variables</h4>
+<section id="transforming-quantitative-variables" class="level4" data-number="4.3.4.1">
+<h4 data-number="4.3.4.1" class="anchored" data-anchor-id="transforming-quantitative-variables"><span class="header-section-number">4.3.4.1</span> Transforming Quantitative Variables</h4>
 <p>One of the simplest reasons to want to transform a quantitative variable is to change the measurement units.</p>
 <p>Here we change the <code>age</code> of passengers from a value in years to a value in decades.</p>
 <div id="68f9fd16" class="cell" data-execution_count="18">
@@ -1562,8 +1556,8 @@ Check In
 </div>
 </div>
 </section>
-<section id="transforming-categorical-variables" class="level4" data-number="5.3.4.2">
-<h4 data-number="5.3.4.2" class="anchored" data-anchor-id="transforming-categorical-variables"><span class="header-section-number">5.3.4.2</span> Transforming Categorical Variables</h4>
+<section id="transforming-categorical-variables" class="level4" data-number="4.3.4.2">
+<h4 data-number="4.3.4.2" class="anchored" data-anchor-id="transforming-categorical-variables"><span class="header-section-number">4.3.4.2</span> Transforming Categorical Variables</h4>
 <p>In some situations, especially later with modeling, we’ll need to convert categorical variables (stored as text) into quantitative (often coded) variables. Binary categorical variables can be converted into quantitative variables by coding one category as 1 and the other category as 0. (In fact, the <strong>survived</strong> column in the titanic dataset has already been coded this way.) The easiest way to do this is to create a boolean mask. For example, to convert <code>gender</code> to a quantitative variable <code>female</code>, which is 1 if the passenger was female and 0 otherwise, we can do the following:</p>
 <div id="5826606c" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_titanic[<span class="st">"female"</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">*</span> (df_titanic[<span class="st">"gender"</span>] <span class="op">==</span> <span class="st">"female"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1892,11 +1886,11 @@ Check In
 </div>
 </section>
 </section>
-<section id="summarizing-rows" class="level3" data-number="5.3.5">
-<h3 data-number="5.3.5" class="anchored" data-anchor-id="summarizing-rows"><span class="header-section-number">5.3.5</span> <strong>Summarizing</strong> Rows</h3>
+<section id="summarizing-rows" class="level3" data-number="4.3.5">
+<h3 data-number="4.3.5" class="anchored" data-anchor-id="summarizing-rows"><span class="header-section-number">4.3.5</span> <strong>Summarizing</strong> Rows</h3>
 <p>Summarization of the rows of a dataset for column(s) of interest can take many different forms. This introduction will not be exhaustive, but certainly cover the basics.</p>
-<section id="summarizing-a-quantitative-variable" class="level4" data-number="5.3.5.1">
-<h4 data-number="5.3.5.1" class="anchored" data-anchor-id="summarizing-a-quantitative-variable"><span class="header-section-number">5.3.5.1</span> Summarizing a Quantitative Variable</h4>
+<section id="summarizing-a-quantitative-variable" class="level4" data-number="4.3.5.1">
+<h4 data-number="4.3.5.1" class="anchored" data-anchor-id="summarizing-a-quantitative-variable"><span class="header-section-number">4.3.5.1</span> Summarizing a Quantitative Variable</h4>
 <p>There are a few descriptive statistics that can be computed directly including, but not limited to, the mean and median.</p>
 <div id="3c7c5df3" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_titanic[<span class="st">"age"</span>].mean()</span>
@@ -2058,8 +2052,8 @@ Check In
 </div>
 </div>
 </section>
-<section id="summarizing-a-categorical-variable" class="level4" data-number="5.3.5.2">
-<h4 data-number="5.3.5.2" class="anchored" data-anchor-id="summarizing-a-categorical-variable"><span class="header-section-number">5.3.5.2</span> Summarizing a Categorical Variable</h4>
+<section id="summarizing-a-categorical-variable" class="level4" data-number="4.3.5.2">
+<h4 data-number="4.3.5.2" class="anchored" data-anchor-id="summarizing-a-categorical-variable"><span class="header-section-number">4.3.5.2</span> Summarizing a Categorical Variable</h4>
 <p>When it comes to categorical variables we’re most often interested in <strong>frequency distributions</strong> (counts), <strong>relative frequency distributions</strong>, and <strong>cross-tabulations</strong>.</p>
 <div id="cccca388" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_titanic[<span class="st">"class"</span>].unique()</span>
@@ -2784,12 +2778,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02-plotnine.html" class="pagination-link" aria-label="Data Visualization in Python">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./04-pivoting_joining.html" class="pagination-link" aria-label="Pivoting and Joining">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

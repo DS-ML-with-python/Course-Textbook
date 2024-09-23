@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>GSB 544: Data Science and Machine Learning with Python - 16&nbsp; Nonparametric Methods</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 15&nbsp; Nonparametric Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./14-nonparametric_methods.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./14-nonparametric_methods.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -186,6 +186,12 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -197,62 +203,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,55 +263,55 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -330,21 +324,21 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">16.1</span> Introduction</a></li>
-  <li><a href="#machine-learning-mission" id="toc-machine-learning-mission" class="nav-link" data-scroll-target="#machine-learning-mission"><span class="header-section-number">16.2</span> Machine Learning Mission</a></li>
-  <li><a href="#k-nearest-neighbors" id="toc-k-nearest-neighbors" class="nav-link" data-scroll-target="#k-nearest-neighbors"><span class="header-section-number">16.3</span> k-Nearest Neighbors</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">15.1</span> Introduction</a></li>
+  <li><a href="#machine-learning-mission" id="toc-machine-learning-mission" class="nav-link" data-scroll-target="#machine-learning-mission"><span class="header-section-number">15.2</span> Machine Learning Mission</a></li>
+  <li><a href="#k-nearest-neighbors" id="toc-k-nearest-neighbors" class="nav-link" data-scroll-target="#k-nearest-neighbors"><span class="header-section-number">15.3</span> k-Nearest Neighbors</a></li>
   <li>
-<a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">16.4</span> Decision Trees</a>
+<a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">15.4</span> Decision Trees</a>
   <ul class="collapse">
-<li><a href="#advantages-and-disadvantages-of-decision-trees" id="toc-advantages-and-disadvantages-of-decision-trees" class="nav-link" data-scroll-target="#advantages-and-disadvantages-of-decision-trees"><span class="header-section-number">16.4.1</span> Advantages and Disadvantages of Decision Trees</a></li>
+<li><a href="#advantages-and-disadvantages-of-decision-trees" id="toc-advantages-and-disadvantages-of-decision-trees" class="nav-link" data-scroll-target="#advantages-and-disadvantages-of-decision-trees"><span class="header-section-number">15.4.1</span> Advantages and Disadvantages of Decision Trees</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/14-nonparametric_methods.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./14-nonparametric_methods.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./14-nonparametric_methods.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span>
+<span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span>
 </h1>
 </div>
 
@@ -359,8 +353,8 @@ window.Quarto = {
   
 
 
-</header><section id="introduction" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">16.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">15.1</span> Introduction</h2>
 <p>This document discusses modeling via nonparametric methods such as <strong>k-Nearest Neighbors</strong> and <strong>decision trees</strong>, and the tools in <code>pandas</code> and <code>sklearn</code> that can assist with this. We will expand on our previous content by diving deeper into model evaluation.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -383,8 +377,8 @@ Note
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="machine-learning-mission" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="machine-learning-mission">
-<span class="header-section-number">16.2</span> Machine Learning Mission</h2>
+</section><section id="machine-learning-mission" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="machine-learning-mission">
+<span class="header-section-number">15.2</span> Machine Learning Mission</h2>
 <p>Recall that in machine learning our goal is to <strong>predict</strong> the value of some <em>target</em> variable using one or more <em>predictor</em> variables. Mathematically, we we’re in the following setup</p>
 <p><span class="math display">\[y = f(X) + \epsilon\]</span></p>
 <p>where <span class="math inline">\(y\)</span> is our target variable and <span class="math inline">\(X\)</span> represents the collection (data frame) of our predictor variables. So far we’ve discussed tackling this via <strong>multiple linear regression</strong>. In this chapter we’ll introduce two nonparametric methods for estimating <span class="math inline">\(f\)</span>: <strong>k-Nearest Neighbors</strong> and <strong>decision trees</strong>.</p>
@@ -401,8 +395,8 @@ Note
 <p><strong>Nonparametric</strong> methods do not involve the estimation of <em>parameters</em>. For example, in <em>multiple linear regression</em> we needed to estimate the <span class="math inline">\(\beta\)</span> coefficients. These were the model parameters. There are no such model parameteres for <strong>k-Nearest Neighbors</strong> and <strong>decision trees</strong>.</p>
 </div>
 </div>
-</section><section id="k-nearest-neighbors" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="k-nearest-neighbors">
-<span class="header-section-number">16.3</span> k-Nearest Neighbors</h2>
+</section><section id="k-nearest-neighbors" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="k-nearest-neighbors">
+<span class="header-section-number">15.3</span> k-Nearest Neighbors</h2>
 <p>As we alluded to in our modeling introduction chapter, the <strong>k-Nearest Neighbors</strong> model involves looking at the observations in the training dataset <em>closest</em> to our new observation of interest and predicting the target value based on these <em>closest</em> training observations. Mathematically,</p>
 <p><span class="math display">\[\hat{f}(x_0) = \frac{1}{K} \sum_{x_i \in N_0} y_i\]</span></p>
 <p>where <span class="math inline">\(K\)</span> is the number of neighboring training data points we’re interested in using to make our prediction, and <span class="math inline">\(N_0\)</span> is the neighborhood (collection) of those <span class="math inline">\(K\)</span> training data points.</p>
@@ -441,8 +435,8 @@ Check In
 <li><p>The model is not interpretable. There are no relationships between variables that get characterized by this model.</p></li>
 </ul>
 <p>We will see later that kNN can also be used for classification problems!</p>
-</section><section id="decision-trees" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="decision-trees">
-<span class="header-section-number">16.4</span> Decision Trees</h2>
+</section><section id="decision-trees" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="decision-trees">
+<span class="header-section-number">15.4</span> Decision Trees</h2>
 <p><strong>Decision trees</strong> are an extremely popular machine learning method because of their ability to capture complex relationships while also being interpretable.</p>
 <p>The idea here is to <em>stratify</em> or <em>segment</em> the predictor space into a number of simple regions. Then use these regions of “like” observations to make predictions!</p>
 <p>Because the set of splitting rules can be summarized in a tree, these approaches aree known as <strong>decision trees</strong>:</p>
@@ -511,8 +505,8 @@ Check In
 </div>
 </div>
 <p>Besides setting some value for <span class="math inline">\(\alpha\)</span>, software will also allow us to specify some minimum number of observations for each terminal node as a way to control the size of the tree. In other words, instead of letting the tree grow all the way to the point where each terminal node (leaf) represents a single training observation, they will represent a collection of training observations (<code>min_samples_leaf</code> in <code>sklearn</code>). In fact, <code>sklearn</code> provides multiple ways to control the size of the fitted tree!</p>
-<section id="advantages-and-disadvantages-of-decision-trees" class="level3" data-number="16.4.1"><h3 data-number="16.4.1" class="anchored" data-anchor-id="advantages-and-disadvantages-of-decision-trees">
-<span class="header-section-number">16.4.1</span> Advantages and Disadvantages of Decision Trees</h3>
+<section id="advantages-and-disadvantages-of-decision-trees" class="level3" data-number="15.4.1"><h3 data-number="15.4.1" class="anchored" data-anchor-id="advantages-and-disadvantages-of-decision-trees">
+<span class="header-section-number">15.4.1</span> Advantages and Disadvantages of Decision Trees</h3>
 <p>Advantages:</p>
 <ul>
 <li><p>Very easy to explain/interpret</p></li>
@@ -1096,12 +1090,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./13-penalized_regression.html" class="pagination-link" aria-label="Penalized Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./15-classification_intro.html" class="pagination-link" aria-label="Introduction to Classification">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,84 @@
+## Programming with GenAI
+
+While it is certainly important to think about *responsible* and *ethical* use of GenAI, that doesn't mean we should avoid using it altogehter.  In this class we will also focus on *effective* and *correct* ways to use it to support our data tasks.
+
+Do you feel safe in a car with some self-driving abilities? Despite the self-driving abilities, your answer probably still depends on how safe you feel with the **driver**.  You would hope that your driver has been taught to drive thoroughly, including knowing how to do the things that the self-driving can do on its own.
+
+It is similar with learning programming and machine learning.  If we can use GenAI to do our work faster and with less frustration that is a good thing.  But we can only really trust an analysis or program produced by GenAI if we are good drivers - if we know enough about programming *without* AI that we are able to review, edit, and test the output of the AI tool.
+
+:::{.callout-opinion .icon collapse="true"}
+
+Our advice is that you challenge yourself to use **no GenAI help** on the **Practice Exercises** in this class.  This will ensure that you get practice with new skills, and with finding other resources online, before you dive in to the lab assignments.  Think of this like driving around in a parking lot before you hit the freeway!
+
+On the other hand, we encourage you to treat the **Lab Assignments** like real-world data analysis projects.  This might mean using a higher level of GenAI support - but of course, you will still need to take careful steps to ensure that the final results are correct and reliable, as we discuss below.
+
+:::
+
+
+In this class, we will follow the **WEIRD** rule for checking that AI-produced work is acceptable.  Anything produced or co-produced by GenAI needs a human contributor to ensure that it is:
+
+* **W**ell-Specified
+* **E**xplainable
+* **I**nterpretable
+* **R**eproducible
+* **D**ependable
+
+### Well-Specified
+
+A self-driving car can get you to your location, but it can't help you decide what location you are driving to.
+
+The blessing and the curse of computer programming is that computers can only do what they are told. The same is true for prompting GenAI content:  an LLM will only respond to the exact prompt that it is given.
+
+The very first step of every data analysis **must** come from a human being, who will define the problem and construct a problem statement, which may be used as an AI prompt.
+
+[Click this link](https://chatgpt.com/share/66f1c744-098c-8012-8f72-9b9512c88649) to see an example of a conversation with Chat-GPT 4o, where we give three different prompts for a particular data analysis question.  Notice how the specificity of the prompt is important to get the results that the user is interested in.
+
+#### Brainstorming
+
+If you don't begin a data exploration with a specific analysis already in mind, GenAI can be excellent for **brainstorming** possible approaches.
+
+[Click here again](https://chatgpt.com/share/66f1c744-098c-8012-8f72-9b9512c88649) to continue the previous chat conversation, where we ask ChatGPT 4o to suggest some additional analyses. The AI tool is able to suggest some supporting tests for our original t-test, as well of some extensions of the original research question.
+
+Ultimately, however, it is the responsibility of the **human** to sift through the AI's suggestions - possibly researching further any suggested analyses they are not familiar with - and determine one final, carefully specified plan of action.
+
+### Explainable
+
+Even if you use GenAI to produce code and/or analysis, ultimately the ownership of the project lies with you.  It is *extremely important* that you understand, and are able to **explain**, the steps that the AI took; whether or not you directly performed them.
+
+:::{.callout-note}
+
+In this course, the **explainable** element is also how we define academic integrity.
+
+We expect that any AI-produced content you include in your work to be something you can completely and correctly explain *without* the AI's help.  
+
+If we suspect that AI is being overused in inappropriate ways - such as homework questions being copy-pasted into the prompt and the AI response being copy-pasted back with no oversight - we will address this by sitting down with you and asking you to explain the content step by step.
+
+It is your responsibility to take the time and ensure you truly understand each task that you "outsource" to a GenAI tool.
+:::
+
+### Interpretable
+
+
+
+### Reproducible
+
+
+
+### Dependable
+
+
+### Even WEIRD-ER: Ethics and References
+
+The **WEIRD** guidelines are focused on making sure the actual content and results of AI work is trustworthy.
+
+Don't forget, though, to be even **WEIRD-ER**: we also expect you to consider the **E**thical issues of your AI use, and to thoroughly **R**eference any AI contribution to your work.
+
+In every Lab Assignment, we expect an appendix with an **Ethics Statement** and **References**, both of which might need to reference your AI use.
+
+An example ethics statement might look something like:
+
+> This analysis includes a comparison of male and female sex penguins.  It therefore omits penguins with unknown sex or with unidentifiable biological sex.  This analysis also makes use of Generative AI to suggest comparisons across penguin sex, and these tools may overlook exceptions to the sex binary.
+
+An example reference statement including AI might look something like:
+
+> Chat-GPT 4o was used to suggest several analyses, including the Two-Way ANOVA test for body mass across sex and habitat.  It was also used to generate first-draft code to perform this ANOVA test and create the corresponding boxplot.

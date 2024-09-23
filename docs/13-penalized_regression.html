@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GSB 544: Data Science and Machine Learning with Python - 15&nbsp; Penalized Regression</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 14&nbsp; Penalized Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./13-penalized_regression.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./13-penalized_regression.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -204,6 +204,12 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -215,62 +221,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -287,55 +281,55 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -350,27 +344,27 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">15.1</span> Introduction</a></li>
-  <li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression"><span class="header-section-number">15.2</span> Ridge Regression</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
+  <li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression"><span class="header-section-number">14.2</span> Ridge Regression</a>
   <ul class="collapse">
-  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">15.2.1</span> Tuning</a></li>
+  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">14.2.1</span> Tuning</a></li>
   </ul></li>
-  <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">15.3</span> LASSO</a>
+  <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">14.3</span> LASSO</a>
   <ul class="collapse">
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">15.3.1</span> Your Turn</a></li>
-  <li><a href="#elastic-net" id="toc-elastic-net" class="nav-link" data-scroll-target="#elastic-net"><span class="header-section-number">15.3.2</span> Elastic Net</a></li>
-  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">15.3.3</span> Your Turn</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">14.3.1</span> Your Turn</a></li>
+  <li><a href="#elastic-net" id="toc-elastic-net" class="nav-link" data-scroll-target="#elastic-net"><span class="header-section-number">14.3.2</span> Elastic Net</a></li>
+  <li><a href="#your-turn-1" id="toc-your-turn-1" class="nav-link" data-scroll-target="#your-turn-1"><span class="header-section-number">14.3.3</span> Your Turn</a></li>
   </ul></li>
-  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">15.4</span> Wrap-Up</a></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">14.4</span> Wrap-Up</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/13-penalized_regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./13-penalized_regression.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./13-penalized_regression.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></h1>
 </div>
 
 
@@ -387,8 +381,8 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">15.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">14.1</span> Introduction</h2>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -487,8 +481,8 @@ Check In
 </div>
 <p>Oof. This is terrible! We used so many features in our model, we <strong>overfit</strong> to the training data, and ended up with terrible predictions.</p>
 </section>
-<section id="ridge-regression" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="ridge-regression"><span class="header-section-number">15.2</span> Ridge Regression</h2>
+<section id="ridge-regression" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="ridge-regression"><span class="header-section-number">14.2</span> Ridge Regression</h2>
 <p>In the previous analysis, we <strong>fit</strong> our model according to <em>Least Squares Regression</em>. That is, we fit a model that predicts the <span class="math inline">\(i\)</span>-th house price with the equation</p>
 <p><span class="math display">\[\hat{y}_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots +  \beta_p x_{ip}\]</span> When we chose the best numbers to plug in for <span class="math inline">\(\beta_1\)</span> … <span class="math inline">\(\beta_p\)</span>, we did so by choosing the numbers that would minimize the <strong>squared error</strong> in the training data:</p>
 <p><span class="math display">\[\sum_{i = 1}^n (y_i - \hat{y}_i)^2\]</span></p>
@@ -535,8 +529,8 @@ Warning
 <p>The <code>sklearn</code> function <code>Ridge()</code> uses the argument name <code>alpha</code> for <span class="math inline">\(\lambda\)</span>.</p>
 </div>
 </div>
-<section id="tuning" class="level3" data-number="15.2.1">
-<h3 data-number="15.2.1" class="anchored" data-anchor-id="tuning"><span class="header-section-number">15.2.1</span> Tuning</h3>
+<section id="tuning" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="tuning"><span class="header-section-number">14.2.1</span> Tuning</h3>
 <p>Now, you might be wondering, how do we know what value to use for <span class="math inline">\(\lambda\)</span>? That is, how <em>should</em> we prioritize between the two concerns?</p>
 <p>Well, we don’t really know! But what we can do is try <em>many</em> different values of <span class="math inline">\(\lambda\)</span> and see which one results in the best metrics.</p>
 <p>That is, we can <strong>tune</strong> the <strong>hyperparameter</strong> <span class="math inline">\(\lambda\)</span> to pick a final value - not because we are interested in the value itself, but because it will tell us the best <strong>model specification</strong> (i.e., the best loss function) to use.</p>
@@ -556,8 +550,8 @@ Practice Activity
 </div>
 </section>
 </section>
-<section id="lasso" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="lasso"><span class="header-section-number">15.3</span> LASSO</h2>
+<section id="lasso" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="lasso"><span class="header-section-number">14.3</span> LASSO</h2>
 <p>This idea of adding a penalty to the loss function is very powerful - and the Ridge penalty is not the only one we could have used.</p>
 <p>Another common choice is the <strong>LASSO</strong> (least absolute shrinkage and selection operator) penalty, which <em>regularizes</em> the <span class="math inline">\(\beta\)</span>’s according to their <em>absolute value</em> instead of the square.</p>
 <p><span class="math display">\[ \ell(\beta) = \sum_{i = 1}^n (\hat{y}_i - y_i)^2 + \lambda \sum_{j = 1}^p |\beta_j| \]</span></p>
@@ -576,8 +570,8 @@ Just our opinion...
 </div>
 </div>
 <p>This outcome, where some of the <span class="math inline">\(\beta\)</span>’s are fully eliminated from the model, is very powerful. It essentially performs <strong>automatic feature selection</strong>; the predictors whose coefficients became zero are the ones that were not needed to get better predictive power.</p>
-<section id="your-turn" class="level3" data-number="15.3.1">
-<h3 data-number="15.3.1" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">15.3.1</span> Your Turn</h3>
+<section id="your-turn" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">14.3.1</span> Your Turn</h3>
 <div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -606,8 +600,8 @@ Warning
 </div>
 </div>
 </section>
-<section id="elastic-net" class="level3" data-number="15.3.2">
-<h3 data-number="15.3.2" class="anchored" data-anchor-id="elastic-net"><span class="header-section-number">15.3.2</span> Elastic Net</h3>
+<section id="elastic-net" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="elastic-net"><span class="header-section-number">14.3.2</span> Elastic Net</h3>
 <p>If Ridge regression is one way to improve OLS in overfit cases, and LASSO regression is another, why not have the best of both worlds?</p>
 <p>There is no reason not to add <em>both</em> penalties to our loss function:</p>
 <p><span class="math display">\[ \ell(\beta) = SSE + \lambda \left(\sum_{j = 1}^p \beta^2 + \sum_{j = 1}^p |\beta_j| \right)\]</span></p>
@@ -615,8 +609,8 @@ Warning
 <p><span class="math display">\[ \ell(\beta) = SSE + \lambda \left(\alpha \sum_{j = 1}^p \beta^2 + (1-\alpha) \sum_{j = 1}^p |\beta_j| \right)\]</span></p>
 <p>But what is the best choice of <span class="math inline">\(\alpha\)</span>? I think you can see where this is headed…</p>
 </section>
-<section id="your-turn-1" class="level3" data-number="15.3.3">
-<h3 data-number="15.3.3" class="anchored" data-anchor-id="your-turn-1"><span class="header-section-number">15.3.3</span> Your Turn</h3>
+<section id="your-turn-1" class="level3" data-number="14.3.3">
+<h3 data-number="14.3.3" class="anchored" data-anchor-id="your-turn-1"><span class="header-section-number">14.3.3</span> Your Turn</h3>
 <div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -647,8 +641,8 @@ Warning
 </div>
 </section>
 </section>
-<section id="wrap-up" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">15.4</span> Wrap-Up</h2>
+<section id="wrap-up" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">14.4</span> Wrap-Up</h2>
 <p>In this chapter, you may feel a bit tricked! We promised you new model specifications, but actually, we <em>still</em> haven’t changed our prediction approach from a simple linear model:</p>
 <p><span class="math display">\[\hat{y}_i = \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots +  \beta_p x_{ip}\]</span></p>
 <p>It’s important to remember, though, that how you <strong>fit</strong> the model to data is every bit as important a piece of the <strong>model specification</strong> decision as the equation itself.</p>
@@ -1214,12 +1208,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./12-cross_validation.html" class="pagination-link" aria-label="Pipelines, Cross-Validation, and Tuning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./14-nonparametric_methods.html" class="pagination-link" aria-label="Nonparametric Methods">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

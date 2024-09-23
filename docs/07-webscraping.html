@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GSB 544: Data Science and Machine Learning with Python - 9&nbsp; Webscraping</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 8&nbsp; Webscraping</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./07-webscraping.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./07-webscraping.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -175,6 +175,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -186,62 +192,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -258,55 +252,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -321,16 +315,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a></li>
-  <li><a href="#an-alternative-to-web-scraping-apis" id="toc-an-alternative-to-web-scraping-apis" class="nav-link" data-scroll-target="#an-alternative-to-web-scraping-apis"><span class="header-section-number">9.2</span> An Alternative to Web Scraping: APIs</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">8.1</span> Introduction</a></li>
+  <li><a href="#an-alternative-to-web-scraping-apis" id="toc-an-alternative-to-web-scraping-apis" class="nav-link" data-scroll-target="#an-alternative-to-web-scraping-apis"><span class="header-section-number">8.2</span> An Alternative to Web Scraping: APIs</a>
   <ul class="collapse">
-  <li><a href="#the-tasty-api" id="toc-the-tasty-api" class="nav-link" data-scroll-target="#the-tasty-api"><span class="header-section-number">9.2.1</span> The Tasty API</a></li>
+  <li><a href="#the-tasty-api" id="toc-the-tasty-api" class="nav-link" data-scroll-target="#the-tasty-api"><span class="header-section-number">8.2.1</span> The Tasty API</a></li>
   </ul></li>
-  <li><a href="#html-and-web-scraping" id="toc-html-and-web-scraping" class="nav-link" data-scroll-target="#html-and-web-scraping"><span class="header-section-number">9.3</span> HTML and Web Scraping</a>
+  <li><a href="#html-and-web-scraping" id="toc-html-and-web-scraping" class="nav-link" data-scroll-target="#html-and-web-scraping"><span class="header-section-number">8.3</span> HTML and Web Scraping</a>
   <ul class="collapse">
-  <li><a href="#inspecting-html-source-code" id="toc-inspecting-html-source-code" class="nav-link" data-scroll-target="#inspecting-html-source-code"><span class="header-section-number">9.3.1</span> Inspecting HTML Source Code</a></li>
-  <li><a href="#scraping-an-html-table-with-pandas" id="toc-scraping-an-html-table-with-pandas" class="nav-link" data-scroll-target="#scraping-an-html-table-with-pandas"><span class="header-section-number">9.3.2</span> Scraping an HTML Table with <code>pandas</code></a></li>
-  <li><a href="#web-scraping-using-beautifulsoup" id="toc-web-scraping-using-beautifulsoup" class="nav-link" data-scroll-target="#web-scraping-using-beautifulsoup"><span class="header-section-number">9.3.3</span> Web Scraping Using <code>BeautifulSoup</code></a></li>
+  <li><a href="#inspecting-html-source-code" id="toc-inspecting-html-source-code" class="nav-link" data-scroll-target="#inspecting-html-source-code"><span class="header-section-number">8.3.1</span> Inspecting HTML Source Code</a></li>
+  <li><a href="#scraping-an-html-table-with-pandas" id="toc-scraping-an-html-table-with-pandas" class="nav-link" data-scroll-target="#scraping-an-html-table-with-pandas"><span class="header-section-number">8.3.2</span> Scraping an HTML Table with <code>pandas</code></a></li>
+  <li><a href="#web-scraping-using-beautifulsoup" id="toc-web-scraping-using-beautifulsoup" class="nav-link" data-scroll-target="#web-scraping-using-beautifulsoup"><span class="header-section-number">8.3.3</span> Web Scraping Using <code>BeautifulSoup</code></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/07-webscraping.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -338,9 +332,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./07-webscraping.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./07-webscraping.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></h1>
 </div>
 
 
@@ -357,8 +351,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">9.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1</span> Introduction</h2>
 <p>This document demonstrates the use of the <code>BeautifulSoup</code> library in Python to do webscraping.</p>
 <p><strong>Web scraping</strong> is the process of gathering information from the Internet. Even copying and pasting the lyrics of your favorite song is a form of web scraping! However, the words “web scraping” usually refer to a process that involves automation. Some websites don’t like it when automatic scrapers gather their data, while others don’t mind.</p>
 <p>If you’re scraping a page respectfully for educational purposes, then you’re unlikely to have any problems. Sill, it’s a good idea to do some research on your own and make sure that you’re not violating any Terms of Service before you start a large-scale project.</p>
@@ -381,12 +375,12 @@ Note
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="an-alternative-to-web-scraping-apis" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="an-alternative-to-web-scraping-apis"><span class="header-section-number">9.2</span> An Alternative to Web Scraping: APIs</h2>
+<section id="an-alternative-to-web-scraping-apis" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="an-alternative-to-web-scraping-apis"><span class="header-section-number">8.2</span> An Alternative to Web Scraping: APIs</h2>
 <p>Some website providers offer application programming interfaces (APIs) that allow you to access their data in a predefined manner. With APIs, you can avoid parsing HTML. Instead, you can access the data directly using formats like <strong>JSON</strong> and <strong>XML</strong>. <strong>HTML</strong> is primarily a way to present content to users visually.</p>
 <p>When you use an API, the process is generally more stable than gathering the data through web scraping. That’s because developers create APIs to be consumed by programs rather than by human eyes.</p>
-<section id="the-tasty-api" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="the-tasty-api"><span class="header-section-number">9.2.1</span> The Tasty API</h3>
+<section id="the-tasty-api" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="the-tasty-api"><span class="header-section-number">8.2.1</span> The Tasty API</h3>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -442,8 +436,8 @@ Check In
 <p>Before we move on from APIs it’s again important to note that gathering data from websites often comes with constraints. For example, the Tasty API only returns 20 results by default and only 40 results maximum, even if you specify the <code>size=</code> parameter. So, to gather more than 40 results we might need to use some form of iteration while still respecting the API’s rate limits.</p>
 </section>
 </section>
-<section id="html-and-web-scraping" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="html-and-web-scraping"><span class="header-section-number">9.3</span> HTML and Web Scraping</h2>
+<section id="html-and-web-scraping" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="html-and-web-scraping"><span class="header-section-number">8.3</span> HTML and Web Scraping</h2>
 <p><strong>HTML</strong>, which stands for “hypertext markup language”, is an XML-like language for specifying the appearance of web pages. Each tag in HTML corresponds to a specific page element. For example:</p>
 <ul>
 <li><code>&lt;img&gt;</code> specifies an image. The path to the image file is specified in the <code>src=</code> attribute.</li>
@@ -451,8 +445,8 @@ Check In
 <li><code>&lt;table&gt;</code> specifies a table. The rows of the table are specified by <code>&lt;tr&gt;</code> tags nested inside the <code>&lt;table&gt;</code> tag, while the cells in each row are specified by <code>&lt;td&gt;</code> tages nested inside each <code>&lt;tr&gt;</code> tag.</li>
 </ul>
 <p>Our goal is not to teach you HTML to make a web page. You will learn just enough HTML to be able to scrape data programmatically from a web page.</p>
-<section id="inspecting-html-source-code" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="inspecting-html-source-code"><span class="header-section-number">9.3.1</span> Inspecting HTML Source Code</h3>
+<section id="inspecting-html-source-code" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="inspecting-html-source-code"><span class="header-section-number">8.3.1</span> Inspecting HTML Source Code</h3>
 <p>Suppose we want to scrape faculty information from the <a href="https://statistics.calpoly.edu/content/directory">Cal Poly Statistics Department directory</a>. Once we have identified a web page that we want to scrape, the next step is to study the HTML source code. All web browsers have a “View Source” or “Page Source” feature that will display the HTML source of a web page.</p>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -469,8 +463,8 @@ Check In
 </div>
 <p>Notice how difficult it can be to find a page element in the HTML source. Many browsers allow you to right-click on a page element and jump to the part of the HTML source corresponding to that element.</p>
 </section>
-<section id="scraping-an-html-table-with-pandas" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="scraping-an-html-table-with-pandas"><span class="header-section-number">9.3.2</span> Scraping an HTML Table with <code>pandas</code></h3>
+<section id="scraping-an-html-table-with-pandas" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="scraping-an-html-table-with-pandas"><span class="header-section-number">8.3.2</span> Scraping an HTML Table with <code>pandas</code></h3>
 <p>The <code>pandas</code> command <code>read_html</code> can be used to scrape information from an HTML table on a webpage.</p>
 <p>We can call <code>read_html</code> on the URL.</p>
 <div id="3b0c6ed0" class="cell" data-execution_count="4">
@@ -500,8 +494,8 @@ Check In
 </div>
 <p>This is a good first pass at scraping information from a webpage and it returns it to us well in the form of a data frame. This works well for HTML <em>tables</em>. Unfortunately, you often want to scrape information from a webpage that isn’t conveniently stored in an HTML table, in which case <code>read_html</code> won’t work. (It only searches for <code>&lt;table&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;tr&gt;</code>, and <code>&lt;td&gt;</code> tags, but there are many other HTML tags.)</p>
 </section>
-<section id="web-scraping-using-beautifulsoup" class="level3" data-number="9.3.3">
-<h3 data-number="9.3.3" class="anchored" data-anchor-id="web-scraping-using-beautifulsoup"><span class="header-section-number">9.3.3</span> Web Scraping Using <code>BeautifulSoup</code></h3>
+<section id="web-scraping-using-beautifulsoup" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="web-scraping-using-beautifulsoup"><span class="header-section-number">8.3.3</span> Web Scraping Using <code>BeautifulSoup</code></h3>
 <p><code>BeautifulSoup</code> is a Python library that makes it easy to navigate an HTML document. Like with XML, we can query tags by name or attribute, and we can narrow our search to the ancestors and descendants of specific tags. Also, many web sites have malformed HTML, which <code>BeautifulSoup</code> is able to handle gracefully.</p>
 <p>First we issue an HTTP request to the URL to get the HTML source code.</p>
 <div id="7a3cbf33" class="cell" data-execution_count="7">
@@ -513,8 +507,8 @@ Check In
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(response.content, <span class="st">"html.parser"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="find-elements-by-id" class="level4" data-number="9.3.3.1">
-<h4 data-number="9.3.3.1" class="anchored" data-anchor-id="find-elements-by-id"><span class="header-section-number">9.3.3.1</span> Find Elements by ID</h4>
+<section id="find-elements-by-id" class="level4" data-number="8.3.3.1">
+<h4 data-number="8.3.3.1" class="anchored" data-anchor-id="find-elements-by-id"><span class="header-section-number">8.3.3.1</span> Find Elements by ID</h4>
 <p>In an HTML web page, every element can have an <code>id</code> attribute assigned. As the name already suggests, that <code>id</code> attribute makes the element uniquely identifiable on the page. You can begin to parse your page by selecting a specific element by its ID.</p>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -534,23 +528,23 @@ Check In
 </div>
 </div>
 </section>
-<section id="find-elements-by-html-class-name" class="level4" data-number="9.3.3.2">
-<h4 data-number="9.3.3.2" class="anchored" data-anchor-id="find-elements-by-html-class-name"><span class="header-section-number">9.3.3.2</span> Find Elements by HTML Class Name</h4>
+<section id="find-elements-by-html-class-name" class="level4" data-number="8.3.3.2">
+<h4 data-number="8.3.3.2" class="anchored" data-anchor-id="find-elements-by-html-class-name"><span class="header-section-number">8.3.3.2</span> Find Elements by HTML Class Name</h4>
 <p>You will often see that every similar piece of a web page is wrapped in the same HTML element, like <code>&lt;div&gt;</code> with a particular class. We’re able to extract all of the parts of the HTML of interest to us, also, by specifying a <em>containing</em> HTML element and the specific classes we want with code like the following:</p>
 <div id="d95e651f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>results.find_all(<span class="st">"element name"</span>, class_<span class="op">=</span><span class="st">"class name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="find-elements-by-class-name-and-text-content" class="level4" data-number="9.3.3.3">
-<h4 data-number="9.3.3.3" class="anchored" data-anchor-id="find-elements-by-class-name-and-text-content"><span class="header-section-number">9.3.3.3</span> Find Elements by Class Name and Text Content</h4>
+<section id="find-elements-by-class-name-and-text-content" class="level4" data-number="8.3.3.3">
+<h4 data-number="8.3.3.3" class="anchored" data-anchor-id="find-elements-by-class-name-and-text-content"><span class="header-section-number">8.3.3.3</span> Find Elements by Class Name and Text Content</h4>
 <p>It’s often the case that we only want pieces of a web page’s content that match certain criteria. We can refine our search using the <code>string</code> option of <code>.find_all()</code>.</p>
 <div id="e43341ba" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>refined_results <span class="op">=</span> results.find_all(<span class="st">"class name"</span>, string<span class="op">=</span><span class="st">"search text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This code finds all <code>class name</code> elements where the contained string matches <code>"search text"</code> <strong>exactly</strong>. We’ll discuss later how to be more robust in the specification of string matches like this!</p>
 </section>
-<section id="find-elements-by-tag" class="level4" data-number="9.3.3.4">
-<h4 data-number="9.3.3.4" class="anchored" data-anchor-id="find-elements-by-tag"><span class="header-section-number">9.3.3.4</span> Find Elements by Tag</h4>
+<section id="find-elements-by-tag" class="level4" data-number="8.3.3.4">
+<h4 data-number="8.3.3.4" class="anchored" data-anchor-id="find-elements-by-tag"><span class="header-section-number">8.3.3.4</span> Find Elements by Tag</h4>
 <p>Now we can search for tags within this HTML document, using functions like <code>.find_all()</code>. For example, we can find all tables on this page.</p>
 <div id="831a5fd8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tables <span class="op">=</span> soup.find_all(<span class="st">"table"</span>)</span>
@@ -1209,12 +1203,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./06-iteration.html" class="pagination-link" aria-label="Iteration">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./08-regex.html" class="pagination-link" aria-label="Strings and Regular Expressions">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

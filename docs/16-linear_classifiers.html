@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>GSB 544: Data Science and Machine Learning with Python - 18&nbsp; Linear Classifiers</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 17&nbsp; Linear Classifiers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./16-linear_classifiers.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./16-linear_classifiers.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -186,6 +186,12 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -197,62 +203,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,55 +263,55 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -330,40 +324,40 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">18.1</span> Introduction</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">17.1</span> Introduction</a></li>
   <li>
-<a href="#linear-classifiers" id="toc-linear-classifiers" class="nav-link" data-scroll-target="#linear-classifiers"><span class="header-section-number">18.2</span> Linear Classifiers</a>
+<a href="#linear-classifiers" id="toc-linear-classifiers" class="nav-link" data-scroll-target="#linear-classifiers"><span class="header-section-number">17.2</span> Linear Classifiers</a>
   <ul class="collapse">
-<li><a href="#fitting-a-linear-classifier" id="toc-fitting-a-linear-classifier" class="nav-link" data-scroll-target="#fitting-a-linear-classifier"><span class="header-section-number">18.2.1</span> Fitting a linear classifier</a></li>
-  <li><a href="#a-bit-of-notation" id="toc-a-bit-of-notation" class="nav-link" data-scroll-target="#a-bit-of-notation"><span class="header-section-number">18.2.2</span> A bit of notation</a></li>
+<li><a href="#fitting-a-linear-classifier" id="toc-fitting-a-linear-classifier" class="nav-link" data-scroll-target="#fitting-a-linear-classifier"><span class="header-section-number">17.2.1</span> Fitting a linear classifier</a></li>
+  <li><a href="#a-bit-of-notation" id="toc-a-bit-of-notation" class="nav-link" data-scroll-target="#a-bit-of-notation"><span class="header-section-number">17.2.2</span> A bit of notation</a></li>
   </ul>
 </li>
   <li>
-<a href="#logistic-regression-as-a-linear-classifier" id="toc-logistic-regression-as-a-linear-classifier" class="nav-link" data-scroll-target="#logistic-regression-as-a-linear-classifier"><span class="header-section-number">18.3</span> Logistic Regression as a Linear Classifier</a>
+<a href="#logistic-regression-as-a-linear-classifier" id="toc-logistic-regression-as-a-linear-classifier" class="nav-link" data-scroll-target="#logistic-regression-as-a-linear-classifier"><span class="header-section-number">17.3</span> Logistic Regression as a Linear Classifier</a>
   <ul class="collapse">
-<li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="header-section-number">18.3.1</span> Loss function</a></li>
+<li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="header-section-number">17.3.1</span> Loss function</a></li>
   </ul>
 </li>
   <li>
-<a href="#linear-discriminant-analysis" id="toc-linear-discriminant-analysis" class="nav-link" data-scroll-target="#linear-discriminant-analysis"><span class="header-section-number">18.4</span> Linear Discriminant Analysis</a>
+<a href="#linear-discriminant-analysis" id="toc-linear-discriminant-analysis" class="nav-link" data-scroll-target="#linear-discriminant-analysis"><span class="header-section-number">17.4</span> Linear Discriminant Analysis</a>
   <ul class="collapse">
-<li><a href="#loss-function-1" id="toc-loss-function-1" class="nav-link" data-scroll-target="#loss-function-1"><span class="header-section-number">18.4.1</span> Loss function</a></li>
-  <li><a href="#qda" id="toc-qda" class="nav-link" data-scroll-target="#qda"><span class="header-section-number">18.4.2</span> QDA</a></li>
+<li><a href="#loss-function-1" id="toc-loss-function-1" class="nav-link" data-scroll-target="#loss-function-1"><span class="header-section-number">17.4.1</span> Loss function</a></li>
+  <li><a href="#qda" id="toc-qda" class="nav-link" data-scroll-target="#qda"><span class="header-section-number">17.4.2</span> QDA</a></li>
   </ul>
 </li>
   <li>
-<a href="#support-vector-classifiersmachines" id="toc-support-vector-classifiersmachines" class="nav-link" data-scroll-target="#support-vector-classifiersmachines"><span class="header-section-number">18.5</span> Support Vector Classifiers/Machines</a>
+<a href="#support-vector-classifiersmachines" id="toc-support-vector-classifiersmachines" class="nav-link" data-scroll-target="#support-vector-classifiersmachines"><span class="header-section-number">17.5</span> Support Vector Classifiers/Machines</a>
   <ul class="collapse">
-<li><a href="#loss-function-2" id="toc-loss-function-2" class="nav-link" data-scroll-target="#loss-function-2"><span class="header-section-number">18.5.1</span> Loss function</a></li>
-  <li><a href="#support-vector-machines" id="toc-support-vector-machines" class="nav-link" data-scroll-target="#support-vector-machines"><span class="header-section-number">18.5.2</span> Support Vector Machines</a></li>
+<li><a href="#loss-function-2" id="toc-loss-function-2" class="nav-link" data-scroll-target="#loss-function-2"><span class="header-section-number">17.5.1</span> Loss function</a></li>
+  <li><a href="#support-vector-machines" id="toc-support-vector-machines" class="nav-link" data-scroll-target="#support-vector-machines"><span class="header-section-number">17.5.2</span> Support Vector Machines</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/16-linear_classifiers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./16-linear_classifiers.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./16-linear_classifiers.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span>
+<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span>
 </h1>
 </div>
 
@@ -378,8 +372,8 @@ window.Quarto = {
   
 
 
-</header><section id="introduction" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">18.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">17.1</span> Introduction</h2>
 <p>In this chapter, we will explore two new model types: <strong>Linear Discriminant Analysis (LDA)</strong> and <strong>Support Vector Classifiers (SVC)</strong>. Both of these approaches, along with <em>Logistic Regression</em> from the previous chapter, share the feature of being what is called <strong>Linear Classifiers</strong></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -403,8 +397,8 @@ Note
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="linear-classifiers" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="linear-classifiers">
-<span class="header-section-number">18.2</span> Linear Classifiers</h2>
+</section><section id="linear-classifiers" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="linear-classifiers">
+<span class="header-section-number">17.2</span> Linear Classifiers</h2>
 <p>In binary classification, our goal is to <strong>predict</strong> which of two categories a <em>target</em> variable belongs to, using one or more <em>predictor</em> variables.</p>
 <p><strong>Linear classifiers</strong> are a general type of modeling approach that uses a linear combination of the predictors to create a <em>score</em>, and then assigns a class based on this score. That is, for some constants <span class="math inline">\(w_1, ..., w_p\)</span> and <span class="math inline">\(c\)</span>,</p>
 <p><span class="math display">\[z_i = w_1 x_{i1} + w_2 x_{i2} + \cdots + w_p x_{ip} + c\]</span> and we predict <span class="math inline">\(y_i = 1\)</span> if <span class="math inline">\(z_i \geq 0\)</span>, and <span class="math inline">\(y_i = 0\)</span> otherwise.</p>
@@ -412,18 +406,18 @@ Note
 <p><img src="./images/linear_classifier.png" class="img-fluid"></p>
 <p>The purple line, <span class="math inline">\(w_1 x_1 + w_2 x_2\)</span> is the equation for the score. Where the blue and the purple line cross are the exact values of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> that would make the score equal to exactly <span class="math inline">\(0\)</span>.</p>
 <p>Therefore, the blue line is the <strong>linear separator</strong> for these two categories, based on this particular score function. Future observations that land up and to the left of this line would be predicted as “A”, and those that land down and to the right are predicted as “B”. This is also sometimes called the <strong>decision boundary</strong>.</p>
-<section id="fitting-a-linear-classifier" class="level3" data-number="18.2.1"><h3 data-number="18.2.1" class="anchored" data-anchor-id="fitting-a-linear-classifier">
-<span class="header-section-number">18.2.1</span> Fitting a linear classifier</h3>
+<section id="fitting-a-linear-classifier" class="level3" data-number="17.2.1"><h3 data-number="17.2.1" class="anchored" data-anchor-id="fitting-a-linear-classifier">
+<span class="header-section-number">17.2.1</span> Fitting a linear classifier</h3>
 <p>Much like with ordinary linear regression, the big question we need to answer is: what values of <span class="math inline">\(w_1, ..., w_p\)</span> and <span class="math inline">\(c\)</span> will give us the <em>best</em> possible predictions? This, of course, depends on your definition of “best”.</p>
 <p>As we shall see, Logistic Regression, LDA, and SVC are <strong>all</strong> linear classifiers; the only difference is that they take very different approaches to choosing the “best” <span class="math inline">\(w\)</span> and <span class="math inline">\(c\)</span> values.</p>
-</section><section id="a-bit-of-notation" class="level3" data-number="18.2.2"><h3 data-number="18.2.2" class="anchored" data-anchor-id="a-bit-of-notation">
-<span class="header-section-number">18.2.2</span> A bit of notation</h3>
+</section><section id="a-bit-of-notation" class="level3" data-number="17.2.2"><h3 data-number="17.2.2" class="anchored" data-anchor-id="a-bit-of-notation">
+<span class="header-section-number">17.2.2</span> A bit of notation</h3>
 <p>For simplicity you will sometimes see the vectors <span class="math inline">\((w_1, ..., w_p)\)</span> and <span class="math inline">\((x_{i1}, ..., x_{ip})\)</span> written as simply <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(\mathbf{x_i}\)</span>. This lets us write the score <span class="math inline">\(z_i\)</span> in shorthand as the “matrix product” of the two vectors:</p>
 <p><span class="math display">\[z_i = \mathbf{w}^T\mathbf{x_i} + c\]</span> Similarly, we might sometimes define our prediction <span class="math inline">\(y_i\)</span> as:</p>
 <p><span class="math display">\[y_i = \mathcal{I} \{z_i \geq 0\}\]</span></p>
 <p>where <span class="math inline">\(\mathcal{I} \{\}\)</span> is the <em>indicator function</em>, equal to 1 if the statement is true and 0 if not..</p>
-</section></section><section id="logistic-regression-as-a-linear-classifier" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="logistic-regression-as-a-linear-classifier">
-<span class="header-section-number">18.3</span> Logistic Regression as a Linear Classifier</h2>
+</section></section><section id="logistic-regression-as-a-linear-classifier" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="logistic-regression-as-a-linear-classifier">
+<span class="header-section-number">17.3</span> Logistic Regression as a Linear Classifier</h2>
 <p>Recall that in logistic regression, we wanted to model the <strong>log-odds</strong> of an observation being in a particular category. To do so, we fit the model:</p>
 <p><span class="math display">\[\text{log-odds} = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\]</span> For consistency, let’s just call the log-odds of the <span class="math inline">\(i\)</span>-th observation <span class="math inline">\(z_i\)</span>. Then we’ll call <span class="math inline">\(\beta_1 = w_1\)</span>, <span class="math inline">\(beta_2 = w_2\)</span>, etc. and call <span class="math inline">\(\beta_0 = c\)</span>.</p>
 <p>Clearly, then, the log-odds in this case is simply a score based on a linear combination of the predictors.</p>
@@ -434,8 +428,8 @@ Note
 <p>If <span class="math inline">\(z_i\)</span> is <strong>negative</strong>, that means the value inside of the log must be <strong>less than one</strong>, which means that <span class="math inline">\(p_i &lt; (1 - p_i)\)</span>.</p>
 <p>If <span class="math inline">\(z_i\)</span> is <strong>positive</strong>, that means the value inside of the log must be <strong>greater than one</strong>, which means that <span class="math inline">\(p_i &gt; (1 - p_i)\)</span>.</p>
 <p>In other words: The cutoff <span class="math inline">\(z_i = 0\)</span> is exactly the same as the cutoff <span class="math inline">\(p_i = 0.5\)</span> - and it sure seems pretty reasonable for us to predict Category 1 whenever the probability is above 50%!</p>
-<section id="loss-function" class="level3" data-number="18.3.1"><h3 data-number="18.3.1" class="anchored" data-anchor-id="loss-function">
-<span class="header-section-number">18.3.1</span> Loss function</h3>
+<section id="loss-function" class="level3" data-number="17.3.1"><h3 data-number="17.3.1" class="anchored" data-anchor-id="loss-function">
+<span class="header-section-number">17.3.1</span> Loss function</h3>
 <p>So, what is the definition of “best” that is used when fitting Logistic Regression? Essentially, this model takes a probabilistic approach: The “best” choices of <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(c\)</span> are the ones that lead to <span class="math inline">\(p_i\)</span> values (probabilities) that would be <strong>most likely</strong> to produce the observed true categories. This method of model fitting is called <strong>Maximum Likelihood Estimation</strong>.</p>
 <p>In this class, we will omit the mathematics of the loss function.</p>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
@@ -451,8 +445,8 @@ Check In
 <p>Open <a href="https://colab.research.google.com/drive/1G7zOURudI7Y23XavK5SWD--_zkHAANz7?usp=sharing">this Colab notebook</a>, where you will find a dataset and instructions. Complete Section 1 (Logistic Regression).</p>
 </div>
 </div>
-</section></section><section id="linear-discriminant-analysis" class="level2" data-number="18.4"><h2 data-number="18.4" class="anchored" data-anchor-id="linear-discriminant-analysis">
-<span class="header-section-number">18.4</span> Linear Discriminant Analysis</h2>
+</section></section><section id="linear-discriminant-analysis" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="linear-discriminant-analysis">
+<span class="header-section-number">17.4</span> Linear Discriminant Analysis</h2>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -470,12 +464,12 @@ Warning
 <p><img src="./images/LDA.png" class="img-fluid"></p>
 <p>Our idea of the “best” decision boundary, if our assumption about Normal distributions is correct, is the one that <strong>maximizes the probability</strong> of future observations falling on the “correct” side of the line.</p>
 <p>How does this work with more than one predictor? Well, instead of the number line in the above illustration containing cholesterol values, imagine that it contained scores from some <span class="math inline">\(z = \mathbf{w}^T \mathbf{x} + c\)</span>. We still assume that we end up with two different Normal curves: one for each category. Then, our decision boundary would be at <span class="math inline">\(z = 0\)</span>.</p>
-<section id="loss-function-1" class="level3" data-number="18.4.1"><h3 data-number="18.4.1" class="anchored" data-anchor-id="loss-function-1">
-<span class="header-section-number">18.4.1</span> Loss function</h3>
+<section id="loss-function-1" class="level3" data-number="17.4.1"><h3 data-number="17.4.1" class="anchored" data-anchor-id="loss-function-1">
+<span class="header-section-number">17.4.1</span> Loss function</h3>
 <p>So, how does <strong>LDA</strong> decide on a “best” choice of <span class="math inline">\(w\)</span>’s and <span class="math inline">\(c\)</span>? It finds the score function that creates the <em>largest separation</em> between the two resulting estimated Normal curves.</p>
 <p><img src="./images/LDA_2.png" class="img-fluid"></p>
-</section><section id="qda" class="level3" data-number="18.4.2"><h3 data-number="18.4.2" class="anchored" data-anchor-id="qda">
-<span class="header-section-number">18.4.2</span> QDA</h3>
+</section><section id="qda" class="level3" data-number="17.4.2"><h3 data-number="17.4.2" class="anchored" data-anchor-id="qda">
+<span class="header-section-number">17.4.2</span> QDA</h3>
 <p>Mathematically, in <strong>LDA</strong> we also assume that both Normal curves have the same variance. This is a pretty big assumption, but it is necessary for LDA to be a linear classifier, and it creates some mathematical conveniences for solving for the <span class="math inline">\(w\)</span> and <span class="math inline">\(c\)</span> values.</p>
 <p>A variant on LDA is called <strong>Quadratic Discriminant Analysis (QDA)</strong>. In this approach, we allow the two curves to have different variances. Through some math details we won’t get into here, this creates a <em>quadratic</em> (non-linear) classifer; i.e., the score is given by</p>
 <p><span class="math display">\[z_i = w_1 (x_{1i} - a_1)^2 + \cdots + w_p (x_{pi} - a_p)^2 + c\]</span></p>
@@ -495,8 +489,8 @@ Check In
 <p>Open <a href="https://colab.research.google.com/drive/1G7zOURudI7Y23XavK5SWD--_zkHAANz7?usp=sharing">this Colab notebook</a>, where you will find a dataset and instructions. Complete Section 2 (LDA).</p>
 </div>
 </div>
-</section></section><section id="support-vector-classifiersmachines" class="level2" data-number="18.5"><h2 data-number="18.5" class="anchored" data-anchor-id="support-vector-classifiersmachines">
-<span class="header-section-number">18.5</span> Support Vector Classifiers/Machines</h2>
+</section></section><section id="support-vector-classifiersmachines" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="support-vector-classifiersmachines">
+<span class="header-section-number">17.5</span> Support Vector Classifiers/Machines</h2>
 <p>A <strong>Support Vector Classifier (SVC)</strong> takes a very non-statistical approach to choosing the “best” linear separator. The logic goes like this:</p>
 <ol type="1">
 <li><p>The best separating line would be one where one category is all far to one side, and the other category is all far to the other side.</p></li>
@@ -504,16 +498,16 @@ Check In
 </ol>
 <p>The SVC model approach is to draw <strong>soft margins</strong> around the score cutoff of <span class="math inline">\(z_i = 0\)</span>, between <span class="math inline">\(z_i = -1\)</span> and <span class="math inline">\(z_i = 1\)</span>. This means that we want the to choose our <span class="math inline">\(w\)</span>’s so that the space between the margins is as big as possible, to keep the two groups separate - but we acknowledge that there may be some observations “caught” in the margins. The observations right at the margins are called the <strong>support vectors</strong>.</p>
 <p><img src="./images/SVC.jpg" class="img-fluid"></p>
-<section id="loss-function-2" class="level3" data-number="18.5.1"><h3 data-number="18.5.1" class="anchored" data-anchor-id="loss-function-2">
-<span class="header-section-number">18.5.1</span> Loss function</h3>
+<section id="loss-function-2" class="level3" data-number="17.5.1"><h3 data-number="17.5.1" class="anchored" data-anchor-id="loss-function-2">
+<span class="header-section-number">17.5.1</span> Loss function</h3>
 <p>The way the SVC model fitting chooses the “best” <span class="math inline">\(w\)</span>’s and <span class="math inline">\(c\)</span> is to balance two concerns:</p>
 <ol type="1">
 <li><p>We want as much of our training data as possible to be on the “correct” side of the line and outside the margin.</p></li>
 <li><p>We want as big of a margin as we can get.</p></li>
 </ol>
 <p>In the loss function for SVC, we will find a <em>tuning parameter</em>, <span class="math inline">\(\lambda\)</span> or sometimes <span class="math inline">\(C\)</span>, which is the balancing of these two concerns, much like in penalized regression.</p>
-</section><section id="support-vector-machines" class="level3" data-number="18.5.2"><h3 data-number="18.5.2" class="anchored" data-anchor-id="support-vector-machines">
-<span class="header-section-number">18.5.2</span> Support Vector Machines</h3>
+</section><section id="support-vector-machines" class="level3" data-number="17.5.2"><h3 data-number="17.5.2" class="anchored" data-anchor-id="support-vector-machines">
+<span class="header-section-number">17.5.2</span> Support Vector Machines</h3>
 <p>As with LDA and QDA, there is a way to “level up” an SVC model into a non-linear classifier, called a <strong>Support Vector Machine</strong>.</p>
 <p>The way this works is that a <em>nonlinear</em> transformation function is applied to all the predictors, and <em>then</em> an SVC is fit. This transformation is called the <strong>kernel</strong>.</p>
 <p><img src="./images/SVM.png" class="img-fluid"></p>
@@ -1100,12 +1094,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./15-classification_intro.html" class="pagination-link" aria-label="Introduction to Classification">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./17-multiclass.html" class="pagination-link" aria-label="Multiclass Classification">
-        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

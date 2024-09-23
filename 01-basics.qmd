@@ -644,6 +644,5 @@ Use your new knowledge of objects, types, and common coding errors to [solve thi
 :::
 
 
-
-
+{{< include 01-a-ai_workflow.qmd >}}
 

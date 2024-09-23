@@ -1,5 +1,5 @@
 ---
-title: "Intro and Workflow Setup"
+title: "Intro and Setup"
 ---
 
 
@@ -302,3 +302,6 @@ Choose an IDE to install.  Then, download the `.ipynb` file from your practice C
 
 Then, from your IDE, render the `.ipynb` file using Quarto. 
 :::
+
+
+{{< include 00-a-intro_ai.qmd >}}
