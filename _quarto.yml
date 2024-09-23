@@ -10,9 +10,9 @@ book:
   - index.qmd
   - part: "Data Science with Python"
     chapters: 
-    - 00-setup.qmd
+    - 00-setup.qmd    
+    #- 01-a-intro_ai.qmd
     - 01-basics.qmd
-    - 01-a-intro_ai.qmd
     - 02-plotnine.qmd
     - 03-basic_data_operations.qmd
     - 04-pivoting_joining.qmd

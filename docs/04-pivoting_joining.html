@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GSB 544: Data Science and Machine Learning with Python - 6&nbsp; Pivoting and Joining</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 5&nbsp; Pivoting and Joining</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./04-pivoting_joining.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./04-pivoting_joining.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -178,6 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -189,62 +195,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,55 +255,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -324,17 +318,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6.1</span> Introduction</a></li>
-  <li><a href="#pivoting-data-in-python" id="toc-pivoting-data-in-python" class="nav-link" data-scroll-target="#pivoting-data-in-python"><span class="header-section-number">6.2</span> Pivoting Data in Python</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
+  <li><a href="#pivoting-data-in-python" id="toc-pivoting-data-in-python" class="nav-link" data-scroll-target="#pivoting-data-in-python"><span class="header-section-number">5.2</span> Pivoting Data in Python</a>
   <ul class="collapse">
-  <li><a href="#tidy-data-is-special-tabular-data" id="toc-tidy-data-is-special-tabular-data" class="nav-link" data-scroll-target="#tidy-data-is-special-tabular-data"><span class="header-section-number">6.2.1</span> Tidy Data is Special Tabular Data</a></li>
-  <li><a href="#wide-to-long-format" id="toc-wide-to-long-format" class="nav-link" data-scroll-target="#wide-to-long-format"><span class="header-section-number">6.2.2</span> Wide to Long Format</a></li>
-  <li><a href="#long-to-wide-format" id="toc-long-to-wide-format" class="nav-link" data-scroll-target="#long-to-wide-format"><span class="header-section-number">6.2.3</span> Long to Wide Format</a></li>
+  <li><a href="#tidy-data-is-special-tabular-data" id="toc-tidy-data-is-special-tabular-data" class="nav-link" data-scroll-target="#tidy-data-is-special-tabular-data"><span class="header-section-number">5.2.1</span> Tidy Data is Special Tabular Data</a></li>
+  <li><a href="#wide-to-long-format" id="toc-wide-to-long-format" class="nav-link" data-scroll-target="#wide-to-long-format"><span class="header-section-number">5.2.2</span> Wide to Long Format</a></li>
+  <li><a href="#long-to-wide-format" id="toc-long-to-wide-format" class="nav-link" data-scroll-target="#long-to-wide-format"><span class="header-section-number">5.2.3</span> Long to Wide Format</a></li>
   </ul></li>
-  <li><a href="#joining-datasets-in-python" id="toc-joining-datasets-in-python" class="nav-link" data-scroll-target="#joining-datasets-in-python"><span class="header-section-number">6.3</span> Joining Datasets in Python</a>
+  <li><a href="#joining-datasets-in-python" id="toc-joining-datasets-in-python" class="nav-link" data-scroll-target="#joining-datasets-in-python"><span class="header-section-number">5.3</span> Joining Datasets in Python</a>
   <ul class="collapse">
-  <li><a href="#concatenating-and-merging-data" id="toc-concatenating-and-merging-data" class="nav-link" data-scroll-target="#concatenating-and-merging-data"><span class="header-section-number">6.3.1</span> Concatenating and Merging Data</a></li>
-  <li><a href="#types-of-joins" id="toc-types-of-joins" class="nav-link" data-scroll-target="#types-of-joins"><span class="header-section-number">6.3.2</span> Types of Joins</a></li>
+  <li><a href="#concatenating-and-merging-data" id="toc-concatenating-and-merging-data" class="nav-link" data-scroll-target="#concatenating-and-merging-data"><span class="header-section-number">5.3.1</span> Concatenating and Merging Data</a></li>
+  <li><a href="#types-of-joins" id="toc-types-of-joins" class="nav-link" data-scroll-target="#types-of-joins"><span class="header-section-number">5.3.2</span> Types of Joins</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/04-pivoting_joining.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -342,9 +336,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./04-pivoting_joining.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./04-pivoting_joining.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></h1>
 </div>
 
 
@@ -361,8 +355,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
 <p>This document demonstrates the use of the <code>pandas</code> library in Python to do pivoting and joining of datasets.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -387,13 +381,13 @@ Note
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> pd.read_csv(<span class="st">"/content/pop.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="pivoting-data-in-python" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="pivoting-data-in-python"><span class="header-section-number">6.2</span> Pivoting Data in Python</h2>
+<section id="pivoting-data-in-python" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="pivoting-data-in-python"><span class="header-section-number">5.2</span> Pivoting Data in Python</h2>
 <p>Data come in all shapes and forms! Rare is the day when we can open a dataset for the first time and it’s ready for every type of visualization or analysis that we could want to do with it.</p>
 <p>In addition to the wrangling we discussed in the previous chapter, there may be a need to reshape the dataset entirely. For example, the column names might be values themselves that we want to make use of.</p>
 <p>Recall our introduction of <em>tidy</em> data in the previous chapter…</p>
-<section id="tidy-data-is-special-tabular-data" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="tidy-data-is-special-tabular-data"><span class="header-section-number">6.2.1</span> Tidy Data is Special Tabular Data</h3>
+<section id="tidy-data-is-special-tabular-data" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="tidy-data-is-special-tabular-data"><span class="header-section-number">5.2.1</span> Tidy Data is Special Tabular Data</h3>
 <p>For most people, the image that comes to mind when thinking about data is indeed something tabular or spreadsheet-like in nature. <strong>Which is great!</strong></p>
 <p>Tabular data is a form preferred by MANY different data operations and work. However, we will want to take this one step further. In almost all data science work we want our data to be <strong>tidy</strong></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -417,8 +411,8 @@ Note
 <p><img src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" class="img-fluid"></p>
 <p>In the previous chapter you were asked to open up a GapMinder dataset <a href="https://www.gapminder.org/data/">here</a> and to comment on whether this dataset was <em>tidy</em> or not. The answer was <strong>no</strong>, this dataset is not <em>tidy</em>. These datasets come with a row representing a country, each column representing a year, and each cell representing the value of the global indicator selected. To be <em>tidy</em> these three variables (<code>country</code>, <code>year</code>, <code>global indicator</code>) should each have their own column, instead of the <code>year</code> variable taking values as the column headers.</p>
 </section>
-<section id="wide-to-long-format" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="wide-to-long-format"><span class="header-section-number">6.2.2</span> Wide to Long Format</h3>
+<section id="wide-to-long-format" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="wide-to-long-format"><span class="header-section-number">5.2.2</span> Wide to Long Format</h3>
 <p>The GapMinder dataset is an example of what’s commonly referred to as data in a <em>wide format</em>. To make this dataset <em>tidy</em> we aim for a dataset with columns for <code>country</code>, <code>year</code>, and <code>global indicator</code> (e.g.&nbsp;population). Three columns is many fewer than the current number of columns, and so we will convert this dataset from <em>wide to long format</em>.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -451,8 +445,8 @@ Check In
 </div>
 </div>
 </section>
-<section id="long-to-wide-format" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="long-to-wide-format"><span class="header-section-number">6.2.3</span> Long to Wide Format</h3>
+<section id="long-to-wide-format" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="long-to-wide-format"><span class="header-section-number">5.2.3</span> Long to Wide Format</h3>
 <p>Even though certain data shapes are not considered <em>tidy</em>, they may be more conducive to performing certain operations than other shapes. For example, what if we were interested in the change in country population between 1950 and 2010? In the original <em>wide</em> shape of the GapMinder data this operation would have been a simple difference of columns like below.</p>
 <div id="b9530318" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>population[<span class="st">"pop_diff"</span>] <span class="op">=</span> population[<span class="st">"2010"</span>] <span class="op">-</span> population[<span class="st">"1950"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -491,14 +485,14 @@ Learn More
 </div>
 </section>
 </section>
-<section id="joining-datasets-in-python" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="joining-datasets-in-python"><span class="header-section-number">6.3</span> Joining Datasets in Python</h2>
+<section id="joining-datasets-in-python" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="joining-datasets-in-python"><span class="header-section-number">5.3</span> Joining Datasets in Python</h2>
 <p>The information you need is often spread across multiple data sets, so you will need to combine multiple data sets into one. In this chapter, we discuss strategies for combining information from multiple (tabular) data sets.</p>
 <p>As a working example, we will use a data set of baby names collected by the Social Security Administration. Each data set in this collection contains the names of all babies born in the United States in a particular year. This data is publicly available, and a copy has been made available at <a href="https://dlsun.github.io/pods/data/names/">https://dlsun.github.io/pods/data/names/</a>.</p>
-<section id="concatenating-and-merging-data" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="concatenating-and-merging-data"><span class="header-section-number">6.3.1</span> Concatenating and Merging Data</h3>
-<section id="concatenation" class="level4" data-number="6.3.1.1">
-<h4 data-number="6.3.1.1" class="anchored" data-anchor-id="concatenation"><span class="header-section-number">6.3.1.1</span> Concatenation</h4>
+<section id="concatenating-and-merging-data" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="concatenating-and-merging-data"><span class="header-section-number">5.3.1</span> Concatenating and Merging Data</h3>
+<section id="concatenation" class="level4" data-number="5.3.1.1">
+<h4 data-number="5.3.1.1" class="anchored" data-anchor-id="concatenation"><span class="header-section-number">5.3.1.1</span> Concatenation</h4>
 <p>Sometimes, the <em>rows</em> of data are spread across multiple files, and we want to combine the rows into a single data set. The process of combining rows from different data sets is known as concatenation.</p>
 <p>Visually, to concatenate two <code>DataFrames</code>, we simply stack them on top of one another.</p>
 <p>For example, suppose we want to understand how the popularity of different names evolved between 1995 and 2015. The 1995 names and the 2015 names are stored in two different files: <code>yob1995.txt</code> and <code>yob2015.txt</code>, respectively. To carry out this analysis, we will need to combine these two data sets into one.</p>
@@ -887,8 +881,8 @@ Learn More
 </div>
 <p>Now this is a <code>DataFrame</code> we can use!</p>
 </section>
-<section id="merging-a.k.a-joining" class="level4" data-number="6.3.1.2">
-<h4 data-number="6.3.1.2" class="anchored" data-anchor-id="merging-a.k.a-joining"><span class="header-section-number">6.3.1.2</span> Merging (a.k.a Joining)</h4>
+<section id="merging-a.k.a-joining" class="level4" data-number="5.3.1.2">
+<h4 data-number="5.3.1.2" class="anchored" data-anchor-id="merging-a.k.a-joining"><span class="header-section-number">5.3.1.2</span> Merging (a.k.a Joining)</h4>
 <p>More commonly, the data sets that we want to combine actually contain different information about the same observations. In other words, instead of stacking the <code>DataFrames</code> on top of each other, as in concatenation, we want to stack them next to each other. The process of combining columns or variables from different data sets is known as <em>merging</em> or <em>joining</em>.</p>
 <p>The observations may be in a different order in the two data sets, so merging is not as simple as placing the two <code>DataFrames</code> side-by-side.</p>
 <p><em>Merging</em> is an operation on two <code>DataFrames</code> that returns a third <code>DataFrame</code>. By convention, the first <code>DataFrame</code> is referred to as the one on the “left”, while the second <code>DataFrame</code> is the one on the “right”.</p>
@@ -1292,13 +1286,13 @@ Learn More
 </div>
 </div>
 </section>
-<section id="one-to-one-and-many-to-one-relationships" class="level4" data-number="6.3.1.3">
-<h4 data-number="6.3.1.3" class="anchored" data-anchor-id="one-to-one-and-many-to-one-relationships"><span class="header-section-number">6.3.1.3</span> One-to-One and Many-to-One Relationships</h4>
+<section id="one-to-one-and-many-to-one-relationships" class="level4" data-number="5.3.1.3">
+<h4 data-number="5.3.1.3" class="anchored" data-anchor-id="one-to-one-and-many-to-one-relationships"><span class="header-section-number">5.3.1.3</span> One-to-One and Many-to-One Relationships</h4>
 <p>In the example above, there was at most one combination of <code>Name</code> and <code>Sex</code> in the 2015 data set for each combination of <code>Name</code> and <code>Sex</code> in the 1995 data set. These two data sets are thus said to have a one-to-one relationship. The same would be true of combining two GapMinder datasets.</p>
 <p>However, two data sets need not have a one-to-one relationship! Two datasets could have a <em>many-to-one relationship</em>. In general, it’s <strong>extremely important</strong> to think carefully about what variables each of your two datasets have to begin with, and what variables you want your merged dataset to have…and what that merged dataset will represent with respect to your data.</p>
 </section>
-<section id="many-to-many-relationships-a-cautionary-tale" class="level4" data-number="6.3.1.4">
-<h4 data-number="6.3.1.4" class="anchored" data-anchor-id="many-to-many-relationships-a-cautionary-tale"><span class="header-section-number">6.3.1.4</span> Many-to-Many Relationships: A Cautionary Tale</h4>
+<section id="many-to-many-relationships-a-cautionary-tale" class="level4" data-number="5.3.1.4">
+<h4 data-number="5.3.1.4" class="anchored" data-anchor-id="many-to-many-relationships-a-cautionary-tale"><span class="header-section-number">5.3.1.4</span> Many-to-Many Relationships: A Cautionary Tale</h4>
 <p>It is also possible for multiple rows in the left <code>DataFrame</code> to match multiple rows in the right <code>DataFrame</code>. In this case, the two data sets are said to have a <em>many-to-many relationship</em>. Many-to-many joins can lead to misleading analyses, so it is important to exercise caution when working with many-to-many relationships.</p>
 <p>For example, in the baby names data set, the <code>Name</code> variable is not uniquely identifying. For example, there are both males and females with the name “Jessie”.</p>
 <div id="29dd2aca" class="cell" data-execution_count="13">
@@ -1454,8 +1448,8 @@ Learn More
 <p>If we had used a data set like this to determine the number of Jessies in 1995, then we would end up with the wrong answer, since we would have double-counted both female and male Jessies as a result of the many-to-many join. This is why it is important to exercise caution when working with (potential) many-to-many relationships.</p>
 </section>
 </section>
-<section id="types-of-joins" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="types-of-joins"><span class="header-section-number">6.3.2</span> Types of Joins</h3>
+<section id="types-of-joins" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="types-of-joins"><span class="header-section-number">5.3.2</span> Types of Joins</h3>
 <p>Above, we saw how to merge (or join) two data sets by matching on certain variables. But what happens when a row in one <code>DataFrame</code> has no match in the other?</p>
 <p>First, let’s investigate how <code>pandas</code> handles this situation by default. The name “Nevaeh”, which is “heaven” spelled backwards, took after Sonny Sandoval of the band P.O.D. gave his daughter the name in 2000. Let’s look at how common this name was five years earlier and five years after.</p>
 <div id="393dd0de" class="cell" data-execution_count="16">
@@ -2595,12 +2589,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./03-basic_data_operations.html" class="pagination-link" aria-label="Tabular Data and Basic Data Operations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./05-function_writing.html" class="pagination-link" aria-label="Writing Custom Functions">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

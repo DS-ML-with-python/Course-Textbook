@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.555">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>GSB 544: Data Science and Machine Learning with Python - 17&nbsp; Introduction to Classification</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 16&nbsp; Introduction to Classification</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./15-classification_intro.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./15-classification_intro.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -186,6 +186,12 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -197,62 +203,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,55 +263,55 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -330,37 +324,37 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">17.1</span> Introduction</a></li>
-  <li><a href="#machine-learning-mission" id="toc-machine-learning-mission" class="nav-link" data-scroll-target="#machine-learning-mission"><span class="header-section-number">17.2</span> Machine Learning Mission</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">16.1</span> Introduction</a></li>
+  <li><a href="#machine-learning-mission" id="toc-machine-learning-mission" class="nav-link" data-scroll-target="#machine-learning-mission"><span class="header-section-number">16.2</span> Machine Learning Mission</a></li>
   <li>
-<a href="#binary-classification-with-logistic-regression" id="toc-binary-classification-with-logistic-regression" class="nav-link" data-scroll-target="#binary-classification-with-logistic-regression"><span class="header-section-number">17.3</span> Binary Classification with Logistic Regression</a>
+<a href="#binary-classification-with-logistic-regression" id="toc-binary-classification-with-logistic-regression" class="nav-link" data-scroll-target="#binary-classification-with-logistic-regression"><span class="header-section-number">16.3</span> Binary Classification with Logistic Regression</a>
   <ul class="collapse">
-<li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">17.3.1</span> Classification</a></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">17.3.2</span> Logistic Regression</a></li>
+<li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">16.3.1</span> Classification</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">16.3.2</span> Logistic Regression</a></li>
   </ul>
 </li>
   <li>
-<a href="#general-classification" id="toc-general-classification" class="nav-link" data-scroll-target="#general-classification"><span class="header-section-number">17.4</span> General Classification</a>
+<a href="#general-classification" id="toc-general-classification" class="nav-link" data-scroll-target="#general-classification"><span class="header-section-number">16.4</span> General Classification</a>
   <ul class="collapse">
-<li><a href="#knn-for-classification" id="toc-knn-for-classification" class="nav-link" data-scroll-target="#knn-for-classification"><span class="header-section-number">17.4.1</span> kNN for Classification</a></li>
-  <li><a href="#decision-trees-for-classification" id="toc-decision-trees-for-classification" class="nav-link" data-scroll-target="#decision-trees-for-classification"><span class="header-section-number">17.4.2</span> Decision Trees for Classification</a></li>
+<li><a href="#knn-for-classification" id="toc-knn-for-classification" class="nav-link" data-scroll-target="#knn-for-classification"><span class="header-section-number">16.4.1</span> kNN for Classification</a></li>
+  <li><a href="#decision-trees-for-classification" id="toc-decision-trees-for-classification" class="nav-link" data-scroll-target="#decision-trees-for-classification"><span class="header-section-number">16.4.2</span> Decision Trees for Classification</a></li>
   </ul>
 </li>
   <li>
-<a href="#validating-classification-models" id="toc-validating-classification-models" class="nav-link" data-scroll-target="#validating-classification-models"><span class="header-section-number">17.5</span> Validating Classification Models</a>
+<a href="#validating-classification-models" id="toc-validating-classification-models" class="nav-link" data-scroll-target="#validating-classification-models"><span class="header-section-number">16.5</span> Validating Classification Models</a>
   <ul class="collapse">
-<li><a href="#confusion-matrices-precision-and-recall" id="toc-confusion-matrices-precision-and-recall" class="nav-link" data-scroll-target="#confusion-matrices-precision-and-recall"><span class="header-section-number">17.5.1</span> Confusion Matrices, Precision, and Recall</a></li>
-  <li><a href="#roc-and-auc" id="toc-roc-and-auc" class="nav-link" data-scroll-target="#roc-and-auc"><span class="header-section-number">17.5.2</span> ROC and AUC</a></li>
-  <li><a href="#f1-score" id="toc-f1-score" class="nav-link" data-scroll-target="#f1-score"><span class="header-section-number">17.5.3</span> F1 Score</a></li>
+<li><a href="#confusion-matrices-precision-and-recall" id="toc-confusion-matrices-precision-and-recall" class="nav-link" data-scroll-target="#confusion-matrices-precision-and-recall"><span class="header-section-number">16.5.1</span> Confusion Matrices, Precision, and Recall</a></li>
+  <li><a href="#roc-and-auc" id="toc-roc-and-auc" class="nav-link" data-scroll-target="#roc-and-auc"><span class="header-section-number">16.5.2</span> ROC and AUC</a></li>
+  <li><a href="#f1-score" id="toc-f1-score" class="nav-link" data-scroll-target="#f1-score"><span class="header-section-number">16.5.3</span> F1 Score</a></li>
   </ul>
 </li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">17.6</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">16.6</span> Conclusion</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/15-classification_intro.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./15-classification_intro.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./15-classification_intro.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span>
+<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span>
 </h1>
 </div>
 
@@ -375,8 +369,8 @@ window.Quarto = {
   
 
 
-</header><section id="introduction" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">17.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">16.1</span> Introduction</h2>
 <p>This document discusses classification, and the tools in <code>pandas</code> and <code>sklearn</code> that can assist with this. We will expand on our previous content by diving deeper into model evaluation.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -400,16 +394,16 @@ Note
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="machine-learning-mission" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="machine-learning-mission">
-<span class="header-section-number">17.2</span> Machine Learning Mission</h2>
+</section><section id="machine-learning-mission" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="machine-learning-mission">
+<span class="header-section-number">16.2</span> Machine Learning Mission</h2>
 <p>Recall that in machine learning our goal is to <strong>predict</strong> the value of some <em>target</em> variable using one or more <em>predictor</em> variables. Mathematically, we we’re in the following setup</p>
 <p><span class="math display">\[
 y = f(X) + \epsilon
 \]</span></p>
 <p>where <span class="math inline">\(y\)</span> is our target variable and <span class="math inline">\(X\)</span> represents the collection (data frame) of our predictor variables. So far our discussion has assumed that <span class="math inline">\(y\)</span> is a quantitative variable, but what if it’s a categorical variable?</p>
 <p>The nature of our predictors could be exactly the same, but now we want to predict the value of a categorical variable.</p>
-</section><section id="binary-classification-with-logistic-regression" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="binary-classification-with-logistic-regression">
-<span class="header-section-number">17.3</span> Binary Classification with Logistic Regression</h2>
+</section><section id="binary-classification-with-logistic-regression" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="binary-classification-with-logistic-regression">
+<span class="header-section-number">16.3</span> Binary Classification with Logistic Regression</h2>
 <p>Suppose we want to predict whether a person is going to default on their loan based on the current balance. The variable we’re trying to predict is <code>default</code> and the values are “Yes” or “No”, and we have a quantitative predictor in <code>balance</code>.</p>
 <p>In the past we’ve discussed dummifying categorical variables for use in modeling efforts and we could try that again here. That is, convert the values of the <code>default</code> variable to 1 (default on the loan) and 0 (not default on the loan). With the values of this variable now numeric, we might try using our previous modeling techniques…such as <strong>linear regression</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -417,8 +411,8 @@ y = f(X) + \epsilon
 <figcaption>Fig 1. Logistic model of Probability of Loan Default vs.&nbsp;Loan Balance (right).</figcaption></figure>
 </div>
 <p>A straight-line (i.e.&nbsp;traditional regression) model is not appropriate for these data, as evidenced by the graph on the left. The fact that the target variable is numeric here (0 or 1) is artificial, and so it’s not appropriate to model it as though it were numeric.</p>
-<section id="classification" class="level3" data-number="17.3.1"><h3 data-number="17.3.1" class="anchored" data-anchor-id="classification">
-<span class="header-section-number">17.3.1</span> Classification</h3>
+<section id="classification" class="level3" data-number="16.3.1"><h3 data-number="16.3.1" class="anchored" data-anchor-id="classification">
+<span class="header-section-number">16.3.1</span> Classification</h3>
 <p>Because our target variable is <strong>categorical</strong>, our machine learning task is known as <strong>classification</strong>. It also means that it no longer makes sense for our error metric to involve differences between the actual value and the predicted value. We should, instead, be looking at whether our predicted value <strong>matches</strong> the actual value. In such situations, the error term often used is <strong>mis-classification rate</strong>.</p>
 <p><span class="math display">\[
 \frac{1}{n} \sum_{i = 1}^n I(y_i \neq \hat{y}_i)
@@ -444,8 +438,8 @@ Note
 <p><span class="math display">\[Pr(Y = j | X = x_0)\]</span></p>
 <p>is the largest. As mathematical as this seems, it actually exactly matches how our intuition works!</p>
 <p>Because it can be shown that the <strong>Bayes Classifier</strong> is the best, machine learning models for classification boil down to the task of estimating these probabilities well. To this end, our classification modeling techniques should give us access to predicted probabilities and not just the predicted categories themselves.</p>
-</section><section id="logistic-regression" class="level3" data-number="17.3.2"><h3 data-number="17.3.2" class="anchored" data-anchor-id="logistic-regression">
-<span class="header-section-number">17.3.2</span> Logistic Regression</h3>
+</section><section id="logistic-regression" class="level3" data-number="16.3.2"><h3 data-number="16.3.2" class="anchored" data-anchor-id="logistic-regression">
+<span class="header-section-number">16.3.2</span> Logistic Regression</h3>
 <p>When our target variable is categorical and has only two distinct values (i.e.&nbsp;is binary) then <strong>logistic regression</strong> is a method often used. This approach involves modeling the log-odds of the target variable being in one category over the other, given the predictors. Mathematically, it’s something like</p>
 <p><span class="math display">\[log(\frac{p(X)}{1 - p(X)}) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p + \epsilon\]</span></p>
 <p>In our predictive modeling context it will suffice to know that after fitting the logistic regression model, predictions should take the form of probabilities of belonging to each possible category of our target variable.</p>
@@ -483,12 +477,12 @@ Check In
 <p>Use the other variables in the dataset and a logistic regression model to classify penguins as either “Gentoo” or “Not”. What is your training accuracy?</p>
 </div>
 </div>
-</section></section><section id="general-classification" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="general-classification">
-<span class="header-section-number">17.4</span> General Classification</h2>
+</section></section><section id="general-classification" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="general-classification">
+<span class="header-section-number">16.4</span> General Classification</h2>
 <p>Unfortunately, <strong>logistic regression</strong> is especially built for binary classification problems. There are ways to employ it for classification problems in which the target variable has more than two distinct values, but they’re a little ad-hoc.</p>
 <p>Instead we’ll turn to other methods when our target variable has more than 2 distinct values.</p>
-<section id="knn-for-classification" class="level3" data-number="17.4.1"><h3 data-number="17.4.1" class="anchored" data-anchor-id="knn-for-classification">
-<span class="header-section-number">17.4.1</span> kNN for Classification</h3>
+<section id="knn-for-classification" class="level3" data-number="16.4.1"><h3 data-number="16.4.1" class="anchored" data-anchor-id="knn-for-classification">
+<span class="header-section-number">16.4.1</span> kNN for Classification</h3>
 <p>k-Nearest Neighbors is another approach for estimating the probabilities we need to do our classification. Once again, we will choose a value of <span class="math inline">\(K\)</span> that determines the size of our neighborhood; i.e.&nbsp;the number of closest training data points we want to use. With a value for <span class="math inline">\(K\)</span> chosen,</p>
 <p><strong>estimate the conditional probability for category <span class="math inline">\(j\)</span> as the fraction of points in the neighborhood whose response value equal <span class="math inline">\(j\)</span></strong></p>
 <p>Simply put, for a new observation predict the category that is most frequent among the <span class="math inline">\(K\)</span> closest training data points.</p>
@@ -511,8 +505,8 @@ Check In
 <p>What would be your general recommendations for values of <span class="math inline">\(K\)</span> to use when using kNN for classification?</p>
 </div>
 </div>
-</section><section id="decision-trees-for-classification" class="level3" data-number="17.4.2"><h3 data-number="17.4.2" class="anchored" data-anchor-id="decision-trees-for-classification">
-<span class="header-section-number">17.4.2</span> Decision Trees for Classification</h3>
+</section><section id="decision-trees-for-classification" class="level3" data-number="16.4.2"><h3 data-number="16.4.2" class="anchored" data-anchor-id="decision-trees-for-classification">
+<span class="header-section-number">16.4.2</span> Decision Trees for Classification</h3>
 <p>The use of decision trees for classification is VERY similar to their use for regression (i.e.&nbsp;numerical target variable).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/ClassificationTree.png" class="img-fluid figure-img"></p>
@@ -547,15 +541,15 @@ Check In
 <p>What is your training accuracy?</p>
 </div>
 </div>
-</section></section><section id="validating-classification-models" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="validating-classification-models">
-<span class="header-section-number">17.5</span> Validating Classification Models</h2>
+</section></section><section id="validating-classification-models" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="validating-classification-models">
+<span class="header-section-number">16.5</span> Validating Classification Models</h2>
 <p>So far we’ve been evaluating our models using <strong>mis-classification rate</strong>, or alternatively <strong>overall accuracy</strong>. As a small, motivating example for the rest of this section, consider the following situation.</p>
 <p><em>Our target variable is binary and our dataset consists of the following: 95% class 1 and 5% class 2.</em></p>
 <p>If we built a classifier that just called everything in our training dataset <em>class 1</em> then our model would have a 95% training accuracy…which sounds really good!</p>
 <p>However, we will have gotten everything that was <em>class 2</em> wrong!</p>
 <p>In many situations we hope that our mistakes (errors) are distributed across all categories of our target variable and are not exclusive to, say, one category as in the previous example. In some situations we do want to prioritize not making certain mistakes over making others. Because of this there are other metrics of interest beyond just <strong>overall accuracy</strong> when it comes to classification.</p>
-<section id="confusion-matrices-precision-and-recall" class="level3" data-number="17.5.1"><h3 data-number="17.5.1" class="anchored" data-anchor-id="confusion-matrices-precision-and-recall">
-<span class="header-section-number">17.5.1</span> Confusion Matrices, Precision, and Recall</h3>
+<section id="confusion-matrices-precision-and-recall" class="level3" data-number="16.5.1"><h3 data-number="16.5.1" class="anchored" data-anchor-id="confusion-matrices-precision-and-recall">
+<span class="header-section-number">16.5.1</span> Confusion Matrices, Precision, and Recall</h3>
 <p>In classification problems, a <strong>confusion matrix</strong> is a convenient way to organize our results as a two-way table of our predicted categories versus the actual categories.</p>
 <p>In general the orientation of this table is not important, but the <code>confusion_matrix</code> function in <code>sklearn</code> will organize our results with the actual categories along the rows of the table and the predicted categories along the columns of the table. In this way, we can see exactly what kind of mistakes are being made!</p>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
@@ -572,14 +566,14 @@ Check In
 <p>What kinds of errors are most prevalent?</p>
 </div>
 </div>
-<section id="precision" class="level4" data-number="17.5.1.1"><h4 data-number="17.5.1.1" class="anchored" data-anchor-id="precision">
-<span class="header-section-number">17.5.1.1</span> Precision</h4>
+<section id="precision" class="level4" data-number="16.5.1.1"><h4 data-number="16.5.1.1" class="anchored" data-anchor-id="precision">
+<span class="header-section-number">16.5.1.1</span> Precision</h4>
 <p><strong>Precision</strong> is defined as the proportion of positive identifications that are actually correct. In other words,</p>
 <p><span class="math display">\[
 Precision = \frac{True Positives}{True Positives + False Positives}
 \]</span></p>
-</section><section id="recall" class="level4" data-number="17.5.1.2"><h4 data-number="17.5.1.2" class="anchored" data-anchor-id="recall">
-<span class="header-section-number">17.5.1.2</span> Recall</h4>
+</section><section id="recall" class="level4" data-number="16.5.1.2"><h4 data-number="16.5.1.2" class="anchored" data-anchor-id="recall">
+<span class="header-section-number">16.5.1.2</span> Recall</h4>
 <p><strong>Recall</strong> is defined as the proportion of actual positives that are identified correctly. In other words,</p>
 <p><span class="math display">\[
 Recall = \frac{True Positives}{True Positives + False Negatives}
@@ -617,23 +611,23 @@ Example
 <li>Gentoo vs.&nbsp;Not Gentoo</li>
 <li>Adelie vs.&nbsp;Not Adelie</li>
 <li>Chinstrap vs.&nbsp;Not Chinstrap</li>
-</ul></section></section><section id="roc-and-auc" class="level3" data-number="17.5.2"><h3 data-number="17.5.2" class="anchored" data-anchor-id="roc-and-auc">
-<span class="header-section-number">17.5.2</span> ROC and AUC</h3>
+</ul></section></section><section id="roc-and-auc" class="level3" data-number="16.5.2"><h3 data-number="16.5.2" class="anchored" data-anchor-id="roc-and-auc">
+<span class="header-section-number">16.5.2</span> ROC and AUC</h3>
 <p>So what the heck is a ROC-AUC anyway?!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/roc_awk.png" class="img-fluid figure-img" style="width:40.0%"></p>
 <figcaption>Artwork by Cal Poly ’22 data science students.</figcaption></figure>
 </div>
-<section id="sensitivity-and-specificity" class="level4" data-number="17.5.2.1"><h4 data-number="17.5.2.1" class="anchored" data-anchor-id="sensitivity-and-specificity">
-<span class="header-section-number">17.5.2.1</span> Sensitivity and Specificity</h4>
+<section id="sensitivity-and-specificity" class="level4" data-number="16.5.2.1"><h4 data-number="16.5.2.1" class="anchored" data-anchor-id="sensitivity-and-specificity">
+<span class="header-section-number">16.5.2.1</span> Sensitivity and Specificity</h4>
 <p><strong>Sensitivity</strong> is actually another name for <strong>recall</strong>, or the <em>true positive rate</em>.</p>
 <p><strong>Specificity</strong> is another name for the <em>true negative rate</em>:</p>
 <p><span class="math display">\[
 Specificity = \frac{True Negatives}{True Negatives + False Positives}
 \]</span></p>
 <p>Similar to <strong>precision</strong> and <strong>recall</strong>, higher values of <strong>sensitivity</strong> and <strong>specificity</strong> are always better.</p>
-</section><section id="roc" class="level4" data-number="17.5.2.2"><h4 data-number="17.5.2.2" class="anchored" data-anchor-id="roc">
-<span class="header-section-number">17.5.2.2</span> ROC</h4>
+</section><section id="roc" class="level4" data-number="16.5.2.2"><h4 data-number="16.5.2.2" class="anchored" data-anchor-id="roc">
+<span class="header-section-number">16.5.2.2</span> ROC</h4>
 <p>One extremely popular way to assess a classification model is via a <strong>Receiver Operating Curve</strong>, often called a <em>ROC Curve</em>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/Roc_curve.png" class="img-fluid figure-img"></p>
@@ -657,8 +651,8 @@ Check In
 </ul>
 </div>
 </div>
-</section><section id="auc" class="level4" data-number="17.5.2.3"><h4 data-number="17.5.2.3" class="anchored" data-anchor-id="auc">
-<span class="header-section-number">17.5.2.3</span> AUC</h4>
+</section><section id="auc" class="level4" data-number="16.5.2.3"><h4 data-number="16.5.2.3" class="anchored" data-anchor-id="auc">
+<span class="header-section-number">16.5.2.3</span> AUC</h4>
 <p>We’ve established that better-looking classifiers are further above the diagonal line in the ROC plot, but many people have gone one step further in summarizing this visualization.</p>
 <p>The <em>area-under-the-curve</em> (AUC) on the ROC plot gives a decent summary of the overall performance of the classifier.</p>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
@@ -674,15 +668,15 @@ Check In
 <p>What is the range of values for the AUC of a classifier? What values are more desirable?</p>
 </div>
 </div>
-</section></section><section id="f1-score" class="level3" data-number="17.5.3"><h3 data-number="17.5.3" class="anchored" data-anchor-id="f1-score">
-<span class="header-section-number">17.5.3</span> F1 Score</h3>
+</section></section><section id="f1-score" class="level3" data-number="16.5.3"><h3 data-number="16.5.3" class="anchored" data-anchor-id="f1-score">
+<span class="header-section-number">16.5.3</span> F1 Score</h3>
 <p>Because classification model metrics can be so complicated, researchers have come up with a class of metrics that can summarize quantities like precision and recall into a single number. The <strong><span class="math inline">\(F_1\)</span></strong> score is the “first” of these metrics:</p>
 <p><span class="math display">\[
 F_1 = 2\frac{precision \cdot recall}{precision + recall}
 \]</span></p>
 <p>The <span class="math inline">\(F_1\)</span> score is the harmonic mean of the precision and recall. It thus symmetrically represents both precision and recall in one metric. The highest possible value is 1.0, indicating perfect precision and recall, and the lowest possible value is 0, if either precision or recall are zero.</p>
-</section></section><section id="conclusion" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="conclusion">
-<span class="header-section-number">17.6</span> Conclusion</h2>
+</section></section><section id="conclusion" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">16.6</span> Conclusion</h2>
 <p>Even in classification problems we should be doing all of our evaluation on test data!</p>
 <div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1254,12 +1248,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./14-nonparametric_methods.html" class="pagination-link" aria-label="Nonparametric Methods">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./16-linear_classifiers.html" class="pagination-link" aria-label="Linear Classifiers">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

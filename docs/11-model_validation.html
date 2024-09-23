@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GSB 544: Data Science and Machine Learning with Python - 13&nbsp; Model Validation</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 12&nbsp; Model Validation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./11-model_validation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./11-model_validation.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -204,6 +204,12 @@ window.Quarto = {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -215,62 +221,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-a-intro_ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Gen AI</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
   </div>
 </li>
       </ul>
@@ -287,55 +281,55 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
   </div>
 </li>
       </ul>
@@ -350,13 +344,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
-  <li><a href="#machine-learning-mission" id="toc-machine-learning-mission" class="nav-link" data-scroll-target="#machine-learning-mission"><span class="header-section-number">13.2</span> Machine Learning Mission</a></li>
-  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression"><span class="header-section-number">13.3</span> Multiple Linear Regression</a></li>
-  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation"><span class="header-section-number">13.4</span> Model Evaluation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">12.1</span> Introduction</a></li>
+  <li><a href="#machine-learning-mission" id="toc-machine-learning-mission" class="nav-link" data-scroll-target="#machine-learning-mission"><span class="header-section-number">12.2</span> Machine Learning Mission</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression"><span class="header-section-number">12.3</span> Multiple Linear Regression</a></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation"><span class="header-section-number">12.4</span> Model Evaluation</a>
   <ul class="collapse">
-  <li><a href="#underoverfitting" id="toc-underoverfitting" class="nav-link" data-scroll-target="#underoverfitting"><span class="header-section-number">13.4.1</span> Under/Overfitting</a></li>
-  <li><a href="#suspiciously-good" id="toc-suspiciously-good" class="nav-link" data-scroll-target="#suspiciously-good"><span class="header-section-number">13.4.2</span> Suspiciously Good</a></li>
+  <li><a href="#underoverfitting" id="toc-underoverfitting" class="nav-link" data-scroll-target="#underoverfitting"><span class="header-section-number">12.4.1</span> Under/Overfitting</a></li>
+  <li><a href="#suspiciously-good" id="toc-suspiciously-good" class="nav-link" data-scroll-target="#suspiciously-good"><span class="header-section-number">12.4.2</span> Suspiciously Good</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/11-model_validation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -364,9 +358,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./11-model_validation.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-modeling_intro.html">Machine Learning with Python</a></li><li class="breadcrumb-item"><a href="./11-model_validation.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Model Validation</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></h1>
 </div>
 
 
@@ -383,8 +377,8 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">13.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">12.1</span> Introduction</h2>
 <p>This document discusses modeling via <em>multiple linear regression</em>, and the tools in <code>pandas</code> and <code>sklearn</code> that can assist with this. We will expand on our previous content by diving deeper into model evaluation.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -408,14 +402,14 @@ Note
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="machine-learning-mission" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="machine-learning-mission"><span class="header-section-number">13.2</span> Machine Learning Mission</h2>
+<section id="machine-learning-mission" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="machine-learning-mission"><span class="header-section-number">12.2</span> Machine Learning Mission</h2>
 <p>Recall that in machine learning our goal is to <strong>predict</strong> the value of some <em>target</em> variable using one or more <em>predictor</em> variables. Mathematically, we we’re in the following setup</p>
 <p><span class="math display">\[y = f(X) + \epsilon \]</span></p>
 <p>where <span class="math inline">\(y\)</span> is our target variable and <span class="math inline">\(X\)</span> represents the collection (data frame) of our predictor variables. So far we’ve discussed tackling this via <strong>multiple linear regression</strong>.</p>
 </section>
-<section id="multiple-linear-regression" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="multiple-linear-regression"><span class="header-section-number">13.3</span> Multiple Linear Regression</h2>
+<section id="multiple-linear-regression" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="multiple-linear-regression"><span class="header-section-number">12.3</span> Multiple Linear Regression</h2>
 <p>Recall that we’ve discussed the following model specification:</p>
 <p><span class="math display">\[y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon\]</span></p>
 <p>where <span class="math inline">\(X_j\)</span> (<span class="math inline">\(j = 1,...,p\)</span>) can represent any type of predictor (or transformed predictor) variable in our dataset.</p>
@@ -451,8 +445,8 @@ Check In
 </div>
 </div>
 </section>
-<section id="model-evaluation" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="model-evaluation"><span class="header-section-number">13.4</span> Model Evaluation</h2>
+<section id="model-evaluation" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="model-evaluation"><span class="header-section-number">12.4</span> Model Evaluation</h2>
 <p>Evaluating the quality of a model can be complex, but it’s been well studied. As standardized as <strong>R-squared</strong> is as a metric for a model, it suffers from at least one weakness:</p>
 <ul>
 <li>It is mathematically guaranteed to stay the same or increase in value if we add terms (predictors) to the model.</li>
@@ -503,8 +497,8 @@ Check In
 <li>R-Squared</li>
 </ul>
 <p>All of these metrics have corresponding functions in <code>sklearn</code>.</p>
-<section id="underoverfitting" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="underoverfitting"><span class="header-section-number">13.4.1</span> Under/Overfitting</h3>
+<section id="underoverfitting" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="underoverfitting"><span class="header-section-number">12.4.1</span> Under/Overfitting</h3>
 <p>Do you think your full model for <code>bill_depth_mm</code> underfit the data? Overfit? Was just fine? How do we even tell?!</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -541,8 +535,8 @@ Check In
 </div>
 </div>
 </section>
-<section id="suspiciously-good" class="level3" data-number="13.4.2">
-<h3 data-number="13.4.2" class="anchored" data-anchor-id="suspiciously-good"><span class="header-section-number">13.4.2</span> Suspiciously Good</h3>
+<section id="suspiciously-good" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="suspiciously-good"><span class="header-section-number">12.4.2</span> Suspiciously Good</h3>
 <p>Suppose we fit a model to our training data and apply it to our test data and obtain extremely low values for both the training and the test error metrics…</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1132,12 +1126,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./10-multiple_linear_regression.html" class="pagination-link" aria-label="Multiple Linear Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./12-cross_validation.html" class="pagination-link" aria-label="Pipelines, Cross-Validation, and Tuning">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
