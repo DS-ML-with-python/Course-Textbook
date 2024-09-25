@@ -640,7 +640,7 @@ The most important takeaways from this chapter are:
 ### Practice Exercise
 
 :::{.callout-practice-exercise .icon}
-Use your new knowledge of objects, types, and common coding errors to [solve this puzzle](https://colab.research.google.com/drive/19q0g8JRwKIRjyLe0HG3Olwnp4VyeyX3P?usp=sharing)
+Use your new knowledge of objects, types, and common coding errors to [solve this puzzle](https://colab.research.google.com/drive/19q0g8JRwKIRjyLe0HG3Olwnp4VyeyX3P?usp=sharing) 
 :::
 
 

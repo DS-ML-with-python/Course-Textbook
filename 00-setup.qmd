@@ -274,6 +274,10 @@ We are always hesitant to recommend a tool in class that is only in Beta testing
 
 :::
 
+:::{.callout-note}
+**Important:** If you are on a PC, you will need to enable the Quarto Extension in Positron for it to work.
+:::
+
 ### RStudio
 
 For R users, there has historically only been one IDE worth using:  [RStudio](https://posit.co/download/rstudio-desktop/).  RStudio *does* support `python` and `jupyter` - so it is certainly a viable option for this class.  However, there can be some frustrations in getting RStudio to recognize the correct installations of `python` and its packages.  If you are already very familiar with RStudio, it might be worth working through the initial install challenges so you can stick with your comfort zone.

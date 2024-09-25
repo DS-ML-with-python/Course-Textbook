@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>a-ai_workflow</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="01-a-ai_workflow_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01-a-ai_workflow_files/libs/quarto-html/quarto.js"></script>
+<script src="01-a-ai_workflow_files/libs/quarto-html/popper.min.js"></script>
+<script src="01-a-ai_workflow_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="01-a-ai_workflow_files/libs/quarto-html/anchor.min.js"></script>
+<link href="01-a-ai_workflow_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01-a-ai_workflow_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="01-a-ai_workflow_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="01-a-ai_workflow_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="01-a-ai_workflow_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Programming with GenAI</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>While it is certainly important to think about <em>responsible</em> and <em>ethical</em> use of GenAI, that doesn’t mean we should avoid using it altogehter. In this class we will also focus on <em>effective</em> and <em>correct</em> ways to use it to support our data tasks.</p>
+<p>Do you feel safe in a car with some self-driving abilities? Despite the self-driving abilities, your answer probably still depends on how safe you feel with the <strong>driver</strong>. You would hope that your driver has been taught to drive thoroughly, including knowing how to do the things that the self-driving can do on its own.</p>
+<p>It is similar with learning programming and machine learning. If we can use GenAI to do our work faster and with less frustration that is a good thing. But we can only really trust an analysis or program produced by GenAI if we are good drivers - if we know enough about programming <em>without</em> AI that we are able to review, edit, and test the output of the AI tool.</p>
+<div class="callout-opinion icon" data-collapse="true">
+<p>Our advice is that you challenge yourself to use <strong>no GenAI help</strong> on the <strong>Practice Exercises</strong> in this class. This will ensure that you get practice with new skills, and with finding other resources online, before you dive in to the lab assignments. Think of this like driving around in a parking lot before you hit the freeway!</p>
+<p>On the other hand, we encourage you to treat the <strong>Lab Assignments</strong> like real-world data analysis projects. This might mean using a higher level of GenAI support - but of course, you will still need to take careful steps to ensure that the final results are correct and reliable, as we discuss below.</p>
+</div>
+<p>In this class, we will follow the <strong>WEIRD</strong> rule for checking that AI-produced work is acceptable. Anything produced or co-produced by GenAI needs a human contributor to ensure that it is:</p>
+<ul>
+<li><strong>W</strong>ell-Specified</li>
+<li><strong>E</strong>ditable</li>
+<li><strong>I</strong>nterpretable</li>
+<li><strong>R</strong>eproducible</li>
+<li><strong>D</strong>ependable</li>
+</ul>
+<section id="well-specified" class="level3">
+<h3 class="anchored" data-anchor-id="well-specified">Well-Specified</h3>
+<p>A self-driving car can get you to your location, but it can’t help you decide what location you are driving to.</p>
+<p>The blessing and the curse of computer programming is that computers can only do what they are told. The same is true for prompting GenAI content: an LLM will only respond to the exact prompt that it is given.</p>
+<p>The very first step of every data analysis <strong>must</strong> come from a human being, who will define the problem and construct a problem statement, which may be used as an AI prompt.</p>
+<p><a href="https://chatgpt.com/share/66f1c744-098c-8012-8f72-9b9512c88649">Click this link</a> to see an example of a conversation with Chat-GPT 4o, where we give three different prompts for a particular data analysis question. Notice how the specificity of the prompt is important to get the results that the user is interested in.</p>
+<section id="brainstorming" class="level4">
+<h4 class="anchored" data-anchor-id="brainstorming">Brainstorming</h4>
+<p>If you don’t begin a data exploration with a specific analysis already in mind, GenAI can be excellent for <strong>brainstorming</strong> possible approaches.</p>
+<p><a href="https://chatgpt.com/share/66f1c744-098c-8012-8f72-9b9512c88649">Click here again</a> to continue the previous chat conversation, where we ask ChatGPT 4o to suggest some additional analyses. The AI tool is able to suggest some supporting tests for our original t-test, as well of some extensions of the original research question.</p>
+<p>Ultimately, however, it is the responsibility of the <strong>human</strong> to sift through the AI’s suggestions - possibly researching further any suggested analyses they are not familiar with - and determine one final, carefully specified plan of action.</p>
+</section>
+</section>
+<section id="editable" class="level3">
+<h3 class="anchored" data-anchor-id="editable">Editable</h3>
+<p>Every few years, a group of programmers hosts the <a href="https://en.wikipedia.org/wiki/International_Obfuscated_C_Code_Contest">Obfusticated C Code Contest</a>, a competition to see who can write the most unreadable, illogical, complicated program to do a straightforward task. Winners include code like the below, which, believe it or not, is a program to play chess:</p>
+<pre><code>B,i,y,u,b,I[411],*G=I,x=10,z=15,M=1e4;X(w,c,h,e,S,s){int t,o,L,E,d,O=e,N=-M*M,K
+=78-h&lt;&lt;x,p,*g,n,*m,A,q,r,C,J,a=y?-x:x;y^=8;G++;d=w||s&amp;&amp;s&gt;=h&amp;&amp;v 0,0)&gt;M;do{_ o=I[
+p=O]){q=o&amp;z^y _ q&lt;7){A=q--&amp;2?8:4;C=o-9&amp;z?q["&amp; .$  "]:42;do{r=I[p+=C[l]-64]_!w|p
+==w){g=q|p+a-S?0:I+S _!r&amp;(q|A&lt;3||g)||(r+1&amp;z^y)&gt;9&amp;&amp;q|A&gt;2){_ m=!(r-2&amp;7))P G[1]=O,
+K;J=n=o&amp;z;E=I[p-a]&amp;z;t=q|E-7?n:(n+=2,6^y);Z n&lt;=t){L=r?l[r&amp;7]*9-189-h-q:0 _ s)L
++=(1-q?l[p/x+5]-l[O/x+5]+l[p%x+6]*-~!q-l[O%x+6]+o/16*8:!!m*9)+(q?0:!(I[p-1]^n)+
+!(I[p+1]^n)+l[n&amp;7]*9-386+!!g*99+(A&lt;2))+!(E^y^9)_ s&gt;h||1&lt;s&amp;s==h&amp;&amp;L&gt;z|d){p[I]=n,O
+[I]=m?*g=*m,*m=0:g?*g=0:0;L-=X(s&gt;h|d?0:p,L-N,h+1,G[1],J=q|A&gt;1?0:p,s)_!(h||s-1|B
+-O|i-n|p-b|L&lt;-M))P y^=8,u=J;J=q-1|A&lt;7||m||!s|d|r|o&lt;z||v 0,0)&gt;M;O[I]=o;p[I]=r;m?
+*m=*g,*g=0:g?*g=9^y:0;}_ L&gt;N){*G=O _ s&gt;1){_ h&amp;&amp;c-L&lt;0)P L _!h)i=n,B=O,b=p;}N=L;}
+n+=J||(g=I+p,m=p&lt;O?g-3:g+2,*m&lt;z|m[O-p]||I[p+=p-O]);}}}}Z!r&amp;q&gt;2||(p=O,q|A&gt;2|o&gt;z&amp;
+!r&amp;&amp;++C*--A));}}}Z++O&gt;98?O=20:e-O);P N+M*M&amp;&amp;N&gt;-K+1924|d?N:0;}main(){Z++B&lt;121)*G
+++=B/x%x&lt;2|B%x&lt;2?7:B/x&amp;4?0:*l++&amp;31;Z B=19){Z B++&lt;99)putchar(B%x?l[B[I]|16]:x)_
+x-(B=F)){i=I[B+=(x-F)*x]&amp;z;b=F;b+=(x-F)*x;Z x-(*G=F))i=*G^8^y;}else v u,5);v u,
+1);}}</code></pre>
+<p>While GenAI doesn’t write code like the above, it can sometimes create programs that aren’t quite designed with human readability in mind. This makes it difficult for a human reviewer to <strong>edit</strong> the program when needed.</p>
+<p><img src="https://imgs.xkcd.com/comics/bad_code_2x.png" class="img-fluid"></p>
+<p>If your GenAI comes back with a program that you find difficult to understand - convoluted design, unclearly named objects, too many nested functions or loops, and so on - you will need to <strong>refactor</strong> the code so that it is easier to tweak and update.</p>
+</section>
+<section id="interpretable" class="level3">
+<h3 class="anchored" data-anchor-id="interpretable">Interpretable</h3>
+<p>Even if you use GenAI to produce code and/or analysis, ultimately the ownership of the project lies with you. It is <em>extremely important</em> that you understand, and are able to <strong>explain</strong>, the steps that the AI took; whether or not you directly performed them.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this course, the <strong>interpretable</strong> element is also how we define academic integrity.</p>
+<p>We expect that any AI-produced content you include in your work to be something you can completely and correctly explain <em>without</em> the AI’s help.</p>
+<p>If we suspect that AI is being overused in inappropriate ways - such as homework questions being copy-pasted into the prompt and the AI response being copy-pasted back with no oversight - we will address this by sitting down with you and asking you to explain the content step by step.</p>
+<p>It is your responsibility to take the time and ensure you truly understand each task that you “outsource” to a GenAI tool.</p>
+</div>
+</div>
+</section>
+<section id="reproducible" class="level3">
+<h3 class="anchored" data-anchor-id="reproducible">Reproducible</h3>
+<p>We call a data analysis <strong>reproducible</strong> if it is structured and documented in such a way that it is easily repeatable with new data or by new researchers.</p>
+<p>A current weakness of GenAI tools is that they often produce code that is too specifically tailored to the data given; code that cannot be generalized to the full data problem.</p>
+<p>Consider, for example, the following suggestion from ChatGPT 4o, in response to the prompt “Write me a python program to find all the first names used in the lyrics of a given song.”</p>
+<div id="dff3204c" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A list of common first names directly embedded in the script</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>FIRST_NAMES <span class="op">=</span> {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'John'</span>, <span class="st">'Paul'</span>, <span class="st">'Ringo'</span>, <span class="st">'Mary'</span>, <span class="st">'Lucy'</span>, <span class="st">'David'</span>, <span class="st">'Sarah'</span>, <span class="st">'James'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Michael'</span>, <span class="st">'Jennifer'</span>, <span class="st">'Linda'</span>, <span class="st">'Elizabeth'</span>, <span class="st">'George'</span>, <span class="st">'Emma'</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Liam'</span>, <span class="st">'Olivia'</span>, <span class="st">'Noah'</span>, <span class="st">'Ava'</span>, <span class="st">'Sophia'</span>, <span class="st">'Isabella'</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add more first names as needed</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_first_names_in_lyrics(lyrics, first_names):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Find all first names in the given song lyrics."""</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Split lyrics into words and remove punctuation using regex</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    words <span class="op">=</span> re.findall(<span class="vs">r'\b\w+\b'</span>, lyrics.lower())</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find intersection of words in lyrics with the first names</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    found_names <span class="op">=</span> {word.capitalize() <span class="cf">for</span> word <span class="kw">in</span> words <span class="cf">if</span> word <span class="kw">in</span> first_names}</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> found_names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here we see that the LLM suggests an approach of manually making a list of common first names. As you can imagine, this is unlikely to be the design that a data scientist would use. Not only does it require manually making a list of common names, or finding a resource like that online, this approach would miss uncommon first names. We would be more likely to use strategies like looking for capitalized words, sentence syntax, context, and so on.</p>
+<p>The LLM’s approach would not be reproducible outside of the example songs it seems to have used to select <code>'John', 'Paul', 'Ringo', 'Mary', 'Lucy'</code> as common names. <a href="https://www.youtube.com/watch?v=LgR6UNeQxXE&amp;pp=ygUdbHVjeSBpbiB0aGUgc2t5IHdpdGggZGlhbW9uZHM%3D">(What songs could this be, do you think?)</a></p>
+<p>When you generate code from an LLM, it is your responsibility to look for “hard-coded” or otherwise unreproducible elements of the program, and to instead implement a more generalizable approach.</p>
+</section>
+<section id="dependable" class="level3">
+<h3 class="anchored" data-anchor-id="dependable">Dependable</h3>
+<p>The simplest and most important question to ask about your AI-produced code or analysis is: is it correct?</p>
+<p>If we have met the previous four guidelines, we know our output is: - Answering the right question - Possible to change if needed - Following a process we understand - Generalized, not hard-coded</p>
+<p>But… does it actually achieve the desired task in a proper way?</p>
+<p>It is not enough for <em>you</em> to be convinced that your procedure works. You need to provide solid reassurances of its <strong>dependability</strong>.</p>
+<section id="unit-testing" class="level4">
+<h4 class="anchored" data-anchor-id="unit-testing">Unit testing</h4>
+<p>In programming, there is one way to do this: writing small <strong>unit tests</strong> that check whether your code outputs the values you wanted it to.</p>
+<p>Unit tests can be a very structured and formal, like the code checks that automatically run when a developer updates a particular library, to make sure the updates didn’t cause a <em>breaking change</em> in the software. But they can also be quick and informal, like putting a few different inputs into your function to make sure it behaves how you expect.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We cannot emphasize this enough: <strong>Unit tests are the best and most important way to prove to yourself, to us, and to your clients that the code you created (with or without AI) works the way you claim it does.</strong></p>
+</div>
+</div>
+<div class="callout-practice-exercise">
+<p><a href="https://chatgpt.com/share/66f3c42c-d598-8012-a717-cdaf70cf7848">Here</a> is a conversation with ChatGPT 4o, in which it is asked to create a program to find all <strong>prime numbers</strong> in a certain range, and a program to find all <strong>perfect numbers</strong> in a certain range.</p>
+<p>You may not understand every step of the code, nor the math procedure being used. That’s okay for this exercise.</p>
+<p>Copy the code into a Colab Notebook. Then write a few unit tests that check if it works. Make sure to include some unexpected or unusual inputs, to try to “challenge” the program to break!</p>
+</div>
+</section>
+</section>
+<section id="even-weird-er-ethics-and-references" class="level3">
+<h3 class="anchored" data-anchor-id="even-weird-er-ethics-and-references">Even WEIRD-ER: Ethics and References</h3>
+<p>The <strong>WEIRD</strong> guidelines are focused on making sure the actual content and results of AI work is trustworthy.</p>
+<p>Don’t forget, though, to be even <strong>WEIRD-ER</strong>: we also expect you to consider the <strong>E</strong>thical issues of your AI use, and to thoroughly <strong>R</strong>eference any AI contribution to your work.</p>
+<p>In every Lab Assignment, we expect an appendix with an <strong>Ethics Statement</strong> and <strong>References</strong>, both of which might need to reference your AI use.</p>
+<p>An example ethics statement might look something like:</p>
+<blockquote class="blockquote">
+<p>This analysis includes a comparison of male and female sex penguins. It therefore omits penguins with unknown sex or with unidentifiable biological sex. This analysis also makes use of Generative AI to suggest comparisons across penguin sex, and these tools may overlook exceptions to the sex binary.</p>
+</blockquote>
+<p>An example reference statement including AI might look something like:</p>
+<blockquote class="blockquote">
+<p>Chat-GPT 4o was used to suggest several analyses, including the Two-Way ANOVA test for body mass across sex and habitat. It was also used to generate first-draft code to perform this ANOVA test and create the corresponding boxplot.</p>
+</blockquote>
+</section>
+<section id="try-it-out" class="level3">
+<h3 class="anchored" data-anchor-id="try-it-out">Try it out</h3>
+<div class="callout-practice-exercise">
+<p><a href="https://colab.research.google.com/drive/1EdWpvNGmW25Ps654d_lFn80ya1nQAKxH?usp=sharing">Complete this activity with a partner.</a></p>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

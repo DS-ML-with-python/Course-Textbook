@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GSB 544: Data Science and Machine Learning with Python - 1&nbsp; Intro and Workflow Setup</title>
+<title>GSB 544: Data Science and Machine Learning with Python - 1&nbsp; Intro and Setup</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./00-setup.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Setup</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -141,12 +170,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./00-setup.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -156,6 +179,12 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Setup</span></span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
@@ -308,15 +337,21 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio"><span class="header-section-number">1.5.3</span> RStudio</a></li>
   <li><a href="#jupyter-1" id="toc-jupyter-1" class="nav-link" data-scroll-target="#jupyter-1"><span class="header-section-number">1.5.4</span> Jupyter</a></li>
   </ul></li>
+  <li><a href="#the-new-world-of-genai" id="toc-the-new-world-of-genai" class="nav-link" data-scroll-target="#the-new-world-of-genai"><span class="header-section-number">1.6</span> The new world of GenAI</a>
+  <ul class="collapse">
+  <li><a href="#a-brief-history" id="toc-a-brief-history" class="nav-link" data-scroll-target="#a-brief-history"><span class="header-section-number">1.6.1</span> A brief history</a></li>
+  <li><a href="#the-birth-of-an-llm" id="toc-the-birth-of-an-llm" class="nav-link" data-scroll-target="#the-birth-of-an-llm"><span class="header-section-number">1.6.2</span> The birth of an LLM</a></li>
+  <li><a href="#copyright-and-plagiarism-issues" id="toc-copyright-and-plagiarism-issues" class="nav-link" data-scroll-target="#copyright-and-plagiarism-issues"><span class="header-section-number">1.6.3</span> Copyright and plagiarism issues</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/00-setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./00-setup.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Setup</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Workflow Setup</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Setup</span></h1>
 </div>
 
 
@@ -721,6 +756,19 @@ Just our opinion...
 <p>We are always hesitant to recommend a tool in class that is only in Beta testing phase. However, we firmly believe that Positron is the future go-to IDE for data science; and even in its current early form, it provides the smoothest workflow from jupyter notebook to Quarto document that we know of.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Important:</strong> If you are on a PC, you will need to enable the Quarto Extension in Positron for it to work.</p>
+</div>
+</div>
 </section>
 <section id="rstudio" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="rstudio"><span class="header-section-number">1.5.3</span> RStudio</h3>
@@ -755,9 +803,105 @@ Check In
 <p>Then, from your IDE, render the <code>.ipynb</code> file using Quarto.</p>
 </div>
 </div>
-
-
 </section>
+</section>
+</section>
+<section id="the-new-world-of-genai" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="the-new-world-of-genai"><span class="header-section-number">1.6</span> The new world of GenAI</h2>
+<p>Every now and then, a technological advance comes along that changes the world very suddenly. These moments are exciting, but also particularly challenging for educators: how can we advise our students when this tool is as new to us as it is to them?</p>
+<p>Our goal for this class is for you to leave with a good idea of how to use GenAI tools <strong>responsibly</strong> and <strong>effectively</strong>. We want to think carefully about the ethical concerns with AI, but we also want to find ways that AI can make our data analysis process stronger, better, and easier.</p>
+<p>While we have put a lot of effort into the activities and resources in this textbook, we also hope that you will view this learning process as a collaborative one between us and you. As you encounter new ideas, new tools, or new challenges, we hope you will not hesitate to share those with us and your classmates.</p>
+<section id="a-brief-history" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="a-brief-history"><span class="header-section-number">1.6.1</span> A brief history</h3>
+<p>Although it is far from the first <strong>Generative AI Model</strong>, GenAI exploded on the public scene with the introduction of <strong>ChatGPT</strong> on November 30, 2022. ChatGPT stands for <em>generative pre-trained transformer</em>, and it is released by OpenAI, an organization founded in 2015. (The “original” ChatGPT - the first one released to the public - is actually version 3.5.)</p>
+<p>Since then, advances have been rapid. Several similar GenAI tools have popped up, including: Google’s Gemini, Anthropic’s Claude, Meta’s Llama, and Baidu’s Ernie. As of writing this in 2024, the most cutting-edge model is Chat-GPT 4o, the 3rd major public release from OpenAI.</p>
+<p>These tools are often referred to as <strong>LLM</strong>s (<em>Large Language Models</em>), since they focus on generating human-like text; unlike other generative AI models that might produce images, sounds, numeric output, etc.</p>
+</section>
+<section id="the-birth-of-an-llm" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="the-birth-of-an-llm"><span class="header-section-number">1.6.2</span> The birth of an LLM</h3>
+<p>The principle behind an LLM is not complicated, and not different than the predictive models we will study in this class.</p>
+<ol type="1">
+<li><p>Gather some <strong>training data</strong>, which provides examples of <strong>possible inputs</strong> and the corresponding <strong>correct outputs</strong>.</p></li>
+<li><p>Specify a <strong>model equation</strong>. For example, in simple linear regression, the equation is <em>output</em> = <em>slope</em> times <em>input</em> plus <em>intercept</em>, often written as <em>y = mx + b</em></p></li>
+<li><p>Use the training data to <em>train</em> the model; i.e.&nbsp;to calculate the <em>parameters</em>. In linear regression, the two parameters are <em>m</em> and <em>b</em>, the slope and intercept.</p></li>
+<li><p>When new data becomes available, where we only have the <em>input</em> values, plug these values into the trained model equation to obtain predicted <em>output</em> values.</p></li>
+</ol>
+<p>So, what makes an LLM so extremely different from a simple linear regression? Three elements:</p>
+<ol type="1">
+<li><p><strong>Quantity of training data.</strong> You might train a simple linear regression on a dataset with 100 rows and two columns. The dataset used to train ChatGPT 3.5 is unimaginably large: essentially, the entirely of all text written by humans available on the internet between 2016 and 2019, equating to roughly 500 billion rows of data.</p></li>
+<li><p><strong>Complexity of the model.</strong> Note that a <em>complex</em> model is not the same as a <em>complicated</em> one: complexity means that we have many, many <em>parameters</em>. The model equations themselves remain relatively simple. A simple linear regression has two parameters: slope and intercept. The original ChatGPT 3.5, and most of the other models mentioned, have around 100-200 billion parameters. ChatGPT 4.0 is estimated to have 1.76 trillion parameters.</p></li>
+<li><p><strong>Generative vs predictive.</strong> A classic predictive model will typically input a single number <span class="math inline">\(x\)</span> and output a single predicted number <span class="math inline">\(y\)</span>. A generative model takes human text and input, and instead outputs a <em>probability distribution</em> giving the probability of every possible word that could be a response to the human prompt. The LLM then <em>samples</em> from that distribution, randomly choosing a word, and then the next word, and then the next. This means that giving an LLM identical input won’t result in identical output.</p></li>
+</ol>
+<section id="cost-and-resources" class="level4" data-number="1.6.2.1">
+<h4 data-number="1.6.2.1" class="anchored" data-anchor-id="cost-and-resources"><span class="header-section-number">1.6.2.1</span> Cost and resources</h4>
+<p>If the procedure and equations for an LLM are not overly complicated, why did they not come on the scene until 2022?</p>
+<p>The answer is quite simple: <em>training</em> an LLM, with such enormous data and complexity, requires an absolutely unbelievable amount of computing resources.</p>
+<p>The cost of training ChatGPT-3.5 was approximately $5 million. It took several months to train, on a massive supercomputer running constantly the whole time. The amount of computation power used can be thought of like this: If you were to buy a top-of-the line personal laptop, for about $4000, you would need to run it continuously for almost 700 years to train ChatGPT-3.5. <a href="https://lambdalabs.com/blog/demystifying-gpt-3">(source)</a></p>
+<p>The size of ChatGPT-4 is not public; however, it is estimated to have cost $100 million.</p>
+<p>All this is to say: to create an LLM on the scale of those popular today, an organization must have the funding, resources, and time to…</p>
+<ul>
+<li><p>… gather or purchase an inconceivable amount of data …</p></li>
+<li><p>… build a networked supercomputer …</p></li>
+<li><p>… run the supercomputer continuously for months …</p></li>
+</ul>
+<p>… <em>before</em> the LLM can be used for anything at all!</p>
+</section>
+<section id="the-prediction-step" class="level4" data-number="1.6.2.2">
+<h4 data-number="1.6.2.2" class="anchored" data-anchor-id="the-prediction-step"><span class="header-section-number">1.6.2.2</span> The prediction step</h4>
+<p>All of this is what is needed to <em>train</em> the model. What about the <em>prediction</em> step? (Sometimes called <em>inference</em> in the AI world; although this term has a different meaning in statisics.)</p>
+<p>Well, once the model parameters are computed, putting in input and getting back output is a <em>much</em> lower computation load. But it is not totally free - and as you can imaging, there are a huge number of prompts and responses to the models every day.</p>
+<p>The cost of a typical prompt-and-response to ChatGPT 3.5 is about $0.0025, i.e., a quarter of a penny. For ChatGPT 4, it is around 9 cents. For this reason, at present users must pay for access to ChatGPT 4 but not 3.5. <a href="https://community.openai.com/t/gpt4-and-gpt-3-5-turb-api-cost-comparison-and-understanding/106192">(source)</a></p>
+</section>
+<section id="environmental-concerns" class="level4" data-number="1.6.2.3">
+<h4 data-number="1.6.2.3" class="anchored" data-anchor-id="environmental-concerns"><span class="header-section-number">1.6.2.3</span> Environmental concerns</h4>
+<p>Another important consideration of the ongoing costs of GenAI is the use of earth’s resources.</p>
+<p>The training and ongoing use of the model requires a supercomputer, <a href="https://maps.app.goo.gl/26WaN6iELoXBq55x7">housed in a large warehouse</a>. These are located near water sources, both for the hydroelectric power, and to use water for cooling; leading to <a href="https://earth.org/environmental-impact-chatgpt/">some concerns</a> about the quantity of fresh water being used.</p>
+<p>Perhaps more prominently, the supercomputers of course use massive amounts of electricity, producing a <em>carbon footprint</em> of C02 emissions from the generation process. The carbon footprint from training ChatGPT-3.5 is the same as driving about 120 vehicles for a year. This is, arguably, not a massively impactful amount in the context of human life - but many have concerns about this footprint scaling up rapidly, as we train more different and more complex models, and as the use of these trained models increases. <a href="https://www.scientificamerican.com/article/a-computer-scientist-breaks-down-generative-ais-hefty-carbon-footprint/">(source)</a></p>
+</section>
+</section>
+<section id="copyright-and-plagiarism-issues" class="level3" data-number="1.6.3">
+<h3 data-number="1.6.3" class="anchored" data-anchor-id="copyright-and-plagiarism-issues"><span class="header-section-number">1.6.3</span> Copyright and plagiarism issues</h3>
+<p>In the coming chapters, we will talk more about the responsibility of <em>users</em> of GenAI, like you and me, to make sure not to plagiarize. For now, though, we are focused on the creation of the LLMs.</p>
+<p>Recall that LLMs are essentially trained on text scraped from the internet. Text produced by an LLM is not <em>new</em> - it is simply the model’s rearrangement of the words and letters that it learned from the training data. So - is this ethical and legal use of the training data gathered from online?</p>
+<p>One extreme opinion is that <em>no use of any GenAI tool is ethical</em> unless <em>all</em> training data was given with explicit permission of the author.</p>
+<p>If I copy text from a website and share it without attribution, that is plagiarism. If I copy text from three websites, combine it together, and share it without attribution, that is plagiarism. If a GenAI copies text from thousands of websites and combines it, perhaps that too is always plagiarism.</p>
+<p>An opinion on the other extreme is that <em>any data available in public is acceptable to use for training</em>.</p>
+<p>This philosophy holds that, essentially, all human writing is the result of our brains processing “training data” from all the text we have ever read, and rearranging the words in new ways. Why is an LLM any different?</p>
+<p>The core question is: <strong>Is training a model a fair use of Intellectual Property?</strong> It is a question without a clear answer at present, and it is being hotly debated in philosophical and legal settings.</p>
+<div class="callout callout-style-default callout-learn-more no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learn More
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This question is particularly relevant in the world of generative <em>image</em> models, where many artists feel that their work is being incorporated into generative AI art without permission. We won’t focus on image generation in this class, but <a href="https://hbr.org/2023/04/generative-ai-has-an-intellectual-property-problem%20is%20an%20interesting%20read%20on%20the%20topic.">this article</a></p>
+</div>
+</div>
+<p>In this class, we will take the perspective that the current GenAI tools are, for better or for worse, legal and publicly available; and thus, we will make use of them in our work. At the same time, we will do our best to think critically about the ethical questions at stake, and to be responsible citizens of the new AI world.</p>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Take a moment to write a brief reflection on the following questions:</p>
+<ol type="1">
+<li><p>What excites you the most about the current GenAI tools available? What scares you most?</p></li>
+<li><p>Do you currently pay for a GenAI tool? If so, what motivated you to do so?</p></li>
+<li><p>What is your current opinion on the copyright question for training data?</p></li>
+</ol>
+</div>
+</div>
+
+
 </section>
 </section>
 

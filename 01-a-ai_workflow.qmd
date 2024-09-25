@@ -18,7 +18,7 @@ On the other hand, we encourage you to treat the **Lab Assignments** like real-w
 In this class, we will follow the **WEIRD** rule for checking that AI-produced work is acceptable.  Anything produced or co-produced by GenAI needs a human contributor to ensure that it is:
 
 * **W**ell-Specified
-* **E**xplainable
+* **E**ditable
 * **I**nterpretable
 * **R**eproducible
 * **D**ependable
@@ -41,13 +41,43 @@ If you don't begin a data exploration with a specific analysis already in mind, 
 
 Ultimately, however, it is the responsibility of the **human** to sift through the AI's suggestions - possibly researching further any suggested analyses they are not familiar with - and determine one final, carefully specified plan of action.
 
-### Explainable
+### Editable
+
+Every few years, a group of programmers hosts the [Obfusticated C Code Contest](https://en.wikipedia.org/wiki/International_Obfuscated_C_Code_Contest), a competition to see who can write the most unreadable, illogical, complicated program to do a straightforward task. Winners include code like the below, which, believe it or not, is a program to play chess:
+
+```
+B,i,y,u,b,I[411],*G=I,x=10,z=15,M=1e4;X(w,c,h,e,S,s){int t,o,L,E,d,O=e,N=-M*M,K
+=78-h<<x,p,*g,n,*m,A,q,r,C,J,a=y?-x:x;y^=8;G++;d=w||s&&s>=h&&v 0,0)>M;do{_ o=I[
+p=O]){q=o&z^y _ q<7){A=q--&2?8:4;C=o-9&z?q["& .$  "]:42;do{r=I[p+=C[l]-64]_!w|p
+==w){g=q|p+a-S?0:I+S _!r&(q|A<3||g)||(r+1&z^y)>9&&q|A>2){_ m=!(r-2&7))P G[1]=O,
+K;J=n=o&z;E=I[p-a]&z;t=q|E-7?n:(n+=2,6^y);Z n<=t){L=r?l[r&7]*9-189-h-q:0 _ s)L
++=(1-q?l[p/x+5]-l[O/x+5]+l[p%x+6]*-~!q-l[O%x+6]+o/16*8:!!m*9)+(q?0:!(I[p-1]^n)+
+!(I[p+1]^n)+l[n&7]*9-386+!!g*99+(A<2))+!(E^y^9)_ s>h||1<s&s==h&&L>z|d){p[I]=n,O
+[I]=m?*g=*m,*m=0:g?*g=0:0;L-=X(s>h|d?0:p,L-N,h+1,G[1],J=q|A>1?0:p,s)_!(h||s-1|B
+-O|i-n|p-b|L<-M))P y^=8,u=J;J=q-1|A<7||m||!s|d|r|o<z||v 0,0)>M;O[I]=o;p[I]=r;m?
+*m=*g,*g=0:g?*g=9^y:0;}_ L>N){*G=O _ s>1){_ h&&c-L<0)P L _!h)i=n,B=O,b=p;}N=L;}
+n+=J||(g=I+p,m=p<O?g-3:g+2,*m<z|m[O-p]||I[p+=p-O]);}}}}Z!r&q>2||(p=O,q|A>2|o>z&
+!r&&++C*--A));}}}Z++O>98?O=20:e-O);P N+M*M&&N>-K+1924|d?N:0;}main(){Z++B<121)*G
+++=B/x%x<2|B%x<2?7:B/x&4?0:*l++&31;Z B=19){Z B++<99)putchar(B%x?l[B[I]|16]:x)_
+x-(B=F)){i=I[B+=(x-F)*x]&z;b=F;b+=(x-F)*x;Z x-(*G=F))i=*G^8^y;}else v u,5);v u,
+1);}}
+```
+
+While GenAI doesn't write code like the above, it can sometimes create programs that aren't quite designed with human readability in mind.  This makes it difficult for a human reviewer to **edit** the program when needed.
+
+![](https://imgs.xkcd.com/comics/bad_code_2x.png)
+
+If your GenAI comes back with a program that you find difficult to understand - convoluted design, unclearly named objects, too many nested functions or loops, and so on - you will need to **refactor** the code so that it is easier to tweak and update.
+
+
+### Interpretable
+
 
 Even if you use GenAI to produce code and/or analysis, ultimately the ownership of the project lies with you.  It is *extremely important* that you understand, and are able to **explain**, the steps that the AI took; whether or not you directly performed them.
 
 :::{.callout-note}
 
-In this course, the **explainable** element is also how we define academic integrity.
+In this course, the **interpretable** element is also how we define academic integrity.
 
 We expect that any AI-produced content you include in your work to be something you can completely and correctly explain *without* the AI's help.  
 
@@ -56,15 +86,82 @@ If we suspect that AI is being overused in inappropriate ways - such as homework
 It is your responsibility to take the time and ensure you truly understand each task that you "outsource" to a GenAI tool.
 :::
 
-### Interpretable
-
-
 
 ### Reproducible
 
+We call a data analysis **reproducible** if it is structured and documented in such a way that it is easily repeatable with new data or by new researchers.  
+
+A current weakness of GenAI tools is that they often produce code that is too specifically tailored to the data given; code that cannot be generalized to the full data problem.
+
+Consider, for example, the following suggestion from ChatGPT 4o, in response to the prompt "Write me a python program to find all the first names used in the lyrics of a given song."
+
+```{python}
+#| eval: false
+
+import re
+
+# A list of common first names directly embedded in the script
+FIRST_NAMES = {
+    'John', 'Paul', 'Ringo', 'Mary', 'Lucy', 'David', 'Sarah', 'James',
+    'Michael', 'Jennifer', 'Linda', 'Elizabeth', 'George', 'Emma',
+    'Liam', 'Olivia', 'Noah', 'Ava', 'Sophia', 'Isabella'
+    # Add more first names as needed
+}
+
+def find_first_names_in_lyrics(lyrics, first_names):
+    """Find all first names in the given song lyrics."""
+    # Split lyrics into words and remove punctuation using regex
+    words = re.findall(r'\b\w+\b', lyrics.lower())
+    
+    # Find intersection of words in lyrics with the first names
+    found_names = {word.capitalize() for word in words if word in first_names}
+    
+    return found_names
+    
+```
+
+Here we see that the LLM suggests an approach of manually making a list of common first names.  As you can imagine, this is unlikely to be the design that a data scientist would use.  Not only does it require manually making a list of common names, or finding a resource like that online, this approach would miss uncommon first names.  We would be more likely to use strategies like looking for capitalized words, sentence syntax, context, and so on.
+
+The LLM's approach would not be reproducible outside of the example songs it seems to have used to select `'John', 'Paul', 'Ringo', 'Mary', 'Lucy'` as common names.  [(What songs could this be, do you think?)](https://www.youtube.com/watch?v=LgR6UNeQxXE&pp=ygUdbHVjeSBpbiB0aGUgc2t5IHdpdGggZGlhbW9uZHM%3D)
+
+When you generate code from an LLM, it is your responsibility to look for "hard-coded" or otherwise unreproducible elements of the program, and to instead implement a more generalizable approach.
 
 
 ### Dependable
+
+The simplest and most important question to ask about your AI-produced code or analysis is: is it correct?
+
+If we have met the previous four guidelines, we know our output is:
+- Answering the right question
+- Possible to change if needed
+- Following a process we understand
+- Generalized, not hard-coded
+
+But... does it actually achieve the desired task in a proper way?
+
+It is not enough for *you* to be convinced that your procedure works.  You need to provide solid reassurances of its **dependability**.
+
+#### Unit testing
+
+In programming, there is one way to do this: writing small **unit tests** that check whether your code outputs the values you wanted it to.
+
+Unit tests can be a very structured and formal, like the code checks that automatically run when a developer updates a particular library, to make sure the updates didn't cause a *breaking change* in the software.  But they can also be quick and informal, like putting a few different inputs into your function to make sure it behaves how you expect.
+
+::: {.callout-important}
+
+We cannot emphasize this enough: **Unit tests are the best and most important way to prove to yourself, to us, and to your clients that the code you created (with or without AI) works the way you claim it does.**
+
+:::
+
+::: {.callout-practice-exercise}
+
+[Here](https://chatgpt.com/share/66f3c42c-d598-8012-a717-cdaf70cf7848) is a conversation with ChatGPT 4o, in which it is asked to create a program to find all **prime numbers** in a certain range, and a program to find all **perfect numbers** in a certain range.
+
+You may not understand every step of the code, nor the math procedure being used.  That's okay for this exercise.
+
+Copy the code into a Colab Notebook.  Then write a few unit tests that check if it works.  Make sure to include some unexpected or unusual inputs, to try to "challenge" the program to break!
+
+:::
 
 
 ### Even WEIRD-ER: Ethics and References
@@ -82,3 +179,13 @@ An example ethics statement might look something like:
 An example reference statement including AI might look something like:
 
 > Chat-GPT 4o was used to suggest several analyses, including the Two-Way ANOVA test for body mass across sex and habitat.  It was also used to generate first-draft code to perform this ANOVA test and create the corresponding boxplot.
+
+
+### Try it out
+
+::: {.callout-practice-exercise}
+
+[Complete this activity with a partner.](https://colab.research.google.com/drive/1EdWpvNGmW25Ps654d_lFn80ya1nQAKxH?usp=sharing)
+
+
+:::
