@@ -30,11 +30,18 @@ If you do not have the `pandas` library installed then you will need to run
 in the Jupyter terminal to install. Same for any other libraries you haven't installed.
 :::
 
+```{r}
+#| include: false
+reticulate::use_python("/Users/kbodwin/.pyenv/versions/3.10.3/bin/python")
+```
+
+
 ```{python}
 import pandas as pd
 from palmerpenguins import load_penguins
 from plotnine import ggplot, geom_point, aes, geom_boxplot
 ```
+
 
 ```{python}
 penguins = load_penguins()
@@ -367,13 +374,14 @@ aes(
 
 ```{python}
 from plotnine import geom_line
-penguins2 = penguins.groupby(by = ["species", "sex"]).mean()
+penguins2 = penguins.groupby(["species", "sex"])[["bill_length_mm"]].mean().reset_index()
 
 (ggplot(penguins2,
 aes(
   x = "species",
   y = "bill_length_mm",
-  color = "sex"
+  color = "sex",
+  group = "sex"
 ))
 + geom_point()
 + geom_line()
@@ -405,7 +413,7 @@ aes(
 ::: {.callout-practice-exercise .icon}
 Open up [this colab notebook](https://colab.research.google.com/drive/1LDt_ALySdbxGZbWEQe8dTx_L9QTC5jcU?usp=sharing) and make a copy.
 
-Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.
+Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub. Then share this repository link in the quiz question.
 :::
 
 {{< include 02-a-ai_viz.qmd >}}

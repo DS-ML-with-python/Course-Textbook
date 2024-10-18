@@ -68,8 +68,8 @@ Do your best to achieve this *without* un-folding the code to see how I construc
 :::
 
 ```{python}
-# | code-fold: true
-# | warning: false
+#| code-fold: true
+#| warning: false
 
 import pandas as pd
 from palmerpenguins import load_penguins
@@ -93,6 +93,6 @@ from plotnine import *
 
 [Click here](https://chatgpt.com/share/6711fb65-6884-8012-a9ff-9789f34b956a) to see my conversation with Chat GPT 4o.  Notice how my results improved when I used more specific Grammar of Graphics language.
 
-Compare the resulting code, and its output, to my hand-written code that made the original plot.  What is different?  What ways did GenAI make things easier, and what ways did it overcomplicate a procedure?
+Compare the resulting code, and its output, to my hand-written code that made the original plot.  What is different?  What ways did GenAI make things easier, and in what ways did it overcomplicate a step?
 
 :::

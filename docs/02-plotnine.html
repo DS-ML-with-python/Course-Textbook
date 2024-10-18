@@ -339,6 +339,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#facet-wrapping" id="toc-facet-wrapping" class="nav-link" data-scroll-target="#facet-wrapping"><span class="header-section-number">3.5.1</span> Facet Wrapping</a></li>
   </ul></li>
+  <li><a href="#visualization-and-genai" id="toc-visualization-and-genai" class="nav-link" data-scroll-target="#visualization-and-genai"><span class="header-section-number">3.6</span> Visualization and GenAI</a>
+  <ul class="collapse">
+  <li><a href="#brainstorming-possible-visualizations-for-a-particular-research-question." id="toc-brainstorming-possible-visualizations-for-a-particular-research-question." class="nav-link" data-scroll-target="#brainstorming-possible-visualizations-for-a-particular-research-question."><span class="header-section-number">3.6.1</span> 1. Brainstorming possible visualizations for a particular research question.</a></li>
+  <li><a href="#building-code-layer-by-layer." id="toc-building-code-layer-by-layer." class="nav-link" data-scroll-target="#building-code-layer-by-layer."><span class="header-section-number">3.6.2</span> 2. Building code layer by layer.</a></li>
+  <li><a href="#try-it-out" id="toc-try-it-out" class="nav-link" data-scroll-target="#try-it-out"><span class="header-section-number">3.6.3</span> Try it out</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/02-plotnine.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -394,21 +400,24 @@ Note
 <p>in the Jupyter terminal to install. Same for any other libraries you haven’t installed.</p>
 </div>
 </div>
-<div id="d0119551" class="cell" data-execution_count="1">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, geom_point, aes, geom_boxplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c6ee4465" class="cell" data-execution_count="2">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -433,15 +442,15 @@ Check In
 <h2 data-number="3.3" class="anchored" data-anchor-id="plotnine-i.e.-ggplot"><span class="header-section-number">3.3</span> plotnine (i.e.&nbsp;ggplot)</h2>
 <p>The <code>plotnine</code> library implements the <em>grammar of graphics</em> in Python.</p>
 <p>Code for the previous example:</p>
-<div id="29d840e1" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="the-aesthetic" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="the-aesthetic"><span class="header-section-number">3.3.1</span> The aesthetic</h3>
-<div id="dcedbc75" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, </span>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
 <span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
@@ -460,10 +469,13 @@ Check In
 </dd>
 </dl>
 </div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -471,8 +483,8 @@ Check In
 </section>
 <section id="the-geometry" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="the-geometry"><span class="header-section-number">3.3.2</span> The geometry</h3>
-<div id="c5c816e2" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, </span>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
 <span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
@@ -487,10 +499,13 @@ Check In
 </dd>
 </dl>
 </div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -507,29 +522,35 @@ Check In
 </section>
 <section id="scales" class="level3" data-number="3.3.4">
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="scales"><span class="header-section-number">3.3.4</span> Scales</h3>
-<div id="1b5ed08a" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-7-7.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>versus</strong></p>
-<div id="de1124d2" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> scale_y_reverse</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> scale_y_reverse()</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> scale_y_reverse</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> scale_y_reverse()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-8-9.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -537,27 +558,33 @@ Check In
 </section>
 <section id="non-aesthetic-colors" class="level3" data-number="3.3.5">
 <h3 data-number="3.3.5" class="anchored" data-anchor-id="non-aesthetic-colors"><span class="header-section-number">3.3.5</span> Non-aesthetic colors</h3>
-<div id="27da4d36" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-9-11.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>versus</strong></p>
-<div id="6bc67b12" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot(fill <span class="op">=</span> <span class="st">"cornflowerblue"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot(fill <span class="op">=</span> <span class="st">"cornflowerblue"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-10-13.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -575,41 +602,47 @@ Check In
 <p>What will this show?</p>
 </div>
 </div>
-<div id="30ec4996" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"cornflowerblue"</span>))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"cornflowerblue"</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="themes" class="level3" data-number="3.3.6">
 <h3 data-number="3.3.6" class="anchored" data-anchor-id="themes"><span class="header-section-number">3.3.6</span> Themes</h3>
-<div id="1ec4cbcc" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-12-15.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>versus</strong></p>
-<div id="246974df" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> theme_classic</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme_classic()</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> theme_classic</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins, aes(x <span class="op">=</span> <span class="st">"species"</span>, y <span class="op">=</span> <span class="st">"bill_length_mm"</span>, fill <span class="op">=</span> <span class="st">"species"</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> theme_classic()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-13-17.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -669,65 +702,81 @@ Learn More
 <section id="bar-plots" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="bar-plots"><span class="header-section-number">3.4.1</span> 1. Bar Plots</h3>
 <p>Most often used for showing <strong>counts</strong> of a <strong>categorical variable</strong>:</p>
-<div id="535473f3" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_bar</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar()</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_bar</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar()</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-14-19.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>… or <strong>relationships</strong> between <strong>two categorical variables</strong>:</p>
-<div id="9e355067" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"sex"</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar()</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>TypeError: '&lt;' not supported between instances of 'str' and 'float'</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"sex"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar()</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-15-21.png" class="img-fluid figure-img" width="614"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Would we rather see percents?</p>
-<div id="691378ee" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"island"</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar(position <span class="op">=</span> <span class="st">"fill"</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"island"</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar(position <span class="op">=</span> <span class="st">"fill"</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-16-23.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Or side-by-side?</p>
-<div id="fb52676c" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"island"</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar(position <span class="op">=</span> <span class="st">"dodge"</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"island"</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_bar(position <span class="op">=</span> <span class="st">"dodge"</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-17-25.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -748,81 +797,100 @@ Example
 </section>
 <section id="boxplots" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">3.4.2</span> 2. Boxplots</h3>
-<div id="f88b77a7" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-18-27.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Side-by-side using a categorical variable:</p>
-<div id="a145a331" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"sex"</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>TypeError: '&lt;' not supported between instances of 'str' and 'float'</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"sex"</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-19-29.png" class="img-fluid figure-img" width="614"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="histograms" class="level3" data-number="3.4.3">
 <h3 data-number="3.4.3" class="anchored" data-anchor-id="histograms"><span class="header-section-number">3.4.3</span> 3. Histograms</h3>
-<div id="4c4837bb" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_histogram</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram()</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_histogram</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram()</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-20-31.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="20ca43e8" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram(bins <span class="op">=</span> <span class="dv">100</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram(bins <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-21-33.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="2ff1206a" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram(bins <span class="op">=</span> <span class="dv">10</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram(bins <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-22-35.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -831,53 +899,62 @@ Example
 <section id="densities" class="level3" data-number="3.4.4">
 <h3 data-number="3.4.4" class="anchored" data-anchor-id="densities"><span class="header-section-number">3.4.4</span> 3.5 Densities</h3>
 <p>Suppose you want to compare histograms by <strong>category</strong>:</p>
-<div id="ab6958bd" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram()</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_histogram()</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-23-37.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Cleaner: smoothed histogram, or density:</p>
-<div id="fb70aaef" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_density</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_density()</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_density</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_density()</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-24-39.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Even cleaner: The <strong>alpha</strong> option:</p>
-<div id="a68d8068" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_density(alpha <span class="op">=</span> <span class="fl">0.5</span>)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  fill <span class="op">=</span> <span class="st">"species"</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_density(alpha <span class="op">=</span> <span class="fl">0.5</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-25-41.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -885,36 +962,42 @@ Example
 </section>
 <section id="scatterplots" class="level3" data-number="3.4.5">
 <h3 data-number="3.4.5" class="anchored" data-anchor-id="scatterplots"><span class="header-section-number">3.4.5</span> 4. Scatterplots</h3>
-<div id="d43cf70a" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_depth_mm"</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_point()</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_depth_mm"</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_point()</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-26-43.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Colors for extra information:</p>
-<div id="7f08a65a" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_depth_mm"</span>,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  color <span class="op">=</span> <span class="st">"species"</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_point()</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_depth_mm"</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  color <span class="op">=</span> <span class="st">"species"</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_point()</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-27-45.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -922,21 +1005,29 @@ Example
 </section>
 <section id="line-plots" class="level3" data-number="3.4.6">
 <h3 data-number="3.4.6" class="anchored" data-anchor-id="line-plots"><span class="header-section-number">3.4.6</span> 5. Line Plots</h3>
-<div id="4e738e71" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_line</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>penguins2 <span class="op">=</span> penguins.groupby(by <span class="op">=</span> [<span class="st">"species"</span>, <span class="st">"sex"</span>]).mean()</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins2,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  color <span class="op">=</span> <span class="st">"sex"</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_point()</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_line()</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>TypeError: agg function failed [how-&gt;mean,dtype-&gt;object]</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> geom_line</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>penguins2 <span class="op">=</span> penguins.groupby([<span class="st">"species"</span>, <span class="st">"sex"</span>])[[<span class="st">"bill_length_mm"</span>]].mean().reset_index()</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins2,</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span>,</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  color <span class="op">=</span> <span class="st">"sex"</span>,</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  group <span class="op">=</span> <span class="st">"sex"</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_point()</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_line()</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-28-47.png" class="img-fluid figure-img" width="614"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-learn-more no-icon callout-titled">
@@ -961,20 +1052,23 @@ Learn More
 <h2 data-number="3.5" class="anchored" data-anchor-id="multiple-plots"><span class="header-section-number">3.5</span> Multiple Plots</h2>
 <section id="facet-wrapping" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="facet-wrapping"><span class="header-section-number">3.5.1</span> Facet Wrapping</h3>
-<div id="ff829b7e" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> facet_wrap</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> facet_wrap(<span class="st">"sex"</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> facet_wrap</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>(ggplot(penguins,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>aes(</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="st">"species"</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="st">"bill_length_mm"</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> geom_boxplot()</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> facet_wrap(<span class="st">"sex"</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-plotnine_files/figure-html/cell-29-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-29-49.png" class="img-fluid figure-img" width="614"></p>
 </figure>
 </div>
 </div>
@@ -990,7 +1084,127 @@ Practice Activity
 </div>
 <div class="callout-body-container callout-body">
 <p>Open up <a href="https://colab.research.google.com/drive/1LDt_ALySdbxGZbWEQe8dTx_L9QTC5jcU?usp=sharing">this colab notebook</a> and make a copy.</p>
-<p>Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.</p>
+<p>Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub. Then share this repository link in the quiz question.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="visualization-and-genai" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="visualization-and-genai"><span class="header-section-number">3.6</span> Visualization and GenAI</h2>
+<p>In our experience, generative AI can help with the data visualization process in two major ways:</p>
+<section id="brainstorming-possible-visualizations-for-a-particular-research-question." class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="brainstorming-possible-visualizations-for-a-particular-research-question."><span class="header-section-number">3.6.1</span> 1. Brainstorming possible visualizations for a particular research question.</h3>
+<p>Sometimes, it can be hard to imagine what a plot will look like or which geometries to use - you sink time into writing out your code, only to be disappointed when the resulting image is not as compelling as you hoped.</p>
+<p>With careful prompting, many genAI tools can suggest plot types and then “preview” these plot ideas for you. There are some limitations, however:</p>
+<ol type="1">
+<li>When asking for this service, make sure to ask for the <strong>code output</strong> specifically. In one attempt to demonstrate this task, I carelessly used the phrase “sketch a plot”, and GPT-4o took the “sketch” command very seriously, as you can see below!</li>
+</ol>
+<p><img src="./images/sketch_penguins.webp" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>The GenAI does not have access to your specific dataset. That means the tool cannot fully preview how your plots might look <em>on your data</em>. What it can do, though, is <strong>show comparable examples on another dataset</strong>.</li>
+</ol>
+<p>The goal here is not to fully produce your final visualization. The goal is to get a general sense of what geometry options might fit your research question, and how each of those would look.</p>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Open a GenAI tool that includes a python environment, such as Chat GPT-4o or Gemini. Try a prompt of the following form:</p>
+<blockquote class="blockquote">
+<p>I would like to make a plot showing the different bill dimensions of different species of penguins. Can you use a similar dataset to show me a few examples of python code and corresponding output to make plots like this?</p>
+</blockquote>
+<p>Then, imagine another dataset (maybe one that doesn’t exist), and ask the genAI tool to show you plot examples for a particular research question. What happens?</p>
+</div>
+</div>
+</section>
+<section id="building-code-layer-by-layer." class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="building-code-layer-by-layer."><span class="header-section-number">3.6.2</span> 2. Building code layer by layer.</h3>
+<section id="initial-plot" class="level4" data-number="3.6.2.1">
+<h4 data-number="3.6.2.1" class="anchored" data-anchor-id="initial-plot"><span class="header-section-number">3.6.2.1</span> Initial plot</h4>
+<p>If you find it psychologically easier to edit code than to start from scratch, genAI can be very adept at producing basic visualization code for you to build on. <a href="https://chatgpt.com/share/671202e0-026c-8012-b770-34ea6bf18f65">This chat</a> shows a very quick example.</p>
+</section>
+<section id="specific-syntax-to-tweak-your-visual" class="level4" data-number="3.6.2.2">
+<h4 data-number="3.6.2.2" class="anchored" data-anchor-id="specific-syntax-to-tweak-your-visual"><span class="header-section-number">3.6.2.2</span> Specific syntax to tweak your visual</h4>
+<p>Once you have your basic plot code, the genAI tool becomes an excellent reference/documentation for how to add layers and make tweaks. For example, suppose in the above example we wanted to see the bill lengths on a logarithmic scale. In <a href="https://chatgpt.com/share/671202e0-026c-8012-b770-34ea6bf18f65">this chat</a>, we see how easily Chat GPT-4o is able to add the <code>ggplot</code> layer of <code>+ scale_y_log10()</code></p>
+</section>
+<section id="principles" class="level4" data-number="3.6.2.3">
+<h4 data-number="3.6.2.3" class="anchored" data-anchor-id="principles"><span class="header-section-number">3.6.2.3</span> Principles</h4>
+<p>Since this use of AI involves asking it to write actual code for you, remember the <strong>WEIRDER</strong> principles:</p>
+<p><strong>Well-specified:</strong> The more specifically we can describe our plot, the better resulting code you will get. Make sure to mention which <em>plotting library</em> you want to use, what <em>geometry</em> you are using, and what your <em>variable mappings</em> are.</p>
+<p><strong>Editable:</strong> Don’t try to get the AI tool to create your final perfect polished visualization from the first prompt; this can lead to overly complicated code that is hard to tweak. Instead, add complexity bit by bit, checking at each step for ways to improve or clarify the AI-generated code.</p>
+<p><strong>Interpretable:</strong> The AI tool will sometimes leap to conclusions about the plot, making unprompted changes to the titles, the scales, or the theme. Make sure you review each <em>layer</em> of the <code>ggplot</code> process, and ensure that it is indeed what you intended.</p>
+<p><strong>Reproducible:</strong> Sometimes, when you ask for a particular small visual change, the AI will achieve this task manually. For example, if you ask for particular labels on the x-axis, it may choose to remove all labels and put numbers in “by hand”, rather than generally changing the <code>scale</code>. <em>(Look for an example of this with the facet titles in the activity at the end of this section!)</em></p>
+<p>Even if the AI-generated code achieves the visual you hoped for, make sure to review the code for instances where you need to replace sloppy solutions with cleaner ones.</p>
+<p><strong>Dependable:</strong> The good news is, <em>unit testing</em> in visualization is easy: simply run the code and see if the output looks how you hoped!</p>
+<p><strong>Ethical:</strong> Just because an LLM suggests a visual doesn’t mean it is a responsible one. You, as the human creator, must review your visualizations to ensure they are not conveying any harmful information or impressions.</p>
+<p><strong>References:</strong> If you use AI-generated code in your visualization, you <strong>absolutely must</strong> state this up front in your work, even if you heavily edit the initial code.</p>
+</section>
+</section>
+<section id="try-it-out" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="try-it-out"><span class="header-section-number">3.6.3</span> Try it out</h3>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try to construct code to replicate the plot below by using only AI prompts. You may ask specifically for <code>plotnine</code> code, but beyond that, you may not mention any specific functions or argument names.</p>
+<p>Instead, use statements that reference the Grammar of Graphics, like “The x-axis is mapped to bill length” or “The color scale for the species is Red, Yellow, Orange.”</p>
+<p>Do your best to achieve this <em>without</em> un-folding the code to see how I constructed the plot; but if you are stuck you may look at it.</p>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    ggplot(penguins.dropna(), aes(x<span class="op">=</span><span class="st">"species"</span>, y<span class="op">=</span><span class="st">"body_mass_g"</span>, fill<span class="op">=</span><span class="st">"species"</span>))</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_violin(alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_jitter()</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> facet_wrap(<span class="st">"sex"</span>)</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_discrete(guide<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(x<span class="op">=</span><span class="st">""</span>, y<span class="op">=</span><span class="st">""</span>, title<span class="op">=</span><span class="st">"Body mass (g) of different penguins species by sex."</span>)</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_bw()</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure Size: (640 x 480)&gt;</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-plotnine_files/figure-html/unnamed-chunk-30-51.png" class="img-fluid figure-img" width="614"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://chatgpt.com/share/6711fb65-6884-8012-a9ff-9789f34b956a">Click here</a> to see my conversation with Chat GPT 4o. Notice how my results improved when I used more specific Grammar of Graphics language.</p>
+<p>Compare the resulting code, and its output, to my hand-written code that made the original plot. What is different? What ways did GenAI make things easier, and in what ways did it overcomplicate a step?</p>
 </div>
 </div>
 
