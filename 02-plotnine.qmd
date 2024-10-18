@@ -68,7 +68,7 @@ Code for the previous example:
 ### The aesthetic
 
 ```{python}
-(ggplot(penguins, 
+(ggplot(penguins,
 aes(                           # <1>
   x = "species",               # <2>
   y = "bill_length_mm",        # <2>
@@ -83,7 +83,7 @@ aes(                           # <1>
 ### The geometry
 
 ```{python}
-(ggplot(penguins, 
+(ggplot(penguins,
 aes(
   x = "species",
   y = "bill_length_mm",
@@ -145,7 +145,7 @@ What will this show?
 ```{python}
 #| eval: false
 
-(ggplot(penguins, 
+(ggplot(penguins,
 aes(
   x = "species",
   y = "bill_length_mm",
@@ -407,3 +407,5 @@ Open up [this colab notebook](https://colab.research.google.com/drive/1LDt_ALySd
 
 Fill out the sections where indicated, render it to html with Quarto, and push your final notebook and html document to a repository on GitHub (same one as Practice Activity 1.1 is good). Then share this repository link in the quiz question.
 :::
+
+{{< include 02-a-ai_viz.qmd >}}

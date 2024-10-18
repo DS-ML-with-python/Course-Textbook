@@ -187,5 +187,4 @@ An example reference statement including AI might look something like:
 
 [Complete this activity with a partner.](https://colab.research.google.com/drive/1EdWpvNGmW25Ps654d_lFn80ya1nQAKxH?usp=sharing)
 
-
 :::
