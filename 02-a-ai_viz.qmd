@@ -1,0 +1,98 @@
+## Visualization and GenAI
+
+In our experience, generative AI can help with the data visualization process in two major ways:
+
+### 1. Brainstorming possible visualizations for a particular research question.
+
+Sometimes, it can be hard to imagine what a plot will look like or which geometries to use - you sink time into writing out your code, only to be disappointed when the resulting image is not as compelling as you hoped.
+
+With careful prompting, many genAI tools can suggest plot types and then "preview" these plot ideas for you.  There are some limitations, however:
+
+1. When asking for this service, make sure to ask for the **code output** specifically.  In one attempt to demonstrate this task, I carelessly used the phrase "sketch a plot", and GPT-4o took the "sketch" command very seriously, as you can see below!
+
+![](./images/sketch_penguins.webp)
+
+2.  The GenAI does not have access to your specific dataset. That means the tool cannot fully preview how your plots might look *on your data*. What it can do, though, is **show comparable examples on another dataset**.
+
+The goal here is not to fully produce your final visualization.  The goal is to get a general sense of what geometry options might fit your research question, and how each of those would look.
+
+::: {.callout-practice-exercise}
+
+Open a GenAI tool that includes a python environment, such as Chat GPT-4o or Gemini. Try a prompt of the following form:
+
+> I would like to make a plot showing the different bill dimensions of different species of penguins.  Can you use a similar dataset to show me a few examples of python code and corresponding output to make plots like this?
+
+Then, imagine another dataset (maybe one that doesn't exist), and ask the genAI tool to show you plot examples for a particular research question.  What happens?
+:::
+
+### 2. Building code layer by layer.
+
+#### Initial plot
+
+If you find it psychologically easier to edit code than to start from scratch, genAI can be very adept at producing basic visualization code for you to build on.  [This chat](https://chatgpt.com/share/671202e0-026c-8012-b770-34ea6bf18f65) shows a very quick example.
+
+#### Specific syntax to tweak your visual
+
+Once you have your basic plot code, the genAI tool becomes an excellent reference/documentation for how to add layers and make tweaks.  For example, suppose in the above example we wanted to see the bill lengths on a logarithmic scale.  In [this chat](https://chatgpt.com/share/671202e0-026c-8012-b770-34ea6bf18f65), we see how easily Chat GPT-4o is able to add the `ggplot` layer of `+ scale_y_log10()`
+
+#### Principles
+
+Since this use of AI involves asking it to write actual code for you, remember the **WEIRDER** principles:
+
+**Well-specified:** The more specifically we can describe our plot, the better resulting code you will get.  Make sure to mention which *plotting library* you want to use, what *geometry* you are using, and what your *variable mappings* are.
+
+**Editable:** Don't try to get the AI tool to create your final perfect polished visualization from the first prompt; this can lead to overly complicated code that is hard to tweak.  Instead, add complexity bit by bit, checking at each step for ways to improve or clarify the AI-generated code.
+
+**Interpretable:** The AI tool will sometimes leap to conclusions about the plot, making unprompted changes to the titles, the scales, or the theme.  Make sure you review each *layer* of the `ggplot` process, and ensure that it is indeed what you intended.
+
+**Reproducible:** Sometimes, when you ask for a particular small visual change, the AI will achieve this task manually.  For example, if you ask for particular labels on the x-axis, it may choose to remove all labels and put numbers in "by hand", rather than generally changing the `scale`.  *(Look for an example of this with the facet titles in the activity at the end of this section!)*
+
+Even if the AI-generated code achieves the visual you hoped for, make sure to review the code for instances where you need to replace sloppy solutions with cleaner ones.
+
+**Dependable:** The good news is, *unit testing* in visualization is easy: simply run the code and see if the output looks how you hoped!
+
+**Ethical:** Just because an LLM suggests a visual doesn't mean it is a responsible one.  You, as the human creator, must review your visualizations to ensure they are not conveying any harmful information or impressions.
+
+**References:** If you use AI-generated code in your visualization, you **absolutely must** state this up front in your work, even if you heavily edit the initial code.
+
+### Try it out
+
+::: {.callout-practice-exercise}
+
+Try to construct code to replicate the plot below by using only AI prompts.  You may ask specifically for `plotnine` code, but beyond that, you may not mention any specific functions or argument names.
+
+Instead, use statements that reference the Grammar of Graphics, like "The x-axis is mapped to bill length" or "The color scale for the species is Red, Yellow, Orange."
+
+Do your best to achieve this *without* un-folding the code to see how I constructed the plot; but if you are stuck you may look at it.
+
+:::
+
+```{python}
+#| code-fold: true
+#| warning: false
+
+import pandas as pd
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+
+from plotnine import *
+
+(
+    ggplot(penguins.dropna(), aes(x="species", y="body_mass_g", fill="species"))
+    + geom_violin(alpha=0.5)
+    + geom_jitter()
+    + facet_wrap("sex")
+    + scale_fill_discrete(guide=None)
+    + labs(x="", y="", title="Body mass (g) of different penguins species by sex.")
+    + theme_bw()
+)
+```
+
+::: {.callout-practice-exercise}
+
+[Click here](https://chatgpt.com/share/6711fb65-6884-8012-a9ff-9789f34b956a) to see my conversation with Chat GPT 4o.  Notice how my results improved when I used more specific Grammar of Graphics language.
+
+Compare the resulting code, and its output, to my hand-written code that made the original plot.  What is different?  What ways did GenAI make things easier, and in what ways did it overcomplicate a step?
+
+:::

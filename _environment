@@ -1,2 +1,2 @@
-QUARTO_PYTHON=/usr/local/bin/python3
-RETICULATE_PYTHON=/usr/local/bin/python3
+QUARTO_PYTHON=/Users/kbodwin/.pyenv/versions/3.10.3/bin/python
+RETICULATE_PYTHON=/Users/kbodwin/.pyenv/versions/3.10.3/bin/python

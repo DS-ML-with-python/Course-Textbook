@@ -330,6 +330,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#concatenating-and-merging-data" id="toc-concatenating-and-merging-data" class="nav-link" data-scroll-target="#concatenating-and-merging-data"><span class="header-section-number">5.3.1</span> Concatenating and Merging Data</a></li>
   <li><a href="#types-of-joins" id="toc-types-of-joins" class="nav-link" data-scroll-target="#types-of-joins"><span class="header-section-number">5.3.2</span> Types of Joins</a></li>
   </ul></li>
+  <li><a href="#data-wrangling-and-ai" id="toc-data-wrangling-and-ai" class="nav-link" data-scroll-target="#data-wrangling-and-ai"><span class="header-section-number">5.4</span> Data Wrangling and AI</a>
+  <ul class="collapse">
+  <li><a href="#cautionary-tales-and-advice" id="toc-cautionary-tales-and-advice" class="nav-link" data-scroll-target="#cautionary-tales-and-advice"><span class="header-section-number">5.4.1</span> Cautionary tales and advice</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/04-pivoting_joining.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -373,10 +377,10 @@ Note
 <p>in the Jupyter terminal to install. <strong>Remember:</strong> you only need to install once per machine (or Colab session).</p>
 </div>
 </div>
-<div id="84cd2e5d" class="cell" data-execution_count="1">
+<div id="418ad175" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c5cb661b" class="cell" data-execution_count="2">
+<div id="5c1a94de" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Population data from GapMinder</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> pd.read_csv(<span class="st">"/content/pop.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -428,7 +432,7 @@ Warning
 </div>
 </div>
 <p>In order to convert our dataset from <em>wide to long format</em> we will use <code>.melt()</code> (or <code>.wide_to_long()</code>) in <code>pandas</code>.</p>
-<div id="577a8e49" class="cell" data-execution_count="3">
+<div id="329de024" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>long_population <span class="op">=</span> population.melt(id_vars<span class="op">=</span>[<span class="st">"country"</span>], var_name<span class="op">=</span><span class="st">"year"</span>, value_name<span class="op">=</span><span class="st">"population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
@@ -448,7 +452,7 @@ Check In
 <section id="long-to-wide-format" class="level3" data-number="5.2.3">
 <h3 data-number="5.2.3" class="anchored" data-anchor-id="long-to-wide-format"><span class="header-section-number">5.2.3</span> Long to Wide Format</h3>
 <p>Even though certain data shapes are not considered <em>tidy</em>, they may be more conducive to performing certain operations than other shapes. For example, what if we were interested in the change in country population between 1950 and 2010? In the original <em>wide</em> shape of the GapMinder data this operation would have been a simple difference of columns like below.</p>
-<div id="b9530318" class="cell" data-execution_count="4">
+<div id="2a71fcf7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>population[<span class="st">"pop_diff"</span>] <span class="op">=</span> population[<span class="st">"2010"</span>] <span class="op">-</span> population[<span class="st">"1950"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-check-in no-icon callout-titled">
@@ -465,7 +469,7 @@ Check In
 </div>
 </div>
 <p>In the <em>long</em> format of our Gapminder dataset (<code>long_population</code>), this operation is less straightforward. Sometimes datasets come to us in <em>long</em> format and to do things like the operation above we need to convert that dataset from <em>long to wide format</em>. We can go the reverse direction (i.e.&nbsp;<em>long to wide format</em>) with <code>.pivot()</code> in <code>pandas</code>.</p>
-<div id="c757f8e4" class="cell" data-execution_count="5">
+<div id="00ab953a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wide_population <span class="op">=</span> long_population.pivot(index <span class="op">=</span> <span class="st">"country"</span>, columns <span class="op">=</span> <span class="st">"year"</span>, values <span class="op">=</span> <span class="st">"population"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>wide_population <span class="op">=</span> wide_population.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -496,7 +500,7 @@ Learn More
 <p>Sometimes, the <em>rows</em> of data are spread across multiple files, and we want to combine the rows into a single data set. The process of combining rows from different data sets is known as concatenation.</p>
 <p>Visually, to concatenate two <code>DataFrames</code>, we simply stack them on top of one another.</p>
 <p>For example, suppose we want to understand how the popularity of different names evolved between 1995 and 2015. The 1995 names and the 2015 names are stored in two different files: <code>yob1995.txt</code> and <code>yob2015.txt</code>, respectively. To carry out this analysis, we will need to combine these two data sets into one.</p>
-<div id="7a07cbd4" class="cell" data-execution_count="6">
+<div id="37b2ee73" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"http://dlsun.github.io/pods/data/names/"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>names1995 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob1995.txt"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                        header<span class="op">=</span><span class="va">None</span>,</span>
@@ -589,7 +593,7 @@ Learn More
 </div>
 </div>
 </div>
-<div id="5982f4cd" class="cell" data-execution_count="7">
+<div id="a5612a82" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>names2015 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob2015.txt"</span>,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                        header<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                        names<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>])</span>
@@ -682,7 +686,7 @@ Learn More
 </div>
 </div>
 <p>To concatenate the two, we use the <code>pd.concat()</code> function, which accepts a <em>list</em> of <code>pandas</code> objects (<code>DataFrames</code> or <code>Series</code>) and concatenates them.</p>
-<div id="0db7727b" class="cell" data-execution_count="8">
+<div id="bcfd0354" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd.concat([names1995, names2015])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -775,7 +779,7 @@ Learn More
 <li><p>There is no longer any way to distinguish the 1995 data from the 2015 data. To fix this, we can add a <strong>Year</strong> column to each <code>DataFrame</code> before we concatenate.</p></li>
 <li><p>The indexes from the original <code>DataFrames</code> are preserved in the concatenated <code>DataFrame</code>. (To see this, observe that the last index in the <code>DataFrame</code> is about 33000, which corresponds to the number of rows in <code>names2015</code>, even though there are 59000 rows in the <code>DataFrame</code>.) That means that there are two rows with an index of 0, two rows with an index of 1, and so on. To force <code>pandas</code> to generate a completely new index for this <code>DataFrame</code>, ignoring the indices from the original <code>DataFrames</code>, we specify <code>ignore_index=True</code>.</p></li>
 </ol>
-<div id="62f386b5" class="cell" data-execution_count="9">
+<div id="07fa374b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>names1995[<span class="st">"Year"</span>] <span class="op">=</span> <span class="dv">1995</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>names2015[<span class="st">"Year"</span>] <span class="op">=</span> <span class="dv">2015</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> pd.concat([names1995, names2015], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
@@ -887,7 +891,7 @@ Learn More
 <p>The observations may be in a different order in the two data sets, so merging is not as simple as placing the two <code>DataFrames</code> side-by-side.</p>
 <p><em>Merging</em> is an operation on two <code>DataFrames</code> that returns a third <code>DataFrame</code>. By convention, the first <code>DataFrame</code> is referred to as the one on the “left”, while the second <code>DataFrame</code> is the one on the “right”.</p>
 <p>This naming convention is reflected in the syntax of the <code>.merge()</code> function in <code>pandas</code>. In the code below, the “left” <code>DataFrame</code>, <code>names1995</code>, is quite literally on the left in the code, while the “right” <code>DataFrame</code>, <code>names2015</code>, is to the right. We also specify the variables to match across the two <code>DataFrames</code>.</p>
-<div id="5bc1249f" class="cell" data-execution_count="10">
+<div id="457a2337" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>names1995.merge(names2015, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -1014,7 +1018,7 @@ Learn More
 </div>
 <p>The <strong>most important component</strong> of <em>merging</em> two datasets is the presence of at least one <em>key</em> variable that both datasets share. This variable is sometimes referred to as an <em>ID variable</em>. It’s this variable that we will want to <em>merge on</em>, i.e.&nbsp;use to combine the two datasets intelligently.</p>
 <p>The variables that we joined on (<code>Name</code> and <code>Sex</code>) appear once in the final <code>DataFrame</code>. The variable <code>Count</code>, which we did not join on, appears twice—since there was a column called <code>Count</code> in both of the original <code>DataFrames</code>. Notice that <code>pandas</code> automatically appended the suffix <code>_x</code> to the name of the variable from the left <code>DataFrame</code> and <code>_y</code> to the one from the right <code>DataFrame</code>. We can customize the suffixes by specifying the <code>suffixes=</code> parameter.</p>
-<div id="0a24bbe0" class="cell" data-execution_count="11">
+<div id="b5bcdfb3" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>names1995.merge(names2015, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], suffixes<span class="op">=</span>(<span class="st">"1995"</span>, <span class="st">"2015"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
@@ -1140,7 +1144,7 @@ Learn More
 </div>
 </div>
 <p>In the code above, we assumed that the columns that we joined on had the same names in the two data sets. What if they had different names? For example, suppose the variable had been called <code>Sex</code> in one data set and <code>Gender</code> in the other. We can specify which variables to use from the left and right data sets using the <code>left_on=</code> and <code>right_on=</code> parameters.</p>
-<div id="eb688a08" class="cell" data-execution_count="12">
+<div id="c1745452" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new DataFrames where the column names are different</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>names2015_ <span class="op">=</span> names2015.rename({<span class="st">"Sex"</span>: <span class="st">"Gender"</span>}, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1295,7 +1299,7 @@ Learn More
 <h4 data-number="5.3.1.4" class="anchored" data-anchor-id="many-to-many-relationships-a-cautionary-tale"><span class="header-section-number">5.3.1.4</span> Many-to-Many Relationships: A Cautionary Tale</h4>
 <p>It is also possible for multiple rows in the left <code>DataFrame</code> to match multiple rows in the right <code>DataFrame</code>. In this case, the two data sets are said to have a <em>many-to-many relationship</em>. Many-to-many joins can lead to misleading analyses, so it is important to exercise caution when working with many-to-many relationships.</p>
 <p>For example, in the baby names data set, the <code>Name</code> variable is not uniquely identifying. For example, there are both males and females with the name “Jessie”.</p>
-<div id="29dd2aca" class="cell" data-execution_count="13">
+<div id="1b6cc45e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>jessie1995 <span class="op">=</span> names1995[names1995[<span class="st">"Name"</span>] <span class="op">==</span> <span class="st">"Jessie"</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>jessie1995</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -1333,7 +1337,7 @@ Learn More
 </div>
 </div>
 </div>
-<div id="3020fc9e" class="cell" data-execution_count="14">
+<div id="31528988" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>jessie2015 <span class="op">=</span> names2015[names2015[<span class="st">"Name"</span>] <span class="op">==</span> <span class="st">"Jessie"</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>jessie2015</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
@@ -1372,7 +1376,7 @@ Learn More
 </div>
 </div>
 <p>If we join these two <code>DataFrames</code> on <code>Name</code>, then we will end up with a many-to-many join, since each “Jessie” row in the 1995 data will be paired with each “Jessie” row in the 2015 data.</p>
-<div id="13959665" class="cell" data-execution_count="15">
+<div id="1259c9d3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>jessie1995.merge(jessie2015, on<span class="op">=</span>[<span class="st">"Name"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -1452,7 +1456,7 @@ Learn More
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="types-of-joins"><span class="header-section-number">5.3.2</span> Types of Joins</h3>
 <p>Above, we saw how to merge (or join) two data sets by matching on certain variables. But what happens when a row in one <code>DataFrame</code> has no match in the other?</p>
 <p>First, let’s investigate how <code>pandas</code> handles this situation by default. The name “Nevaeh”, which is “heaven” spelled backwards, took after Sonny Sandoval of the band P.O.D. gave his daughter the name in 2000. Let’s look at how common this name was five years earlier and five years after.</p>
-<div id="393dd0de" class="cell" data-execution_count="16">
+<div id="6625a0f9" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"http://dlsun.github.io/pods/data/names/"</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>names1995 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob1995.txt"</span>,</span>
@@ -1460,7 +1464,7 @@ Learn More
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>names2005 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob2005.txt"</span>,</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                        header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f500d852" class="cell" data-execution_count="17">
+<div id="e8d19726" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>names1995[names1995.Name <span class="op">==</span> <span class="st">"Nevaeh"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
@@ -1482,7 +1486,7 @@ Learn More
 </div>
 </div>
 </div>
-<div id="c60d5bfe" class="cell" data-execution_count="18">
+<div id="473e1693" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>names2005[names2005.Name <span class="op">==</span> <span class="st">"Nevaeh"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div>
@@ -1518,7 +1522,7 @@ Learn More
 </div>
 <p>In 1995, there were no girls (at least fewer than 5) named Nevaeh; just eight years later, there were over 4500 girls (and even 56 boys) with the name. It seems like Sonny Sandoval had a huge effect.</p>
 <p>What happens to the name “Nevaeh” when we merge the two data sets?</p>
-<div id="2ade94e2" class="cell" data-execution_count="19">
+<div id="2a653eca" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>])</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>names[names.Name <span class="op">==</span> <span class="st">"Nevaeh"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -1555,7 +1559,7 @@ Learn More
 <p><img src="https://github.com/dlsun/pods/blob/master/09-Joining-Tabular-Data/joins.png?raw=1" class="img-fluid"></p>
 <p>In <code>pandas</code>, the join type is specified using the <code>how=</code> argument.</p>
 <p>Now let’s look at the examples of each of these types of joins.</p>
-<div id="5d69a84e" class="cell" data-execution_count="20">
+<div id="64389c7e" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inner join</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>names_inner <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"inner"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>names_inner</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1658,7 +1662,7 @@ Learn More
 </div>
 </div>
 </div>
-<div id="deba1bef" class="cell" data-execution_count="21">
+<div id="1712bfdf" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># outer join</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>names_outer <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"outer"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>names_outer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1762,7 +1766,7 @@ Learn More
 </div>
 </div>
 <p>Names like “Zyrell” and “Zyron” appeared in the 2005 data but not the 1995 data. For this reason, their count in 1995 is <code>NaN</code>. In general, there will be missing values in <code>DataFrames</code> that result from an outer join. Any time a value appears in one <code>DataFrame</code> but not the other, there will be <code>NaN</code>s in the columns from the <code>DataFrame</code> missing that value.</p>
-<div id="e4b4f459" class="cell" data-execution_count="22">
+<div id="c882803e" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>names_inner.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>Name       0
@@ -1773,7 +1777,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>Left and right joins preserve data from one <code>DataFrame</code> but not the other. For example, if we were trying to calculate the percentage change for each name from 1995 to 2005, we would want to include all of the names that appeared in the 1995 data. If the name did not appear in the 2005 data, then that is informative.</p>
-<div id="d1ca4e94" class="cell" data-execution_count="23">
+<div id="5e730aa9" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># left join</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>names_left <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>names_left</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1877,7 +1881,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>The result of the left join has <code>NaN</code>s in the columns from the right <code>DataFrame</code>.</p>
-<div id="aadf3bca" class="cell" data-execution_count="24">
+<div id="75f23b8d" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>names_left.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>Name          0
@@ -1888,7 +1892,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>The result of the right join, on the other hand, has <code>NaN</code>s in the column from the left <code>DataFrame</code>.</p>
-<div id="c165d231" class="cell" data-execution_count="25">
+<div id="9f1eca4c" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># right join</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>names_right <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"right"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>names_right</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1991,7 +1995,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="a1a70628" class="cell" data-execution_count="26">
+<div id="71d34103" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>names_right.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>Name           0
@@ -2027,8 +2031,98 @@ Practice Activity
 <p><a href="https://colab.research.google.com/drive/12zB93Tb-f1lln5AtX8q1iHv6thlDb4aO?usp=sharing">Click here</a> to solve a riddle using data manipulation.</p>
 </div>
 </div>
+</section>
+</section>
+<section id="data-wrangling-and-ai" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="data-wrangling-and-ai"><span class="header-section-number">5.4</span> Data Wrangling and AI</h2>
+<p>The advice in this section applies to data analysis tasks in general, not only to the basic wrangling and summarizing in this chapter - but since this is our first foray in to data wrangling code, let’s dive right in!</p>
+<p>In data processing and summarizing, we can think of four main ways that genAI can support your work. <a href="https://chatgpt.com/share/671211e0-6698-8012-889f-c7206aba3d65">In this chat</a>, we make use of all four of the steps below; open it up and follow along.</p>
+<section id="as-a-planner-to-help-you-chart-out-your-wrangling-steps." class="level4" data-number="5.4.0.1">
+<h4 data-number="5.4.0.1" class="anchored" data-anchor-id="as-a-planner-to-help-you-chart-out-your-wrangling-steps."><span class="header-section-number">5.4.0.1</span> 1. As a <strong>planner</strong>, to help you chart out your wrangling steps.</h4>
+<p>Data analysis involves going from Point A (your current dataset) to Point B (your desired calculation or visualization). One of the most difficult aspects of data science is figuring out what intermediate steps will get you there. For this, a genAI tool can be a great “thinking buddy” and suggest a path forward.</p>
+<p>Although it may not give a perfect solution (especially since it typically cannot see your data), two heads are often better than one. The generated suggestions may include data cleaning steps you hadn’t thought of, or help you fill in a gap when you are stuck.</p>
+<p>As always, you will get your best results if your prompt is <strong>well-specified:</strong> make sure to describe the structure of the dataset you have, and the exact nature of the output you are trying to produce.</p>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In our chat example, we got back some pretty useful steps, including a great reminder to make sure our date-time data is the proper <em>type</em>. However, because we weren’t overly detailed about the dataset, the AI had to “guess” about which columns existed. And since we also didn’t clarify what we wanted our plot to look like, it had to offer an “optional” Step 6.</p>
+</div>
+</div>
+</section>
+<section id="as-documentation-when-you-are-struggling-with-the-exact-use-case-or-syntax-of-a-function." class="level4" data-number="5.4.0.2">
+<h4 data-number="5.4.0.2" class="anchored" data-anchor-id="as-documentation-when-you-are-struggling-with-the-exact-use-case-or-syntax-of-a-function."><span class="header-section-number">5.4.0.2</span> 2. As <strong>documentation</strong>, when you are struggling with the exact use case or syntax of a function.</h4>
+<p>It is extremely common in coding to know what function(s) you need for your task, but to be a little fuzzy on the details of how to make then run the way you want. While the information you need can technically always be found in the official documentation of the functions, these can sometimes be difficult to understand. One of the absolute <em>strongest contributions</em> of genAI is the ability to generate <strong>examples</strong> and to explain every step. In this regard, the AI tool is much like a human tutor!</p>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In our demo chat, we see that the AI was able to explain the <code>to_datetime()</code> function to us in great detail, including several examples of when you might need to use common optional arguments like <code>format</code> or <code>errors</code>.</p>
+</div>
+</div>
+</section>
+<section id="as-a-search-tool-when-you-want-to-find-the-perfect-function." class="level4" data-number="5.4.0.3">
+<h4 data-number="5.4.0.3" class="anchored" data-anchor-id="as-a-search-tool-when-you-want-to-find-the-perfect-function."><span class="header-section-number">5.4.0.3</span> 3. As a <strong>search tool</strong>, when you want to find the perfect function.</h4>
+<p>The beauty of packages like <code>pandas</code> is that many, many functions are provided to give you “shortcuts” for common data tasks. The curse is that you don’t always know if a particular function exists!</p>
+<p>Certainly, it is possible to look in official documentation - but this can be tedious and involve guessing which functions <em>might</em> solve your problem by their name alone. A better option might be a static search service, like Google - but to trigger useful results, you often need to use key words that precisely describe what you are looking for.</p>
+<p>Since genAI tools can interpret human-style text, they are often able to understand what you are looking for and help you find the perfect function.</p>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In response to our question about misspellings in the dataset, the genAI offered two solutions: a simple one for when the possible misspellings are known, and a complex one for general use. In the second solution, it suggested an additional library called <code>fuzzywuzzy</code>.</p>
+</div>
+</div>
+</section>
+<section id="as-a-debugger-when-you-can-spot-where-in-your-analysis-something-is-going-wrong." class="level4" data-number="5.4.0.4">
+<h4 data-number="5.4.0.4" class="anchored" data-anchor-id="as-a-debugger-when-you-can-spot-where-in-your-analysis-something-is-going-wrong."><span class="header-section-number">5.4.0.4</span> 4. As a <strong>debugger</strong>, when you can spot where in your analysis something is going wrong.</h4>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Here we wanted to take the mean of a column called <code>num_admitted</code>, grouped by <code>hour</code> and <code>severity</code>. Unfortunately we made an extremely common mistake of putting the column name inside the <code>mean()</code> function. The genAI tool was able to explain why this approach is wrong, and offer possible solutions.</p>
+</div>
+</div>
+</section>
+<section id="cautionary-tales-and-advice" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="cautionary-tales-and-advice"><span class="header-section-number">5.4.1</span> Cautionary tales and advice</h3>
+<section id="debugging-works-best-on-small-pieces" class="level4" data-number="5.4.1.1">
+<h4 data-number="5.4.1.1" class="anchored" data-anchor-id="debugging-works-best-on-small-pieces"><span class="header-section-number">5.4.1.1</span> Debugging works best on small pieces</h4>
+<p>Suppose you write out your full end-to-end data analysis, without testing or checking any intermediate steps, and it does not work as you hoped. Would you put the whole thing into an LLM for help?</p>
+<p>While this may work in some straightforward cases, it also may confuse and frustrate you more, as the AI suggests a long list of possible issues for you to comb through.</p>
+<p>Instead, we recommend stepping through your analysis line by line, until you reach a step where the results are not what you intended. (This is good troubleshooting strategy already, and you might find your bug before you even turn to an AI tool!) Then, you can ask the AI about only one or two lines of code that aren’t working, and get a more direct and helpful answer.</p>
+</section>
+<section id="beware-of-hallucinations" class="level4" data-number="5.4.1.2">
+<h4 data-number="5.4.1.2" class="anchored" data-anchor-id="beware-of-hallucinations"><span class="header-section-number">5.4.1.2</span> Beware of hallucinations</h4>
+<p>Keep in mind that a genAI response is not the same as a systematic search: it is producing output trying to mimic what it has seen in the training data.</p>
+<p>This means that if you ask for a function for a particular task, an AI tool <strong>might</strong> simply <em>invent</em> a function that seems similar to others it has seen in training. As AI tools are improving, and training data sources for python code are increasing, hallucinations about code are becoming quite rare. However, it’s important to be aware that AI-produced suggestions are not equivalent to finding the function in official documentation; you’ll need to verify for yourself.</p>
 
 
+</section>
 </section>
 </section>
 

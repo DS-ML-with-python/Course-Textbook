@@ -1,0 +1,61 @@
+## Data Wrangling and AI
+
+The advice in this section applies to data analysis tasks in general, not only to the basic wrangling and summarizing in this chapter - but since this is our first foray in to data wrangling code, let's dive right in!
+
+In data processing and summarizing, we can think of four main ways that genAI can support your work.  [In this chat](https://chatgpt.com/share/671211e0-6698-8012-889f-c7206aba3d65), we make use of all four of the steps below; open it up and follow along.
+
+#### 1. As a **planner**, to help you chart out your wrangling steps.
+
+Data analysis involves going from Point A (your current dataset) to Point B (your desired calculation or visualization).  One of the most difficult aspects of data science is figuring out what intermediate steps will get you there. For this, a genAI tool can be a great "thinking buddy" and suggest a path forward.
+
+Although it may not give a perfect solution (especially since it typically cannot see your data), two heads are often better than one.  The generated suggestions may include data cleaning steps you hadn't thought of, or help you fill in a gap when you are stuck.
+
+As always, you will get your best results if your prompt is **well-specified:** make sure to describe the structure of the dataset you have, and the exact nature of the output you are trying to produce.
+
+::: {.callout-example}
+In our chat example, we got back some pretty useful steps, including a great reminder to make sure our date-time data is the proper *type*.  However, because we weren't overly detailed about the dataset, the AI had to "guess" about which columns existed.  And since we also didn't clarify what we wanted our plot to look like, it had to offer an "optional" Step 6.
+:::
+
+#### 2. As **documentation**, when you are struggling with the exact use case or syntax of a function.
+
+It is extremely common in coding to know what function(s) you need for your task, but to be a little fuzzy on the details of how to make then run the way you want.  While the information you need can technically always be found in the official documentation of the functions, these can sometimes be difficult to understand.  One of the absolute *strongest contributions* of genAI is the ability to generate **examples** and to explain every step.  In this regard, the AI tool is much like a human tutor!
+
+::: {.callout-example}
+In our demo chat, we see that the AI was able to explain the `to_datetime()` function to us in great detail, including several examples of when you might need to use common optional arguments like `format` or `errors`.
+:::
+
+#### 3. As a **search tool**, when you want to find the perfect function.
+
+The beauty of packages like `pandas` is that many, many functions are provided to give you "shortcuts" for common data tasks.  The curse is that you don't always know if a particular function exists!
+
+Certainly, it is possible to look in official documentation - but this can be tedious and involve guessing which functions *might* solve your problem by their name alone.  A better option might be a static search service, like Google - but to trigger useful results, you often need to use key words that precisely describe what you are looking for.
+
+Since genAI tools can interpret human-style text, they are often able to understand what you are looking for and help you find the perfect function.
+
+::: {.callout-example}
+In response to our question about misspellings in the dataset, the genAI offered two solutions: a simple one for when the possible misspellings are known, and a complex one for general use.  In the second solution, it suggested an additional library called `fuzzywuzzy`.
+:::
+
+#### 4. As a **debugger**, when you can spot where in your analysis something is going wrong.
+
+::: {.callout-example}
+
+Here we wanted to take the mean of a column called `num_admitted`, grouped by `hour` and `severity`.  Unfortunately we made an extremely common mistake of putting the column name inside the `mean()` function.  The genAI tool was able to explain why this approach is wrong, and offer possible solutions.
+
+:::
+
+### Cautionary tales and advice
+
+#### Debugging works best on small pieces
+
+Suppose you write out your full end-to-end data analysis, without testing or checking any intermediate steps, and it does not work as you hoped.  Would you put the whole thing into an LLM for help?
+
+While this may work in some straightforward cases, it also may confuse and frustrate you more, as the AI suggests a long list of possible issues for you to comb through.
+
+Instead, we recommend stepping through your analysis line by line, until you reach a step where the results are not what you intended.  (This is good troubleshooting strategy already, and you might find your bug before you even turn to an AI tool!) Then, you can ask the AI about only one or two lines of code that aren't working, and get a more direct and helpful answer.
+
+#### Beware of hallucinations
+
+Keep in mind that a genAI response is not the same as a systematic search: it is producing output trying to mimic what it has seen in the training data.
+
+This means that if you ask for a function for a particular task, an AI tool **might** simply *invent* a function that seems similar to others it has seen in training.  As AI tools are improving, and training data sources for python code are increasing, hallucinations about code are becoming quite rare.  However, it's important to be aware that AI-produced suggestions are not equivalent to finding the function in official documentation; you'll need to verify for yourself.

@@ -53,7 +53,7 @@ A dataset is **tidy** if it adheres to following three characteristics:
 
 ![](https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png)
 
-In the previous chapter you were asked to open up a GapMinder dataset [here](https://www.gapminder.org/data/) and to comment on whether this dataset was *tidy* or not. 
+In the previous chapter you were asked to open up a GapMinder dataset [here](https://www.gapminder.org/data/) and to comment on whether this dataset was *tidy* or not.
 The answer was **no**, this dataset is not *tidy*. These datasets come with a row representing a country, each column representing a year, and each cell representing the value of the global indicator selected. To be *tidy* these three variables (`country`, `year`, `global indicator`) should each have their own column, instead of the `year` variable taking values as the column headers.
 
 ### Wide to Long Format
@@ -66,7 +66,7 @@ It often helps to physically draw/map out what our current dataset looks like an
 
 :::
 
-In order to convert our dataset from *wide to long format* we will use `.melt()` (or `.wide_to_long()`) in `pandas`. 
+In order to convert our dataset from *wide to long format* we will use `.melt()` (or `.wide_to_long()`) in `pandas`.
 
 ```{python}
 #|eval: false
@@ -341,7 +341,8 @@ Download a second GapMinder dataset and merge it with the population dataset fro
 
 ::: {.callout-practice-exercise .icon}
 
-[Click here](https://colab.research.google.com/drive/12zB93Tb-f1lln5AtX8q1iHv6thlDb4aO?usp=sharing) to solve a riddle using data manipulation. 
+[Click here](https://colab.research.google.com/drive/12zB93Tb-f1lln5AtX8q1iHv6thlDb4aO?usp=sharing) to solve a riddle using data manipulation.
 
 :::
 
+{{< include 03-a-ai_wrangling.qmd >}}
