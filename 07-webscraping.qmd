@@ -1,5 +1,7 @@
 ---
 title: "Webscraping"
+execute:
+  eval: false
 ---
 
 ## Introduction
@@ -105,42 +107,7 @@ Visit the web page above, and view the HTML source of that page. (You may have t
 
 Notice how difficult it can be to find a page element in the HTML source. Many browsers allow you to right-click on a page element and jump to the part of the HTML source corresponding to that element.
 
-### Scraping an HTML Table with `pandas`
 
-The `pandas` command `read_html` can be used to scrape information from an HTML table on a webpage.
-
-We can call `read_html` on the URL.
-
-```{python}
-#| eval: false
-
-pd.read_html("https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population")
-```
-
-However, this scrapes all the tables on the webpage, not just the one we want. As we will see with Beautiful Soup, we can narrow the search by specifying the table attributes.
-
-```{python}
-#| eval: false
-
-pd.read_html("https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population", attrs = {'class': 'wikitable sortable', "style": "text-align:center"})
-```
-
-:::{.callout-check-in .icon}
-
-Where did the `attrs` details in the code above come from? With the 2-3 people around you, inspect the HTML source code for this page and see if you can identify this.
-
-:::
-
-This still returns 3 tables. The table that we want is the first one!
-
-```{python}
-#| eval: false
-
-df_cities2 = pd.read_html("https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population", attrs = {'class': 'wikitable sortable', "style": "text-align:center"})[0]
-df_cities2
-```
-
-This is a good first pass at scraping information from a webpage and it returns it to us well in the form of a data frame. This works well for HTML *tables*. Unfortunately, you often want to scrape information from a webpage that isn't conveniently stored in an HTML table, in which case `read_html` won't work. (It only searches for `<table>`, `<th>`, `<tr>`, and `<td>` tags, but there are many other HTML tags.)
 
 ### Web Scraping Using `BeautifulSoup`
 
@@ -295,6 +262,6 @@ Now this data is ready for further processing.
 
 :::{.callout-practice-exercise .icon}
 
-Practice Activity notebook [here](https://colab.research.google.com/drive/1duoW5rE47BqNcyQzjDx2fMgZSsAClpdc?usp=sharing).
+Practice Activity notebook [here](https://colab.research.google.com/drive/1O2I1JQ6wnZ3fiMgVoxqFVd_J-h56AE5T?usp=sharing).
 
 :::
